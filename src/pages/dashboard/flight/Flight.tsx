@@ -1,4 +1,3 @@
-import React from "react";
 import PrivateProvider from "../../../providers/PrivateProvider";
 
 const Flight = () => {
