@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import Flight from "./pages/dashboard/flight/Flight";
+import Flight from "./pages/admin/flight/Flight";
 
 const router = createBrowserRouter([
   {
