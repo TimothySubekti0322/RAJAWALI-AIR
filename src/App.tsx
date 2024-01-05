@@ -6,6 +6,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <div>Landing Page</div>,
+    errorElement: <div>404 Not Found</div>,
   },
   {
     path: "/login",
@@ -18,10 +19,6 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/flight",
     element: <Flight />,
-  },
-  {
-    path: "*",
-    element: <div>404 Not Found</div>,
   },
 ]);
 export default function App() {
