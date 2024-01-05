@@ -21,6 +21,7 @@ const router = createBrowserRouter([
     element: <Flight />,
   },
 ]);
+
 export default function App() {
   return <RouterProvider router={router} />;
 }
