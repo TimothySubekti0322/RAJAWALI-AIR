@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Flight from "./pages/admin/flight/Flight";
 import AirportDashboard from "./pages/admin/airport/AirportDashboard";
+import AddAirport from "./pages/admin/airport/AddAirport";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/airport/add",
-    element: <div>Add Airport Page</div>,
+    // element: <div>Add Airport Page</div>,
+    element: <AddAirport/>,
   },
   {
     path: "/dashboard/airport/edit/:id",
