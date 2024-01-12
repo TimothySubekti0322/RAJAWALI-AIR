@@ -6,7 +6,7 @@ import type { AirportData } from "../../../assets/static/TableDataTypes";
 import Pagination from "@mui/material/Pagination";
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
-// import axios from "axios";
+import axios from "axios";
 
 // Pagination Styling
 const paginationItemStyles = makeStyles(() =>
@@ -55,18 +55,14 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
   const [totalPage, setTotalPage] = useState<number>(0);
 
   useEffect(() => {
-    console.log(api);
-  }, []);
-
-  // Uncomment this code below if you want to fetch data from API
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // const response = await axios.get(api);
+        const res = await axios.get(api);
+        const response: AirportData[] = res.data.data.content;
+        console.log(res.data.data.content);
         // const response: AirportData[] = [];
-        const response: AirportData[] = tableData;
+        // const response: AirportData[] = tableData;
         const dataLength = tableData.length;
         setTotalPage(Math.ceil(dataLength / dataPerPage));
         setRawData(response);
