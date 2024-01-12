@@ -25,12 +25,12 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="w-full min-h-screen sm:pl-64">
           <div className="w-full px-4 pt-20 pb-4 sm:pt-0">
             <div className="hidden mt-4 sm:block">
-              <Header />
+              <div className="relative flex items-center justify-between w-full h-16 px-6 py-2 bg-white rounded-xl">
+                <Header />
+              </div>
             </div>
 
-            <div className="mt-8 mb-2 bg-white rounded-xl">
-              {children}
-            </div>
+            <div className="mt-8 mb-2 bg-white rounded-xl">{children}</div>
 
             <div className="mt-8" style={{ width: "-webkit-fill-available" }}>
               <Footer />

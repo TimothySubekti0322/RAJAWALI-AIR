@@ -12,8 +12,8 @@ const Header = () => {
     window.location.href = "/login";
   };
   return (
-    <div className="relative flex items-center justify-between w-full h-16 px-6 py-2 bg-white rounded-xl">
-      <div className="flex items-center justify-between">
+    <>
+      <div className="flex flex-row items-center justify-between">
         <span className="text-[#1E90FF] text-lg font-bold">Hallo!</span>
         <p className="ml-2 text-base font-medium">Admin</p>
       </div>
@@ -48,7 +48,7 @@ const Header = () => {
           Log Out
         </button>
       )}
-    </div>
+    </>
   );
 };
 
