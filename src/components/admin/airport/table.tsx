@@ -139,7 +139,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                   <td className="flex items-center justify-center px-4 py-3 gap-x-4">
                     {/* Edit */}
                     <button
-                      className="bg-[#F1A025] py-1 hover:bg-[#D08003] hover:border-[#D08003]"
+                      className="bg-[#F1A025] py-1 px-5 hover:bg-[#D08003] hover:border-[#D08003]"
                       onClick={() => {
                         window.location.href = `/dashboard/airport/edit/${index}`;
                       }}
@@ -148,7 +148,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                     </button>
 
                     {/* Delete */}
-                    <button className="bg-[#CB3A31] py-1 hover:bg-[#A91810] hover:border-[#A91810]">
+                    <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810]">
                       <RiDeleteBinLine className="text-lg text-white" />
                     </button>
                   </td>
