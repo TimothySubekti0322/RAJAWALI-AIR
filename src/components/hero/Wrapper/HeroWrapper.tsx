@@ -1,6 +1,7 @@
 import flightBackground from "../../../assets/images/home-input-flight.jpg";
 import HeroTitle from "../Title/HeroTitle";
 import SearchInputFlight from "../SearchInputFlight/SearchInputFlight";
+import Navbar from "../../navbar/Navbar";
 const divStyle = {
     backgroundImage: `url(${flightBackground})`,
     backgroundSize: 'cover',
@@ -12,9 +13,12 @@ const divStyle = {
 
 const HeroWrapper = () => {
     return(
-        <div className={"flex flex-col px-6 pb-24 pt-36"} style={divStyle}>
-            <HeroTitle />
-            <SearchInputFlight />
+        <div style={divStyle} className={"px-6 "}>
+            <Navbar />
+            <div className={"flex flex-col pb-24 pt-36"}>
+                <HeroTitle />
+                <SearchInputFlight />
+            </div>
         </div>
     )
 }
