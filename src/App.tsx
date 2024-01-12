@@ -1,11 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Flight from "./pages/admin/flight/Flight";
+import Home from "./pages/client/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Landing Page</div>,
+    element: <Home/>,
     errorElement: <div>404 Not Found</div>,
   },
   {
