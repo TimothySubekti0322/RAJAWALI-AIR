@@ -64,7 +64,8 @@ const SearchInputFlight = () => {
                                 id={option.id}
                                 name="radioOptions"
                                 value={option.id}
-                                // checked={selectedOption === option.id}
+                                defaultChecked={option.id === "option2"}
+                                // checked={option.id === "option2"}
                                 // onChange={handleOptionChange}
                                 className="form-radio h-5 w-5 text-indigo-600 radio radio-primary"
                             />
