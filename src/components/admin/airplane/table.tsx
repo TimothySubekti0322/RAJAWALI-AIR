@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
-// import tableData from "../../../pages/admin/airport/dummyData";
-import type { AirportData } from "../../../assets/static/TableDataTypes";
+import type { AirplaneData } from "../../../assets/static/TableDataTypes";
 import Pagination from "@mui/material/Pagination";
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -43,10 +42,10 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // Raw Data
-  const [rawData, setRawData] = useState<AirportData[]>([]);
+  const [rawData, setRawData] = useState<AirplaneData[]>([]);
 
   // Data
-  const [data, setData] = useState<AirportData[]>([]);
+  const [data, setData] = useState<AirplaneData[]>([]);
 
   // Current Page
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -59,10 +58,10 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
       try {
         setLoading(true);
         const res = await axios.get(api);
-        const response: AirportData[] = res.data.data.content;
+        const response: AirplaneData[] = res.data.data.content;
         console.log(res.data.data.content);
-        // const response: AirportData[] = [];
-        // const response: AirportData[] = tableData;
+        // const response: AirplaneData[] = [];
+        // const response: AirplaneData[] = tableData;
         const dataLength = response.length;
         setTotalPage(Math.ceil(dataLength / dataPerPage));
         setRawData(response);
@@ -132,17 +131,23 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
               {data.map((item, index) => (
                 <tr key={item.id} className="border-b-2">
                   <td className="px-4 py-3 text-center">{item.id}</td>
-                  <td className="px-4 py-3 text-center">{item.name}</td>
-                  <td className="px-4 py-3 text-center">{item.city}</td>
-                  <td className="px-4 py-3 text-center">{item.country}</td>
-                  <td className="px-4 py-3 text-center">{item.cityCode}</td>
+                  <td className="px-4 py-3 text-center">{item.airplaneCode}</td>
+                  <td className="px-4 py-3 text-center">
+                    {item.economySeats} | {item.economySeatsPerCol}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    {item.businessSeats} | {item.businessSeatsPerCol}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    {item.firstSeats} | {item.firstSeatsPerCol}
+                  </td>
                   <td className="h-full px-4 py-3">
                     <div className="flex items-center justify-center gap-x-4">
                       {/* Edit */}
                       <button
                         className="bg-[#F1A025] py-1 px-5 hover:bg-[#D08003] hover:border-[#D08003] rounded-lg"
                         onClick={() => {
-                          window.location.href = `/dashboard/airport/edit/${index}`;
+                          window.location.href = `/dashboard/airplane/edit/${index}`;
                         }}
                       >
                         <FaRegEdit className="text-lg text-white" />
