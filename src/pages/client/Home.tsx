@@ -1,8 +1,8 @@
-import Navbar from "../../components/Navbar"
+import HeroWrapper from "../../components/client/hero/Wrapper/HeroWrapper";
 function Home() {
     return (
         <>
-            <Navbar />
+            <HeroWrapper />
         </>
     )
 }
