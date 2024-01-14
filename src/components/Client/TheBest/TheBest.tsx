@@ -2,11 +2,11 @@ const TheBest = () => {
   return (
     <>
       <section className="">
-        <div className="container grid gap-4 grid-cols-2 grid-rows-3 mt-[8] pt-[4.44rem] sm:container sm:mx-auto sm:items-center sm:grid sm:grid-cols-1 md:grid-cols-2">
+        <div className="container grid gap-4 grid-cols-2 grid-rows-3 mt-[1rem] pt-[4.44rem] min-[320px]:grid min-[320px]:grid-cols-1 sm:container sm:mx-auto sm:items-center sm:grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
           <div className="container sm:mx-auto">
-            <img src="/src/assets/pramugari.png" alt="" className="sm:w-full sm:h-auto" />
+            <img src="/src/assets/pramugari.png" alt="" className="sm:w-[600px] sm:h-auto md:w-full md:h-auto" />
           </div>
-          <div className="mr-[5.06rem] sm:items-center ">
+          <div className="mr-[5.06rem] sm:items-center sm:mx-6">
             <div className="justify-end w-full text-right">
               <span className="text-neutral-600 text-3xl font-bold font-['Open Sans'] leading-10">
                 We{" "}

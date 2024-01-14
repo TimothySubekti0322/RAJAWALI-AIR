@@ -3,6 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/autoplay";
+
+
+
 
 // import required modules
 import { Pagination } from "swiper/modules";
@@ -16,29 +20,35 @@ const Carousel = () => {
         <hr className="w-full h-0 border-4 border-blue-500 mt-[1.87rem] sm:container sm:mx-auto" />
       </div>
       <Swiper
-        centeredSlides={true}
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
         breakpoints={{
           640: {
-            slidesPerView: 1.9,
+            slidesPerView: 2,
+            spaceBetween: 20,
           },
           768: {
-            slidesPerView: 2.3,
+            slidesPerView: 3,
+            spaceBetween: 250,
           },
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 3.2,
+            spaceBetween: 160,
           },
           1280: {
-            slidesPerView: 4.4,
-            spaceBetween: 30,
+            slidesPerView: 4.2,
+            spaceBetween: 160,
+          },
+          1536: {
+            slidesPerView: 3,
+            spaceBetween: -400,
           }
         }}
-        className="flex mt-[3.38rem] justify-center py-20 "
+        modules={[Pagination]}
+        className="mt-20 pb-12"
       >
-        <SwiperSlide >
+        <SwiperSlide className="container 2xl:ml-20">
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
@@ -118,7 +128,7 @@ const Carousel = () => {
           </div>
         </SwiperSlide>
 
-        <SwiperSlide >
+        <SwiperSlide>
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
