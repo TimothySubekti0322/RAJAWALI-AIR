@@ -1,4 +1,4 @@
-import HeroWrapper from "../../components/hero/Wrapper/HeroWrapper";
+import HeroWrapper from "../../components/client/hero/Wrapper/HeroWrapper";
 function Home() {
     return (
         <>
