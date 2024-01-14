@@ -42,7 +42,7 @@ const Header = () => {
       {/* Signout Button */}
       {!chevronDown && (
         <button
-          className="absolute right-0 flex justify-center h-10 bg-white border-[#C2C2C2] rounded-md outline-none border-1 w-32 -bottom-10 focus:outline-none hover:bg-[#BA2920] hover:text-white"
+          className="absolute right-0 flex justify-center items-center h-10 bg-white border-[#C2C2C2] rounded-md outline-none border-1 w-32 -bottom-10 focus:outline-none hover:bg-[#BA2920] hover:text-white"
           onClick={logoutHandler}
         >
           Log Out

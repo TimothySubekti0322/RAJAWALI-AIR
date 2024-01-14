@@ -42,7 +42,7 @@ export default function Sidebar(props: Props) {
       {/* Rajawali Air Logo and Title Section */}
       <div className="flex items-center w-full gap-x-4">
         <img
-          src="/images/rajawali-air-logo.png"
+          src="/images/rajawali-air-logo.svg"
           alt="Rajawali Air Logo"
           className="w-10 h-10"
         />
@@ -81,7 +81,7 @@ export default function Sidebar(props: Props) {
         {/* Airplane */}
         <a
           className={`flex px-4 py-4 rounded-2xl  ${
-            selectedMenu == "home"
+            selectedMenu == "airplane"
               ? "bg-[#A4E0FF] text-[#1E90FF]"
               : "bg-white hover:bg-[#A4E0FF] text-[#B2B2B2] hover:text-[#1E90FF]"
           }`}
@@ -94,7 +94,7 @@ export default function Sidebar(props: Props) {
         {/* Flight */}
         <a
           className={`flex px-4 py-4 rounded-2xl ${
-            selectedMenu == "home"
+            selectedMenu == "flight"
               ? "bg-[#A4E0FF] text-[#1E90FF]"
               : "bg-white hover:bg-[#A4E0FF] text-[#B2B2B2] hover:text-[#1E90FF]"
           }`}
@@ -107,7 +107,7 @@ export default function Sidebar(props: Props) {
         {/* User */}
         <a
           className={`flex px-4 py-4 rounded-2xl  ${
-            selectedMenu == "home"
+            selectedMenu == "user"
               ? "bg-[#A4E0FF] text-[#1E90FF]"
               : "bg-white hover:bg-[#A4E0FF] text-[#B2B2B2] hover:text-[#1E90FF]"
           }`}
