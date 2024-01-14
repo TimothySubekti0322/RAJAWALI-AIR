@@ -10,27 +10,27 @@ function Navbar() {
     return (
         <>
             <section>
-                <div className="flex justify-between items-center mx-[100px] mt-[50px]">
+                <div className="flex justify-between items-center mx-[100px] mt-[30px]">
                     <Link to="/" className="items-center flex">
                         <img className="h-[50px] w-[71px]" src={Rajawali} alt="" />
-                        <div className="font-extrabold text-2xl">RAJAWALI AIR</div>
+                        <div className="font-extrabold text-2xl text-white">RAJAWALI AIR</div>
                     </Link>
                     <div className="flex items-center">
                         <Link to="/login" className="flex items-center mx-10">
                             <img className="h-[25px] w-[25px]" src={Favorite} alt="" />
-                            <div className="ml-2">Favorite</div>
+                            <div className="ml-2 text-white">Favorite</div>
                         </Link>
                         <Link to="/login" className="flex items-center mx-10">
                             <img className="h-[21px] w-[21px]" src={Inbox} alt="" />
-                            <div className="ml-2">Inbox</div>
+                            <div className="ml-2 text-white">Inbox</div>
                         </Link>
                         <Link to="/login" className="flex items-center mx-10">
                             <img className="h-[21px] w-[21px]" src={Orders} alt="" />
-                            <div className="ml-2">Orders</div>
+                            <div className="ml-2 text-white">Orders</div>
                         </Link>
                         <div className="flex items-center mx-10">
                             <img className="h-[21px] w-[21px]" src={Flag} alt="" />
-                            <select className="ml-2 bg-transparent">
+                            <select className="ml-2 bg-transparent text-white">
                                 <option>
                                     ID
                                 </option>
