@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import planeDepartureIcon from "../../../assets/images/PlaneDeparture.png";
-import passengerIcon from "../../../assets/images/passenger.png";
+import React, { useState } from "react";
+import planeDepartureIcon from "../../../../assets/images/PlaneDeparture.png";
+import passengerIcon from "../../../../assets/images/passenger.png";
 
 const styleText: React.CSSProperties = {
     color: "var(--Neutral-700, #757575)",
@@ -23,7 +23,7 @@ interface Airport {
     name: string
 }
 
-const listAirports:Airport[]  = [
+const listAirports: Airport[] = [
     {
         id: "1",
         name: "Jakarta (CGK)"
@@ -53,8 +53,8 @@ const listAirports:Airport[]  = [
 const SearchInputFlight = () => {
     const [isDisabled] = useState(true);
 
-    return(
-        <div className="w-full flex flex-col rounded-2xl py-6 px-8 gap-3 " style={{backgroundColor: 'rgba(237, 237, 237, 0.8)'}}>
+    return (
+        <div className="w-full flex flex-col rounded-2xl py-6 px-8 gap-3 " style={{ backgroundColor: 'rgba(237, 237, 237, 0.8)' }}>
             <div className="container flex flex-col ">
                 <div className="sm:w-auto">
                     {options.map((option) => (
@@ -111,17 +111,17 @@ const SearchInputFlight = () => {
                             </div>
                         </label>
                     </div>
-                    <div style={{width: "220px"}}>
+                    <div style={{ width: "220px" }}>
                         <label className="form-control w-full max-w-xs" style={styleText}>
                             <div className="label" style={styleText}>
                                 <span >Departure Date</span>
                             </div>
                             <input
                                 type={"date"}
-                                className="w-full py-2 px-3 input input-bordered rounded-lg bg-transparent"/>
+                                className="w-full py-2 px-3 input input-bordered rounded-lg bg-transparent" />
                         </label>
                     </div>
-                    <div style={{width: "220px"}}>
+                    <div style={{ width: "220px" }}>
                         <label className="form-control w-full max-w-xs" style={styleText}>
                             <div className="label" style={styleText}>
                                 <span >Return Date</span>
@@ -130,7 +130,7 @@ const SearchInputFlight = () => {
                                 type={"date"}
                                 className="w-full py-2 px-3 input input-bordered rounded-lg"
                                 disabled={isDisabled}
-                                style={isDisabled ? { backgroundColor: 'rgba(194, 194, 194, 0.7)' } : { backgroundColor: 'transparent'}}
+                                style={isDisabled ? { backgroundColor: 'rgba(194, 194, 194, 0.7)' } : { backgroundColor: 'transparent' }}
                             />
                         </label>
                     </div>
@@ -141,8 +141,8 @@ const SearchInputFlight = () => {
                             </div>
                             <div className="relative">
                                 <input className="input input-bordered pl-8 bg-transparent"
-                                       type={"text"}
-                                       placeholder={"1 Passenger, Economy"}
+                                    type={"text"}
+                                    placeholder={"1 Passenger, Economy"}
                                 />
                                 <div className="absolute left-3 top-4">
                                     <img src={passengerIcon} alt="Airplane Icon" className="w-4 h-4" />
