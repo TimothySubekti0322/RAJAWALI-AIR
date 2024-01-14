@@ -1,4 +1,4 @@
-import flightBackground from "../../../assets/images/home-input-flight.jpg";
+import flightBackground from "../../../../assets/images/home-input-flight.jpg";
 import HeroTitle from "../Title/HeroTitle";
 import SearchInputFlight from "../SearchInputFlight/SearchInputFlight";
 import Navbar from "../../navbar/Navbar";
@@ -12,7 +12,7 @@ const divStyle = {
 };
 
 const HeroWrapper = () => {
-    return(
+    return (
         <div style={divStyle} className={"px-6 "}>
             <Navbar />
             <div className={"flex flex-col pb-24 pt-36"}>
