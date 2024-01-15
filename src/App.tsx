@@ -1,10 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
-import FlightDashboard from "./pages/admin/flight/FlightDashboard";
-
 import Home from "./pages/client/Home";
 import AirportDashboard from "./pages/admin/airport/AirportDashboard";
+import AddAirport from "./pages/admin/airport/AddAirport";
 import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
+import FlightDashboard from "./pages/admin/flight/FlightDashboard";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/airport/add",
-    element: <div>Add Airport Page</div>,
+    element: <AddAirport />,
   },
   {
     path: "/dashboard/airport/edit/:id",
