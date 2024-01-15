@@ -4,6 +4,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 // import tableData from "../../../pages/admin/airport/dummyData";
 import type { AirportData } from "../../../assets/static/TableDataTypes";
 import Pagination from "@mui/material/Pagination";
+import Modal from "../modals"
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
@@ -149,15 +150,18 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                       </button>
 
                       {/* Delete */}
-                      <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg">
+                      <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
+                       onClick={() => document.getElementById('my_modal_1').showModal()}>
                         <RiDeleteBinLine className="text-lg text-white" />
                       </button>
                     </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                     
+                    </td>
+                    <Modal />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
         )}
       </div>
       {!loading && rawData.length > 0 && (
