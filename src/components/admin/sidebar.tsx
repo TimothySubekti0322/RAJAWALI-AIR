@@ -5,13 +5,13 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { FiHome } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 import { CiAirportSign1 } from "react-icons/ci";
 import { IoAirplaneOutline } from "react-icons/io5";
 import { MdOutlineFlightTakeoff } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
+import Header from "./header";
 
 const drawerWidth = 16;
 
@@ -42,7 +42,7 @@ export default function Sidebar(props: Props) {
       {/* Rajawali Air Logo and Title Section */}
       <div className="flex items-center w-full gap-x-4">
         <img
-          src="/images/rajawali-air-logo.png"
+          src="/images/rajawali-air-logo.svg"
           alt="Rajawali Air Logo"
           className="w-10 h-10"
         />
@@ -81,7 +81,7 @@ export default function Sidebar(props: Props) {
         {/* Airplane */}
         <a
           className={`flex px-4 py-4 rounded-2xl  ${
-            selectedMenu == "home"
+            selectedMenu == "airplane"
               ? "bg-[#A4E0FF] text-[#1E90FF]"
               : "bg-white hover:bg-[#A4E0FF] text-[#B2B2B2] hover:text-[#1E90FF]"
           }`}
@@ -94,7 +94,7 @@ export default function Sidebar(props: Props) {
         {/* Flight */}
         <a
           className={`flex px-4 py-4 rounded-2xl ${
-            selectedMenu == "home"
+            selectedMenu == "flight"
               ? "bg-[#A4E0FF] text-[#1E90FF]"
               : "bg-white hover:bg-[#A4E0FF] text-[#B2B2B2] hover:text-[#1E90FF]"
           }`}
@@ -107,7 +107,7 @@ export default function Sidebar(props: Props) {
         {/* User */}
         <a
           className={`flex px-4 py-4 rounded-2xl  ${
-            selectedMenu == "home"
+            selectedMenu == "user"
               ? "bg-[#A4E0FF] text-[#1E90FF]"
               : "bg-white hover:bg-[#A4E0FF] text-[#B2B2B2] hover:text-[#1E90FF]"
           }`}
@@ -136,8 +136,8 @@ export default function Sidebar(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <header className="fixed w-full bg-white sm:hidden">
-        <Toolbar>
+      <header className="fixed flex items-center w-full bg-white sm:hidden gap-x-6">
+        <Toolbar sx={{ width: "100%" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -147,9 +147,9 @@ export default function Sidebar(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
+          <div className="flex items-center justify-between grow">
+            <Header />
+          </div>
         </Toolbar>
       </header>
       <Box
