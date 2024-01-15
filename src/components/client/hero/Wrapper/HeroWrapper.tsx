@@ -1,7 +1,7 @@
-import flightBackground from "../../../assets/images/home-input-flight.jpg";
+import flightBackground from "../../../../assets/images/home-input-flight.jpg";
 import HeroTitle from "../Title/HeroTitle";
 import SearchInputFlight from "../SearchInputFlight/SearchInputFlight";
-import Navbar from "../../navbar/Navbar";
+import Navbar from "../../../navbar/Navbar";
 const divStyle = {
     backgroundImage: `url(${flightBackground})`,
     backgroundSize: 'cover',
