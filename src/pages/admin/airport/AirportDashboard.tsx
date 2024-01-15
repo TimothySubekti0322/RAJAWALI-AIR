@@ -38,7 +38,7 @@ const AirportDashboard = () => {
 
         <Table
           tableColumns={tableColumns}
-          api="https://rajawali-production.up.railway.app/api/v1/airport"
+          api="https://rajawali-production.up.railway.app/api/v1/airports"
         />
       </div>
     </Layout>

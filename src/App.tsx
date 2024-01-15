@@ -1,12 +1,15 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import Flight from "./pages/admin/flight/Flight";
+import FlightDashboard from "./pages/admin/flight/FlightDashboard";
+
+import Home from "./pages/client/Home";
 import AirportDashboard from "./pages/admin/airport/AirportDashboard";
+import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Landing Page</div>,
+    element: <Home />,
     errorElement: <div>404 Not Found</div>,
   },
   {
@@ -30,8 +33,28 @@ const router = createBrowserRouter([
     element: <div>Edit Airport Page</div>,
   },
   {
+    path: "/dashboard/airplane",
+    element: <AirplaneDashboard />,
+  },
+  {
+    path: "/dashboard/airplane/add",
+    element: <div>Add Airplane Page</div>,
+  },
+  {
+    path: "/dashboard/airplane/edit/:id",
+    element: <div>Edit Airplane Page</div>,
+  },
+  {
     path: "/dashboard/flight",
-    element: <Flight />,
+    element: <FlightDashboard />,
+  },
+  {
+    path: "/dashboard/flight/add",
+    element: <div>Add Flight Page</div>,
+  },
+  {
+    path: "/dashboard/flight/edit/:id",
+    element: <div>Edit Flight Page</div>,
   },
 ]);
 
