@@ -1,4 +1,3 @@
-import React from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 const Modal = () => {
@@ -6,9 +5,9 @@ const Modal = () => {
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <dialog id="my_modal_1" className="modal">
-        <div className="modal-box px-0 py-4">
+        <div className="px-0 py-4 modal-box">
           <div className="flex pl-5">
-            <RiDeleteBinLine className="text-lg font-bold text-black mt-1" />
+            <RiDeleteBinLine className="mt-1 text-lg font-bold text-black" />
             <h3 className="pb-[12px] font-semibold text-lg text-black pl-1">
               Delete!
             </h3>
@@ -24,13 +23,21 @@ const Modal = () => {
               <div className="text-white font-medium text-[16px] -mt-2">
                 <button
                   className=" mr-5 bg-[#C2C2C2] py-2 w-[119px] font-normal"
-                  onClick={() => document.getElementById("my_modal_1").close()}
+                  onClick={() =>
+                    (
+                      document.getElementById("my_modal_1") as HTMLFormElement
+                    )?.close()
+                  }
                 >
                   Cancel
                 </button>
                 <button
                   className=" bg-[#CB3A31] mr-5 py-2 w-[119px] font-normal"
-                  onClick={() => document.getElementById("my_modal_1").close()}
+                  onClick={() =>
+                    (
+                      document.getElementById("my_modal_1") as HTMLFormElement
+                    )?.close()
+                  }
                 >
                   Delete
                 </button>

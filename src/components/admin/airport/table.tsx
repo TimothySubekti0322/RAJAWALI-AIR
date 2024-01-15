@@ -151,13 +151,13 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
 
                       {/* Delete */}
                       <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
-                       onClick={() => document.getElementById('my_modal_1').showModal()}>
+                       onClick={() => (document.getElementById('my_modal_1') as HTMLFormElement)?.showModal()}>
                         <RiDeleteBinLine className="text-lg text-white" />
                       </button>
                     </div>
                      
                     </td>
-                    <Modal />
+                    <Modal/>
                   </tr>
                 ))}
               </tbody>
