@@ -2,7 +2,7 @@
 import Carousel from "../../components/Client/Carousel/Carousel";
 import TheBest from "../../components/Client/TheBest/TheBest";
 
-const Landing = () => {
+const Home = () => {
   return (
     <>
     <Carousel/>
@@ -11,4 +11,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Home;
