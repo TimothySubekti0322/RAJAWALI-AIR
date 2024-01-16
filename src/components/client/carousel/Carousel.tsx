@@ -54,7 +54,7 @@ const Carousel = () => {
             <figure>
               <img
                 className="w-[20rem] h-[15.9375rem]"
-                src="src/assets/raja.png"
+                src="../../../src/assets/raja.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -77,7 +77,7 @@ const Carousel = () => {
             <figure>
               <img
                 className="w-[20rem] h-[15.9375rem]"
-                src="src/assets/jakarta.png"
+                src="../../../src/assets/jakarta.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -100,7 +100,7 @@ const Carousel = () => {
             <figure>
               <img
                 className="w-[20rem] h-[15.9375rem]"
-                src="src/assets/bali.png"
+                src="../../../src/assets/bali.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -123,7 +123,7 @@ const Carousel = () => {
             <figure>
               <img
                 className="w-[20rem] h-[15.9375rem]"
-                src="src/assets/singapure.png"
+                src="../../../src/assets/singapure.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -146,7 +146,7 @@ const Carousel = () => {
             <figure>
               <img
                 className="w-[20rem] h-[15.9375rem]"
-                src="src/assets/thailand.png"
+                src="../../../src/assets/thailand.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -169,7 +169,7 @@ const Carousel = () => {
             <figure>
               <img
                 className="w-[20rem] h-[15.9375rem]"
-                src="src/assets/bajo.png"
+                src="../../../src/assets/bajo.png"
                 alt="Raja Ampat"
               />
             </figure>
