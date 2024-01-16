@@ -10,7 +10,7 @@ const AddButton: React.FC<addButtonProps> = ({ page, url }) => {
   };
   return (
     <button
-      className="flex bg-[#553285] text-white gap-x-4 items-center hover:bg-[#331063]"
+      className="flex bg-[#553285] text-white gap-x-4 items-center hover:bg-[#331063] px-4 py-2 rounded-lg"
       onClick={onClick}
     >
       <p className="sm:text-2xl">+</p>

@@ -14,7 +14,8 @@ import { Pagination } from "swiper/modules";
 const Carousel = () => {
   return (
     <>
-      <div className="mx-[5rem] mt-[3.12rem]">
+    <section className="bg-white">
+      <div className="mx-[5rem] pt-[3.12rem]">
         <p className="w-96 h-11 text-neutral-600 text-3xl font-bold font-['Open Sans'] leading-10 sm:container sm:mx-auto">OFFERS</p>
         <p className="w-96 h-5 text-neutral-500 text-base font-semibold font-['Open Sans'] leading-normal">Exclusive Deals for Our Special Customers</p>
         <hr className="w-full h-0 border-4 border-blue-500 mt-[1.87rem] sm:container sm:mx-auto" />
@@ -145,6 +146,7 @@ const Carousel = () => {
         </SwiperSlide>
         
       </Swiper>
+      </section>
     </>
   );
 };
