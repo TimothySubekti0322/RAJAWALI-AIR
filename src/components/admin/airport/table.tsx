@@ -164,7 +164,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                       </button>
                     </div>
                   </td>
-                  <Modal />
+                  <Modal dashboardName="airport" id={item.id} />
                 </tr>
               ))}
             </tbody>
