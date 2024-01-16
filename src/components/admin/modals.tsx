@@ -1,8 +1,35 @@
 import { RiDeleteBinLine } from "react-icons/ri";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import API_URL from "../../assets/static/API";
 
-const Modal = () => {
+type DashboardName = "airport" | "airplane" | "flight" | "user";
+
+interface modalProps {
+  dashboardName: DashboardName;
+  id: string;
+}
+
+const Modal: React.FC<modalProps> = ({ dashboardName, id }) => {
+  const deleteHandler = async () => {
+    try {
+      const res = await axios.delete(`${API_URL}/v1/${dashboardName}s/${id}`);
+      if (res.data.success) {
+        toast.success("Data deleted successfully");
+        setTimeout(() => {
+          window.location.href = `/dashboard/${dashboardName}}`;
+        }, 1000); // Delayed by 1000 milliseconds (1 seconds)
+      }
+      console.log(res);
+    } catch (error) {
+      setTimeout(toast.error("Something when wrong"), 100);
+      console.log(error);
+    }
+  };
+
   return (
     <div>
+      <Toaster />
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <dialog id="my_modal_1" className="modal">
         <div className="px-0 py-4 modal-box">
@@ -33,11 +60,7 @@ const Modal = () => {
                 </button>
                 <button
                   className=" bg-[#CB3A31] mr-5 py-2 w-[119px] font-normal"
-                  onClick={() =>
-                    (
-                      document.getElementById("my_modal_1") as HTMLFormElement
-                    )?.close()
-                  }
+                  onClick={deleteHandler}
                 >
                   Delete
                 </button>
