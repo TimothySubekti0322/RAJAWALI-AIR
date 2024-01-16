@@ -1,6 +1,6 @@
-import HeroWrapper from "../../components/Client/hero/Wrapper/HeroWrapper";
-import Carousel from "../../components/Client/Carousel/Carousel";
-import TheBest from "../../components/Client/TheBest/TheBest";
+import HeroWrapper from "../../components/client/hero/Wrapper/HeroWrapper";
+import Carousel from "../../components/client/Carousel/Carousel";
+import TheBest from "../../components/client/TheBest/TheBest";
 function Home() {
     return (
         <>
