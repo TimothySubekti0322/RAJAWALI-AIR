@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../../../components/admin/layout/Layout";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
@@ -16,13 +16,32 @@ const breadcrumbs = [
     Airport
   </Typography>,
   <Typography key="3" color="text.primary">
-    Add
+    Edit
   </Typography>,
 ];
 
 const apiURL = `${API_URL}/v1/airports`;
 
-const AddAirport = () => {
+const EditAirport = () => {
+  const path = window.location.pathname;
+  const id = path.split("/")[4];
+
+  // Initial Render Data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiURL}/${id}`);
+        console.log(response);
+        if (response.data.success) {
+          setForm(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -39,7 +58,8 @@ const AddAirport = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(apiURL, form);
+      const response = await axios.put(`${apiURL}/${id}`, form);
+      console.log(response);
       if (response.data.success) {
         toast.success("Data added successfully");
         setLoading(false);
@@ -63,7 +83,7 @@ const AddAirport = () => {
     <Layout>
       <Toaster />
       <div className="w-full px-4 py-6 xl:px-8 xl:py-10 2xl:px-10">
-        <p className="text-[#1E90FF] font-semibold text-xl">Add Airport</p>
+        <p className="text-[#1E90FF] font-semibold text-xl">Edit Airport</p>
         <div className="flex items-center justify-between mt-2 ">
           {/* BreadCrumbs */}
           <Breadcrumbs
@@ -150,4 +170,4 @@ const AddAirport = () => {
   );
 };
 
-export default AddAirport;
+export default EditAirport;
