@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import planeDepartureIcon from "../../../../assets/images/PlaneDeparture.png";
 import passengerIcon from "../../../../assets/images/passenger.png";
 import addanotherIcon from "../../../../assets/images/gridicons_add.png";
 import SelectPassenger, {AmountPassengerProps} from "../SelectPassenger/SelectPassenger";
+import axios from "axios";
 
 const styleText: React.CSSProperties = {
     color: "var(--Neutral-700, #757575)",
@@ -30,43 +31,18 @@ const options = [
 ];
 
 interface Airport {
-    id: string,
-    name: string
+    id: string;
+    name: string;
+    city: string;
+    country: string;
+    cityCode: string;
 }
-
-const listAirports:Airport[]  = [
-    {
-        id: "1",
-        name: "Jakarta (CGK)"
-    },
-    {
-        id: "2",
-        name: "Denpasar Bali (DPS)"
-    },
-    {
-        id: "3",
-        name: "Surabaya Airport (SUB)"
-    },
-    {
-        id: "4",
-        name: "Ujung Pandang (UPG)"
-    },
-    {
-        id: "5",
-        name: "Pekanbaru Airport (PKU)"
-    },
-    {
-        id: "6",
-        name: "Semarang Airport (SRG)"
-    }
-]
-
-
 const SearchInputFlight = () => {
     const [selectedOption, setSelectedOption] = useState<string>("option2");
     const [addAnotherCount, setAddAnotherCount] = useState<number>(1);
     const [showSelectPassenger, setShowSelectPassenger] = useState<boolean>(false);
     const [inputPassenger, setInputPassenger] = useState<string>("");
+    const [listAirport, setListAirport] = useState<Airport[]>();
     const [passenger, setPassenger] = useState<AmountPassengerProps>({
         adultName: "Adult",
         adultValue: 0,
@@ -86,6 +62,17 @@ const SearchInputFlight = () => {
         width: selectedOption === "option3" ? "40%" : "20%",
     };
 
+    useEffect(() => {
+        axios.get(`https://rajawali-production.up.railway.app/api/v1/airports`)
+            .then(({data}) => {
+                const resultData: Airport[] = data.data.content;
+                setListAirport(resultData);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [])
+
     const renderAnotherFlight = () => {
         const flights = [];
         for (let i = 1; i < addAnotherCount; i++) {
@@ -102,8 +89,8 @@ const SearchInputFlight = () => {
                                         <div className="relative">
                                             <select className="select select-bordered pl-8 bg-transparent">
                                                 <option disabled selected>Where From</option>
-                                                {listAirports.map((item) => (
-                                                    <option value={item.id}>{item.name}</option>
+                                                {listAirport?.map((item) => (
+                                                    <option value={item.id}>{item.name} ({item.cityCode})</option>
                                                 ))}
                                             </select>
                                             <div className="absolute left-3 top-4">
@@ -121,8 +108,8 @@ const SearchInputFlight = () => {
                                     <div className="relative">
                                         <select className="select select-bordered pl-8 bg-transparent">
                                             <option disabled selected>Where To</option>
-                                            {listAirports.map((item) => (
-                                                <option value={item.id}>{item.name}</option>
+                                            {listAirport?.map((item) => (
+                                                <option value={item.id}>{item.name} ({item.cityCode})</option>
                                             ))}
                                         </select>
                                         <div className="absolute left-3 top-4">
@@ -194,8 +181,8 @@ const SearchInputFlight = () => {
                                     <div className="relative">
                                         <select className="select select-bordered pl-8 bg-transparent">
                                             <option disabled selected>Where From</option>
-                                            {listAirports.map((item) => (
-                                                <option value={item.id}>{item.name}</option>
+                                            {listAirport?.map((item) => (
+                                                <option value={item.id}>{item.name} ({item.cityCode})</option>
                                             ))}
                                         </select>
                                         <div className="absolute left-3 top-4">
@@ -213,8 +200,8 @@ const SearchInputFlight = () => {
                                 <div className="relative">
                                     <select className="select select-bordered pl-8 bg-transparent">
                                         <option disabled selected>Where To</option>
-                                        {listAirports.map((item) => (
-                                            <option value={item.id}>{item.name}</option>
+                                        {listAirport?.map((item) => (
+                                            <option value={item.id}>{item.name} ({item.cityCode})</option>
                                         ))}
                                     </select>
                                     <div className="absolute left-3 top-4">
@@ -281,8 +268,8 @@ const SearchInputFlight = () => {
                                         <div className="relative">
                                             <select className="select select-bordered pl-8 bg-transparent">
                                                 <option disabled selected>Where From</option>
-                                                {listAirports.map((item) => (
-                                                    <option value={item.id}>{item.name}</option>
+                                                {listAirport?.map((item) => (
+                                                    <option value={item.id}>{item.name} ({item.cityCode})</option>
                                                 ))}
                                             </select>
                                             <div className="absolute left-3 top-4">
@@ -300,8 +287,8 @@ const SearchInputFlight = () => {
                                     <div className="relative">
                                         <select className="select select-bordered pl-8 bg-transparent">
                                             <option disabled selected>Where To</option>
-                                            {listAirports.map((item) => (
-                                                <option value={item.id}>{item.name}</option>
+                                            {listAirport?.map((item) => (
+                                                <option value={item.id}>{item.name} ({item.cityCode})</option>
                                             ))}
                                         </select>
                                         <div className="absolute left-3 top-4">
@@ -310,7 +297,7 @@ const SearchInputFlight = () => {
                                     </div>
                                 </label>
                             </div>
-                            <div style={{width: "100%"}}>
+                            <div className={'w-[100%]'}>
                                 <label className="form-control w-full max-w-xs" style={styleText}>
                                     <div className="label" style={styleText}>
                                         <span >Departure Date</span>
@@ -322,7 +309,7 @@ const SearchInputFlight = () => {
                             </div>
                         </div>
                     )}
-                    <button className="btn text-white border-0" style={{ backgroundColor: "#1E90FF", width: "39%" }}>Let's Search</button>
+                    <button className="btn text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]">Let's Search</button>
                 </div>
                 {selectedOption === "option3" && (
                     <div
