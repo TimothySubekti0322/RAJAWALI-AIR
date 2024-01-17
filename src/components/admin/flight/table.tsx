@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
-// import tableData from "../../../pages/admin/airport/dummyData";
+import Modal from "../modals";
 import type { FlightData } from "../../../assets/static/TableDataTypes";
 import Pagination from "@mui/material/Pagination";
 import { makeStyles, createStyles } from "@mui/styles";
@@ -168,11 +168,21 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                       </button>
 
                       {/* Delete */}
-                      <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg">
+                      <button
+                        className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
+                        onClick={() =>
+                          (
+                            document.getElementById(
+                              "my_modal_1"
+                            ) as HTMLFormElement
+                          )?.showModal()
+                        }
+                      >
                         <RiDeleteBinLine className="text-lg text-white" />
                       </button>
                     </div>
                   </td>
+                  <Modal dashboardName="flight" id={item.id} />
                 </tr>
               ))}
             </tbody>
