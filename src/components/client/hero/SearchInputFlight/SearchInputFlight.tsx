@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import planeDepartureIcon from "../../../../assets/images/PlaneDeparture.png";
 import passengerIcon from "../../../../assets/images/passenger.png";
 import addanotherIcon from "../../../../assets/images/gridicons_add.png";
-import SelectPassenger, {
-  AmountPassengerProps,
-} from "../SelectPassenger/SelectPassenger";
+
+import SelectPassenger, {AmountPassengerProps} from "../SelectPassenger/SelectPassenger";
+import axios from "axios";
+
 
 const styleText: React.CSSProperties = {
   color: "var(--Neutral-700, #757575)",
@@ -32,52 +33,27 @@ const options = [
 ];
 
 interface Airport {
-  id: string;
-  name: string;
+    id: string;
+    name: string;
+    city: string;
+    country: string;
+    cityCode: string;
 }
-
-const listAirports: Airport[] = [
-  {
-    id: "1",
-    name: "Jakarta (CGK)",
-  },
-  {
-    id: "2",
-    name: "Denpasar Bali (DPS)",
-  },
-  {
-    id: "3",
-    name: "Surabaya Airport (SUB)",
-  },
-  {
-    id: "4",
-    name: "Ujung Pandang (UPG)",
-  },
-  {
-    id: "5",
-    name: "Pekanbaru Airport (PKU)",
-  },
-  {
-    id: "6",
-    name: "Semarang Airport (SRG)",
-  },
-];
-
 const SearchInputFlight = () => {
-  const [selectedOption, setSelectedOption] = useState<string>("option2");
-  const [addAnotherCount, setAddAnotherCount] = useState<number>(1);
-  const [showSelectPassenger, setShowSelectPassenger] =
-    useState<boolean>(false);
-  const [inputPassenger, setInputPassenger] = useState<string>("");
-  const [passenger, setPassenger] = useState<AmountPassengerProps>({
-    adultName: "Adult",
-    adultValue: 0,
-    childName: "Child",
-    childValue: 0,
-    infantName: "Infant",
-    infantValue: 0,
-  });
-  const [selectCabin, setSelectCabin] = useState<string | null>(null);
+    const [selectedOption, setSelectedOption] = useState<string>("option2");
+    const [addAnotherCount, setAddAnotherCount] = useState<number>(1);
+    const [showSelectPassenger, setShowSelectPassenger] = useState<boolean>(false);
+    const [inputPassenger, setInputPassenger] = useState<string>("");
+    const [listAirport, setListAirport] = useState<Airport[]>();
+    const [passenger, setPassenger] = useState<AmountPassengerProps>({
+        adultName: "Adult",
+        adultValue: 0,
+        childName: "Child",
+        childValue: 0,
+        infantName: "Infant",
+        infantValue: 0
+    });
+    const [selectCabin, setSelectCabin] = useState<string | null>(null);
 
   const handleOnChangeSelectedOption = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -90,40 +66,74 @@ const SearchInputFlight = () => {
     width: selectedOption === "option3" ? "40%" : "20%",
   };
 
-  const renderAnotherFlight = () => {
-    const flights = [];
-    for (let i = 1; i < addAnotherCount; i++) {
-      flights.push(
-        <div className="flex flex-row items-end justify-end w-full gap-3">
-          {selectedOption === "option3" && (
-            <div className={"flex w-full gap-3"}>
-              <div className="flex">
-                <div>
-                  <label
-                    className="w-full max-w-xs form-control"
-                    style={styleText}
-                  >
-                    <div className="label" style={styleText}>
-                      <span>From</span>
-                    </div>
-                    <div className="relative">
-                      <select className="pl-8 bg-transparent select select-bordered">
-                        <option disabled selected>
-                          Where From
-                        </option>
-                        {listAirports.map((item) => (
-                          <option value={item.id}>{item.name}</option>
-                        ))}
-                      </select>
-                      <div className="absolute left-3 top-4">
-                        <img
-                          src={planeDepartureIcon}
-                          alt="Airplane Icon"
-                          className="w-4 h-4"
-                        />
-                      </div>
-                    </div>
-                  </label>
+    useEffect(() => {
+        axios.get(`https://rajawali-production.up.railway.app/api/v1/airports`)
+            .then(({data}) => {
+                const resultData: Airport[] = data.data.content;
+                setListAirport(resultData);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [])
+
+    const renderAnotherFlight = () => {
+        const flights = [];
+        for (let i = 1; i < addAnotherCount; i++) {
+            flights.push(
+                <div className="w-full flex flex-row justify-end gap-3 items-end">
+                    {selectedOption === "option3" && (
+                        <div className={"flex w-full gap-3"}>
+                            <div className="flex" >
+                                <div >
+                                    <label className="form-control w-full max-w-xs" style={styleText}>
+                                        <div className="label" style={styleText}>
+                                            <span >From</span>
+                                        </div>
+                                        <div className="relative">
+                                            <select className="select select-bordered pl-8 bg-transparent">
+                                                <option disabled selected>Where From</option>
+                                                {listAirport?.map((item) => (
+                                                    <option value={item.id}>{item.name} ({item.cityCode})</option>
+                                                ))}
+                                            </select>
+                                            <div className="absolute left-3 top-4">
+                                                <img src={planeDepartureIcon} alt="Airplane Icon" className="w-4 h-4" />
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label className="form-control w-full max-w-xs" style={styleText}>
+                                    <div className="label" style={styleText}>
+                                        <span >To</span>
+                                    </div>
+                                    <div className="relative">
+                                        <select className="select select-bordered pl-8 bg-transparent">
+                                            <option disabled selected>Where To</option>
+                                            {listAirport?.map((item) => (
+                                                <option value={item.id}>{item.name} ({item.cityCode})</option>
+                                            ))}
+                                        </select>
+                                        <div className="absolute left-3 top-4">
+                                            <img src={planeDepartureIcon} alt="Airplane Icon" className="w-4 h-4" />
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div style={{width: "20%"}}>
+                                <label className="form-control w-full max-w-xs" style={styleText}>
+                                    <div className="label" style={styleText}>
+                                        <span >Departure Date</span>
+                                    </div>
+                                    <input
+                                        type={"date"}
+                                        className="w-full py-2 px-3 input input-bordered rounded-lg bg-transparent"/>
+                                </label>
+                            </div>
+                        </div>
+                    )}
                 </div>
               </div>
               <div>
@@ -342,49 +352,156 @@ const SearchInputFlight = () => {
                     <div className="label" style={styleText}>
                       <span>From</span>
                     </div>
-                    <div className="relative">
-                      <select className="pl-8 bg-transparent select select-bordered">
-                        <option disabled selected>
-                          Where From
-                        </option>
-                        {listAirports.map((item) => (
-                          <option value={item.id}>{item.name}</option>
-                        ))}
-                      </select>
-                      <div className="absolute left-3 top-4">
-                        <img
-                          src={planeDepartureIcon}
-                          alt="Airplane Icon"
-                          className="w-4 h-4"
-                        />
-                      </div>
+                    <div className="flex gap-3 lg:flex-row md:flex-col sm:flex-col" >
+                        <div className="flex gap-5" >
+                            <div >
+                                <label className="form-control w-full max-w-xs" style={styleText}>
+                                    <div className="label" style={styleText}>
+                                        <span >From</span>
+                                    </div>
+                                    <div className="relative">
+                                        <select className="select select-bordered pl-8 bg-transparent">
+                                            <option disabled selected>Where From</option>
+                                            {listAirport?.map((item) => (
+                                                <option value={item.id}>{item.name} ({item.cityCode})</option>
+                                            ))}
+                                        </select>
+                                        <div className="absolute left-3 top-4">
+                                            <img src={planeDepartureIcon} alt="Airplane Icon" className="w-4 h-4" />
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label className="form-control w-full max-w-xs" style={styleText}>
+                                <div className="label" style={styleText}>
+                                    <span >To</span>
+                                </div>
+                                <div className="relative">
+                                    <select className="select select-bordered pl-8 bg-transparent">
+                                        <option disabled selected>Where To</option>
+                                        {listAirport?.map((item) => (
+                                            <option value={item.id}>{item.name} ({item.cityCode})</option>
+                                        ))}
+                                    </select>
+                                    <div className="absolute left-3 top-4">
+                                        <img src={planeDepartureIcon} alt="Airplane Icon" className="w-4 h-4" />
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div style={{width: "20%"}}>
+                            <label className="form-control w-full max-w-xs" style={styleText}>
+                                <div className="label" style={styleText}>
+                                    <span >Departure Date</span>
+                                </div>
+                                <input
+                                    type={"date"}
+                                    className="w-full py-2 px-3 input input-bordered rounded-lg bg-transparent"/>
+                            </label>
+                        </div>
+                        {selectedOption !== "option3" && (
+                            <div style={{width: "20%"}}>
+                                <label className="form-control w-full max-w-xs" style={styleText}>
+                                    <div className="label" style={styleText}>
+                                        <span >Return Date</span>
+                                    </div>
+                                    <input
+                                        type={"date"}
+                                        className="w-full py-2 px-3 input input-bordered rounded-lg"
+                                        disabled={selectedOption === "option2"}
+                                        style={selectedOption === "option2" ? { backgroundColor: 'rgba(194, 194, 194, 0.7)' } : { backgroundColor: 'transparent'}}
+                                    />
+                                </label>
+                            </div>
+                        )}
+                        <div style={passengerWidthStyle}>
+                            <label className="form-control" style={styleText}>
+                                <div className="label" style={styleText}>
+                                    <span >Passenger, Class</span>
+                                </div>
+                                <div className="relative">
+                                    <input className="input input-bordered pl-8 bg-transparent w-full block"
+                                           type={"text"}
+                                           placeholder={"1 Passenger, Economy"}
+                                           value={inputPassenger}
+                                           onClick={() => setShowSelectPassenger(true)}
+                                    />
+                                    <div className="absolute left-3 top-4">
+                                        <img src={passengerIcon} alt="Airplane Icon" className="w-4 h-4" />
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
                     </div>
                   </label>
                 </div>
-              </div>
-              <div>
-                <label
-                  className="w-full max-w-xs form-control"
-                  style={styleText}
-                >
-                  <div className="label" style={styleText}>
-                    <span>To</span>
-                  </div>
-                  <div className="relative">
-                    <select className="pl-8 bg-transparent select select-bordered">
-                      <option disabled selected>
-                        Where To
-                      </option>
-                      {listAirports.map((item) => (
-                        <option value={item.id}>{item.name}</option>
-                      ))}
-                    </select>
-                    <div className="absolute left-3 top-4">
-                      <img
-                        src={planeDepartureIcon}
-                        alt="Airplane Icon"
-                        className="w-4 h-4"
-                      />
+                {renderAnotherFlight()}
+                <div className="w-full flex flex-row justify-end gap-3 items-end">
+                    {selectedOption === "option3" && (
+                        <div className={"flex w-full gap-3"}>
+                            <div className="flex" >
+                                <div >
+                                    <label className="form-control w-full max-w-xs" style={styleText}>
+                                        <div className="label" style={styleText}>
+                                            <span >From</span>
+                                        </div>
+                                        <div className="relative">
+                                            <select className="select select-bordered pl-8 bg-transparent">
+                                                <option disabled selected>Where From</option>
+                                                {listAirport?.map((item) => (
+                                                    <option value={item.id}>{item.name} ({item.cityCode})</option>
+                                                ))}
+                                            </select>
+                                            <div className="absolute left-3 top-4">
+                                                <img src={planeDepartureIcon} alt="Airplane Icon" className="w-4 h-4" />
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label className="form-control w-full max-w-xs" style={styleText}>
+                                    <div className="label" style={styleText}>
+                                        <span >To</span>
+                                    </div>
+                                    <div className="relative">
+                                        <select className="select select-bordered pl-8 bg-transparent">
+                                            <option disabled selected>Where To</option>
+                                            {listAirport?.map((item) => (
+                                                <option value={item.id}>{item.name} ({item.cityCode})</option>
+                                            ))}
+                                        </select>
+                                        <div className="absolute left-3 top-4">
+                                            <img src={planeDepartureIcon} alt="Airplane Icon" className="w-4 h-4" />
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div className={'w-[100%]'}>
+                                <label className="form-control w-full max-w-xs" style={styleText}>
+                                    <div className="label" style={styleText}>
+                                        <span >Departure Date</span>
+                                    </div>
+                                    <input
+                                        type={"date"}
+                                        className="w-full py-2 px-3 input input-bordered rounded-lg bg-transparent"/>
+                                </label>
+                            </div>
+                        </div>
+                    )}
+                    <button className="btn text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]">Let's Search</button>
+                </div>
+                {selectedOption === "option3" && (
+                    <div
+                        className={"flex gap-5 items-center"}
+                        style={anotherFlightStyle}>
+                        <div className={"flex gap-1"} style={{cursor: "pointer"}} onClick={() => setAddAnotherCount(addAnotherCount + 1)}><img src={addanotherIcon} alt={"+"}/> ADD ANOTHER FLIGHT</div>
+                        {addAnotherCount > 1 && (
+                            <div className={"flex gap-1"} style={{cursor: "pointer", color: "red"}} onClick={() => setAddAnotherCount(addAnotherCount - 1)}>REMOVE ANOTHER FLIGHT</div>
+                        )
                     </div>
                   </div>
                 </label>
