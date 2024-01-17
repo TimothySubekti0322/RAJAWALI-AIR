@@ -5,6 +5,7 @@ import AddAirport from "./pages/admin/airport/AddAirport";
 import EditAirport from "./pages/admin/airport/EditAirport";
 import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
 import FlightDashboard from "./pages/admin/flight/FlightDashboard";
+import FlightForm from "./pages/admin/flight/FlightForm";
 
 const router = createBrowserRouter([
   {
@@ -50,11 +51,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/flight/add",
-    element: <div>Add Flight Page</div>,
+    element: <FlightForm />,
   },
   {
     path: "/dashboard/flight/edit/:id",
-    element: <div>Edit Flight Page</div>,
+    element: <FlightForm />,
   },
 ]);
 
