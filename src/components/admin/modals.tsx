@@ -17,7 +17,7 @@ const Modal: React.FC<modalProps> = ({ dashboardName, id }) => {
       if (res.data.success) {
         toast.success("Data deleted successfully");
         setTimeout(() => {
-          window.location.href = `/dashboard/${dashboardName}}`;
+          window.location.href = `/dashboard/${dashboardName}`;
         }, 1000); // Delayed by 1000 milliseconds (1 seconds)
       }
       console.log(res);
@@ -31,7 +31,7 @@ const Modal: React.FC<modalProps> = ({ dashboardName, id }) => {
     <div>
       <Toaster />
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-      <dialog id="my_modal_1" className="modal">
+      <dialog id={`my_modal_${id}`} className="modal">
         <div className="px-0 py-4 modal-box">
           <div className="flex pl-5">
             <RiDeleteBinLine className="mt-1 text-lg font-bold text-black" />
