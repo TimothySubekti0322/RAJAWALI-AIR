@@ -160,7 +160,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                         onClick={() =>
                           (
                             document.getElementById(
-                              "my_modal_1"
+                              `my_modal_${item.id}`
                             ) as HTMLFormElement
                           )?.showModal()
                         }
