@@ -1,11 +1,16 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./pages/client/Home";
+
+// Admin Pages
 import AirportDashboard from "./pages/admin/airport/AirportDashboard";
 import AddAirport from "./pages/admin/airport/AddAirport";
 import EditAirport from "./pages/admin/airport/EditAirport";
 import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
 import FlightDashboard from "./pages/admin/flight/FlightDashboard";
 import FlightForm from "./pages/admin/flight/FlightForm";
+
+// Client Pages
+import Home from "./pages/client/Home";
+import TicketList from "./pages/client/TicketList";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <div>Register Page</div>,
+  },
+  {
+    path: "/ticketList",
+    element: <TicketList />,
   },
   {
     path: "/dashboard/airport",
