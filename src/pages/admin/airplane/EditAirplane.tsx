@@ -57,6 +57,7 @@ const EditAirplane = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
+    console.log('isi handle input change', event.target.value);
   };
 
   const handleSubmit = async () => {
@@ -80,7 +81,7 @@ const EditAirplane = () => {
           window.location.href = "/dashboard/airplane";
         }, 1000); // Delayed by 1000 milliseconds (1 seconds)
       }
-      console.log(response.data.data.economySeats);
+      console.log('kursi ekonomi: ',response.data.data.economySeats);
     } catch (error) {
       console.log(error);
       setTimeout(toast.error("Something when wrong"), 100);
