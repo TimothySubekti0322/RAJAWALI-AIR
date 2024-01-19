@@ -76,9 +76,9 @@ const EditAirplane = () => {
           businessSeatsPerCol: 0,
           firstSeatsPerCol: 0,
         });
-        // setTimeout(() => {
-        //   window.location.href = "";
-        // }, 1000); // Delayed by 1000 milliseconds (1 seconds)
+        setTimeout(() => {
+          window.location.href = "/dashboard/airplane";
+        }, 1000); // Delayed by 1000 milliseconds (1 seconds)
       }
       console.log(response.data.data.economySeats);
     } catch (error) {
