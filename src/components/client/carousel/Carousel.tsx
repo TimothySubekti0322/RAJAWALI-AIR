@@ -53,7 +53,7 @@ const Carousel = () => {
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
-                src="/src/assets/raja.png"
+                src="/public/images/raja.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -69,7 +69,7 @@ const Carousel = () => {
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
-                src="/src/assets/jakarta.png"
+                src="/public/images/jakarta.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -85,7 +85,7 @@ const Carousel = () => {
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
-                src="/src/assets/bali.png"
+                src="/public/images/bali.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -101,7 +101,7 @@ const Carousel = () => {
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
-                src="/src/assets/singapure.png"
+                src="/public/images/singapure.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -117,7 +117,7 @@ const Carousel = () => {
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
-                src="/src/assets/thailand.png"
+                src="/public/images/thailand.png"
                 alt="Raja Ampat"
               />
             </figure>
@@ -133,7 +133,7 @@ const Carousel = () => {
           <div className="card w-[20rem] h-[22.5] bg-base-100 rounded-none rounded-xl shadow-lg">
             <figure>
               <img className="w-[20rem] h-[15.9375rem]"
-                src="/src/assets/bajo.png"
+                src="/public/images/bajo.png"
                 alt="Raja Ampat"
               />
             </figure>
