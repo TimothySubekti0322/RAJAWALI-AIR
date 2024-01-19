@@ -1,16 +1,14 @@
-import HeroWrapper from "../../components/Client/hero/Wrapper/HeroWrapper";
-import Carousel from "../../components/Client/Carousel/Carousel";
-import TheBest from "../../components/Client/TheBest/TheBest";
+import HeroWrapper from "../../components/client/hero/Wrapper/HeroWrapper";
+import Carousel from "../../components/client/carousel/Carousel";
+import TheBest from "../../components/client/thebest/TheBest";
 function Home() {
-    return (
-        <>
-            <HeroWrapper />
-            <Carousel/>
-            <TheBest/>
-        </>
-    )
+  return (
+    <>
+      <HeroWrapper />
+      <Carousel />
+      <TheBest />
+    </>
+  );
 }
 
-export default Home
-
-
+export default Home;

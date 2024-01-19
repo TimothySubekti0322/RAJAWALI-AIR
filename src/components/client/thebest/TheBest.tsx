@@ -4,7 +4,7 @@ const TheBest = () => {
       <section className="bg-white">
         <div className="container grid gap-4 grid-cols-2 grid-rows-3 mt-[-3rem] pt-[4.44rem] min-[320px]:grid min-[320px]:grid-cols-1 sm:container sm:mx-auto sm:items-center sm:grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
           <div className="container sm:mx-auto">
-            <img src="/public/images/pramugari.png" alt="" className="sm:w-[600px] sm:h-auto md:w-full md:h-auto" />
+            <img src="/src/assets/pramugari.png" alt="" className="sm:w-[600px] sm:h-auto md:w-full md:h-auto" />
           </div>
           <div className="mr-[5.06rem] sm:items-center sm:mx-6">
             <div className="justify-end w-full text-right">
@@ -26,7 +26,7 @@ const TheBest = () => {
 
             <div className="flex mt-[2.94rem]">
               <div className="flex-initial mr-[1.06rem] w-11 h-11 p-2 bg-blue-500 rounded-full justify-center items-center inline-flex mt-4">
-                <img src="/public/images/search.png" alt="" />
+                <img src="/src/assets/search.png" alt="" />
               </div>
               <div className="flex-1 w-32">
                 <p className="w-96 h-6 text-neutral-600 text-base font-bold font-['Open Sans'] leading-snug text-justify">
@@ -41,7 +41,7 @@ const TheBest = () => {
 
             <div className="flex mt-7">
               <div className="flex-initial mr-[1.06rem] w-11 h-11 p-2 bg-blue-500 rounded-full justify-center items-center inline-flex mt-4">
-                <img src="/public/images/carbon_request-quote.png" alt="" />
+                <img src="/src/assets/carbon_request-quote.png" alt="" />
               </div>
               <div className="flex-1 w-32 ">
                 <p className="w-96 h-6 text-neutral-600 text-base font-bold font-['Open Sans'] leading-snug text-justify">
@@ -56,7 +56,7 @@ const TheBest = () => {
 
             <div className="flex mt-7">
               <div className="flex-initial mr-[1.06rem] w-11 h-11 p-2 bg-blue-500 rounded-full justify-center items-center inline-flex mt-2">
-                <img src="/public/images/plane.png" alt="" />
+                <img src="/src/assets/plane.png" alt="" />
               </div>
               <div className="flex-1 w-32">
                 <p className="w-96 h-6 text-neutral-600 text-base font-bold font-['Open Sans'] leading-snug text-justify">
@@ -71,7 +71,7 @@ const TheBest = () => {
 
             <div className="flex mt-7">
               <div className="flex-initial mr-[1.06rem] w-11 h-11 p-2 bg-blue-500 rounded-full justify-center items-center inline-flex mt-2">
-                <img src="/public/images/phone.png" alt="" />
+                <img src="/src/assets/phone.png" alt="" />
               </div>
               <div className="flex-1 w-32">
                 <p className="w-96 h-6 text-neutral-600 text-base font-bold font-['Open Sans'] leading-snug text-justify">
@@ -86,7 +86,7 @@ const TheBest = () => {
 
             <div className="flex mt-7">
               <div className="flex-initial mr-[1.06rem] w-11 h-11 p-2 bg-blue-500 rounded-full justify-center items-center inline-flex mt-2">
-                <img src="/public/images/ion_notifications-outline.png" alt="" />
+                <img src="/src/assets/ion_notifications-outline.png" alt="" />
               </div>
               <div className="flex-1 w-32">
                 <p className="w-96 h-6 text-neutral-600 text-base font-bold font-['Open Sans'] leading-snug text-justify">

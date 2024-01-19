@@ -4,7 +4,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 // import tableData from "../../../pages/admin/airport/dummyData";
 import type { AirportData } from "../../../assets/static/TableDataTypes";
 import Pagination from "@mui/material/Pagination";
-import Modal from "../modals"
+import Modal from "../modals";
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
@@ -130,7 +130,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {data.map((item) => (
                 <tr key={item.id} className="border-b-2">
                   <td className="px-4 py-3 text-center">{item.id}</td>
                   <td className="px-4 py-3 text-center">{item.name}</td>
@@ -143,25 +143,32 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                       <button
                         className="bg-[#F1A025] py-1 px-5 hover:bg-[#D08003] hover:border-[#D08003] rounded-lg"
                         onClick={() => {
-                          window.location.href = `/dashboard/airport/edit/${index}`;
+                          window.location.href = `/dashboard/airport/edit/${item.id}`;
                         }}
                       >
                         <FaRegEdit className="text-lg text-white" />
                       </button>
 
                       {/* Delete */}
-                      <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
-                       onClick={() => (document.getElementById('my_modal_1') as HTMLFormElement)?.showModal()}>
+                      <button
+                        className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
+                        onClick={() =>
+                          (
+                            document.getElementById(
+                              `my_modal_${item.id}`
+                            ) as HTMLFormElement
+                          )?.showModal()
+                        }
+                      >
                         <RiDeleteBinLine className="text-lg text-white" />
                       </button>
                     </div>
-                     
-                    </td>
-                    <Modal/>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  </td>
+                  <Modal dashboardName="airport" id={item.id} />
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
       {!loading && rawData.length > 0 && (

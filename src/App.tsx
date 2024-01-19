@@ -2,8 +2,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/client/Home";
 import AirportDashboard from "./pages/admin/airport/AirportDashboard";
 import AddAirport from "./pages/admin/airport/AddAirport";
+import EditAirport from "./pages/admin/airport/EditAirport";
 import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
 import FlightDashboard from "./pages/admin/flight/FlightDashboard";
+import FlightForm from "./pages/admin/flight/FlightForm";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/airport/edit/:id",
-    element: <div>Edit Airport Page</div>,
+    element: <EditAirport />,
   },
   {
     path: "/dashboard/airplane",
@@ -49,11 +51,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/flight/add",
-    element: <div>Add Flight Page</div>,
+    element: <FlightForm />,
   },
   {
     path: "/dashboard/flight/edit/:id",
-    element: <div>Edit Flight Page</div>,
+    element: <FlightForm />,
   },
 ]);
 

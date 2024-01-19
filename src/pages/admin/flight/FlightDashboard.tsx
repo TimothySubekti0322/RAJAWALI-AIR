@@ -3,7 +3,8 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Table from "../../../components/admin/flight/table";
-import AddButton from "../../../components/admin/addButton";
+// import React from "react";
+import {useNavigate} from "react-router-dom";
 
 const tableColumns = [
   "Id",
@@ -28,6 +29,7 @@ const breadcrumbs = [
   </Typography>,
 ];
 const Flight = () => {
+  const navigate = useNavigate();
   return (
     <Layout>
       <div className="w-full px-4 py-6 xl:px-8 xl:py-10 2xl:px-10">
@@ -42,7 +44,15 @@ const Flight = () => {
           </Breadcrumbs>
 
           {/* Add Button */}
-          <AddButton page="Flight" url="/dashboard/flight/add" />
+          <button
+              className="flex bg-[#553285] text-white gap-x-4 items-center hover:bg-[#331063] px-4 py-2 rounded-lg"
+              onClick={() => navigate('/dashboard/flight/add')}
+          >
+            <p className="sm:text-2xl">+</p>
+            <p className="text-xs sm:text-base">
+              Add Flight
+            </p>
+          </button>
         </div>
 
         {/* Table */}

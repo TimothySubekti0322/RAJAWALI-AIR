@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
-// import tableData from "../../../pages/admin/airport/dummyData";
+import Modal from "../modals";
 import type { FlightData } from "../../../assets/static/TableDataTypes";
 import Pagination from "@mui/material/Pagination";
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Pagination Styling
 const paginationItemStyles = makeStyles(() =>
@@ -38,6 +39,7 @@ interface TableProps {
 const dataPerPage = 10;
 
 const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
+  const navigate = useNavigate();
   const classes = paginationItemStyles();
   // Fetching Data State
   const [loading, setLoading] = useState<boolean>(false);
@@ -129,7 +131,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {data.map((item) => (
                 <tr key={item.id} className="border-b-2">
                   <td className="px-4 py-3 text-center">{item.id}</td>
                   <td className="px-4 py-3 text-center">
@@ -160,19 +162,27 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                       {/* Edit */}
                       <button
                         className="bg-[#F1A025] py-1 px-5 hover:bg-[#D08003] hover:border-[#D08003] rounded-lg"
-                        onClick={() => {
-                          window.location.href = `/dashboard/flight/edit/${index}`;
-                        }}
+                        onClick={() => navigate(`/dashboard/flight/edit/${item.id}`)}
                       >
                         <FaRegEdit className="text-lg text-white" />
                       </button>
 
                       {/* Delete */}
-                      <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg">
+                      <button
+                        className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
+                        onClick={() =>
+                          (
+                            document.getElementById(
+                              `my_modal_${item.id}`
+                            ) as HTMLFormElement
+                          )?.showModal()
+                        }
+                      >
                         <RiDeleteBinLine className="text-lg text-white" />
                       </button>
                     </div>
                   </td>
+                  <Modal dashboardName="flight" id={item.id} />
                 </tr>
               ))}
             </tbody>

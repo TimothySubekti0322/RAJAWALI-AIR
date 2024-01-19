@@ -6,6 +6,7 @@ import Pagination from "@mui/material/Pagination";
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+import Modal from "../modals";
 
 // Pagination Styling
 const paginationItemStyles = makeStyles(() =>
@@ -154,11 +155,21 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                       </button>
 
                       {/* Delete */}
-                      <button className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg">
+                      <button
+                        className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
+                        onClick={() =>
+                          (
+                            document.getElementById(
+                              `my_modal_${item.id}`
+                            ) as HTMLFormElement
+                          )?.showModal()
+                        }
+                      >
                         <RiDeleteBinLine className="text-lg text-white" />
                       </button>
                     </div>
                   </td>
+                  <Modal dashboardName="airplane" id={item.id} />
                 </tr>
               ))}
             </tbody>
