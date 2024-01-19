@@ -3,7 +3,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import TextInput from "../../../components/admin/input/textInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NumberInput from "../../../components/admin/input/numberInput";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -19,11 +19,30 @@ const breadcrumbs = [
     Airplane
   </Typography>,
   <Typography key="3" color="text.primary">
-    Add
+    Update
   </Typography>,
 ];
 
-const AddAirplane = () => {
+const EditAirplane = () => {
+  const path = window.location.pathname;
+  const id = path.split("/")[4];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiURL}/${id}`);
+        console.log(response);
+        if (response.data.success) {
+          setForm(response.data.data);
+          console.log(response.data.data.economySeats);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     airplaneCode: "",
@@ -43,9 +62,10 @@ const AddAirplane = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(apiURL, form);
+      const response = await axios.put(`${apiURL}/${id}`, form);
+      console.log(response);
       if (response.data.success) {
-        toast.success("Data added successfully");
+        toast.success("Data updated successfully");
         setLoading(false);
         setForm({
           airplaneCode: "",
@@ -56,20 +76,20 @@ const AddAirplane = () => {
           businessSeatsPerCol: 0,
           firstSeatsPerCol: 0,
         });
-        setTimeout(() => {
-          window.location.href = "/dashboard/airplane";
-        }, 1000); // Delayed by 1000 milliseconds (1 seconds)
+        // setTimeout(() => {
+        //   window.location.href = "";
+        // }, 1000); // Delayed by 1000 milliseconds (1 seconds)
       }
+      console.log(response.data.data.economySeats);
     } catch (error) {
       console.log(error);
       setTimeout(toast.error("Something when wrong"), 100);
     }
   };
-
   return (
     <Layout>
       <div className="w-full px-4 py-6 xl:px-8 xl:py-10 2xl:px-10">
-        <p className="text-[#1E90FF] font-semibold text-xl">Add Airplane</p>
+        <p className="text-[#1E90FF] font-semibold text-xl">Update Airplane</p>
         <div className="flex items-center justify-between mt-2 ">
           {/* BreadCrumbs */}
           <Breadcrumbs
@@ -129,7 +149,7 @@ const AddAirplane = () => {
             <NumberInput
               title="Business Seat Per Column"
               inputID="businessSeatsPerCol"
-              placeholder="Enter Business Seat per column"
+              placeholder="Enter Economy Seat"
               onChange={handleInputChange}
               value={form.businessSeatsPerCol}
               description="Number Input Only"
@@ -138,7 +158,7 @@ const AddAirplane = () => {
             <NumberInput
               title="First Class Seat Per Column"
               inputID="firstSeatsPerCol"
-              placeholder="Enter First Class Seat per column"
+              placeholder="Enter Economy Seat"
               onChange={handleInputChange}
               value={form.firstSeatsPerCol}
               description="Number Input Only"
@@ -150,10 +170,10 @@ const AddAirplane = () => {
             <button
               className="px-4 py-2 rounded-lg bg-[#CB3A31] hover:bg-[#A91810] text-white font-semibold text-xl"
               onClick={() => {
-                window.location.href = "/dashboard/airplane/add";
+                window.location.href = "/dashboard/airplane";
               }}
             >
-              cancel
+              Cancel
             </button>
 
             {/* Submit Button */}
@@ -166,7 +186,7 @@ const AddAirplane = () => {
                   <span className="loading loading-spinner loading-xl"></span>
                 </div>
               ) : (
-                "Create"
+                "Update"
               )}
             </button>
           </div>
@@ -176,4 +196,4 @@ const AddAirplane = () => {
   );
 };
 
-export default AddAirplane;
+export default EditAirplane;
