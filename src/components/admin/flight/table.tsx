@@ -7,7 +7,7 @@ import Pagination from "@mui/material/Pagination";
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Pagination Styling
 const paginationItemStyles = makeStyles(() =>
@@ -173,7 +173,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                         onClick={() =>
                           (
                             document.getElementById(
-                              "my_modal_1"
+                              `my_modal_${item.id}`
                             ) as HTMLFormElement
                           )?.showModal()
                         }
