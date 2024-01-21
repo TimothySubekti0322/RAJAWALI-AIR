@@ -7,6 +7,8 @@ import EditAirport from "./pages/admin/airport/EditAirport";
 import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
 import FlightDashboard from "./pages/admin/flight/FlightDashboard";
 import FlightForm from "./pages/admin/flight/FlightForm";
+import AddAirplane from "./pages/admin/airplane/AddAirplane";
+import EditAirplane from "./pages/admin/airplane/EditAirplane";
 
 // Client Pages
 import Home from "./pages/client/Home";
@@ -48,11 +50,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/airplane/add",
-    element: <div>Add Airplane Page</div>,
+    element: <AddAirplane />,
   },
   {
     path: "/dashboard/airplane/edit/:id",
-    element: <div>Edit Airplane Page</div>,
+    element: <EditAirplane />,
   },
   {
     path: "/dashboard/flight",

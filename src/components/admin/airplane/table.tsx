@@ -129,7 +129,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
+              {data.map((item) => (
                 <tr key={item.id} className="border-b-2">
                   <td className="px-4 py-3 text-center">{item.id}</td>
                   <td className="px-4 py-3 text-center">{item.airplaneCode}</td>
@@ -148,7 +148,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                       <button
                         className="bg-[#F1A025] py-1 px-5 hover:bg-[#D08003] hover:border-[#D08003] rounded-lg"
                         onClick={() => {
-                          window.location.href = `/dashboard/airplane/edit/${index}`;
+                          window.location.href = `/dashboard/airplane/edit/${item.id}`;
                         }}
                       >
                         <FaRegEdit className="text-lg text-white" />
