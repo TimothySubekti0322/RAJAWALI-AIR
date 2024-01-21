@@ -13,6 +13,7 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 // Client Pages
 import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
+import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
+  },
+  {
+    path: "/passengerDetails",
+    element: <PassengerDetailsPage />,
   },
 ]);
 
