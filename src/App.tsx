@@ -14,6 +14,7 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
 import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
+import PaymentMethod from "./pages/client/PaymentMethod";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/ticketList",
     element: <TicketList />,
+  },
+  {
+    path: "/paymentMethod",
+    element: <PaymentMethod />,
   },
   {
     path: "/dashboard/airport",
