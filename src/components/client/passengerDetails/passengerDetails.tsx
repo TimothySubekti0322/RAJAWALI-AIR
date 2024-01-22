@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Global } from "@emotion/react";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { grey } from "@mui/material/colors";
 import Button from "@mui/material/Button";
@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { IoClose } from "react-icons/io5";
 import RadioButton from "./radioButton";
-import { useTheme } from "@mui/material/styles";
 import { FaChevronRight } from "react-icons/fa";
 
 const drawerBleeding = 0;
@@ -43,7 +42,7 @@ const Puller = styled("div")(({ theme }) => ({
   left: "calc(50% - 30px)",
 }));
 
-export default function SwipeableEdgeDrawer(props: Props) {
+export default function SwipeableEdgeDrawer(props: Readonly<Props>) {
   const themes = useTheme();
   const { window } = props;
   const [open, setOpen] = React.useState(false);
