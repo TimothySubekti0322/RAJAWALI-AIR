@@ -5,7 +5,7 @@ interface TextInputProps {
   inputID: string;
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string | undefined;
+  value: string | number | undefined;
   description: string;
 }
 

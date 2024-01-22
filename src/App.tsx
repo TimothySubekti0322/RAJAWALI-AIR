@@ -7,11 +7,13 @@ import EditAirport from "./pages/admin/airport/EditAirport";
 import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
 import FlightDashboard from "./pages/admin/flight/FlightDashboard";
 import FlightForm from "./pages/admin/flight/FlightForm";
+import AddAirplane from "./pages/admin/airplane/AddAirplane";
+import EditAirplane from "./pages/admin/airplane/EditAirplane";
 
 // Client Pages
 import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
-import FlightDetail from "./components/client/flightDetail/FlightDetail";
+import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +34,6 @@ const router = createBrowserRouter([
     element: <TicketList />,
   },
   {
-    path: "/ticketList/detail",
-    element: <FlightDetail />
-  },
-  {
     path: "/dashboard/airport",
     element: <AirportDashboard />,
   },
@@ -53,11 +51,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/airplane/add",
-    element: <div>Add Airplane Page</div>,
+    element: <AddAirplane />,
   },
   {
     path: "/dashboard/airplane/edit/:id",
-    element: <div>Edit Airplane Page</div>,
+    element: <EditAirplane />,
   },
   {
     path: "/dashboard/flight",
@@ -70,6 +68,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
+  },
+  {
+    path: "/passengerDetails",
+    element: <PassengerDetailsPage />,
   },
 ]);
 
