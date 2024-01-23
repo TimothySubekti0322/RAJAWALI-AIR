@@ -62,27 +62,27 @@ const TravelAddOns = () => {
       </BodyLayout>
 
       <div className="fixed left-0 right-0 bottom-0 mx-auto w-full sm:w-[360px] h-[3.8rem] bg-white rounded-t-sm flex justify-center items-center gap-x-12 mb-5">
-        <div className="TotalPriceComponent w-96 h-24 p-4 bg-white rounded-tl rounded-tr border-t border-blue-500 flex-col justify-start items-start gap-2.5 inline-flex">
-          <div className="Frame1000000920 flex-col justify-start items-start gap-2 flex">
-            <div className="Frame1000000919 w-80 justify-between items-center inline-flex">
-              <div className="Frame1000000918 justify-start items-center gap-1 flex">
-                <div className="Idr3204800 text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
+        <div className=" w-96 h-24 p-4 bg-white rounded-tl rounded-tr border-t border-blue-500 flex-col justify-start items-start gap-2.5 inline-flex">
+          <div className=" flex-col justify-start items-start gap-2 flex">
+            <div className=" w-80 justify-between items-center inline-flex">
+              <div className=" justify-start items-center gap-1 flex">
+                <div className=" text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
                   IDR 3.204.800
                 </div>
-                <div className="MingcuteDownLine w-5 h-5 justify-center items-center flex">
-                  <div className="Group w-5 h-5 relative"></div>
+                <div className=" w-5 h-5 justify-center items-center flex">
+                  <div className=" w-5 h-5 relative"></div>
                 </div>
               </div>
-              <div className="Frame1000000801 justify-start items-center gap-1 flex">
-                <div className="PepiconsPencilCoinsCircle w-3 h-3 p-px justify-center items-center flex">
-                  <div className="Group w-3 h-3 relative"></div>
+              <div className=" justify-start items-center gap-1 flex">
+                <div className=" w-3 h-3 p-px justify-center items-center flex">
+                  <div className=" w-3 h-3 relative"></div>
                 </div>
-                <div className="Get10000LoyaltyPoints text-right text-blue-500 text-xs font-medium font-['Roboto'] leading-none">
+                <div className=" text-right text-blue-500 text-xs font-medium font-['Roboto'] leading-none">
                   Get 10000 Loyalty Points
                 </div>
               </div>
             </div>
-            <button className="NoIconFullWidth w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex">
+            <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex">
             <div className="Primary text-stone-50 text-base font-semibold font-['Roboto'] leading-none">
               Continue to Payment
               </div>
