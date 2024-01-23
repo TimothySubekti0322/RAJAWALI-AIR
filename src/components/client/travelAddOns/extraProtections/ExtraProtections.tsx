@@ -7,6 +7,8 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
+// import { GoDotFill } from "react-icons/go";
+
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -44,6 +46,9 @@ const ExtraProtections = ({ textHeader }: Props) => {
           <div className=" w-72 justify-between items-center inline-flex">
             <div className=" flex-col justify-start items-start gap-2 inline-flex">
               <div className=" w-60 h-8 relative">
+                {/* <div className="text-black left-">
+                <GoDotFill />
+                </div> */}
                 <div className=" left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none">
                   Personal accident
                 </div>
