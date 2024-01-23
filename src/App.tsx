@@ -15,6 +15,7 @@ import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
 import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 import PaymentMethod from "./pages/client/PaymentMethod";
+import Meals from "./pages/client/Meals";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
   {
     path: "/passengerDetails",
     element: <PassengerDetailsPage />,
+  },
+  {
+    path: "/meals",
+    element: <Meals />,
   },
 ]);
 
