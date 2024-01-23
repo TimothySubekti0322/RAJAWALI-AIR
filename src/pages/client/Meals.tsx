@@ -12,7 +12,7 @@ const Meals = () => {
           <div className="flex-initial">
             <button
               onClick={() => {
-                window.location.href = "/";
+                window.location.href = "/travelAddOns";
               }}
             >
               <FaArrowLeft className="text-xl text-white" />
