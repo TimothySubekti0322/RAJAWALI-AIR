@@ -1,10 +1,8 @@
-import { FiFilter } from "react-icons/fi";
-import { MdOutlineSort } from "react-icons/md";
 import BodyLayout from "../../components/client/bodyLayout";
 import HeaderLayout from "../../components/client/headerLayout";
 import { FaArrowLeft } from "react-icons/fa";
 import { FlightFacil } from "../../components/client/travelAddOns/flightFasil/FlightFacil";
-// import ExtraProtections from "../../components/client/travelAddOns/extraProteksi/ExtraProtections";
+import ExtraProtections from "../../components/client/travelAddOns/extraProtections/ExtraProtections";
 
 const TravelAddOns = () => {
   return (
@@ -56,21 +54,40 @@ const TravelAddOns = () => {
             Extra Protections
           </p>
 
-         {/* <ExtraProtections /> */}
+          <ExtraProtections textHeader="Travel Insurance" />
+          <ExtraProtections textHeader="Travel Insurance" />
+          <ExtraProtections textHeader="Travel Insurance"/>
         </div>
       </BodyLayout>
 
-      <div className="fixed left-0 right-0 bottom-0 mx-auto w-full sm:w-[360px] h-[3.8rem] bg-white rounded-t-sm flex justify-center items-center gap-x-12">
-        {/* Filter */}
-        <button className="flex flex-col items-center gap-y-1 text-white hover:text-[#CCCCCC]">
-          <FiFilter className="w-4 h-4 " />
-          <p className="text-sm ">Filter</p>
-        </button>
-        {/* Sort */}
-        <button className="flex flex-col items-center gap-y-1 text-white hover:text-[#CCCCCC]">
-          <MdOutlineSort className="w-4 h-4" />
-          <p className="text-sm">Sort</p>
-        </button>
+      <div className="fixed left-0 right-0 bottom-0 mx-auto w-full sm:w-[360px] h-[3.8rem] bg-white rounded-t-sm flex justify-center items-center gap-x-12 mb-5">
+        <div className="TotalPriceComponent w-96 h-24 p-4 bg-white rounded-tl rounded-tr border-t border-blue-500 flex-col justify-start items-start gap-2.5 inline-flex">
+          <div className="Frame1000000920 flex-col justify-start items-start gap-2 flex">
+            <div className="Frame1000000919 w-80 justify-between items-center inline-flex">
+              <div className="Frame1000000918 justify-start items-center gap-1 flex">
+                <div className="Idr3204800 text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
+                  IDR 3.204.800
+                </div>
+                <div className="MingcuteDownLine w-5 h-5 justify-center items-center flex">
+                  <div className="Group w-5 h-5 relative"></div>
+                </div>
+              </div>
+              <div className="Frame1000000801 justify-start items-center gap-1 flex">
+                <div className="PepiconsPencilCoinsCircle w-3 h-3 p-px justify-center items-center flex">
+                  <div className="Group w-3 h-3 relative"></div>
+                </div>
+                <div className="Get10000LoyaltyPoints text-right text-blue-500 text-xs font-medium font-['Roboto'] leading-none">
+                  Get 10000 Loyalty Points
+                </div>
+              </div>
+            </div>
+            <button className="NoIconFullWidth w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex">
+            <div className="Primary text-stone-50 text-base font-semibold font-['Roboto'] leading-none">
+              Continue to Payment
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
