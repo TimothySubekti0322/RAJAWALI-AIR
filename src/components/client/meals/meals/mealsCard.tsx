@@ -51,7 +51,7 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
       )}
       {!loading &&
         data.map((item) => (
-          <div className=" w-[20.5rem] h-20 justify-between items-center inline-flex bg-white rounded-md mt-3 px-2 shadow-lg">
+          <div className=" w-[20.5rem] h-27 justify-between items-center inline-flex bg-white rounded-md mt-3 px-2 shadow-lg py-2">
             <div className=" justify-start items-center gap-2 flex">
               <img
                 className="Rectangle208 w-20 h-14 rounded-lg"
