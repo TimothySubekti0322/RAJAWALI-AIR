@@ -11,6 +11,7 @@ import FlightForm from "./pages/admin/flight/FlightForm";
 // Client Pages
 import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
+import SelectedMethod from "./pages/client/SelectedMethod";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/ticketList",
     element: <TicketList />,
+  },
+  {
+    path: "/selectedMethod",
+    element: <SelectedMethod />,
   },
   {
     path: "/dashboard/airport",
