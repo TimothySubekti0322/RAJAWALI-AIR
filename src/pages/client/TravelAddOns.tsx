@@ -4,6 +4,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FlightFacil } from "../../components/client/travelAddOns/flightFasil/FlightFacil";
 import ExtraProtections from "../../components/client/travelAddOns/extraProtections/ExtraProtections";
 
+
+
 const TravelAddOns = () => {
   return (
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
@@ -54,9 +56,9 @@ const TravelAddOns = () => {
             Extra Protections
           </p>
 
-          <ExtraProtections textHeader="Travel Insurance" />
-          <ExtraProtections textHeader="Travel Insurance" />
-          <ExtraProtections textHeader="Travel Insurance"/>
+          <ExtraProtections textHeader="Travel Insurance" price="100.000" />
+          <ExtraProtections textHeader="Baggage Insurance" price="13.500" />
+          <ExtraProtections textHeader="Flight Delay Insurance" price="60.000"/>
           <div>adsfsf</div>
         </div>
       </BodyLayout>

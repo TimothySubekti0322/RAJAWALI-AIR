@@ -25,11 +25,12 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 interface Props {
   textHeader: string;
+  price: string;
 }
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const ExtraProtections = ({ textHeader }: Props) => {
+const ExtraProtections = ({ textHeader, price }: Props) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -83,6 +84,14 @@ const ExtraProtections = ({ textHeader }: Props) => {
         >
           <ExpandMoreIcon />
         </ExpandMore>
+        <div className="relative bottom-0 left-[7rem]">
+          <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
+            IDR {price}/
+          </span>
+          <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
+            pax
+          </span>
+        </div>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
