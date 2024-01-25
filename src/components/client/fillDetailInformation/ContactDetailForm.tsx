@@ -1,8 +1,3 @@
-import planeDepartureBlue from "../../../assets/images/planeDepartureBlue.png";
-import rajawaliAirPng from "../../../assets/images/RajawaliAirPNG2.png";
-import arrowRight from "../../../assets/images/arrowRight.png";
-import angleRight from "../../../assets/images/angle-right.png";
-import React from "react";
 
 const ContactDetailForm = () => {
     return(

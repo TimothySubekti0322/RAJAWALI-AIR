@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     element: <PassengerDetailsPage />,
   },
   {
-    path: "/fillDetailInformation",
+    path: "/fillDetailInformation/:id",
     element: <FillDetailInfo />
   }
 ]);
