@@ -16,6 +16,7 @@ import TicketList from "./pages/client/TicketList";
 import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
+import SelectedMethod from "./pages/client/SelectedMethod";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: "/paymentMethod",
     element: <PaymentMethod />,
+  },
+  {
+    path: "/selectedMethod",
+    element: <SelectedMethod />,
   },
   {
     path: "/dashboard/airport",
