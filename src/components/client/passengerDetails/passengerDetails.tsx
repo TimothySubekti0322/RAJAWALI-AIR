@@ -42,7 +42,7 @@ const Puller = styled("div")(({ theme }) => ({
   left: "calc(50% - 30px)",
 }));
 
-export default function SwipeableEdgeDrawer(props: Readonly<Props>) {
+export default function SwipeableEdgeDrawer(props: Props) {
   const themes = useTheme();
   const { window } = props;
   const [open, setOpen] = React.useState(false);
