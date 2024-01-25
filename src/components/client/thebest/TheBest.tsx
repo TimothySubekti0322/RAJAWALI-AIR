@@ -1,7 +1,8 @@
+import "../footer/Footer.css"
 const TheBest = () => {
   return (
-    <section className="bg-white">
-      <div className="container grid gap-4 grid-cols-2 grid-rows-3 mt-[-3rem] pt-[4.44rem] min-[320px]:grid min-[320px]:grid-cols-1 sm:container sm:mx-auto sm:items-center sm:grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+    <section className="feature pb-[5%] ">
+      <div className="container grid gap-4 grid-cols-2 min-[320px]:grid min-[320px]:grid-cols-1 sm:container sm:mx-auto sm:items-center sm:grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 pt-[0%]">
         <div className="container sm:mx-auto">
           <img
             src="/images/pramugari.png"
