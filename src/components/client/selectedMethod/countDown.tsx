@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 interface CountdownProps {
   initialHours: number;
@@ -42,18 +42,26 @@ const Countdown: React.FC<CountdownProps> = ({
   return (
     <div className="flex">
       <div className="ml-5 h-5 w-5 flex items-center justify-center bg-[#1E90FF] rounded">
-        <p className="text-xs font-semibold">{String(hours).padStart(2, '0')}</p>
+        <p className="text-xs font-semibold">
+          {String(hours).padStart(2, "0")}
+        </p>
       </div>
       <p className="mx-2 text-[#1E90FF] -mt-1">:</p>
       <div className="h-5 w-5 flex items-center justify-center bg-[#1E90FF] rounded">
-        <p className="text-xs font-semibold">{String(minutes).padStart(2, '0')}</p>
+        <p className="text-xs font-semibold">
+          {String(minutes).padStart(2, "0")}
+        </p>
       </div>
       <p className="mx-2 text-[#1E90FF] -mt-1">:</p>
       <div className="h-5 w-5 flex items-center justify-center bg-[#1E90FF] rounded">
-        <p className="text-xs font-semibold">{String(seconds).padStart(2, '0')}</p>
+        <p className="text-xs font-semibold">
+          {String(seconds).padStart(2, "0")}
+        </p>
       </div>
     </div>
   );
 };
 
 export default Countdown;
+
+export type { CountdownProps };
