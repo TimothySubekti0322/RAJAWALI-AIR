@@ -16,6 +16,7 @@ import TicketList from "./pages/client/TicketList";
 import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
+import FillDetailInfo from "./pages/client/FillDetailInfo";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
     path: "/passengerDetails",
     element: <PassengerDetailsPage />,
   },
+  {
+    path: "/fillDetailInformation",
+    element: <FillDetailInfo />
+  }
 ]);
 
 export default function App() {
