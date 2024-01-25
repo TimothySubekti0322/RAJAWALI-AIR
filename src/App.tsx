@@ -16,6 +16,8 @@ import TicketList from "./pages/client/TicketList";
 import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
+import Meals from "./pages/client/Meals";
+import SelectedMethod from "./pages/client/SelectedMethod";
 import FillDetailInfo from "./pages/client/FillDetailInfo";
 
 const router = createBrowserRouter([
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: "/paymentMethod",
     element: <PaymentMethod />,
+  },
+  {
+    path: "/selectedMethod",
+    element: <SelectedMethod />,
   },
   {
     path: "/dashboard/airport",
@@ -83,6 +89,10 @@ const router = createBrowserRouter([
   {
     path: "/passengerDetails",
     element: <PassengerDetailsPage />,
+  },
+  {
+    path: "/meals",
+    element: <Meals />,
   },
   {
     path: "/fillDetailInformation/:id",
