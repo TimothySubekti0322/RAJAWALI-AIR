@@ -80,7 +80,10 @@ const PaymentMethod = () => {
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
           />
-          <button className="w-full bg-[#1E90FF] rounded-lg mt-4 py-3 mb-6 text-white font-semibold">
+          <button
+            className="w-full bg-[#1E90FF] rounded-lg mt-4 py-3 mb-6 text-white font-semibold"
+            onClick={() => (window.location.href = "/continuePayment")}
+          >
             Apply
           </button>
         </div>

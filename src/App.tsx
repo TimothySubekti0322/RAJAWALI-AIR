@@ -45,6 +45,10 @@ const router = createBrowserRouter([
     element: <SelectedFlight />,
   },
   {
+    path: "/fillDetailInformation/:id",
+    element: <FillDetailInfo />,
+  },
+  {
     path: "/baggageDepart",
     element: <BaggageDepart />,
   },
@@ -54,7 +58,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/continuePayment",
-    element: <ContinuePayment />
+    element: <ContinuePayment />,
   },
   {
     path: "/selectedMethod",
@@ -104,10 +108,6 @@ const router = createBrowserRouter([
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
   },
-  {
-    path: "/fillDetailInformation/:id",
-    element: <FillDetailInfo />
-  }
 ]);
 
 export default function App() {

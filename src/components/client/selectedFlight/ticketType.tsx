@@ -67,7 +67,13 @@ const TicketType: React.FC<TicketTypeProps> = ({ type }) => {
           </p>
         </div>
         <div>
-          <button className="text-xs text-white bg-[#1E90FF] hover:bg-[#0C70DD] shadow-md rounded-md px-4 py-1">
+          <button
+            className="text-xs text-white bg-[#1E90FF] hover:bg-[#0C70DD] shadow-md rounded-md px-4 py-1"
+            onClick={() =>
+              (window.location.href =
+                "/fillDetailInformation/0b16a559-bd16-4a86-bfd9-8e85c4765c46")
+            }
+          >
             Select
           </button>
         </div>

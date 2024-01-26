@@ -2,7 +2,10 @@ import { FaChevronDown } from "react-icons/fa6";
 
 const FlightCard = () => {
   return (
-    <div className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md">
+    <button
+      className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md "
+      onClick={() => (window.location.href = "/selectedFlight")}
+    >
       {/* Logo and RW225 */}
       <div className="flex items-center">
         <img
@@ -76,7 +79,7 @@ const FlightCard = () => {
       </div>
 
       {/* Reschedule & Chevron Down */}
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex items-center justify-between w-full mt-3">
         <div className="text-[#1E90FF] bg-[#D2F1FF] rounded-lg text-[0.625rem] 2xl:text-xs py-1 px-2">
           Reschedule & Refund Options
         </div>
@@ -84,7 +87,7 @@ const FlightCard = () => {
           <FaChevronDown className="text-sm text-black" />
         </button>
       </div>
-    </div>
+    </button>
   );
 };
 
