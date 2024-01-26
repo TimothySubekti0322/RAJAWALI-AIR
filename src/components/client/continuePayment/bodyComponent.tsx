@@ -4,10 +4,8 @@ import PaymentMethodCard from "./paymentMethodCard";
 import PromoCard from "./promoCard";
 
 const BodyComponent = () => {
-
   return (
     <>
-      
       {/* Inner Body Section */}
       <div className="w-full px-4">
         {/* Departure Header */}
@@ -18,8 +16,11 @@ const BodyComponent = () => {
           <PaymentCard />
           <PaymentMethodCard />
           <PromoCard />
-          <button className="mt-5 h-10 bg-[#1E90FF] rounded font-semibold">
-                Pay with Virtual Account
+          <button
+            className="mt-5 h-10 bg-[#1E90FF] rounded font-semibold"
+            onClick={() => (window.location.href = "/selectedMethod")}
+          >
+            Pay with Virtual Account
           </button>
         </div>
       </div>

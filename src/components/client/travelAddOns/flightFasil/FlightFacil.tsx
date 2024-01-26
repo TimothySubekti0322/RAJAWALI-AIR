@@ -11,11 +11,19 @@ export const FlightFacil: React.FC<FlightFacilProps> = ({
   paraf,
   img2,
 }) => {
+  const handleClick = (title: string) => {
+    console.log(title);
+    if (title == "Baggage") {
+      window.location.href = "/baggageDepart";
+    } else if (title == "In-flight Meals") {
+      window.location.href = "/meals";
+    }
+  };
   return (
     <>
       <div className="flex w-[20.5rem] h-[5.5rem] bg-white rounded-lg shadow mt-[0.625rem]">
         <div className="p-[0.75rem]">
-          <div className="flex flex-col-2 flex-grow">
+          <div className="flex flex-grow flex-col-2">
             <div className="flex-auto w-[15.75rem]">
               <div className="inline-flex text-black">
                 <div className="mr-[0.5rem]">
@@ -29,9 +37,13 @@ export const FlightFacil: React.FC<FlightFacilProps> = ({
                 <p>{paraf}</p>
               </div>
             </div>
-            <button>
-              <div className="flex text-black ml-5 my-5">
-                <img src={img2} alt="" className="hover:bg-slate-200 focus:outline-none focus:shadow-outline rounded-full"/>
+            <button onClick={() => handleClick(textBold)}>
+              <div className="flex my-5 ml-5 text-black">
+                <img
+                  src={img2}
+                  alt=""
+                  className="rounded-full hover:bg-slate-200 focus:outline-none focus:shadow-outline"
+                />
               </div>
             </button>
           </div>

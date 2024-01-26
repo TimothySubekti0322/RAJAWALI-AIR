@@ -406,7 +406,10 @@ const SearchInputFlight = () => {
               </div>
             </div>
           )}
-          <button className="btn text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]">
+          <button
+            className="btn text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]"
+            onClick={() => (window.location.href = "/ticketList")}
+          >
             Let's Search
           </button>
         </div>
