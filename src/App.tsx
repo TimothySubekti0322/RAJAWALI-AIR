@@ -13,12 +13,12 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 // Client Pages
 import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
-import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
 import Meals from "./pages/client/Meals";
 import SelectedMethod from "./pages/client/SelectedMethod";
 import ContinuePayment from "./pages/client/ContinuePayment";
+import FillDetailInfo from "./pages/client/FillDetailInfo";
 import SelectedFlight from "./pages/client/SelectedFlight";
 import TravelAddOns from "./pages/client/TravelAddOns";
 
@@ -105,9 +105,9 @@ const router = createBrowserRouter([
     element: <FlightForm />,
   },
   {
-    path: "/passengerDetails",
-    element: <PassengerDetailsPage />,
-  },
+    path: "/fillDetailInformation/:id",
+    element: <FillDetailInfo />
+  }
 ]);
 
 export default function App() {
