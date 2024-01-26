@@ -1,6 +1,6 @@
 import BodyLayout from "../../components/client/bodyLayout";
 import HeaderLayout from "../../components/client/headerLayout";
-import { FaArrowLeft } from "react-icons/fa";
+import HeaderFill from "../../components/client/headerFill";
 import { FlightFacil } from "../../components/client/travelAddOns/flightFasil/FlightFacil";
 import ExtraProtections from "../../components/client/travelAddOns/extraProtections/ExtraProtections";
 import TotalPriceDetailComponent from "../../components/client/totalPrice/TotalPriceDetailComponent.tsx";
@@ -28,20 +28,7 @@ const TravelAddOns = () => {
   return (
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
       <HeaderLayout>
-        <div className="inline-flex items-center">
-          <div className="flex-initial">
-            <button
-              onClick={() => {
-                window.location.href = "/";
-              }}
-            >
-              <FaArrowLeft className="text-xl text-white" />
-            </button>
-          </div>
-          <div className="flex-initial text-center text-stone-50 text-base font-bold font-['Roboto'] tracking-tight pl-[5.31rem]">
-            <p className="text-white">Travel Add-ons</p>
-          </div>
-        </div>
+        <HeaderFill title="Travel Add-ons" />
       </HeaderLayout>
 
       <BodyLayout paddingBottomSize="5rem">

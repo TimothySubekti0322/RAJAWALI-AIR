@@ -1,16 +1,15 @@
 import HeaderLayout from "../../components/client/headerLayout";
-import { FaArrowLeft } from "react-icons/fa";
 import BodyLayout from "../../components/client/bodyLayout";
 import FlightCard from "../../components/client/fillDetailInformation/FlightCard";
 import ContactDetailForm, {
   ContactDetailInput,
 } from "../../components/client/fillDetailInformation/ContactDetailForm";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import SwipeableEdgeDrawer from "../../components/client/passengerDetails/passengerDetails.tsx";
+import HeaderFill from "../../components/client/headerFill.tsx";
 
 const FillDetailInfo = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
   const [contactDetail, setContactDetail] = useState<ContactDetailInput>({
     title: "",
@@ -69,18 +68,7 @@ const FillDetailInfo = () => {
       className={'className="w-full min-h-screen bg-[#f7f7f7] relative"'}
     >
       <HeaderLayout>
-        <div>
-          <button
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            <FaArrowLeft className="text-xl text-white" />
-          </button>
-          <span className={"text-white font-bold text-base ml-16"}>
-            Fill Details Information
-          </span>
-        </div>
+        <HeaderFill title="Fill Details Information" />
       </HeaderLayout>
 
       {/*Body*/}
