@@ -13,7 +13,6 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 // Client Pages
 import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
-import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
 import Meals from "./pages/client/Meals";
@@ -104,10 +103,6 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
-  },
-  {
-    path: "/passengerDetails",
-    element: <PassengerDetailsPage />,
   },
   {
     path: "/fillDetailInformation/:id",
