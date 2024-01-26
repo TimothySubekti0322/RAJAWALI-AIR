@@ -7,7 +7,7 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
-// import { GoDotFill } from "react-icons/go";
+import { GoDotFill } from "react-icons/go";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -47,10 +47,10 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
           <div className=" w-72 justify-between items-center inline-flex">
             <div className=" flex-col justify-start items-start gap-2 inline-flex">
               <div className=" w-60 h-8 relative">
-                {/* <div className="text-black left-">
-                <GoDotFill />
-                </div> */}
-                <div className=" left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none">
+                <div className=" left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none gap-1">
+                  <div className="inline-flex">
+                    <GoDotFill size={8} style={{ margin: "2px" }} />
+                  </div>
                   Personal accident
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
@@ -59,6 +59,9 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
               </div>
               <div className=" w-60 h-8 relative">
                 <div className="TripCancellationDueToSpecificReasons left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none">
+                  <div className="inline-flex">
+                    <GoDotFill size={8} style={{ margin: "2px" }} />
+                  </div>
                   Trip cancellation (due to specific reasons)
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
@@ -98,6 +101,9 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
           <div className="Frame1000000916 w-72 h-36 flex-col justify-start items-start gap-2 inline-flex">
             <div className="Group2089 w-60 h-8 relative">
               <div className="BaggageLossOrDamage left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none">
+                <div className="inline-flex">
+                  <GoDotFill size={8} style={{ margin: "2px" }} />
+                </div>
                 Baggage loss or damage
               </div>
               <div className="CoversUpToIdr5000000 left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
@@ -106,6 +112,9 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
             </div>
             <div className="Group2090 w-60 h-8 relative">
               <div className="BaggageDelay left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none">
+                <div className="inline-flex">
+                  <GoDotFill size={8} style={{ margin: "2px" }} />
+                </div>
                 Baggage delay
               </div>
               <div className="CoversUpToIdr3000000 left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
@@ -114,6 +123,9 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
             </div>
             <div className="Group2091 w-72 h-8 relative">
               <div className="CancellationByPassengerDueToSpecificReason left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none">
+                <div className="inline-flex">
+                  <GoDotFill size={8} style={{ margin: "2px" }} />
+                </div>
                 Cancellation by passenger due to specific reason
               </div>
               <div className="CoversUpToIdr100000000Ticket left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
@@ -122,6 +134,9 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
             </div>
             <div className="Group2092 w-60 h-8 relative">
               <div className="MissedTravelConnection left-0 top-0 absolute text-black text-xs font-medium font-['Roboto'] leading-none">
+                <div className="inline-flex">
+                  <GoDotFill size={8} style={{ margin: "2px" }} />
+                </div>
                 Missed travel connection
               </div>
               <div className="CoversUpToIdr5000000 left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
