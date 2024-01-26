@@ -17,6 +17,7 @@ import PassengerDetailsPage from "./pages/client/PassengerDetailsPage";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
 import SelectedMethod from "./pages/client/SelectedMethod";
+import ContinuePayment from "./pages/client/ContinuePayment";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/paymentMethod",
     element: <PaymentMethod />,
+  },
+  {
+    path: "/continuePayment",
+    element: <ContinuePayment />
   },
   {
     path: "/selectedMethod",
