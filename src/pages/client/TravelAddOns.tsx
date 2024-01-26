@@ -4,12 +4,12 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FlightFacil } from "../../components/client/travelAddOns/flightFasil/FlightFacil";
 import ExtraProtections from "../../components/client/travelAddOns/extraProtections/ExtraProtections";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
+// import Collapse from "@mui/material/Collapse";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import TotalPriceDetailComponent from "../../components/client/totalPrice/TotalPriceDetailComponent";
+// import TotalPriceDetailComponent from "../../components/client/totalPrice/TotalPriceDetailComponent";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -114,9 +114,6 @@ const TravelAddOns = () => {
                         <ExpandMoreIcon className="text-blue-500" />
                       </ExpandMore>
                     </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                      <TotalPriceDetailComponent />
-                    </Collapse>
                   </div>
                 </div>
                 <div className="Get10000LoyaltyPoints text-right text-blue-500 text-xs font-medium font-['Roboto'] leading-none">
