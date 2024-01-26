@@ -31,7 +31,7 @@ export const FlightFacil: React.FC<FlightFacilProps> = ({
             </div>
             <button>
               <div className="flex text-black ml-5 my-5">
-                <img src={img2} alt="" />
+                <img src={img2} alt="" className="hover:bg-slate-200 focus:outline-none focus:shadow-outline rounded-full"/>
               </div>
             </button>
           </div>

@@ -116,7 +116,7 @@ const TravelAddOns = () => {
                     <TotalPriceDetailComponent />
                   </div>
               )}
-              <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex">
+              <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex hover:bg-blue-600 focus:outline-none focus:shadow-outline">
                 <div className="Primary text-stone-50 text-base font-semibold font-['Roboto'] leading-none">
                   Continue to Payment
                 </div>
