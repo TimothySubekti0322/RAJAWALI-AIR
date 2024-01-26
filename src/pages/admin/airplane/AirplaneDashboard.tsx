@@ -45,7 +45,7 @@ const AirplaneDashboard = () => {
 
         <Table
           tableColumns={tableColumns}
-          api="https://rajawali-production.up.railway.app/api/v1/airplanes"
+          api="https://rajawali-production.up.railway.app/api/v1/airplanes?pageSize=100"
         />
       </div>
     </Layout>
