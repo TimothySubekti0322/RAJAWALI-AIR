@@ -51,6 +51,13 @@ type MealsData = {
   description: string;
   price: number;
   thumbnailUrl: string;
-}
+};
 
-export type { AirportData, AirplaneData, FlightData, UserData, MealsData };
+export type {
+  AirportData,
+  AirplaneData,
+  Airplane,
+  FlightData,
+  UserData,
+  MealsData,
+};
