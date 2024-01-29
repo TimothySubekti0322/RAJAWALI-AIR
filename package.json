@@ -19,6 +19,7 @@
     "@types/moment": "^2.13.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.4",
+    "keen-slider": "^6.8.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
