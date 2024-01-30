@@ -6,14 +6,6 @@ import HistoryCardReschedule from "./historyCardReschedule";
 const bodyComponentHistory = () => {
     return(
         <>
-        {/* <div className="flex flex-col space-y-4 m-2">
-            
-
-                <HistoryCardPurchase />
-                <HistoryCardReschedule />
-            
-            <HistoryCardCancel />
-        </div> */}
 
         <div className="w-full px-3">
             {/* Month Header */}

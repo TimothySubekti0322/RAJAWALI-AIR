@@ -20,7 +20,7 @@ import Meals from "./pages/client/Meals";
 import SelectedMethod from "./pages/client/SelectedMethod";
 import SelectedFlight from "./pages/client/SelectedFlight";
 import History from "./pages/client/History";
-import HistoryCard from "./components/client/history/historyCardPurchase";
+import EmptyHistory from "./pages/client/EmptyHistory";
 
 const router = createBrowserRouter([
   {
@@ -96,13 +96,15 @@ const router = createBrowserRouter([
     path: "/passengerDetails",
     element: <PassengerDetailsPage />,
   },
+  // Check history page
   {
     path: "/history",
     element: <History/>,
   },
+  // Check Empty history page
   {
-    path: "/history-Card",
-    element: <HistoryCard/>,
+    path: "/history-empty",
+    element: <EmptyHistory/>,
   },
   
 ]);
