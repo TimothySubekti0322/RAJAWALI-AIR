@@ -45,4 +45,19 @@ type UserData = {
   password: string;
 };
 
-export type { AirportData, AirplaneData, FlightData, UserData };
+type MealsData = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  thumbnailUrl: string;
+};
+
+export type {
+  AirportData,
+  AirplaneData,
+  Airplane,
+  FlightData,
+  UserData,
+  MealsData,
+};

@@ -96,7 +96,7 @@ const SearchInputFlight = () => {
                       <span>From</span>
                     </div>
                     <div className="relative">
-                      <select className="pl-8 bg-transparent select select-bordered">
+                      <select className="pl-8 bg-transparent select select-bordered w-[95%]">
                         <option disabled selected>
                           Where From
                         </option>
@@ -126,7 +126,7 @@ const SearchInputFlight = () => {
                     <span>To</span>
                   </div>
                   <div className="relative">
-                    <select className="pl-8 bg-transparent select select-bordered">
+                    <select className="pl-8 bg-transparent select select-bordered w-[95%]">
                       <option disabled selected>
                         Where To
                       </option>
@@ -221,7 +221,7 @@ const SearchInputFlight = () => {
                     <span>From</span>
                   </div>
                   <div className="relative">
-                    <select className="pl-8 bg-transparent select select-bordered">
+                    <select className="pl-8 bg-transparent select select-bordered w-[97%]">
                       <option disabled selected>
                         Where From
                       </option>
@@ -248,7 +248,7 @@ const SearchInputFlight = () => {
                   <span>To</span>
                 </div>
                 <div className="relative">
-                  <select className="pl-8 bg-transparent select select-bordered">
+                  <select className="pl-8 bg-transparent select select-bordered w-[97%]">
                     <option disabled selected>
                       Where To
                     </option>
@@ -340,7 +340,7 @@ const SearchInputFlight = () => {
                       <span>From</span>
                     </div>
                     <div className="relative">
-                      <select className="pl-8 bg-transparent select select-bordered">
+                      <select className="pl-8 bg-transparent select select-bordered w-[95%]">
                         <option disabled selected>
                           Where From
                         </option>
@@ -370,7 +370,7 @@ const SearchInputFlight = () => {
                     <span>To</span>
                   </div>
                   <div className="relative">
-                    <select className="pl-8 bg-transparent select select-bordered">
+                    <select className="pl-8 bg-transparent select select-bordered w-[95%]">
                       <option disabled selected>
                         Where To
                       </option>
@@ -390,7 +390,7 @@ const SearchInputFlight = () => {
                   </div>
                 </label>
               </div>
-              <div className={"w-[100%]"}>
+              <div>
                 <label
                   className="w-full max-w-xs form-control"
                   style={styleText}
@@ -406,7 +406,10 @@ const SearchInputFlight = () => {
               </div>
             </div>
           )}
-          <button className="btn text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]">
+          <button
+            className="btn text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]"
+            onClick={() => (window.location.href = "/ticketList")}
+          >
             Let's Search
           </button>
         </div>

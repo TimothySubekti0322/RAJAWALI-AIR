@@ -1,7 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import FlightCard from "./flightCard";
+import { RawFlightData } from "../../../pages/client/TicketList";
 
-const BodyComponent = () => {
+interface BodyComponentProps {
+  flightData: RawFlightData[];
+}
+
+const BodyComponent: React.FC<BodyComponentProps> = ({ flightData }) => {
   const [selectedDate, setSelectedDate] = useState<number>(1);
   return (
     <>
@@ -59,11 +64,14 @@ const BodyComponent = () => {
 
         {/* Fligth Card */}
         <div className="flex flex-col w-full mt-4 gap-y-3">
+          {flightData.map((flight) => (
+            <FlightCard flightData={flight} />
+          ))}
+          {/* <FlightCard />
           <FlightCard />
           <FlightCard />
           <FlightCard />
-          <FlightCard />
-          <FlightCard />
+          <FlightCard /> */}
         </div>
       </div>
     </>

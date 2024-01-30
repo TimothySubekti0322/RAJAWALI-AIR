@@ -10,9 +10,20 @@ import FlightForm from "./pages/admin/flight/FlightForm";
 import Tes from "./pages/tes/index"
 import Tes2 from "./pages/tes/index2";
 
+import AddAirplane from "./pages/admin/airplane/AddAirplane";
+import EditAirplane from "./pages/admin/airplane/EditAirplane";
+
 // Client Pages
 import Home from "./pages/client/Home";
 import TicketList from "./pages/client/TicketList";
+import PaymentMethod from "./pages/client/PaymentMethod";
+import BaggageDepart from "./pages/client/BaggageDepart";
+import Meals from "./pages/client/Meals";
+import SelectedMethod from "./pages/client/SelectedMethod";
+import ContinuePayment from "./pages/client/ContinuePayment";
+import FillDetailInfo from "./pages/client/FillDetailInfo";
+import SelectedFlight from "./pages/client/SelectedFlight";
+import TravelAddOns from "./pages/client/TravelAddOns";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +44,38 @@ const router = createBrowserRouter([
     element: <TicketList />,
   },
   {
+    path: "/selectedFlight",
+    element: <SelectedFlight />,
+  },
+  {
+    path: "/fillDetailInformation/:id",
+    element: <FillDetailInfo />,
+  },
+  {
+    path: "/baggageDepart",
+    element: <BaggageDepart />,
+  },
+  {
+    path: "/paymentMethod",
+    element: <PaymentMethod />,
+  },
+  {
+    path: "/continuePayment",
+    element: <ContinuePayment />,
+  },
+  {
+    path: "/selectedMethod",
+    element: <SelectedMethod />,
+  },
+  {
+    path: "/meals",
+    element: <Meals />,
+  },
+  {
+    path: "/travelAddOns",
+    element: <TravelAddOns />,
+  },
+  {
     path: "/dashboard/airport",
     element: <AirportDashboard />,
   },
@@ -50,11 +93,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard/airplane/add",
-    element: <div>Add Airplane Page</div>,
+    element: <AddAirplane />,
   },
   {
     path: "/dashboard/airplane/edit/:id",
-    element: <div>Edit Airplane Page</div>,
+    element: <EditAirplane />,
   },
   {
     path: "/dashboard/flight",
