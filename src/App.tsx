@@ -19,16 +19,14 @@ import BaggageDepart from "./pages/client/BaggageDepart";
 import Meals from "./pages/client/Meals";
 import SelectedMethod from "./pages/client/SelectedMethod";
 import SelectedFlight from "./pages/client/SelectedFlight";
+import History from "./pages/client/History";
+import HistoryCard from "./components/client/history/historyCardPurchase";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
     errorElement: <div>404 Not Found</div>,
-  },
-  {
-    path: "/login",
-    element: <div>Login Page</div>,
   },
   {
     path: "/register",
@@ -98,6 +96,15 @@ const router = createBrowserRouter([
     path: "/passengerDetails",
     element: <PassengerDetailsPage />,
   },
+  {
+    path: "/history",
+    element: <History/>,
+  },
+  {
+    path: "/history-Card",
+    element: <HistoryCard/>,
+  },
+  
 ]);
 
 export default function App() {
