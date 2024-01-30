@@ -14,6 +14,7 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
   const [data, setData] = useState<MealsData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,7 +79,7 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
               </div>
             </div>
             <div className=" w-[1.25rem] h-[1.25rem] relative">
-              <Checkbox
+              <Checkbox 
                 {...label}
                 defaultChecked
                 sx={{
@@ -89,6 +90,7 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
                     fontSize: 25
                   }
                 }}
+                // onChange={handleCheckBox}
               />
             </div>
           </div>
