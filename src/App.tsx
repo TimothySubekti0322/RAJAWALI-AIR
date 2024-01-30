@@ -7,6 +7,9 @@ import EditAirport from "./pages/admin/airport/EditAirport";
 import AirplaneDashboard from "./pages/admin/airplane/AirplaneDashboard";
 import FlightDashboard from "./pages/admin/flight/FlightDashboard";
 import FlightForm from "./pages/admin/flight/FlightForm";
+import Tes from "./pages/tes/index"
+import Tes2 from "./pages/tes/index2";
+
 import AddAirplane from "./pages/admin/airplane/AddAirplane";
 import EditAirplane from "./pages/admin/airplane/EditAirplane";
 
@@ -108,6 +111,14 @@ const router = createBrowserRouter([
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
   },
+  {
+    path: "/tes",
+    element: <Tes />,
+  },
+  {
+    path: "/tes2",
+    element: <Tes2 />,
+  }
 ]);
 
 export default function App() {
