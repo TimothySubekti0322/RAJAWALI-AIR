@@ -9,6 +9,13 @@ import axios from "axios";
 import API_URL from "../../assets/static/API";
 import { AirportData, Airplane } from "../../assets/static/TableDataTypes";
 import CircularProgress from "@mui/material/CircularProgress";
+import {
+  getArrayOfDays,
+  getDate,
+  extractDepartureDate,
+  getDayAndDate,
+} from "../../utils/ticketList/ticketList.utils";
+import type { DaysObject } from "../../utils/ticketList/ticketList.utils";
 
 export interface RawFlightData {
   id: string;
@@ -64,14 +71,34 @@ const initialData: RawFlightData[] = [
 const TicketList = () => {
   // Query Params
   const searchParams = new URLSearchParams(window.location.search);
-  const sourceAirportId = searchParams.get("sourceAirportId");
-  const destAirportId = searchParams.get("destAirportId");
-  const adultsNumber = searchParams.get("adultsNumber");
-  const departureDate = searchParams.get("departureDate");
-  const classType = searchParams.get("classType");
+  const sourceAirportId = searchParams.get("sourceAirportId")
+    ? `sourceAirportId=${searchParams.get("sourceAirportId")}&`
+    : "";
+  const destAirportId = searchParams.get("destAirportId")
+    ? `destAirportId=${searchParams.get("destAirportId")}&`
+    : "";
+  const adultsNumber = searchParams.get("adultsNumber")
+    ? `adultsNumber=${searchParams.get("adultsNumber")}&`
+    : "";
+  const infantsNumber = searchParams.get("infantsNumber")
+    ? `infantsNumber=${searchParams.get("infantsNumber")}&`
+    : "";
+  const childsNumber = searchParams.get("childsNumber")
+    ? `childsNumber=${searchParams.get("childsNumber")}&`
+    : "";
+  const departureDate = searchParams.get("departureDate")
+    ? `departureDate=${searchParams.get("departureDate")}&`
+    : "";
+  const classType = searchParams.get("classType")
+    ? `classType=${searchParams.get("classType")}`
+    : "";
 
   // Data
   const [data, setData] = useState<RawFlightData[]>(initialData);
+
+  // Date & Current Date
+  const [date, setDate] = useState<DaysObject[]>([]);
+  const [currentDate, setCurrentDate] = useState<number>(0);
 
   // Loading
   const [loading, setLoading] = useState<boolean>(true);
@@ -79,33 +106,30 @@ const TicketList = () => {
   // Error
   const [error, setError] = useState<boolean>(false);
 
-  // const sourceAirportId =
-  //   "sourceAirportId=7cca5acf-75d9-478b-b921-f14d72e7116e&";
-  // const destAirportId = "destAirportId=b4d9b11a-24b1-4af2-a374-b66f711a75a4&";
-  // const adultsNumber = "adultsNumber=1&";
-  // const departureDate = "departureDate=2024-04-24&";
-  // const classType = "classType=FIRST";
-  const API = `${API_URL}/v1/flights/departures?${
-    sourceAirportId && `sourceAirportId=${sourceAirportId}&`
-  }${destAirportId && `destAirportId=${destAirportId}&`}${
-    adultsNumber && `adultsNumber=${adultsNumber}&`
-  }${departureDate && `departureDate=${departureDate}&`}${
-    classType && `classType=${classType}`
-  }`;
-  console.log(API);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(API);
-        setData(res.data.data.content);
-      } catch (error) {
-        setError(true);
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // API
+  const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
 
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(API);
+      setData(res.data.data.content);
+      if (res.data.data.content.length > 0) {
+        setDate(getArrayOfDays(res.data.data.content[0].departureDate));
+        setCurrentDate(getDate(res.data.data.content[0].departureDate));
+      } else {
+        setDate(getArrayOfDays(departureDate));
+        setCurrentDate(getDate(departureDate));
+      }
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    } finally {
+      setLoading(false);
+      console.log(data);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -128,16 +152,27 @@ const TicketList = () => {
               departureCode="YIA"
               arrival="Balikpapan"
               arrivalCode="BPN"
-              date="Thu, 25 Jan"
+              date={getDayAndDate(extractDepartureDate(departureDate))}
               passenger={2}
-              seatClass="Economy"
+              seatClass={classType.split("=")[1].replace("&", "")}
             />
           </HeaderLayout>
 
           {/* Body */}
           {/* <div className="w-full sm:w-[360px] mx-auto min-h-screen bg-[#E3EEFF] pt-[3.75rem] pb-20"></div> */}
           <BodyLayout paddingBottomSize="5rem">
-            <BodyComponent flightData={data} />
+            <BodyComponent
+              flightData={data}
+              date={date}
+              currentDate={currentDate}
+              sourceAirportId={sourceAirportId}
+              destAirportId={destAirportId}
+              adultsNumber={adultsNumber}
+              childsNumber={childsNumber}
+              infantsNumber={infantsNumber}
+              departureDate={departureDate}
+              classType={classType}
+            />
           </BodyLayout>
 
           {/* Bottom Navbar */}
