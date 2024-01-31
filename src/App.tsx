@@ -20,6 +20,8 @@ import SelectedMethod from "./pages/client/SelectedMethod";
 import ContinuePayment from "./pages/client/ContinuePayment";
 import FillDetailInfo from "./pages/client/FillDetailInfo";
 import SelectedFlight from "./pages/client/SelectedFlight";
+import History from "./pages/client/History";
+import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 
 const router = createBrowserRouter([
@@ -107,6 +109,16 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
+  },
+  // Check history page
+  {
+    path: "/history",
+    element: <History />,
+  },
+  // Check Empty history page
+  {
+    path: "/history-empty",
+    element: <EmptyHistory />,
   },
 ]);
 
