@@ -48,7 +48,10 @@ const BaggageDepart = () => {
             {numberToCurrency("IDR", price, true, false)}
           </p>
         </div>
-        <button className="bg-[#1E90FF] text-white font-semibold text-sm hover:bg-[#0C70DD] rounded-md py-[0.3rem] px-12 shadow-md ">
+        <button
+          className="bg-[#1E90FF] text-white font-semibold text-sm hover:bg-[#0C70DD] rounded-md py-[0.3rem] px-12 shadow-md"
+          onClick={() => (window.location.href = "/travelAddOns")}
+        >
           Save
         </button>
       </div>

@@ -11,12 +11,12 @@ const HeaderFill: React.FC<HeaderFillProps> = ({ title }) => {
       <button
         className="absolute left-0"
         onClick={() => {
-          window.location.href = "/";
+          window.history.back();
         }}
       >
         <FaArrowLeft className="text-xl text-white" />
       </button>
-      <div>{title}</div>
+      <div className="text-white">{title}</div>
     </div>
   );
 };

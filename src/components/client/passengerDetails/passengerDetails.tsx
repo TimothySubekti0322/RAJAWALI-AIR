@@ -42,9 +42,14 @@ const Puller = styled("div")(({ theme }) => ({
   left: "calc(50% - 30px)",
 }));
 
-export default function SwipeableEdgeDrawer(props: Props) {
+interface PassengerDetailProps {
+    index: number,
+    ageGroup: string,
+}
+
+export default function SwipeableEdgeDrawer(props: Readonly<Props & PassengerDetailProps>) {
   const themes = useTheme();
-  const { window } = props;
+  const { window, index, ageGroup } = props;
   const [open, setOpen] = React.useState(false);
 
   const [honorofic, setHonorofic] = React.useState("other");
@@ -79,11 +84,35 @@ export default function SwipeableEdgeDrawer(props: Props) {
           },
         }}
       />
-      <Box sx={{ textAlign: "center", pt: 1, borderRadius: "8px 8px 0 0" }}>
-        <Button onClick={toggleDrawer(true)}>
-          <FaChevronRight className="text-[#1E90FF]" />
-        </Button>
-      </Box>
+        <div className={'my-4 w-full mt-0 drop-shadow-md'}>
+            <div
+                className={'flex w-full justify-between rounded-lg bg-white w-full px-3 py-1 mt-1 text-black drop-shadow-md'}>
+                <div className={'w-full'}>
+                    {index === 0 && (
+                        <>
+                            <div className={'flex gap-3 mt-2 items-center justify-between'}>
+                                <span className={'text-xs text-[#757575]'}>Same as contact details</span>
+                                <input type="checkbox" className="toggle toggle-info toggle-sm"/>
+                            </div>
+                            <div className={'w-full h-[1px] bg-[#757575] my-3'}>
+                            </div>
+                        </>
+                    )}
+
+                    <div className={'my-2 items-center w-full flex justify-between'}>
+                        <span
+                            className={'text-[#1E90FF] font-semibold text-sm'}>Passenger {index + 1} ({ageGroup})</span>
+                        {/*<PassengerDetails  />*/}
+                        <Box sx={{ textAlign: "center", pt: 1, borderRadius: "8px 8px 0 0", backgroundColor: 'white' }}>
+                            <Button onClick={toggleDrawer(true)}>
+                                <FaChevronRight className="text-[#1E90FF]" />
+                            </Button>
+                        </Box>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       <SwipeableDrawer
         container={container}
         anchor="bottom"

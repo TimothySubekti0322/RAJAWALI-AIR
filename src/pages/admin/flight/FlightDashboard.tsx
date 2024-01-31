@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Table from "../../../components/admin/flight/table";
 // import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const tableColumns = [
   "Id",
@@ -45,13 +45,11 @@ const Flight = () => {
 
           {/* Add Button */}
           <button
-              className="flex bg-[#553285] text-white gap-x-4 items-center hover:bg-[#331063] px-4 py-2 rounded-lg"
-              onClick={() => navigate('/dashboard/flight/add')}
+            className="flex bg-[#553285] text-white gap-x-4 items-center hover:bg-[#331063] px-4 py-2 rounded-lg"
+            onClick={() => navigate("/dashboard/flight/add")}
           >
             <p className="sm:text-2xl">+</p>
-            <p className="text-xs sm:text-base">
-              Add Flight
-            </p>
+            <p className="text-xs sm:text-base">Add Flight</p>
           </button>
         </div>
 
@@ -59,7 +57,7 @@ const Flight = () => {
 
         <Table
           tableColumns={tableColumns}
-          api="https://rajawali-production.up.railway.app/api/v1/flights"
+          api="https://rajawali-production.up.railway.app/api/v1/flights?pageSize=100"
         />
       </div>
     </Layout>

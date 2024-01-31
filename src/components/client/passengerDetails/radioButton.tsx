@@ -51,20 +51,6 @@ const RadioButton: React.FC<RadioButtonProps> = ({ value, setValue }) => {
           }
           label={<p className="text-xs">Mrs.</p>}
         />
-        <FormControlLabel
-          value="Ms."
-          control={
-            <Radio
-              sx={{
-                "& .MuiSvgIcon-root": {
-                  fontSize: 18,
-                  marginLeft: "0.75rem",
-                },
-              }}
-            />
-          }
-          label={<p className="text-xs">Ms.</p>}
-        />
       </RadioGroup>
     </FormControl>
   );

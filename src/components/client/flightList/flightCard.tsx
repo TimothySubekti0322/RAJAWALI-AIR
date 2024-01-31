@@ -1,8 +1,21 @@
+import React from "react";
 import { FaChevronDown } from "react-icons/fa6";
+import { RawFlightData } from "../../../pages/client/TicketList";
+import { extractTimeFromDateString } from "../../../utils/DateFormater";
+import { getDurationBetweenDates } from "../../../utils/ticketList/ticketList.utils";
+import { numberToCurrency } from "../../../utils/NumberFormater";
 
-const FlightCard = () => {
+interface FlightCardProps {
+  flightData: RawFlightData;
+}
+
+const FlightCard: React.FC<FlightCardProps> = ({ flightData }) => {
+  console.log(flightData);
   return (
-    <div className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md">
+    <button
+      className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md "
+      onClick={() => (window.location.href = "/selectedFlight")}
+    >
       {/* Logo and RW225 */}
       <div className="flex items-center">
         <img
@@ -20,15 +33,18 @@ const FlightCard = () => {
         <div className="flex items-center gap-x-3">
           <div className="flex flex-col items-center">
             <p className="mt-3 text-xs font-semibold text-black 2xl:text-sm">
-              08:15
+              {extractTimeFromDateString(flightData.departureDate)}
             </p>
             <p className="text-[#757575] text-[0.5rem] 2xl:text-[0.625rem]">
-              YIA
+              {flightData.sourceAirport.cityCode}
             </p>
           </div>
           <div className="flex flex-col items-center">
             <p className="text-[#757575] text-[0.5rem] 2xl:text-[0.625rem]">
-              1h 50m
+              {getDurationBetweenDates(
+                flightData.departureDate,
+                flightData.arrivalDate
+              )}
             </p>
             <div>
               <img src="/images/long-arrow.svg" alt="long arrow" />
@@ -39,10 +55,10 @@ const FlightCard = () => {
           </div>
           <div className="flex flex-col items-center mt-3">
             <p className="text-xs font-semibold text-black 2xl:text-sm">
-              09:05
+              {extractTimeFromDateString(flightData.arrivalDate)}
             </p>
             <p className="text-[#757575] text-[0.5rem] 2xl:text-[0.625rem]">
-              BPN
+              {flightData.destinationAirport.cityCode}
             </p>
           </div>
         </div>
@@ -50,7 +66,9 @@ const FlightCard = () => {
         {/* Price */}
         <div className="flex flex-col items-end">
           <div className="flex items-center mt-2">
-            <p className="text-[#1E90FF] font-semibold">IDR 1.179.200/</p>
+            <p className="text-[#1E90FF] font-semibold">
+              {numberToCurrency("IDR", flightData.totalPrice, true, false)}/
+            </p>
             <p className="text-xs text-[#757575]">pax</p>
           </div>
           <div className="flex mt-[0.1rem] gap-x-1">
@@ -59,7 +77,7 @@ const FlightCard = () => {
               alt="loyalty point logo"
             />
             <p className="text-[0.625rem] text-[#757575] font-semibold">
-              10000 Loyalty Points
+              {flightData.points} Loyalty Points
             </p>
           </div>
         </div>
@@ -76,7 +94,7 @@ const FlightCard = () => {
       </div>
 
       {/* Reschedule & Chevron Down */}
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex items-center justify-between w-full mt-3">
         <div className="text-[#1E90FF] bg-[#D2F1FF] rounded-lg text-[0.625rem] 2xl:text-xs py-1 px-2">
           Reschedule & Refund Options
         </div>
@@ -84,7 +102,7 @@ const FlightCard = () => {
           <FaChevronDown className="text-sm text-black" />
         </button>
       </div>
-    </div>
+    </button>
   );
 };
 
