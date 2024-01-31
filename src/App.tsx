@@ -31,6 +31,10 @@ const router = createBrowserRouter([
     errorElement: <div>404 Not Found</div>,
   },
   {
+    path: "/login",
+    element: <div>Login Page</div>,
+  },
+  {
     path: "/register",
     element: <div>Register Page</div>,
   },
@@ -106,19 +110,15 @@ const router = createBrowserRouter([
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
   },
-  {
-    path: "/passengerDetails",
-    element: <PassengerDetailsPage />,
-  },
   // Check history page
   {
     path: "/history",
-    element: <History/>,
+    element: <History />,
   },
   // Check Empty history page
   {
     path: "/history-empty",
-    element: <EmptyHistory/>,
+    element: <EmptyHistory />,
   },
 ]);
 
