@@ -6,6 +6,7 @@ import SelectPassenger, {
   AmountPassengerProps,
 } from "../SelectPassenger/SelectPassenger";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const styleText: React.CSSProperties = {
   color: "var(--Neutral-700, #757575)",
@@ -39,6 +40,7 @@ interface Airport {
   country: string;
   cityCode: string;
 }
+
 const SearchInputFlight = () => {
   const [selectedOption, setSelectedOption] = useState<string>("option2");
   const [addAnotherCount, setAddAnotherCount] = useState<number>(1);
@@ -55,6 +57,7 @@ const SearchInputFlight = () => {
     infantValue: 0,
   });
   const [selectCabin, setSelectCabin] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleOnChangeSelectedOption = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -78,6 +81,51 @@ const SearchInputFlight = () => {
         console.log(error);
       });
   }, []);
+
+  const savePassengersToLocalStorage = () => {
+    const passengers = [];
+    for (let i = 0; i < passenger.childValue; i ++) {
+      passengers.push({
+        seatId: "",
+        genderType: "",
+        ageType: "CHILD",
+        fullName: "",
+        idCardNumber: ""
+      })
+    }
+    for (let i = 0; i < passenger.infantValue; i ++) {
+      passengers.push({
+        seatId: "",
+        genderType: "",
+        ageType: "INFANT",
+        fullName: "",
+        idCardNumber: ""
+      })
+    }
+    for (let i = 0; i < passenger.adultValue; i ++) {
+      passengers.push({
+        seatId: "",
+        genderType: "",
+        ageType: "ADULT",
+        fullName: "",
+        idCardNumber: ""
+      })
+    }
+
+    localStorage.setItem("passengerList", JSON.stringify(passengers));
+    localStorage.setItem("classType", JSON.stringify(selectCabin));
+  }
+
+  const handleSearchFlight = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const sourceAirportId = formData.get("sourceAirportId") as string;
+    const destAirportId = formData.get("destAirportId") as string;
+    const departureDate = formData.get("departureDate");
+    savePassengersToLocalStorage();
+    const queryParam = `sourceAirportId=${sourceAirportId}&destAirportId=${destAirportId}&departureDate=${departureDate}&classType=${selectCabin?.toUpperCase()}&adultsNumber=${passenger.adultValue}&childsNumber=${passenger.childValue}&infantsNumber=${passenger.infantValue}`;
+    navigate(`ticketList?${queryParam}`);
+  }
 
   const renderAnotherFlight = () => {
     const flights = [];
@@ -156,6 +204,7 @@ const SearchInputFlight = () => {
                   </div>
                   <input
                     type={"date"}
+                    name={'departureDate'}
                     className="w-full px-3 py-2 bg-transparent rounded-lg input input-bordered"
                   />
                 </label>
@@ -186,9 +235,10 @@ const SearchInputFlight = () => {
           onSubmit={submitPassengerAmount}
         />
       )}
-      <div
+      <form
         className="flex flex-col w-full gap-3 px-8 py-6 rounded-2xl "
         style={{ backgroundColor: "rgba(237, 237, 237, 0.8)" }}
+        onSubmit={handleSearchFlight}
       >
         <div className="container flex flex-col ">
           <div className="sm:w-auto">
@@ -221,7 +271,7 @@ const SearchInputFlight = () => {
                     <span>From</span>
                   </div>
                   <div className="relative">
-                    <select className="pl-8 bg-transparent select select-bordered w-[97%]">
+                    <select className="pl-8 bg-transparent select select-bordered w-[97%]" name="sourceAirportId">
                       <option disabled selected>
                         Where From
                       </option>
@@ -248,7 +298,7 @@ const SearchInputFlight = () => {
                   <span>To</span>
                 </div>
                 <div className="relative">
-                  <select className="pl-8 bg-transparent select select-bordered w-[97%]">
+                  <select className="pl-8 bg-transparent select select-bordered w-[97%]" name="destAirportId">
                     <option disabled selected>
                       Where To
                     </option>
@@ -275,6 +325,7 @@ const SearchInputFlight = () => {
                 </div>
                 <input
                   type={"date"}
+                  name={"departureDate"}
                   className="w-full px-3 py-2 bg-transparent rounded-lg input input-bordered"
                 />
               </label>
@@ -310,7 +361,7 @@ const SearchInputFlight = () => {
                   <input
                     className="block w-full pl-8 bg-transparent input input-bordered"
                     type={"text"}
-                    placeholder={"1 Passenger, Economy"}
+                    placeholder={"0 Passenger"}
                     value={inputPassenger}
                     onClick={() => setShowSelectPassenger(true)}
                   />
@@ -408,7 +459,8 @@ const SearchInputFlight = () => {
           )}
           <button
             className="btn text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]"
-            onClick={() => (window.location.href = "/ticketList")}
+            type={"submit"}
+            // onClick={handleSearchFlight}
           >
             Let's Search
           </button>
@@ -433,7 +485,7 @@ const SearchInputFlight = () => {
             )}
           </div>
         )}
-      </div>
+      </form>
     </>
   );
 };
