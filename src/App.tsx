@@ -23,6 +23,7 @@ import SelectedFlight from "./pages/client/SelectedFlight";
 import History from "./pages/client/History";
 import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
+import SearchTestPage from "./pages/client/SearchTestPage";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,14 @@ const router = createBrowserRouter([
     element: <TravelAddOns />,
   },
   {
+    path: "/history",
+    element: <History />,
+  },
+  {
+    path: "/history-empty",
+    element: <EmptyHistory />,
+  },
+  {
     path: "/dashboard/airport",
     element: <AirportDashboard />,
   },
@@ -110,15 +119,9 @@ const router = createBrowserRouter([
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
   },
-  // Check history page
   {
-    path: "/history",
-    element: <History />,
-  },
-  // Check Empty history page
-  {
-    path: "/history-empty",
-    element: <EmptyHistory />,
+    path: "/search-test",
+    element: <SearchTestPage />,
   },
 ]);
 

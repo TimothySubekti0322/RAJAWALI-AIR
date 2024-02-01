@@ -1,38 +1,28 @@
 import React, { useEffect, useState } from "react";
 import FlightCard from "./flightCard";
-import { RawFlightData } from "../../../pages/client/TicketList";
+import { RawFlightData } from "../../../components/client/flightList/flight.type";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import {
-  replaceDate,
-  extractDepartureDate,
-} from "../../../utils/ticketList/ticketList.utils";
+import { replaceDate } from "../../../utils/ticketList/ticketList.utils";
 import type { DaysObject } from "../../../utils/ticketList/ticketList.utils";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface BodyComponentProps {
   flightData: RawFlightData[];
-  date: DaysObject[];
+  arraysDate: DaysObject[];
   currentDate: number;
-  sourceAirportId: string;
-  destAirportId: string;
-  adultsNumber: string;
-  childsNumber: string;
-  infantsNumber: string;
   departureDate: string;
-  classType: string;
+  setNewDate: React.Dispatch<React.SetStateAction<string>>;
+  loadingNewData: boolean;
 }
 
 const BodyComponent: React.FC<BodyComponentProps> = ({
   flightData,
-  date,
+  arraysDate,
   currentDate,
-  sourceAirportId,
-  destAirportId,
-  adultsNumber,
-  childsNumber,
-  infantsNumber,
   departureDate,
-  classType,
+  setNewDate,
+  loadingNewData,
 }) => {
   const [selectedDate, setSelectedDate] = useState<number>(currentDate);
 
@@ -50,12 +40,10 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
   }, [currentDate]);
 
   const handleChangeDate = (date: number) => {
-    const extractedDate = extractDepartureDate(departureDate);
-    const newDate = "departureDate=" + replaceDate(extractedDate, date) + "&";
-    window.location.href = `/ticketList?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${newDate}${classType}`;
+    const newDate = replaceDate(departureDate, date);
+    setNewDate(newDate);
   };
 
-  console.log(flightData);
   return (
     <>
       <div
@@ -63,7 +51,7 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
         className="grid w-full h-12 grid-cols-4 text-sm bg-white border-y-[1px] border-[#9E9E9E] keen-slider"
       >
         {/* Date Button */}
-        {date.map((item, index) => (
+        {arraysDate.map((item, index) => (
           <button
             key={index}
             className={`${
@@ -84,8 +72,17 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
       </div>
       {/* Inner Body Section */}
       <div className="w-full h-full px-4">
-        {flightData.length == 0 ? (
-          <div className="flex flex-col items-center justify-center w-full h-full my-auto pt-[30%]">
+        {loadingNewData && (
+          <div className="flex flex-col items-center justify-center w-full h-full pt-[50%]">
+            <CircularProgress size="3rem" />
+            <div className="flex items-end">
+              <p className="mt-12 text-[1rem] font-bold text-black">Loading</p>
+              <span className="ml-1 -mb-[0.1rem] text-black loading loading-dots loading-xs"></span>
+            </div>
+          </div>
+        )}
+        {!loadingNewData && flightData.length == 0 && (
+          <div className="flex flex-col items-center justify-center w-full h-full my-auto pt-[30%] 2xl:pt-[40%]">
             <img
               src="/images/no-flight.svg"
               alt="no flight"
@@ -95,7 +92,8 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
               No Flight Found
             </p>
           </div>
-        ) : (
+        )}
+        {!loadingNewData && flightData.length > 0 && (
           <>
             {/* Departure Header */}
             <p className="mt-4 font-bold text-black">Departure Schedule</p>
