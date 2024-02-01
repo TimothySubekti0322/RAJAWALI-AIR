@@ -39,10 +39,12 @@ interface Airport {
   city: string;
   country: string;
   cityCode: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const SearchInputFlight = () => {
-  const [selectedOption, setSelectedOption] = useState<string>("option2");
+  const [selectedOption, setSelectedOption] = useState<string>("One-Way");
   const [addAnotherCount, setAddAnotherCount] = useState<number>(1);
   const [showSelectPassenger, setShowSelectPassenger] =
     useState<boolean>(false);
@@ -67,7 +69,7 @@ const SearchInputFlight = () => {
   };
 
   const passengerWidthStyle = {
-    width: selectedOption === "option3" ? "40%" : "20%",
+    width: selectedOption === "Multi-City" ? "40%" : "20%",
   };
 
   useEffect(() => {
@@ -82,8 +84,34 @@ const SearchInputFlight = () => {
       });
   }, []);
 
+  // ========================= Function to save variable in local storage ===============================
+  const saveReservationTypeToLocalStorage = () => {
+    localStorage.setItem("reservationType", JSON.stringify(selectedOption));
+  }
+
+  const saveDateToLocalStorage = (dateString: string, varName: string) => {
+    localStorage.setItem(varName, JSON.stringify(dateString));
+  }
+
+  const saveAirportToLocalStorage = (airportId: string, varName: string) => {
+    const sourceAirport = listAirport?.find((s) => s.id === airportId);
+    if (sourceAirport) {
+      localStorage.setItem(varName, JSON.stringify(sourceAirport));
+    }
+  }
+
   const savePassengersToLocalStorage = () => {
     const passengers = [];
+
+    for (let i = 0; i < passenger.adultValue; i ++) {
+      passengers.push({
+        seatId: "",
+        genderType: "",
+        ageType: "ADULT",
+        fullName: "",
+        idCardNumber: ""
+      })
+    }
     for (let i = 0; i < passenger.childValue; i ++) {
       passengers.push({
         seatId: "",
@@ -102,27 +130,26 @@ const SearchInputFlight = () => {
         idCardNumber: ""
       })
     }
-    for (let i = 0; i < passenger.adultValue; i ++) {
-      passengers.push({
-        seatId: "",
-        genderType: "",
-        ageType: "ADULT",
-        fullName: "",
-        idCardNumber: ""
-      })
-    }
 
-    localStorage.setItem("passengerList", JSON.stringify(passengers));
+    localStorage.setItem("passengers", JSON.stringify(passengers));
     localStorage.setItem("classType", JSON.stringify(selectCabin));
   }
+  // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
   const handleSearchFlight = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const sourceAirportId = formData.get("sourceAirportId") as string;
     const destAirportId = formData.get("destAirportId") as string;
-    const departureDate = formData.get("departureDate");
+    const departureDate = formData.get("departureDate") as string;
+
     savePassengersToLocalStorage();
+    saveAirportToLocalStorage(sourceAirportId, "sourceAirport");
+    saveAirportToLocalStorage(destAirportId, "destinationAirport");
+    saveDateToLocalStorage(departureDate, "date");
+    saveReservationTypeToLocalStorage();
+
     const queryParam = `sourceAirportId=${sourceAirportId}&destAirportId=${destAirportId}&departureDate=${departureDate}&classType=${selectCabin?.toUpperCase()}&adultsNumber=${passenger.adultValue}&childsNumber=${passenger.childValue}&infantsNumber=${passenger.infantValue}`;
     navigate(`ticketList?${queryParam}`);
   }
@@ -132,7 +159,7 @@ const SearchInputFlight = () => {
     for (let i = 1; i < addAnotherCount; i++) {
       flights.push(
         <div className="flex flex-row items-end justify-end w-full gap-3">
-          {selectedOption === "option3" && (
+          {selectedOption === "Multi-City" && (
             <div className={"flex w-full gap-3"}>
               <div className="flex">
                 <div>
@@ -246,10 +273,10 @@ const SearchInputFlight = () => {
               <label key={option.id} className="inline-flex items-center">
                 <input
                   type="radio"
-                  id={option.id}
+                  id={option.label}
                   name="radioOptions"
-                  value={option.id}
-                  defaultChecked={option.id === "option2"}
+                  value={option.label}
+                  defaultChecked={option.label === "One-Way"}
                   // checked={option.id === "option2"}
                   onChange={handleOnChangeSelectedOption}
                   className="w-5 h-5 text-indigo-600 form-radio radio radio-primary"
@@ -330,7 +357,7 @@ const SearchInputFlight = () => {
                 />
               </label>
             </div>
-            {selectedOption !== "option3" && (
+            {selectedOption !== "Multi-City" && (
               <div style={{ width: "20%" }}>
                 <label
                   className="w-full max-w-xs form-control"
@@ -341,10 +368,11 @@ const SearchInputFlight = () => {
                   </div>
                   <input
                     type={"date"}
+                    name={"returnDate"}
                     className="w-full px-3 py-2 rounded-lg input input-bordered"
-                    disabled={selectedOption === "option2"}
+                    disabled={selectedOption === "One-Way"}
                     style={
-                      selectedOption === "option2"
+                      selectedOption === "One-Way"
                         ? { backgroundColor: "rgba(194, 194, 194, 0.7)" }
                         : { backgroundColor: "transparent" }
                     }
@@ -379,7 +407,7 @@ const SearchInputFlight = () => {
         </div>
         {renderAnotherFlight()}
         <div className="flex flex-row items-end justify-end w-full gap-3">
-          {selectedOption === "option3" && (
+          {selectedOption === "Multi-City" && (
             <div className={"flex w-full gap-3"}>
               <div className="flex">
                 <div>
@@ -465,7 +493,7 @@ const SearchInputFlight = () => {
             Let's Search
           </button>
         </div>
-        {selectedOption === "option3" && (
+        {selectedOption === "Multi-City" && (
           <div className={"flex gap-5 items-center"} style={anotherFlightStyle}>
             <div
               className={"flex gap-1"}

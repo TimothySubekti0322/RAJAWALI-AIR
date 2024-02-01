@@ -4,64 +4,137 @@ import FlightCard from "../../components/client/fillDetailInformation/FlightCard
 import ContactDetailForm, {
   ContactDetailInput,
 } from "../../components/client/fillDetailInformation/ContactDetailForm";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import SwipeableEdgeDrawer from "../../components/client/passengerDetails/passengerDetails.tsx";
 import HeaderFill from "../../components/client/headerFill.tsx";
+import saveToLocalStorage from "../../helpers/SaveToLocalStorage.ts";
+
+interface IPassenger {
+  seatId: string;
+  genderType: string;
+  ageType: string;
+  fullName: string;
+  idCardNumber: string;
+}
 
 const FillDetailInfo = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [contactDetail, setContactDetail] = useState<ContactDetailInput>({
-    title: "",
+    genderType: "",
     email: "",
     fullName: "",
     phoneNumber: "",
   });
+  const [passengers, setPassengers] = useState<IPassenger[]>([]);
+  const [passengerList, setPassengerList] = useState([
+    {
+      id: 0,
+      genderType: "",
+      fullName: ""
+    }
+  ]);
+  const [isSameContactDetail, setIsSameContactDetail] = useState<boolean>(false);
 
-  // ===== DUMMY =====
-  const dataPassenger = {
-    classFlight: "First Class",
-    adultTotal: 2,
-    childTotal: 0,
-    infantTotal: 1,
-  };
+  useEffect(() => {
+    // Mendapatkan data dari local storage
+    const storedPassengers = localStorage.getItem("passengers");
+    const genderTypeLs = localStorage.getItem("genderType");
+    const fullNameLs = localStorage.getItem("fullName");
+    const emailLs = localStorage.getItem("email");
+    const phoneNumberLs = localStorage.getItem("phoneNumber");
+    // console.log(storedPassengers);
+    if (storedPassengers) {
+      const passengerS: IPassenger[] = JSON.parse(storedPassengers);
+
+      setPassengers(passengerS);
+    }
+
+    if (genderTypeLs && fullNameLs && phoneNumberLs && emailLs) {
+      setContactDetail({...contactDetail,
+        genderType: JSON.parse(genderTypeLs),
+        phoneNumber: JSON.parse(phoneNumberLs),
+        fullName: JSON.parse(fullNameLs),
+        email: JSON.parse(emailLs)
+      })
+    }
+  }, []);
 
   const onNext = () => {
-    console.log(contactDetail);
-    window.location.href = "/travelAddOns";
+    saveInformationToLocalStorage();
+    navigate("/travelAddOns");
   };
+
+  const handleSavePassenger = (index: number, honorofic: string, name: string) => {
+    const passengerIndex = passengerList.findIndex(passenger => passenger.id === index);
+
+    if (passengerIndex !== -1) {
+      // Jika id sudah ada, update nilai penumpang
+      const updatedPassengerList = [...passengerList];
+      updatedPassengerList[passengerIndex] = {
+        ...updatedPassengerList[passengerIndex],
+        genderType: honorofic,
+        fullName: name
+      };
+      setPassengerList(updatedPassengerList);
+    } else {
+      // Jika id tidak ditemukan, tambahkan penumpang baru
+      setPassengerList([...passengerList, {
+        id: index,
+        genderType: honorofic,
+        fullName: name
+      }]);
+    }
+  };
+
+  const saveInformationToLocalStorage = () => {
+    saveToLocalStorage("genderType", contactDetail.genderType);
+    saveToLocalStorage("fullName", contactDetail.fullName);
+    saveToLocalStorage("email", contactDetail.email);
+    saveToLocalStorage("phoneNumber", contactDetail.phoneNumber);
+
+    // Jika isSameContactDetail bernilai true, simpan informasi passenger sama dengan contact detail
+    if (isSameContactDetail) {
+      passengerList[0] = {
+        id: 0,
+        genderType: contactDetail.genderType,
+        fullName: contactDetail.fullName
+      }
+    }
+
+    // Update passengers in Local Storage after filled the information
+    const updatePassengers = [...passengers];
+    passengerList.forEach((p, index) => {
+      updatePassengers[index] = {
+        ...updatePassengers[index],
+        genderType: p.genderType,
+        fullName: p.fullName
+      };
+    });
+    saveToLocalStorage("passengers", updatePassengers);
+  };
+
 
   const passengerDetails = () => {
-    const passengers = [];
-    let index = 0;
+    const result: React.ReactNode[] = [];
 
-    if (dataPassenger.adultTotal > 0) {
-      for (let i = 0; i < dataPassenger.adultTotal; i++) {
-        passengers.push(
-          <SwipeableEdgeDrawer index={index} ageGroup={"Adult"} />
-        );
-        index++;
-      }
-    }
-    if (dataPassenger.childTotal > 0) {
-      for (let i = 0; i < dataPassenger.childTotal; i++) {
-        passengers.push(
-          <SwipeableEdgeDrawer index={index} ageGroup={"Child"} />
-        );
-        index++;
-      }
-    }
-    if (dataPassenger.infantTotal > 0) {
-      for (let i = 0; i < dataPassenger.infantTotal; i++) {
-        passengers.push(
-          <SwipeableEdgeDrawer index={index} ageGroup={"Infant"} />
-        );
-        index++;
-      }
-    }
+    passengers.map((p, index) => {
+      result.push(
+          <SwipeableEdgeDrawer
+              handleSaveButton={handleSavePassenger}
+              index={index} ageGroup={p.ageType}
+              isSameContactDetail={isSameContactDetail}
+              setIsSameContactDetail={setIsSameContactDetail} />
+      )
+    })
 
-    return passengers;
+    return result;
   };
+
+  const disabledButtonValidation = (): boolean => {
+    return !contactDetail.fullName || !contactDetail.genderType || !contactDetail.phoneNumber || !contactDetail.email
+  }
 
   return (
     <section
@@ -87,6 +160,7 @@ const FillDetailInfo = () => {
           </div>
           <button
             onClick={onNext}
+            disabled={disabledButtonValidation()}
             className="btn btn-block bg-[#1E90FF] text-white hover:bg-blue-700"
           >
             Next

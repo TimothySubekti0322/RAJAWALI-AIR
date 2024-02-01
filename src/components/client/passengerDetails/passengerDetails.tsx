@@ -3,12 +3,12 @@ import { Global } from "@emotion/react";
 import { styled, useTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { grey } from "@mui/material/colors";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { IoClose } from "react-icons/io5";
 import RadioButton from "./radioButton";
 import { FaChevronRight } from "react-icons/fa";
+import {useEffect} from "react";
 
 const drawerBleeding = 0;
 
@@ -45,18 +45,31 @@ const Puller = styled("div")(({ theme }) => ({
 interface PassengerDetailProps {
     index: number,
     ageGroup: string,
+    handleSaveButton: (id: number, ageType: string, fullName: string) => void,
+    // children?: ReactNode,
+    isSameContactDetail: boolean,
+    setIsSameContactDetail: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function SwipeableEdgeDrawer(props: Readonly<Props & PassengerDetailProps>) {
   const themes = useTheme();
-  const { window, index, ageGroup } = props;
+  const { window, index, ageGroup, handleSaveButton, isSameContactDetail, setIsSameContactDetail } = props;
   const [open, setOpen] = React.useState(false);
 
   const [honorofic, setHonorofic] = React.useState("other");
   const [name, setName] = React.useState("");
 
+  useEffect(() => {
+      const pass = localStorage.getItem("passengers");
+      if (pass) {
+          const conv = JSON.parse(pass);
+          setName(conv[index].fullName);
+          setHonorofic(conv[index].genderType)
+      }
+  },[])
+
   const handleSave = () => {
-    console.log(honorofic, name);
+    handleSaveButton(index, honorofic, name);
     setOpen(false);
   };
 
@@ -92,21 +105,20 @@ export default function SwipeableEdgeDrawer(props: Readonly<Props & PassengerDet
                         <>
                             <div className={'flex gap-3 mt-2 items-center justify-between'}>
                                 <span className={'text-xs text-[#757575]'}>Same as contact details</span>
-                                <input type="checkbox" className="toggle toggle-info toggle-sm"/>
+                                <input type="checkbox" className="toggle toggle-info toggle-sm" checked={isSameContactDetail} onClick={() => setIsSameContactDetail(!isSameContactDetail)}/>
                             </div>
                             <div className={'w-full h-[1px] bg-[#757575] my-3'}>
                             </div>
                         </>
                     )}
-
                     <div className={'my-2 items-center w-full flex justify-between'}>
                         <span
                             className={'text-[#1E90FF] font-semibold text-sm'}>Passenger {index + 1} ({ageGroup})</span>
                         {/*<PassengerDetails  />*/}
                         <Box sx={{ textAlign: "center", pt: 1, borderRadius: "8px 8px 0 0", backgroundColor: 'white' }}>
-                            <Button onClick={toggleDrawer(true)}>
-                                <FaChevronRight className="text-[#1E90FF]" />
-                            </Button>
+                            <button onClick={toggleDrawer(true)} disabled={index === 0 && isSameContactDetail}>
+                                {index === 0 && isSameContactDetail? <FaChevronRight className="text-slate-300" /> : <FaChevronRight className="text-[#1E90FF]" /> }
+                            </button>
                         </Box>
                     </div>
                 </div>
@@ -171,6 +183,7 @@ export default function SwipeableEdgeDrawer(props: Readonly<Props & PassengerDet
                   type="text"
                   placeholder="Full Name"
                   className="w-full px-2 py-3 bg-white rounded-md border-[1.5px] border-[#1E90FF] text-xs"
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
