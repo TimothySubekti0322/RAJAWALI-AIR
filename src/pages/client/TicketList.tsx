@@ -9,6 +9,7 @@ import axios from "axios";
 import API_URL from "../../assets/static/API";
 import { AirportData, Airplane } from "../../assets/static/TableDataTypes";
 import CircularProgress from "@mui/material/CircularProgress";
+import moment from "moment";
 
 export interface RawFlightData {
   id: string;
@@ -79,6 +80,13 @@ const TicketList = () => {
   // Error
   const [error, setError] = useState<boolean>(false);
 
+  // Get data from Local Storage
+  const sourceAirport = JSON.parse(localStorage.getItem("sourceAirport") as string);
+  const destAirport = JSON.parse(localStorage.getItem("destinationAirport") as string);
+  const date = JSON.parse(localStorage.getItem("date") as string);
+  const classTypeLs = JSON.parse(localStorage.getItem("classType") as string);
+  const passengersLs = JSON.parse(localStorage.getItem("passengers") as string);
+
   // Open Modal
 
   // const sourceAirportId =
@@ -126,13 +134,14 @@ const TicketList = () => {
         <section className="w-full min-h-screen bg-[#f7f7f7] relative">
           <HeaderLayout>
             <HeaderFill
-              departure="Yogyakarta"
-              departureCode="YIA"
-              arrival="Balikpapan"
-              arrivalCode="BPN"
-              date="Thu, 25 Jan"
-              passenger={2}
-              seatClass="Economy"
+              departure={sourceAirport.city}
+              departureCode={sourceAirport.cityCode}
+              arrival={destAirport.city}
+              arrivalCode={destAirport.cityCode}
+              // date="Thu, 25 Jan"
+              date={moment(date).format("ddd, DD MMM YYYY")}
+              passenger={passengersLs.length}
+              seatClass={classTypeLs}
             />
           </HeaderLayout>
 

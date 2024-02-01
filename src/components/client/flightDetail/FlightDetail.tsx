@@ -8,6 +8,7 @@ import {Airplane, AirportData} from "../../../assets/static/TableDataTypes.ts";
 import {extractTimeFromDateString} from "../../../utils/DateFormater.ts";
 import moment from "moment";
 import {getDurationBetweenDates} from "../../../utils/ticketList/ticketList.utils.ts";
+import {useNavigate} from "react-router-dom";
 
 interface IFlightDetail {
   id: string;
@@ -30,9 +31,10 @@ interface FlightDetailProps {
   detailFlight: IFlightDetail
 }
 const FlightDetail = ({ onClose, detailFlight }: FlightDetailProps) => {
+  const navigate = useNavigate();
   return (
       <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 9999, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <div className={"rounded-md bg-white p-3 fixed top-[368px] flex flex-col justify-center items-center"} style={{ color: "black" }}>
+        <div className={"rounded-md bg-white p-3 fixed top-[367px] flex flex-col justify-center items-center"} style={{ color: "black" }}>
           <div
               className={`absolute sm:w-[360px] mx-auto mt-0 min-h-[600px] bg-[white] flex flex-col justify-between rounded-lg`}
           >
@@ -91,7 +93,7 @@ const FlightDetail = ({ onClose, detailFlight }: FlightDetailProps) => {
                   <p className={"text-xs text-slate-500 mt-1"}>
                     {detailFlight.sourceAirport.name} | Terminal Domestic
                   </p>
-                  <FlightDetailCard />
+                  <FlightDetailCard airplaneCode={detailFlight.airplane.airplaneCode} />
                   <p className={"text-sm font-medium text-black"}>
                     {detailFlight.destinationAirport.city} ({detailFlight.destinationAirport.cityCode})  | {extractTimeFromDateString(detailFlight.arrivalDate)}
                   </p>
@@ -117,6 +119,7 @@ const FlightDetail = ({ onClose, detailFlight }: FlightDetailProps) => {
                     className={
                       "btn btn-sm text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]"
                     }
+                    onClick={() => navigate("/selectedFlight")}
                 >
                   Continue
                 </button>
