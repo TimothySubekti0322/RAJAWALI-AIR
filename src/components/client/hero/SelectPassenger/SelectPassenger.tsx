@@ -53,7 +53,11 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                     <tr>
                         <td className={"pl-2"}><AmountPassengerComponent
                             value={amountPassenger.adultValue}
-                            handleMin={() => setAmountPassenger({ ...amountPassenger, adultValue: amountPassenger.adultValue - 1 }) }
+                            handleMin={() => {
+                                if (amountPassenger.adultValue > 0) {
+                                    setAmountPassenger({...amountPassenger, adultValue: amountPassenger.adultValue - 1})
+                                }
+                            }}
                             handlePlus={() => setAmountPassenger({ ...amountPassenger, adultValue: amountPassenger.adultValue + 1 }) }
                             nameInput={amountPassenger.adultName}
                             status={"Adult"}
@@ -67,7 +71,11 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                     <tr>
                         <td className={"pl-2"}><AmountPassengerComponent
                             value={amountPassenger.childValue}
-                            handleMin={() => setAmountPassenger({ ...amountPassenger, childValue: amountPassenger.childValue - 1 }) }
+                            handleMin={() => {
+                                if (amountPassenger.childValue > 0) {
+                                    setAmountPassenger({...amountPassenger, childValue: amountPassenger.childValue - 1})
+                                }
+                            }}
                             handlePlus={() => setAmountPassenger({ ...amountPassenger, childValue: amountPassenger.childValue + 1 }) }
                             nameInput={amountPassenger.childName}
                             status={"Child"} ageInformation={"Age 2-11"} /></td>
@@ -80,7 +88,11 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                     <tr>
                         <td className={"pl-2"}><AmountPassengerComponent
                             value={amountPassenger.infantValue}
-                            handleMin={() => setAmountPassenger({ ...amountPassenger, infantValue: amountPassenger.infantValue - 1 }) }
+                            handleMin={() => {
+                                if (amountPassenger.infantValue > 0) {
+                                    setAmountPassenger({...amountPassenger, infantValue: amountPassenger.infantValue - 1})
+                                }
+                            }}
                             handlePlus={() => setAmountPassenger({ ...amountPassenger, infantValue: amountPassenger.infantValue + 1 }) }
                             nameInput={amountPassenger.infantName}
                             status={"Infant"} ageInformation={"Age 0-2"} /></td>

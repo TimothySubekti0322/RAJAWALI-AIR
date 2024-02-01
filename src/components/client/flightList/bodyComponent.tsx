@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import FlightCard from "./flightCard";
 import { RawFlightData } from "../../../pages/client/TicketList";
+import FlightDetail from "../flightDetail/FlightDetail.tsx";
 
 interface BodyComponentProps {
-  flightData: RawFlightData[];
+  flightData: RawFlightData[],
 }
 
 const BodyComponent: React.FC<BodyComponentProps> = ({ flightData }) => {
   const [selectedDate, setSelectedDate] = useState<number>(1);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
   return (
     <>
       <div className="grid w-full h-12 grid-cols-4 text-sm bg-white border-y-[1px] border-[#9E9E9E]">
@@ -65,7 +68,13 @@ const BodyComponent: React.FC<BodyComponentProps> = ({ flightData }) => {
         {/* Fligth Card */}
         <div className="flex flex-col w-full mt-4 gap-y-3">
           {flightData.map((flight) => (
-            <FlightCard flightData={flight} />
+              <>
+                <FlightCard handleOpenModal={() => setOpenModal(true)} flightData={flight} />
+                {openModal && (
+                    <FlightDetail detailFlight={flight} onClose={() => setOpenModal(false)}  />
+                )}
+              </>
+
           ))}
           {/* <FlightCard />
           <FlightCard />

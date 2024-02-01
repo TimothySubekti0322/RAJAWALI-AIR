@@ -79,6 +79,8 @@ const TicketList = () => {
   // Error
   const [error, setError] = useState<boolean>(false);
 
+  // Open Modal
+
   // const sourceAirportId =
   //   "sourceAirportId=7cca5acf-75d9-478b-b921-f14d72e7116e&";
   // const destAirportId = "destAirportId=b4d9b11a-24b1-4af2-a374-b66f711a75a4&";
@@ -139,8 +141,11 @@ const TicketList = () => {
           <BodyLayout paddingBottomSize="5rem">
             <BodyComponent flightData={data} />
           </BodyLayout>
-
+          {/*<FlightDetail id={"1"} onClose={() => console.log("close")}  />*/}
           {/* Bottom Navbar */}
+          {/*{openModal && (*/}
+          {/*    <FlightDetail detailFlight={} onClose={() => setOpenModal(false)}  />*/}
+          {/*)}*/}
           <div className="fixed left-0 right-0 bottom-0 mx-auto w-full sm:w-[360px] h-[3.8rem] bg-[#1E90FF] rounded-t-xl flex justify-center items-center gap-x-12">
             {/* Filter */}
             <button className="flex flex-col items-center gap-y-1 text-white hover:text-[#CCCCCC]">
