@@ -120,11 +120,11 @@ const TicketList = () => {
       : "";
 
     const departureDate = localStorage.getItem("date")
-      ? `departureDate=${localStorage.getItem("date")}&`
+      ? `departureDate=${JSON.parse(localStorage.getItem("date") as string)}&`
       : "";
 
     const classType = localStorage.getItem("classType")
-      ? `classType=${localStorage.getItem("classType")}`
+      ? `classType=${JSON.parse(localStorage.getItem("classType") as string).toUpperCase()}`
       : "";
 
     // Set Date
@@ -190,9 +190,9 @@ const TicketList = () => {
 
       localStorage.setItem("date", searchParams.get("departureDate") as string);
 
-      const classType = searchParams.get("classType")
-        ? `classType=${searchParams.get("classType")}`
-        : "";
+      const classType = localStorage.getItem("classType")
+          ? `classType=${JSON.parse(localStorage.getItem("classType") as string).toUpperCase()}`
+          : "";
 
       localStorage.setItem(
         "classType",
@@ -230,10 +230,7 @@ const TicketList = () => {
   // Get data from Local Storage
   const sourceAirport = JSON.parse(localStorage.getItem("sourceAirport") as string);
   const destAirport = JSON.parse(localStorage.getItem("destinationAirport") as string);
-  // const dateLs = JSON.parse(localStorage.getItem("date") as string);
-  // const classTypeLs = JSON.parse(localStorage.getItem("classType") as string);
   const passengersLs = JSON.parse(localStorage.getItem("passengers") as string);
-
   // Open Modal
 
   // const sourceAirportId =
@@ -309,7 +306,7 @@ const TicketList = () => {
       const departureDate = `departureDate=${newDate}&`;
 
       const classType = localStorage.getItem("classType")
-        ? `classType=${localStorage.getItem("classType")}`
+        ? `classType=${JSON.parse(localStorage.getItem("classType") as string).toUpperCase()}`
         : "";
 
       // Set Date
@@ -345,7 +342,7 @@ const TicketList = () => {
               passenger={passengersLs.length}
               seatClass={
                 localStorage.getItem("classType")
-                    ? (localStorage.getItem("classType") as string)
+                    ? (JSON.parse(localStorage.getItem("classType") as string))
                     : (searchParams.get("classType") as string)
               }
             />
