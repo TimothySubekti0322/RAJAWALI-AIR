@@ -7,7 +7,59 @@ import BodyLayout from "../../components/client/bodyLayout";
 import BodyComponent from "../../components/client/flightList/bodyComponent";
 import axios from "axios";
 import API_URL from "../../assets/static/API";
+import { AirportData, Airplane } from "../../assets/static/TableDataTypes";
 import CircularProgress from "@mui/material/CircularProgress";
+
+export interface RawFlightData {
+  id: string;
+  sourceAirport: AirportData;
+  destinationAirport: AirportData;
+  airplane: Airplane;
+  departureDate: string;
+  arrivalDate: string;
+  classType: string;
+  seatPrice: number;
+  totalPrice: number;
+  discount: number;
+  availableSeats: number;
+  createdAt: string;
+  updatedAt: string;
+  points: number;
+}
+
+const initialData: RawFlightData[] = [
+  {
+    id: "",
+    sourceAirport: {
+      id: "",
+      name: "",
+      country: "",
+      city: "",
+      cityCode: "",
+    },
+    destinationAirport: {
+      id: "",
+      name: "",
+      country: "",
+      city: "",
+      cityCode: "",
+    },
+    airplane: {
+      id: "",
+      airplaneCode: "",
+    },
+    departureDate: "",
+    arrivalDate: "",
+    classType: "",
+    seatPrice: 0,
+    totalPrice: 0,
+    discount: 0,
+    availableSeats: 0,
+    createdAt: "",
+    updatedAt: "",
+    points: 0,
+  },
+];
 import {
   getArrayOfDays,
   getDate,
@@ -20,8 +72,8 @@ import {
   searchParamaterResourceAvailable,
 } from "../../utils/ticketList/ticketList.utils";
 import type { DaysObject } from "../../utils/ticketList/ticketList.utils";
-import type { RawFlightData } from "../../components/client/flightList/flight.type";
-import { initialData } from "../../components/client/flightList/flight.type";
+// import type { RawFlightData } from "../../components/client/flightList/flight.type";
+// import { initialData } from "../../components/client/flightList/flight.type";
 
 const TicketList = () => {
   // Query Params
@@ -68,11 +120,11 @@ const TicketList = () => {
       : "";
 
     const departureDate = localStorage.getItem("date")
-      ? `departureDate=${localStorage.getItem("date")}&`
+      ? `departureDate=${JSON.parse(localStorage.getItem("date") as string)}&`
       : "";
 
     const classType = localStorage.getItem("classType")
-      ? `classType=${localStorage.getItem("classType")}`
+      ? `classType=${JSON.parse(localStorage.getItem("classType") as string).toUpperCase()}`
       : "";
 
     // Set Date
@@ -138,9 +190,9 @@ const TicketList = () => {
 
       localStorage.setItem("date", searchParams.get("departureDate") as string);
 
-      const classType = searchParams.get("classType")
-        ? `classType=${searchParams.get("classType")}`
-        : "";
+      const classType = localStorage.getItem("classType")
+          ? `classType=${JSON.parse(localStorage.getItem("classType") as string).toUpperCase()}`
+          : "";
 
       localStorage.setItem(
         "classType",
@@ -175,6 +227,18 @@ const TicketList = () => {
     }
   };
 
+  // Get data from Local Storage
+  const sourceAirport = JSON.parse(localStorage.getItem("sourceAirport") as string);
+  const destAirport = JSON.parse(localStorage.getItem("destinationAirport") as string);
+  const passengersLs = JSON.parse(localStorage.getItem("passengers") as string);
+  // Open Modal
+
+  // const sourceAirportId =
+  //   "sourceAirportId=7cca5acf-75d9-478b-b921-f14d72e7116e&";
+  // const destAirportId = "destAirportId=b4d9b11a-24b1-4af2-a374-b66f711a75a4&";
+  // const adultsNumber = "adultsNumber=1&";
+  // const departureDate = "departureDate=2024-04-24&";
+  // const classType = "classType=FIRST";
   useEffect(() => {
     const fetchingData = async () => {
       try {
@@ -242,7 +306,7 @@ const TicketList = () => {
       const departureDate = `departureDate=${newDate}&`;
 
       const classType = localStorage.getItem("classType")
-        ? `classType=${localStorage.getItem("classType")}`
+        ? `classType=${JSON.parse(localStorage.getItem("classType") as string).toUpperCase()}`
         : "";
 
       // Set Date
@@ -269,16 +333,17 @@ const TicketList = () => {
         <section className="w-full min-h-screen bg-[#f7f7f7] relative">
           <HeaderLayout>
             <HeaderFill
-              departure="Yogyakarta"
-              departureCode="YIA"
-              arrival="Balikpapan"
-              arrivalCode="BPN"
+              departure={sourceAirport.city}
+              departureCode={sourceAirport.cityCode}
+              arrival={destAirport.city}
+              arrivalCode={destAirport.cityCode}
+              // date="Thu, 25 Jan"
               date={getDayAndDate(date)}
-              passenger={2}
+              passenger={passengersLs.length}
               seatClass={
                 localStorage.getItem("classType")
-                  ? (localStorage.getItem("classType") as string)
-                  : (searchParams.get("classType") as string)
+                    ? (JSON.parse(localStorage.getItem("classType") as string))
+                    : (searchParams.get("classType") as string)
               }
             />
           </HeaderLayout>

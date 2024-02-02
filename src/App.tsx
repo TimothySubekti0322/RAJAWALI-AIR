@@ -48,7 +48,7 @@ const router = createBrowserRouter([
     element: <SelectedFlight />,
   },
   {
-    path: "/fillDetailInformation/:id",
+    path: "/fillDetailInformation",
     element: <FillDetailInfo />,
   },
   {

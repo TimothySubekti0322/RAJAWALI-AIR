@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FlightCard from "./flightCard";
+// import { RawFlightData } from "../../../pages/client/TicketList";
+import FlightDetail from "../flightDetail/FlightDetail.tsx";
 import { RawFlightData } from "../../../components/client/flightList/flight.type";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
@@ -25,6 +27,7 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
   loadingNewData,
 }) => {
   const [selectedDate, setSelectedDate] = useState<number>(currentDate);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   // Date Slider
   const [sliderRef] = useKeenSlider({
@@ -98,14 +101,26 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
             {/* Departure Header */}
             <p className="mt-4 font-bold text-black">Departure Schedule</p>
 
-            {/* Fligth Card */}
             <div className="flex flex-col w-full mt-4 gap-y-3">
               {flightData.map((flight) => (
-                <FlightCard key={flight.id} flightData={flight} />
+                  <>
+                    <FlightCard handleOpenModal={() => setOpenModal(true)} flightData={flight} />
+                    {openModal && (
+                        <FlightDetail detailFlight={flight} onClose={() => setOpenModal(false)}  />
+                    )}
+                  </>
+
               ))}
+              {/* <FlightCard />
+          <FlightCard />
+          <FlightCard />
+          <FlightCard />
+          <FlightCard /> */}
             </div>
           </>
         )}
+        {/* Fligth Card */}
+
       </div>
     </>
   );
