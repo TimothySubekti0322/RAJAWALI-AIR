@@ -23,6 +23,8 @@ import SelectedFlight from "./pages/client/SelectedFlight";
 import History from "./pages/client/History";
 import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
+import LoginClient from "./pages/client/loginClient";
+import LoginAdmin from "./pages/admin/loginAdmin";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +33,12 @@ const router = createBrowserRouter([
     errorElement: <div>404 Not Found</div>,
   },
   {
+    path: "/login-admin",
+    element:<LoginAdmin/> ,
+  },
+  {
     path: "/login",
-    element: <div>Login Page</div>,
+    element:<LoginClient/> ,
   },
   {
     path: "/register",
