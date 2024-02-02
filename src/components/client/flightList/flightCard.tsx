@@ -1,6 +1,6 @@
 import React from "react";
 import { FaChevronDown } from "react-icons/fa6";
-import { RawFlightData } from "../../../pages/client/TicketList";
+import { RawFlightData } from "./flight.type";
 import { extractTimeFromDateString } from "../../../utils/DateFormater";
 import { getDurationBetweenDates } from "../../../utils/ticketList/ticketList.utils";
 import { numberToCurrency } from "../../../utils/NumberFormater";

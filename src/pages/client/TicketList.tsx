@@ -7,97 +7,185 @@ import BodyLayout from "../../components/client/bodyLayout";
 import BodyComponent from "../../components/client/flightList/bodyComponent";
 import axios from "axios";
 import API_URL from "../../assets/static/API";
-import { AirportData, Airplane } from "../../assets/static/TableDataTypes";
 import CircularProgress from "@mui/material/CircularProgress";
-
-export interface RawFlightData {
-  id: string;
-  sourceAirport: AirportData;
-  destinationAirport: AirportData;
-  airplane: Airplane;
-  departureDate: string;
-  arrivalDate: string;
-  classType: string;
-  seatPrice: number;
-  totalPrice: number;
-  discount: number;
-  availableSeats: number;
-  createdAt: string;
-  updatedAt: string;
-  points: number;
-}
-
-const initialData: RawFlightData[] = [
-  {
-    id: "",
-    sourceAirport: {
-      id: "",
-      name: "",
-      country: "",
-      city: "",
-      cityCode: "",
-    },
-    destinationAirport: {
-      id: "",
-      name: "",
-      country: "",
-      city: "",
-      cityCode: "",
-    },
-    airplane: {
-      id: "",
-      airplaneCode: "",
-    },
-    departureDate: "",
-    arrivalDate: "",
-    classType: "",
-    seatPrice: 0,
-    totalPrice: 0,
-    discount: 0,
-    availableSeats: 0,
-    createdAt: "",
-    updatedAt: "",
-    points: 0,
-  },
-];
+import {
+  getArrayOfDays,
+  getDate,
+  getDayAndDate,
+  resourceAvailable,
+  getAdultsNumberFromLocalStorage,
+  getChildsNumberFromLocalStorage,
+  getInfantsNumberFromLocalStorage,
+  localStorageResourceAvailable,
+  searchParamaterResourceAvailable,
+} from "../../utils/ticketList/ticketList.utils";
+import type { DaysObject } from "../../utils/ticketList/ticketList.utils";
+import type { RawFlightData } from "../../components/client/flightList/flight.type";
+import { initialData } from "../../components/client/flightList/flight.type";
 
 const TicketList = () => {
   // Query Params
   const searchParams = new URLSearchParams(window.location.search);
-  const sourceAirportId = searchParams.get("sourceAirportId");
-  const destAirportId = searchParams.get("destAirportId");
-  const adultsNumber = searchParams.get("adultsNumber");
-  const departureDate = searchParams.get("departureDate");
-  const classType = searchParams.get("classType");
 
   // Data
   const [data, setData] = useState<RawFlightData[]>(initialData);
 
+  // Date & Current Date
+  const [arraysDate, setArraysDate] = useState<DaysObject[]>([]);
+  const [date, setDate] = useState<string>("");
+  const [currentDate, setCurrentDate] = useState<number>(0);
+  const [newDate, setNewDate] = useState<string>("");
+
   // Loading
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingNewData, setLoadingNewData] = useState<boolean>(false);
 
   // Error
   const [error, setError] = useState<boolean>(false);
 
-  // const sourceAirportId =
-  //   "sourceAirportId=7cca5acf-75d9-478b-b921-f14d72e7116e&";
-  // const destAirportId = "destAirportId=b4d9b11a-24b1-4af2-a374-b66f711a75a4&";
-  // const adultsNumber = "adultsNumber=1&";
-  // const departureDate = "departureDate=2024-04-24&";
-  // const classType = "classType=FIRST";
-  const API = `${API_URL}/v1/flights/departures?${
-    sourceAirportId && `sourceAirportId=${sourceAirportId}&`
-  }${destAirportId && `destAirportId=${destAirportId}&`}${
-    adultsNumber && `adultsNumber=${adultsNumber}&`
-  }${departureDate && `departureDate=${departureDate}&`}${
-    classType && `classType=${classType}`
-  }`;
-  console.log(API);
+  // Fetch Data From Local Storage
+  const fetchDataFromLocalStorage = async () => {
+    const sourceAirport = localStorage.getItem("sourceAirport");
+    const sourceAirportId = sourceAirport
+      ? `sourceAirportId=${JSON.parse(sourceAirport as string).id}&`
+      : "";
+
+    const destAirport = localStorage.getItem("destinationAirport");
+    const destAirportId = destAirport
+      ? `destAirportId=${JSON.parse(destAirport as string).id}&`
+      : "";
+
+    const adultsNumber = getAdultsNumberFromLocalStorage()
+      ? `adultsNumber=${getAdultsNumberFromLocalStorage()}&`
+      : "";
+
+    const childsNumber = getChildsNumberFromLocalStorage()
+      ? `childsNumber=${getChildsNumberFromLocalStorage()}&`
+      : "";
+
+    const infantsNumber = getInfantsNumberFromLocalStorage()
+      ? `infantsNumber=${getInfantsNumberFromLocalStorage()}&`
+      : "";
+
+    const departureDate = localStorage.getItem("date")
+      ? `departureDate=${localStorage.getItem("date")}&`
+      : "";
+
+    const classType = localStorage.getItem("classType")
+      ? `classType=${localStorage.getItem("classType")}`
+      : "";
+
+    // Set Date
+    setArraysDate(getArrayOfDays(departureDate));
+    setDate(localStorage.getItem("date") as string);
+    setCurrentDate(getDate(departureDate));
+
+    const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
+    await fetchData(API);
+  };
+
+  // Fetch Data from search params
+  const fetchDataFromSearchParams = async () => {
+    try {
+      const sourceAirportId = searchParams.get("sourceAirportId")
+        ? `sourceAirportId=${searchParams.get("sourceAirportId")}&`
+        : "";
+
+      localStorage.setItem(
+        "sourceAirportId",
+        searchParams.get("sourceAirportId") as string
+      );
+
+      const destAirportId = searchParams.get("destAirportId")
+        ? `destAirportId=${searchParams.get("destAirportId")}&`
+        : "";
+
+      localStorage.setItem(
+        "destAirportId",
+        searchParams.get("destAirportId") as string
+      );
+
+      const adultsNumber = searchParams.get("adultsNumber")
+        ? `adultsNumber=${searchParams.get("adultsNumber")}&`
+        : "";
+
+      localStorage.setItem(
+        "adultsNumber",
+        searchParams.get("adultsNumber") as string
+      );
+
+      const infantsNumber = searchParams.get("infantsNumber")
+        ? `infantsNumber=${searchParams.get("infantsNumber")}&`
+        : "";
+
+      localStorage.setItem(
+        "infantsNumber",
+        searchParams.get("infantsNumber") as string
+      );
+
+      const childsNumber = searchParams.get("childsNumber")
+        ? `childsNumber=${searchParams.get("childsNumber")}&`
+        : "";
+
+      localStorage.setItem(
+        "childsNumber",
+        searchParams.get("childsNumber") as string
+      );
+
+      const departureDate = searchParams.get("departureDate")
+        ? `departureDate=${searchParams.get("departureDate")}&`
+        : "";
+
+      localStorage.setItem("date", searchParams.get("departureDate") as string);
+
+      const classType = searchParams.get("classType")
+        ? `classType=${searchParams.get("classType")}`
+        : "";
+
+      localStorage.setItem(
+        "classType",
+        searchParams.get("classType") as string
+      );
+
+      // Set Date
+      setArraysDate(getArrayOfDays(departureDate));
+      setDate(searchParams.get("departureDate") as string);
+      setCurrentDate(getDate(departureDate));
+
+      const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
+      await fetchData(API);
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
+  };
+
+  const fetchData = async (API: string) => {
+    try {
+      // const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
+      console.log(API);
+      const res = await axios.get(API);
+      setData(res.data.data.content);
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    } finally {
+      setLoading(false);
+      console.log(data);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchingData = async () => {
       try {
-        const res = await axios.get(API);
-        setData(res.data.data.content);
+        setLoading(true);
+        if (localStorageResourceAvailable()) {
+          console.log("fetching data from local storage");
+          await fetchDataFromLocalStorage();
+        } else if (searchParamaterResourceAvailable()) {
+          console.log("fetching data from search params");
+          await fetchDataFromSearchParams();
+        }
       } catch (error) {
         setError(true);
         console.log(error);
@@ -106,8 +194,65 @@ const TicketList = () => {
       }
     };
 
-    fetchData();
+    if (!resourceAvailable()) {
+      setError(true);
+    } else {
+      fetchingData();
+    }
   }, []);
+
+  // When Date is Changed
+  useEffect(() => {
+    const fetchNewData = async (API: string) => {
+      try {
+        console.log("Date Changed");
+        await fetchData(API);
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      } finally {
+        setLoadingNewData(false);
+      }
+    };
+
+    if (newDate !== "") {
+      setLoadingNewData(true);
+      const sourceAirport = localStorage.getItem("sourceAirport");
+      const sourceAirportId = sourceAirport
+        ? `sourceAirportId=${JSON.parse(sourceAirport as string).id}&`
+        : "";
+
+      const destAirport = localStorage.getItem("destinationAirport");
+      const destAirportId = destAirport
+        ? `destAirportId=${JSON.parse(destAirport as string).id}&`
+        : "";
+
+      const adultsNumber = getAdultsNumberFromLocalStorage()
+        ? `adultsNumber=${getAdultsNumberFromLocalStorage()}&`
+        : "";
+
+      const childsNumber = getChildsNumberFromLocalStorage()
+        ? `childsNumber=${getChildsNumberFromLocalStorage()}&`
+        : "";
+
+      const infantsNumber = getInfantsNumberFromLocalStorage()
+        ? `infantsNumber=${getInfantsNumberFromLocalStorage()}&`
+        : "";
+
+      const departureDate = `departureDate=${newDate}&`;
+
+      const classType = localStorage.getItem("classType")
+        ? `classType=${localStorage.getItem("classType")}`
+        : "";
+
+      // Set Date
+      setDate(localStorage.getItem("date") as string);
+      setCurrentDate(getDate(newDate));
+
+      const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
+      fetchNewData(API);
+    }
+  }, [newDate]);
 
   return (
     <>
@@ -128,16 +273,27 @@ const TicketList = () => {
               departureCode="YIA"
               arrival="Balikpapan"
               arrivalCode="BPN"
-              date="Thu, 25 Jan"
+              date={getDayAndDate(date)}
               passenger={2}
-              seatClass="Economy"
+              seatClass={
+                localStorage.getItem("classType")
+                  ? (localStorage.getItem("classType") as string)
+                  : (searchParams.get("classType") as string)
+              }
             />
           </HeaderLayout>
 
           {/* Body */}
           {/* <div className="w-full sm:w-[360px] mx-auto min-h-screen bg-[#E3EEFF] pt-[3.75rem] pb-20"></div> */}
           <BodyLayout paddingBottomSize="5rem">
-            <BodyComponent flightData={data} />
+            <BodyComponent
+              flightData={data}
+              arraysDate={arraysDate}
+              currentDate={currentDate}
+              departureDate={date}
+              setNewDate={setNewDate}
+              loadingNewData={loadingNewData}
+            />
           </BodyLayout>
 
           {/* Bottom Navbar */}
