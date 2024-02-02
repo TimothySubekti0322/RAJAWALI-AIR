@@ -3,8 +3,10 @@ import HeaderLayout from "../../components/client/headerLayout";
 import { FaArrowLeft } from "react-icons/fa";
 import MealsCard from "../../components/client/meals/meals/mealsCard";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+// import { useEffect, useState } from "react";
 
 const Meals = () => {
+  
   return (
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
       <HeaderLayout>
@@ -29,12 +31,12 @@ const Meals = () => {
       <BodyLayout paddingBottomSize="5rem">
         <div className="inline-flex pt-[1rem] px-[1rem] flex-col">
           <div className="inline-flex text-black gap-2 mb-[0.75rem]">
-            <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md">
+            <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300">
               <p className="font-bold">Passenger 1 (Adult)</p>
               <p>3 Meals (IDR 146.000)</p>
             </div>
 
-            <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md">
+            <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300">
               <p className="font-bold">Passenger 2 (Adult)</p>
               <p>No orders yet</p>
             </div>
@@ -83,7 +85,7 @@ const Meals = () => {
               Total
             </div>
             <div className="Idr146000 text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
-              IDR 146.000
+            asdfsfsf
             </div>
           </div>
           <div className="NoIcon w-32 h-8 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 flex">

@@ -3,16 +3,49 @@ import { MealsData } from "../../../../assets/static/TableDataTypes";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
+import React from "react";
+import { numberToCurrency } from "../../../../utils/NumberFormater";
 
 interface TableProps {
   api: string;
 }
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+// const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const MealsCard: React.FC<TableProps> = ({ api }) => {
   const [data, setData] = useState<MealsData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [checked, setChecked] = React.useState<Record<string, boolean>>({});
+  // const [currentPrice, setCurrentPrice] = React.useState<number>(0);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, checked: isChecked } = event.target;
+    setChecked((prevState) => ({
+      ...prevState,
+      [id]: isChecked,
+    }));
+  };
+
+  const formatToRupiah = (angka: number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR'
+    }).format(angka);
+  };
+
+  const totalHarga = data.reduce((total, item) => {
+    if (checked[item.id]) {
+      // Jika item terceklist, tambahkan harga item ke total
+      return total + item.price;
+    }
+    return total;
+  }, 0);
+
+  useEffect(() => {
+    localStorage.setItem('totalHarga', formatToRupiah(totalHarga));
+  }, [totalHarga]);
+
+
 
 
   useEffect(() => {
@@ -52,7 +85,10 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
       )}
       {!loading &&
         data.map((item) => (
-          <div className=" w-[20.5rem] h-27 justify-between items-center inline-flex bg-white rounded-md mt-3 px-2 shadow-lg py-2">
+          <div
+            key={item.id}
+            className=" w-[20.5rem] h-27 justify-between items-center inline-flex bg-white rounded-md mt-3 px-2 shadow-lg py-2"
+          >
             <div className=" justify-start items-center gap-2 flex">
               <img
                 className="Rectangle208 w-20 h-14 rounded-lg"
@@ -69,7 +105,7 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
                 </div>
                 <div className=" w-36">
                   <span className="text-zinc-900 text-xs font-medium font-['Roboto'] leading-none">
-                    IDR {item.price}
+                  {numberToCurrency("IDR", item.price, true, false)}
                   </span>
                   <span className="text-neutral-500 text-xs font-normal font-['Roboto'] leading-none">
                     {" "}
@@ -79,22 +115,28 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
               </div>
             </div>
             <div className=" w-[1.25rem] h-[1.25rem] relative">
-              <Checkbox 
-                {...label}
-                defaultChecked
+              <Checkbox
+                id={item.id}
+                checked={checked[item.id] || false}
+                onChange={handleChange}
                 sx={{
-                  position: 'relative', // Set posisi elemen Checkbox menjadi absolute
-                  top: '-12px',          // Atur posisi top sesuai kebutuhan
-                  left: '-12px',         // Atur posisi left sesuai kebutuhan
-                  '& .MuiSvgIcon-root': {
-                    fontSize: 25
-                  }
+                  position: "relative", // Set posisi elemen Checkbox menjadi absolute
+                  top: "-12px", // Atur posisi top sesuai kebutuhan
+                  left: "-12px", // Atur posisi left sesuai kebutuhan
+                  "& .MuiSvgIcon-root": {
+                    fontSize: 25,
+                  },
                 }}
                 // onChange={handleCheckBox}
               />
             </div>
           </div>
         ))}
+        <div className="text-black">
+         total harga:  {formatToRupiah(totalHarga)}
+        </div>
+      <div className="text-black">
+      </div>
     </>
   );
 };

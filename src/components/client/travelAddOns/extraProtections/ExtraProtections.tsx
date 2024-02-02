@@ -8,6 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { GoDotFill } from "react-icons/go";
+import React from "react";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -28,13 +29,20 @@ interface Props {
   price: string;
 }
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
 const ExtraProtections = ({ textHeader, price }: Props) => {
   const [expanded, setExpanded] = useState(false);
+  const [checked, setChecked] = React.useState<Record<string, boolean>>({});
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, checked: isChecked } = event.target;
+    setChecked((prevState) => ({
+      ...prevState,
+      [id]: isChecked,
+    }));
   };
 
   return (
@@ -70,7 +78,7 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
               </div>
             </div>
             <div className=" w-5 h-5 justify-center items-center flex">
-              <Checkbox {...label} defaultChecked />
+              <Checkbox id={textHeader} checked={checked[textHeader] || false} onChange={handleChange} />
             </div>
           </div>
         </div>
