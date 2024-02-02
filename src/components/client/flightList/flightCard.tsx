@@ -4,17 +4,28 @@ import { RawFlightData } from "./flight.type";
 import { extractTimeFromDateString } from "../../../utils/DateFormater";
 import { getDurationBetweenDates } from "../../../utils/ticketList/ticketList.utils";
 import { numberToCurrency } from "../../../utils/NumberFormater";
+import { useNavigate } from "react-router-dom";
 
 interface FlightCardProps {
   flightData: RawFlightData;
+  handleOpenModal: () => void;
 }
 
-const FlightCard: React.FC<FlightCardProps> = ({ flightData }) => {
+const FlightCard: React.FC<FlightCardProps> = ({
+  flightData,
+  handleOpenModal,
+}) => {
   console.log(flightData);
+  const navigate = useNavigate();
+  const handleOnClick = () => {
+    localStorage.setItem("flightId", JSON.stringify(flightData.id));
+    navigate(`/selectedFlight`);
+  };
+
   return (
     <button
       className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md "
-      onClick={() => (window.location.href = "/selectedFlight")}
+      onClick={handleOnClick}
     >
       {/* Logo and RW225 */}
       <div className="flex items-center">
@@ -98,7 +109,13 @@ const FlightCard: React.FC<FlightCardProps> = ({ flightData }) => {
         <div className="text-[#1E90FF] bg-[#D2F1FF] rounded-lg text-[0.625rem] 2xl:text-xs py-1 px-2">
           Reschedule & Refund Options
         </div>
-        <button className="bg-[#EDEDED] p-[0.25rem] rounded-[8px]">
+        {/*<SwipeableComponents>*/}
+        {/*  <FlightDetail onClose={() => console.log("test")} id={"1"} />*/}
+        {/*</SwipeableComponents>*/}
+        <button
+          className="bg-[#EDEDED] p-[0.25rem] rounded-[8px]"
+          onClick={handleOpenModal}
+        >
           <FaChevronDown className="text-sm text-black" />
         </button>
       </div>
