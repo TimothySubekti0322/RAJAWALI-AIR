@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FlightCard from "./flightCard";
-// import { RawFlightData } from "../../../pages/client/TicketList";
-import FlightDetail from "../flightDetail/FlightDetail.tsx";
 import { RawFlightData } from "../../../components/client/flightList/flight.type";
+import FlightDetail from "../flightDetail/FlightDetail.tsx";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { replaceDate } from "../../../utils/ticketList/ticketList.utils";
@@ -111,11 +110,6 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
                   </>
 
               ))}
-              {/* <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard />
-          <FlightCard /> */}
             </div>
           </>
         )}
