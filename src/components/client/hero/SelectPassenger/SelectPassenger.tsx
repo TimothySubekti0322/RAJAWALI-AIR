@@ -97,9 +97,9 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                             nameInput={amountPassenger.infantName}
                             status={"Infant"} ageInformation={"Age 0-2"} /></td>
                         <td style={cabinClassStyle}><CabinClassComponent
-                            text={"First Class"}
+                            text={"First"}
                             isSelected={selectCabin === "First Class"}
-                            onClick={() => handleCabinClick("First Class")}
+                            onClick={() => handleCabinClick("First")}
                         /></td>
                     </tr>
                     <tr>
