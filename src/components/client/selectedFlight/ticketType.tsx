@@ -1,11 +1,13 @@
 import React from "react";
 import { numberToCurrency } from "../../../utils/NumberFormater";
+import {useNavigate} from "react-router-dom";
 
 interface TicketTypeProps {
   type: string;
 }
 
 const TicketType: React.FC<TicketTypeProps> = ({ type }) => {
+    const navigate = useNavigate();
   const price: number = 2358400;
   return (
     <div className="bg-white text-[#505050] rounded-lg shadow-md py-4 px-4">
@@ -69,9 +71,7 @@ const TicketType: React.FC<TicketTypeProps> = ({ type }) => {
         <div>
           <button
             className="text-xs text-white bg-[#1E90FF] hover:bg-[#0C70DD] shadow-md rounded-md px-4 py-1"
-            onClick={() =>
-              (window.location.href =
-                "/fillDetailInformation/0b16a559-bd16-4a86-bfd9-8e85c4765c46")
+            onClick={() => navigate("/fillDetailInformation")
             }
           >
             Select

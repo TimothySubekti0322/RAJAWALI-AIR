@@ -4,6 +4,7 @@ import { RawFlightData } from "./flight.type";
 import { extractTimeFromDateString } from "../../../utils/DateFormater";
 import { getDurationBetweenDates } from "../../../utils/ticketList/ticketList.utils";
 import { numberToCurrency } from "../../../utils/NumberFormater";
+import {useNavigate} from "react-router-dom";
 
 interface FlightCardProps {
   flightData: RawFlightData,
@@ -12,12 +13,18 @@ interface FlightCardProps {
 
 const FlightCard: React.FC<FlightCardProps> = ({ flightData, handleOpenModal }) => {
   console.log(flightData);
+  const navigate = useNavigate();
+  const handleOnClick = () => {
+    localStorage.setItem("flightId", JSON.stringify(flightData.id));
+    navigate(`/selectedFlight`);
+  }
+
   return (
     <div
       className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md "
       // onClick={() => (window.location.href = "/selectedFlight")}
     >
-      <button onClick={() => (window.location.href = "/selectedFlight")}>
+      <button onClick={handleOnClick}>
         {/* Logo and RW225 */}
         <div className="flex items-center">
           <img

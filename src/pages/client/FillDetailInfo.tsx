@@ -4,7 +4,7 @@ import FlightCard from "../../components/client/fillDetailInformation/FlightCard
 import ContactDetailForm, {
   ContactDetailInput,
 } from "../../components/client/fillDetailInformation/ContactDetailForm";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import SwipeableEdgeDrawer from "../../components/client/passengerDetails/passengerDetails.tsx";
 import HeaderFill from "../../components/client/headerFill.tsx";
@@ -20,7 +20,7 @@ interface IPassenger {
 
 const FillDetailInfo = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const id = JSON.parse(localStorage.getItem("flightId") as string);
   const [contactDetail, setContactDetail] = useState<ContactDetailInput>({
     genderType: "",
     email: "",

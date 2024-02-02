@@ -32,6 +32,11 @@ interface FlightDetailProps {
 }
 const FlightDetail = ({ onClose, detailFlight }: FlightDetailProps) => {
   const navigate = useNavigate();
+  const handleOnClick = () => {
+    localStorage.setItem("flightId", JSON.stringify(detailFlight.id));
+    navigate(`/selectedFlight`);
+  }
+
   return (
       <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 9999, display: "flex", justifyContent: "center", alignItems: "center" }}>
         <div className={"rounded-md bg-white p-3 fixed top-[367px] flex flex-col justify-center items-center"} style={{ color: "black" }}>
@@ -119,7 +124,7 @@ const FlightDetail = ({ onClose, detailFlight }: FlightDetailProps) => {
                     className={
                       "btn btn-sm text-white border-0 bg-[#1E90FF] w-[30%] hover:bg-[#0C70DD]"
                     }
-                    onClick={() => navigate("/selectedFlight")}
+                    onClick={handleOnClick}
                 >
                   Continue
                 </button>
