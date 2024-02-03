@@ -344,6 +344,7 @@ const TicketList = () => {
           <img
             src="/images/something-went-wrong.jpg"
             className="w-1/2 sm:w-1/3"
+            alt="something went wrong"
           />
           <p className="md:-mt-6 xl:-mt-12 font-bold text-black text-[1.5rem] md:text-[2rem] 2xl:text-[3rem]">
             Something Went Wrong
