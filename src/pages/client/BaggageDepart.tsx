@@ -11,8 +11,20 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 
+import type { Passenger } from "../../assets/static/LocalStorage.type";
+import { addTotalPriceToLocalStorage } from "../../utils/TotalPriceLocalStorage";
+
 const BaggageDepart = () => {
   const [price, setPrice] = React.useState<number>(0);
+
+  const passengers: Passenger[] = JSON.parse(
+    localStorage.getItem("passengers") as string
+  );
+
+  const handleSave = () => {
+    addTotalPriceToLocalStorage(price);
+    window.location.href = "/travelAddOns";
+  };
   return (
     <section
       className="w-full min-h-screen bg-[#f7f7f7] relative text-white"
@@ -21,21 +33,20 @@ const BaggageDepart = () => {
       <HeaderLayout>
         <HeaderFill title="Baggage For Depart" />
       </HeaderLayout>
-      <BodyLayout paddingBottomSize="0">
+      <BodyLayout paddingBottomSize="6rem">
         <div className="relative w-full h-full">
           {/* Inner Section */}
           <div className="w-full px-4 pt-4">
             <FlightCard />
-            <PassengerBaggage
-              title="Passenger 1"
-              price={price}
-              setPrice={setPrice}
-            />
-            <PassengerBaggage
-              title="Passenger 2"
-              price={price}
-              setPrice={setPrice}
-            />
+            {passengers.map((passenger, index) => (
+              <PassengerBaggage
+                key={index}
+                title={`Passenger ${index + 1}`}
+                passenger={passenger}
+                price={price}
+                setPrice={setPrice}
+              />
+            ))}
           </div>
         </div>
       </BodyLayout>
@@ -50,7 +61,7 @@ const BaggageDepart = () => {
         </div>
         <button
           className="bg-[#1E90FF] text-white font-semibold text-sm hover:bg-[#0C70DD] rounded-md py-[0.3rem] px-12 shadow-md"
-          onClick={() => (window.location.href = "/travelAddOns")}
+          onClick={() => handleSave()}
         >
           Save
         </button>
