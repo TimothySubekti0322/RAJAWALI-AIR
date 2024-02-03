@@ -61,11 +61,29 @@ const TravelAddOns = () => {
             Extra Protections
           </p>
 
-          <ExtraProtections textHeader="Travel Insurance" price={100000} lineOneBold="Personal Anccident" parafOne="Covers Up To IDR 500.000.000" lineTwoBold="Trip Cancellation" parafTwo="Covers Up To IDR 30.000.000" />
-          <ExtraProtections textHeader="Baggage Insurance" price={13500} lineOneBold="Baggage Loss or Damage" parafOne="Covers Up To IDR 5.000.000" lineTwoBold="Baggage Delay" parafTwo="Covers Up To IDR 3.000.000" />
+          <ExtraProtections
+            textHeader="Travel Insurance"
+            price={100000}
+            lineOneBold="Personal Anccident"
+            parafOne="Covers Up To IDR 500.000.000"
+            lineTwoBold="Trip Cancellation"
+            parafTwo="Covers Up To IDR 30.000.000"
+          />
+          <ExtraProtections
+            textHeader="Baggage Insurance"
+            price={13500}
+            lineOneBold="Baggage Loss or Damage"
+            parafOne="Covers Up To IDR 5.000.000"
+            lineTwoBold="Baggage Delay"
+            parafTwo="Covers Up To IDR 3.000.000"
+          />
           <ExtraProtections
             textHeader="Flight Delay Insurance"
-            price={60000} lineOneBold="90-minute Departure Delay" parafOne="Reimbursement Up To IDR 600.000" lineTwoBold="Be Instanly Eligible for Claim" parafTwo="Automated Email and SMS Notification"
+            price={60000}
+            lineOneBold="90-minute Departure Delay"
+            parafOne="Reimbursement Up To IDR 600.000"
+            lineTwoBold="Be Instanly Eligible for Claim"
+            parafTwo="Automated Email and SMS Notification"
           />
           <div>adsfsf</div>
         </div>
