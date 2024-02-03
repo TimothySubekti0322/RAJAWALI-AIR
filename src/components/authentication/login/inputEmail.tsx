@@ -24,7 +24,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
         type="text"
         name={inputID}
         id={inputID}
-        className="w-full rounded-lg border-2 border-[#B7B7B7] mt-4 py-2 px-2 bg-white"
+        className="w-full rounded-lg border-2 border-[#B7B7B7] mt-2 py-2 px-2 bg-white text-black"
         placeholder={placeholder}
         onChange={onChange}
         required

@@ -5,6 +5,9 @@ import Cookies from "universal-cookie";
 import InputEmail from "../../components/authentication/login/inputEmail";
 import InputPassoword from "../../components/authentication/login/inputPassword";
 import CheckSignIn from "../../components/authentication/login/checkSignIn";
+import API_URL from "../../assets/static/API";
+
+const apiURL = `${API_URL}/v1/auth/signin`;
 
 interface Form {
     email: string;
@@ -38,9 +41,9 @@ const LoginAdmin = () => {
         e.preventDefault();
         setLoading(true);
         try {
-          const res = await axios.post("/api/auth/", form);
+          const res = await axios.post(apiURL, form);
           console.log(res.data);
-          if (res.data.status === 200) {
+          if (res.data.status === 200 && res.data.payload.role === "Admin") {
             console.log(res.data);
             const cookies = new Cookies();
             if (res.data.rememberMe) {
@@ -72,7 +75,7 @@ const LoginAdmin = () => {
 
     return(
         <div className="w-screen h-screen flex bg-white text-white">
-            <div className="w-[45%] relative">
+            <div className="w-[45%] relative p-8">
                 <img
                     src="/images/loginAdmin.svg"
                     alt="login Background"
@@ -84,7 +87,7 @@ const LoginAdmin = () => {
             <div className="flex flex-1 flex-col px-12  justify-center bg-[#1E90FF]">
             <form onSubmit={handleSubmit}>
               <div className="px-6">
-                <p className="hidden py-5 sm:block text-3xl font-bold ">
+                <p className="hidden py-3 sm:block text-3xl font-bold ">
                       Welcome Back, Admin!
                   </p>
 
@@ -131,9 +134,8 @@ const LoginAdmin = () => {
                     className="w-full py-3 bg-[#D2F1FF] mt-8 rounded-md text-[#0F53B7] font-bold sm:mt-10"
                   >
                     {loading ? (
-                      <div className="flex flex-row gap-x-2 justify-center items-center">
-                        <span className="loading loading-spinner loading-sm md:loading-md"></span>
-                        <p className="text-sm md:text-base">Loading</p>
+                      <div className="flex items-center px-4">
+                      <span className="loading loading-spinner loading-xl"></span>
                       </div>
                     ) : (
                       "SIGN IN"
@@ -141,6 +143,11 @@ const LoginAdmin = () => {
                   </button>  
                 </div>   
             </form>
+
+            <div className="ml-auto flex px-6 float-right py-3">
+              <p>Forgot password?</p>
+              <a href="#" className="font-bold px-1">Reset Password</a>
+            </div>
             </div>
 
         </div>
