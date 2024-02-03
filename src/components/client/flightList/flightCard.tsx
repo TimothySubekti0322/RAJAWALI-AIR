@@ -11,6 +11,8 @@ interface FlightCardProps {
   handleOpenModal: () => void;
 }
 
+
+
 const FlightCard: React.FC<FlightCardProps> = ({
   flightData,
   handleOpenModal,
