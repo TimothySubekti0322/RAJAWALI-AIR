@@ -1,13 +1,16 @@
 import React from "react";
 import BaggageOption from "./baggageOption";
+import type { Passenger } from "../../../assets/static/LocalStorage.type";
 
 interface PassengerBaggageProps {
   title: string;
+  passenger: Passenger;
   price: number;
   setPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 const PassengerBaggage: React.FC<PassengerBaggageProps> = ({
   title,
+  passenger,
   price,
   setPrice,
 }) => {
@@ -22,7 +25,9 @@ const PassengerBaggage: React.FC<PassengerBaggageProps> = ({
   };
   return (
     <div className="w-full mt-4">
-      <p className="text-sm font-bold text-black ">{title} (Adult)</p>
+      <p className="text-sm font-bold text-black ">
+        {title} ({passenger.ageType})
+      </p>
       <div className="grid grid-cols-3 gap-4 mt-4">
         <BaggageOption
           baggageSelected={baggageSelected}
@@ -51,7 +56,7 @@ const PassengerBaggage: React.FC<PassengerBaggageProps> = ({
         <BaggageOption
           baggageSelected={baggageSelected}
           weight={30}
-          price={2000000}
+          price={1500000}
           handleClick={handleClicked}
         />
         <BaggageOption
