@@ -7,7 +7,9 @@ interface HeaderFillProps {
   arrival: string;
   arrivalCode: string;
   date: string;
-  passenger: number;
+  child: number;
+  adult: number;
+  infant: number;
   seatClass: string;
 }
 
@@ -17,7 +19,9 @@ const HeaderFill: React.FC<HeaderFillProps> = ({
   arrival,
   arrivalCode,
   date,
-  passenger,
+  child,
+  adult,
+  infant,
   seatClass,
 }) => {
   return (
@@ -42,7 +46,9 @@ const HeaderFill: React.FC<HeaderFillProps> = ({
         <div className="flex items-center text-[10px] gap-x-1">
           <p>{date}</p>
           <p>|</p>
-          <p>{passenger} Adult</p>
+          <p>{child > 0 ? `${child} Child` : ""}</p>
+          <p>{adult > 0 ? `${adult} Adult` : ""}</p>
+          <p>{infant > 0 ? `${infant} Infant` : ""}</p>
           <p>|</p>
           <p>{seatClass} Class</p>
         </div>

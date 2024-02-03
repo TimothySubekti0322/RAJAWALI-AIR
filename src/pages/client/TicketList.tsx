@@ -269,12 +269,39 @@ const TicketList = () => {
         <section className="w-full min-h-screen bg-[#f7f7f7] relative">
           <HeaderLayout>
             <HeaderFill
-              departure="Yogyakarta"
-              departureCode="YIA"
-              arrival="Balikpapan"
-              arrivalCode="BPN"
+              departure={
+                JSON.parse(localStorage.getItem("sourceAirport") as string).city
+                  ? JSON.parse(localStorage.getItem("sourceAirport") as string)
+                      .city
+                  : "Unknown"
+              }
+              departureCode={
+                JSON.parse(localStorage.getItem("sourceAirport") as string)
+                  .cityCode
+                  ? JSON.parse(localStorage.getItem("sourceAirport") as string)
+                      .cityCode
+                  : "UNK"
+              }
+              arrival={
+                JSON.parse(localStorage.getItem("destinationAirport") as string)
+                  .city
+                  ? JSON.parse(
+                      localStorage.getItem("destinationAirport") as string
+                    ).city
+                  : "Unknown"
+              }
+              arrivalCode={
+                JSON.parse(localStorage.getItem("destinationAirport") as string)
+                  .cityCode
+                  ? JSON.parse(
+                      localStorage.getItem("destinationAirport") as string
+                    ).cityCode
+                  : "UNK"
+              }
               date={getDayAndDate(date)}
-              passenger={2}
+              child={getChildsNumberFromLocalStorage()}
+              adult={getAdultsNumberFromLocalStorage()}
+              infant={getInfantsNumberFromLocalStorage()}
               seatClass={
                 localStorage.getItem("classType")
                   ? (localStorage.getItem("classType") as string)
