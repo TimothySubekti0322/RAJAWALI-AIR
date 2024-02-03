@@ -37,10 +37,7 @@ const MealsCard: React.FC<TableProps> = ({ api, setPrice }) => {
       }
     });
   };
-
-
-
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

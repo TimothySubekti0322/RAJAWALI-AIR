@@ -26,15 +26,18 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 interface Props {
+  id: string;
   textHeader: string;
   price: number;
   lineOneBold: string;
   parafOne: string;
   lineTwoBold: string;
   parafTwo: string;
+  priceInsure: number;
+  setPriceInsure: React.Dispatch<React.SetStateAction<number>>
 }
 
-const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBold, parafTwo  }: Props) => {
+const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBold, parafTwo, id, setPriceInsure  }: Props) => {
   const [expanded, setExpanded] = useState(false);
   const [checked, setChecked] = React.useState<Record<string, boolean>>({});
   
@@ -49,6 +52,23 @@ const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBol
       ...prevState,
       [id]: isChecked,
     }));
+
+    const updatePriceInsure = (id: string, isChecked: boolean) => {
+      switch (id) {
+        case "1":
+          return isChecked ? 100000 : -100000; // Jika diceklis, tambahkan 100000, jika tidak, kembalikan 0
+        case "2":
+          return isChecked ? 13500 : -13500; // Jika diceklis, tambahkan 200000, jika tidak, kembalikan 0
+        case "3":
+          return isChecked ? 60000 : -60000; // Jika diceklis, tambahkan 300000, jika tidak, kembalikan 0
+        default:
+          return 0; // Jika id tidak sesuai, kembalikan 0
+      }
+    };
+
+    setPriceInsure((price) => {
+      return price + updatePriceInsure(id, isChecked);
+    });
   };
 
   return (
@@ -84,7 +104,7 @@ const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBol
               </div>
             </div>
             <div className=" w-5 h-5 justify-center items-center flex">
-              <Checkbox id={textHeader} checked={checked[textHeader] || false} onChange={handleChange} />
+              <Checkbox id={id} checked={checked[id] || false} onChange={handleChange} />
             </div>
           </div>
         </div>

@@ -5,19 +5,20 @@ import MealsCard from "../../components/client/meals/meals/mealsCard";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import React from "react";
 import { numberToCurrency } from "../../utils/NumberFormater";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 // import { useEffect, useState } from "react";
 
 const Meals = () => {
   const [price, setPrice] = React.useState<number>(0);
+  console.log(price);
 
   const handleMealsClick = () => {
-    if (price > 0) {
-      localStorage.setItem("totalPrice", JSON.stringify(price));
-      window.location.href = "/travelAddOns";
-    } else {
-      toast.success("something went wrong");
-    }
+    let totalPrice = JSON.parse(localStorage.getItem("totalPrice") || "0"); // Menjadi default "0" jika localStorage.getItem("totalPrice") mengembalikan null
+    totalPrice += price; // Menambahkan nilai price baru ke totalPrice yang ada
+
+    localStorage.setItem("totalPrice", JSON.stringify(totalPrice)); // Menyimpan kembali totalPrice yang sudah ditambahkan ke localStorage
+
+    window.location.href = "/travelAddOns";
   };
   return (
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
@@ -116,7 +117,11 @@ const Meals = () => {
           <p className="text-black text-base font-bold font-['Roboto'] leading-snug mb-[0rem]">
             Meals
           </p>
-          <MealsCard api="https://rajawali-production.up.railway.app/api/v1/meals" price={price} setPrice={setPrice} />
+          <MealsCard
+            api="https://rajawali-production.up.railway.app/api/v1/meals"
+            price={price}
+            setPrice={setPrice}
+          />
         </div>
       </BodyLayout>
 
@@ -129,7 +134,7 @@ const Meals = () => {
               Total
             </div>
             <div className="Idr146000 text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
-            {numberToCurrency("IDR", price, true, false)}
+              {numberToCurrency("IDR", price, true, false)}
             </div>
           </div>
           <div className=" w-32 h-8 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 flex hover:bg-blue-700">
