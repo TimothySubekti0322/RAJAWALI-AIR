@@ -3,10 +3,22 @@ import HeaderLayout from "../../components/client/headerLayout";
 import { FaArrowLeft } from "react-icons/fa";
 import MealsCard from "../../components/client/meals/meals/mealsCard";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+import React from "react";
+import { numberToCurrency } from "../../utils/NumberFormater";
+import toast from "react-hot-toast";
 // import { useEffect, useState } from "react";
 
 const Meals = () => {
-  
+  const [price, setPrice] = React.useState<number>(0);
+
+  const handleMealsClick = () => {
+    if (price > 0) {
+      localStorage.setItem("totalPrice", JSON.stringify(price));
+      window.location.href = "/travelAddOns";
+    } else {
+      toast.success("something went wrong");
+    }
+  };
   return (
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
       <HeaderLayout>
@@ -31,14 +43,46 @@ const Meals = () => {
       <BodyLayout paddingBottomSize="5rem">
         <div className="inline-flex pt-[1rem] px-[1rem] flex-col">
           <div className="inline-flex text-black gap-2 mb-[0.75rem]">
-            <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300">
-              <p className="font-bold">Passenger 1 (Adult)</p>
-              <p>3 Meals (IDR 146.000)</p>
-            </div>
+            <a href="#">
+              <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300">
+                <p className="font-bold">Passenger 1 (Adult)</p>
+                <p>3 Meals (IDR 146.000)</p>
+              </div>
+            </a>
 
-            <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300">
-              <p className="font-bold">Passenger 2 (Adult)</p>
-              <p>No orders yet</p>
+            <a href="#">
+              <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300">
+                <p className="font-bold">Passenger 2 (Adult)</p>
+                <p>No orders yet</p>
+              </div>
+            </a>
+          </div>
+          <div className=" w-[20.5rem] h-16 p-2.5 bg-stone-50 rounded-lg shadow border border-neutral-200 flex-col justify-start items-start gap-2.5 inline-flex mb-[0.75rem] pt-3">
+            <div className="flex flex-col items-start justify-start gap-2 ">
+              <div className="flex flex-col items-start justify-start gap-2 ">
+                <div className="inline-flex items-center justify-start gap-2 ">
+                  <img
+                    className="w-6 h-4 RajawaliAirPng2"
+                    src="/images/meals/rajawali.png"
+                  />
+                  <div className="flex items-center justify-start gap-2 ">
+                    <div className="Bpn text-black text-xs font-semibold font-['Roboto'] leading-snug">
+                      BPN
+                    </div>
+                    <div className="text-black text-xs font-semibold font-['Roboto'] leading-snug">
+                      <MdOutlineArrowRightAlt size={20} />
+                    </div>
+                    <div className="Yia text-black text-xs font-semibold font-['Roboto'] leading-snug">
+                      YIA
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-start justify-start gap-1 ">
+                  <div className=" text-neutral-500 text-xs font-normal font-['Roboto'] leading-none">
+                    25 Jan 2024, 08:15 - 09:05 | 1h 50m
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className=" w-[20.5rem] h-16 p-2.5 bg-stone-50 rounded-lg shadow border border-neutral-200 flex-col justify-start items-start gap-2.5 inline-flex mb-[0.75rem] pt-3">
@@ -72,7 +116,7 @@ const Meals = () => {
           <p className="text-black text-base font-bold font-['Roboto'] leading-snug mb-[0rem]">
             Meals
           </p>
-          <MealsCard api="https://rajawali-production.up.railway.app/api/v1/meals" />
+          <MealsCard api="https://rajawali-production.up.railway.app/api/v1/meals" price={price} setPrice={setPrice} />
         </div>
       </BodyLayout>
 
@@ -85,13 +129,13 @@ const Meals = () => {
               Total
             </div>
             <div className="Idr146000 text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
-            asdfsfsf
+            {numberToCurrency("IDR", price, true, false)}
             </div>
           </div>
-          <div className="NoIcon w-32 h-8 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 flex">
+          <div className=" w-32 h-8 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 flex hover:bg-blue-700">
             <button
               className="Primary text-stone-50 text-sm font-semibold font-['Roboto'] leading-tight tracking-tight"
-              onClick={() => (window.location.href = "/travelAddOns")}
+              onClick={handleMealsClick}
             >
               Save
             </button>

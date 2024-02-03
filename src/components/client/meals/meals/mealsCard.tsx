@@ -8,11 +8,13 @@ import { numberToCurrency } from "../../../../utils/NumberFormater";
 
 interface TableProps {
   api: string;
+  price: number;
+  setPrice: React.Dispatch<React.SetStateAction<number>>
 }
 
 // const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const MealsCard: React.FC<TableProps> = ({ api }) => {
+const MealsCard: React.FC<TableProps> = ({ api, setPrice }) => {
   const [data, setData] = useState<MealsData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [checked, setChecked] = React.useState<Record<string, boolean>>({});
@@ -20,30 +22,21 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, checked: isChecked } = event.target;
+    const itemPrice = Number(event.target.value);
+    console.log('event', event.target)
     setChecked((prevState) => ({
       ...prevState,
       [id]: isChecked,
     }));
+
+    setPrice((price) => {
+      if (isChecked) {
+        return price + itemPrice;
+      } else {
+        return price - itemPrice;
+      }
+    });
   };
-
-  const formatToRupiah = (angka: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR'
-    }).format(angka);
-  };
-
-  const totalHarga = data.reduce((total, item) => {
-    if (checked[item.id]) {
-      // Jika item terceklist, tambahkan harga item ke total
-      return total + item.price;
-    }
-    return total;
-  }, 0);
-
-  useEffect(() => {
-    localStorage.setItem('totalHarga', formatToRupiah(totalHarga));
-  }, [totalHarga]);
 
 
 
@@ -118,6 +111,7 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
               <Checkbox
                 id={item.id}
                 checked={checked[item.id] || false}
+                value={item.price}
                 onChange={handleChange}
                 sx={{
                   position: "relative", // Set posisi elemen Checkbox menjadi absolute
@@ -133,7 +127,6 @@ const MealsCard: React.FC<TableProps> = ({ api }) => {
           </div>
         ))}
         <div className="text-black">
-         total harga:  {formatToRupiah(totalHarga)}
         </div>
       <div className="text-black">
       </div>

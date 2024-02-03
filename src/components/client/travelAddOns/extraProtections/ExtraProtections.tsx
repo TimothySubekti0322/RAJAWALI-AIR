@@ -9,6 +9,7 @@ import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { GoDotFill } from "react-icons/go";
 import React from "react";
+import { numberToCurrency } from "../../../../utils/NumberFormater";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -26,12 +27,17 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 interface Props {
   textHeader: string;
-  price: string;
+  price: number;
+  lineOneBold: string;
+  parafOne: string;
+  lineTwoBold: string;
+  parafTwo: string;
 }
 
-const ExtraProtections = ({ textHeader, price }: Props) => {
+const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBold, parafTwo  }: Props) => {
   const [expanded, setExpanded] = useState(false);
   const [checked, setChecked] = React.useState<Record<string, boolean>>({});
+  
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -59,10 +65,10 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
                   <div className="inline-flex">
                     <GoDotFill size={8} style={{ margin: "2px" }} />
                   </div>
-                  Personal accident
+                  {lineOneBold}
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
-                  Covers up to IDR 500.000.000
+                  {parafOne}
                 </div>
               </div>
               <div className=" w-60 h-8 relative">
@@ -70,10 +76,10 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
                   <div className="inline-flex">
                     <GoDotFill size={8} style={{ margin: "2px" }} />
                   </div>
-                  Trip cancellation (due to specific reasons)
+                  {lineTwoBold}
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
-                  Covers up to IDR 30.000.000
+                  {parafTwo}
                 </div>
               </div>
             </div>
@@ -97,7 +103,7 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
         </ExpandMore>
         <div className="relative bottom-0 left-[7rem]">
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
-            IDR {price}/
+          {numberToCurrency("IDR", price, true, false)}/
           </span>
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
             pax
