@@ -212,6 +212,23 @@ function getTotalPassengersFromLocalStorage(): number {
   return Passengers.length;
 }
 
+function saveFlightIdToLocalStorage(flightId: string) {
+  const currentFlightId = localStorage.getItem("flightId");
+  console.log(currentFlightId);
+  if (!currentFlightId) {
+    console.log("Masuk");
+    const flightIdStringfy = JSON.stringify([flightId]);
+    localStorage.setItem("flightId", flightIdStringfy);
+  } else {
+    const currentFlightIdArray = JSON.parse(currentFlightId);
+    if (!currentFlightIdArray.includes(flightId)) {
+      currentFlightIdArray.push(flightId);
+    }
+    const flightIdStringfy = JSON.stringify(currentFlightIdArray);
+    localStorage.setItem("flightId", flightIdStringfy);
+  }
+}
+
 export {
   getDurationBetweenDates,
   getDaysOfMonth,
@@ -227,4 +244,5 @@ export {
   getChildsNumberFromLocalStorage,
   getInfantsNumberFromLocalStorage,
   getTotalPassengersFromLocalStorage,
+  saveFlightIdToLocalStorage,
 };

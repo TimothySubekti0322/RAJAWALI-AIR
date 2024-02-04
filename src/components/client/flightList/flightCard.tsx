@@ -4,24 +4,27 @@ import { RawFlightData } from "./flight.type";
 import { extractTimeFromDateString } from "../../../utils/DateFormater";
 import { getDurationBetweenDates } from "../../../utils/ticketList/ticketList.utils";
 import { numberToCurrency } from "../../../utils/NumberFormater";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { saveFlightIdToLocalStorage } from "../../../utils/ticketList/ticketList.utils";
 
 interface FlightCardProps {
   flightData: RawFlightData;
   handleOpenModal: () => void;
+  ticketSelected: boolean;
+  setTicketSelected: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-
 
 const FlightCard: React.FC<FlightCardProps> = ({
   flightData,
   handleOpenModal,
+  ticketSelected,
+  setTicketSelected,
 }) => {
-  console.log(flightData);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleOnClick = () => {
-    localStorage.setItem("flightId", JSON.stringify(flightData.id));
-    navigate(`/selectedFlight`);
+    saveFlightIdToLocalStorage(flightData.id);
+    // navigate(`/selectedFlight`);
+    setTicketSelected(!ticketSelected);
   };
 
   return (
