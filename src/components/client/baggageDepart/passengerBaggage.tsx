@@ -1,28 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BaggageOption from "./baggageOption";
 import type { Passenger } from "../../../assets/static/LocalStorage.type";
+import { generateArrayWithValue } from "../../../utils/bagageDepart/baggageDepart.utils";
 
 interface PassengerBaggageProps {
+  index: number;
+  numberOfFlight: number;
+  flightSelected: number;
   title: string;
   passenger: Passenger;
   price: number;
   setPrice: React.Dispatch<React.SetStateAction<number>>;
+  selectedAddOns: number | undefined;
+  changeAddOns: (passengerIndex: number, weight: number) => void;
 }
 const PassengerBaggage: React.FC<PassengerBaggageProps> = ({
+  index,
+  numberOfFlight,
+  flightSelected,
   title,
   passenger,
   price,
   setPrice,
+  selectedAddOns,
+  changeAddOns,
 }) => {
   const [baggageSelected, setBaggageSelected] = React.useState<
     number | undefined
-  >(undefined);
-  const [currentPrice, setCurrentPrice] = React.useState<number>(0);
+  >(selectedAddOns);
+  const [currentPrice, setCurrentPrice] = React.useState<number[]>(
+    generateArrayWithValue(numberOfFlight, 0)
+  );
   const handleClicked = (weight: number, newPrice: number) => {
-    setBaggageSelected(weight);
-    setPrice(price - currentPrice + newPrice);
-    setCurrentPrice(newPrice);
+    setPrice(price - currentPrice[flightSelected] + newPrice);
+    const newPriceArray = [...currentPrice];
+    newPriceArray[flightSelected] = newPrice;
+    setCurrentPrice(newPriceArray);
+    changeAddOns(index, weight);
   };
+  useEffect(() => {
+    setBaggageSelected(selectedAddOns);
+  }, [selectedAddOns]);
   return (
     <div className="w-full mt-4">
       <p className="text-sm font-bold text-black ">
