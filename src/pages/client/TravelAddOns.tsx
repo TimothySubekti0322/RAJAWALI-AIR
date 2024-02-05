@@ -10,6 +10,7 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import React from "react";
 import { numberToCurrency } from "../../utils/NumberFormater.ts";
+import BookingProvider from "../../providers/BookingProvider.tsx";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -31,6 +32,7 @@ const TravelAddOns = () => {
 
   console.log('data price insurence', priceInsure);
   return (
+    <BookingProvider requiredItem={["passengers"]}>
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
       <HeaderLayout>
         <HeaderFill title="Travel Add-ons" />
@@ -152,6 +154,7 @@ const TravelAddOns = () => {
         </div>
       </div>
     </section>
+    </BookingProvider>
   );
 };
 

@@ -22,6 +22,7 @@ const MealsCard: React.FC<TableProps> = ({ api, setPrice }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, checked: isChecked } = event.target;
+    console.log('id = ', id)
     const itemPrice = Number(event.target.value);
     console.log('event', event.target)
     setChecked((prevState) => ({

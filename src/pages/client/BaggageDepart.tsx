@@ -42,7 +42,7 @@ const BaggageDepart = () => {
               {passengers?.map((passenger, index) => (
                 <PassengerBaggage
                   key={index}
-                  title={`Passenger ${index + 1}`}
+                  title={`Passenger ${index + 1}` }
                   passenger={passenger}
                   price={price}
                   setPrice={setPrice}
