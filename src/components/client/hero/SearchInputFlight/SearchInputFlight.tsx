@@ -89,16 +89,16 @@ const SearchInputFlight = () => {
     localStorage.setItem("reservationType", JSON.stringify(selectedOption));
   }
 
-  const saveDateToLocalStorage = (dateString: string, varName: string) => {
+  const saveDateToLocalStorage = (dateString: string[], varName: string) => {
     localStorage.setItem(varName, JSON.stringify(dateString));
   }
 
-  const saveAirportToLocalStorage = (airportId: string, varName: string) => {
-    const sourceAirport = listAirport?.find((s) => s.id === airportId);
-    if (sourceAirport) {
-      localStorage.setItem(varName, JSON.stringify(sourceAirport));
-    }
-  }
+  // const saveAirportToLocalStorage = (airportId: string, varName: string) => {
+  //   const sourceAirport = listAirport?.find((s) => s.id === airportId);
+  //   if (sourceAirport) {
+  //     localStorage.setItem(varName, JSON.stringify(sourceAirport));
+  //   }
+  // }
 
   const savePassengersToLocalStorage = () => {
     const passengers = [];
@@ -143,15 +143,35 @@ const SearchInputFlight = () => {
     const sourceAirportId = formData.get("sourceAirportId") as string;
     const destAirportId = formData.get("destAirportId") as string;
     const departureDate = formData.get("departureDate") as string;
+    const returnDate = formData.get("returnDate") as string;
+
+    const dates: string[] = [
+      departureDate
+    ]
+    const sourceAirports: string[] = [sourceAirportId];
+    const destAirports: string[] = [destAirportId];
+    if (returnDate) dates.push(returnDate);
+    if (selectedOption == "Multi-City") {
+      for (let i = 0; i < addAnotherCount; i ++) {
+        const date = formData.get(`departureDate${i}`) as string;
+        const sourceAirport = formData.get(`sourceAirport${i}`) as string;
+        const destAirport = formData.get(`destAirport${i}`) as string;
+        dates.push(date)
+        sourceAirports.push(sourceAirport);
+        destAirports.push(destAirport)
+      }
+    }
 
     savePassengersToLocalStorage();
-    saveAirportToLocalStorage(sourceAirportId, "sourceAirport");
-    saveAirportToLocalStorage(destAirportId, "destinationAirport");
-    saveDateToLocalStorage(departureDate, "date");
+    // saveAirportToLocalStorage(sourceAirportId, "sourceAirport");
+    // saveAirportToLocalStorage(destAirportId, "destinationAirport");
+    localStorage.setItem("sourceAirport", JSON.stringify(sourceAirports));
+    localStorage.setItem("destinationAirport", JSON.stringify(destAirports))
+    saveDateToLocalStorage(dates, "date");
     saveReservationTypeToLocalStorage();
 
-    const queryParam = `sourceAirportId=${sourceAirportId}&destAirportId=${destAirportId}&departureDate=${departureDate}&classType=${selectCabin?.toUpperCase()}&adultsNumber=${passenger.adultValue}&childsNumber=${passenger.childValue}&infantsNumber=${passenger.infantValue}`;
-    navigate(`ticketList?${queryParam}`);
+    // const queryParam = `sourceAirportId=${sourceAirportId}&destAirportId=${destAirportId}&departureDate=${departureDate}&classType=${selectCabin?.toUpperCase()}&adultsNumber=${passenger.adultValue}&childsNumber=${passenger.childValue}&infantsNumber=${passenger.infantValue}`;
+    navigate(`ticketList`);
   }
 
   const renderAnotherFlight = () => {
@@ -171,7 +191,7 @@ const SearchInputFlight = () => {
                       <span>From</span>
                     </div>
                     <div className="relative">
-                      <select className="pl-8 bg-transparent select select-bordered w-[95%]">
+                      <select className="pl-8 bg-transparent select select-bordered w-[95%]" name={`sourceAirportId${i}`}>
                         <option disabled selected>
                           Where From
                         </option>
@@ -201,7 +221,7 @@ const SearchInputFlight = () => {
                     <span>To</span>
                   </div>
                   <div className="relative">
-                    <select className="pl-8 bg-transparent select select-bordered w-[95%]">
+                    <select className="pl-8 bg-transparent select select-bordered w-[95%]" name={`destAirportId${i}`}>
                       <option disabled selected>
                         Where To
                       </option>
@@ -231,7 +251,7 @@ const SearchInputFlight = () => {
                   </div>
                   <input
                     type={"date"}
-                    name={'departureDate'}
+                    name={`departureDate${i}`}
                     className="w-full px-3 py-2 bg-transparent rounded-lg input input-bordered"
                   />
                 </label>
@@ -419,7 +439,7 @@ const SearchInputFlight = () => {
                       <span>From</span>
                     </div>
                     <div className="relative">
-                      <select className="pl-8 bg-transparent select select-bordered w-[95%]">
+                      <select className="pl-8 bg-transparent select select-bordered w-[95%]" name={'sourceAirport0'}>
                         <option disabled selected>
                           Where From
                         </option>
@@ -449,7 +469,7 @@ const SearchInputFlight = () => {
                     <span>To</span>
                   </div>
                   <div className="relative">
-                    <select className="pl-8 bg-transparent select select-bordered w-[95%]">
+                    <select className="pl-8 bg-transparent select select-bordered w-[95%]" name={'destAirport0'}>
                       <option disabled selected>
                         Where To
                       </option>
@@ -480,6 +500,7 @@ const SearchInputFlight = () => {
                   <input
                     type={"date"}
                     className="w-full px-3 py-2 bg-transparent rounded-lg input input-bordered"
+                    name={'departureDate0'}
                   />
                 </label>
               </div>
