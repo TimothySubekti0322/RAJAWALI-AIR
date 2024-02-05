@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiFilter } from "react-icons/fi";
 import { MdOutlineSort } from "react-icons/md";
 import HeaderLayout from "../../components/client/headerLayout";
@@ -22,8 +22,19 @@ import {
 import type { DaysObject } from "../../utils/ticketList/ticketList.utils";
 import type { RawFlightData } from "../../components/client/flightList/flight.type";
 import { initialData } from "../../components/client/flightList/flight.type";
+import BookingProvider from "../../providers/BookingProvider";
 
-const TicketList = () => {
+interface TicketListProps {
+  indexTicket: number;
+  ticketSelected: boolean;
+  setTicketSelected: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const TicketList: React.FC<TicketListProps> = ({
+  indexTicket,
+  ticketSelected,
+  setTicketSelected,
+}) => {
   // Query Params
   const searchParams = new URLSearchParams(window.location.search);
 
@@ -47,12 +58,14 @@ const TicketList = () => {
   const fetchDataFromLocalStorage = async () => {
     const sourceAirport = localStorage.getItem("sourceAirport");
     const sourceAirportId = sourceAirport
-      ? `sourceAirportId=${JSON.parse(sourceAirport as string).id}&`
+      ? `sourceAirportId=${
+          JSON.parse(sourceAirport as string)[indexTicket].id
+        }&`
       : "";
 
     const destAirport = localStorage.getItem("destinationAirport");
     const destAirportId = destAirport
-      ? `destAirportId=${JSON.parse(destAirport as string).id}&`
+      ? `destAirportId=${JSON.parse(destAirport as string)[indexTicket].id}&`
       : "";
 
     const adultsNumber = getAdultsNumberFromLocalStorage()
@@ -68,7 +81,9 @@ const TicketList = () => {
       : "";
 
     const departureDate = localStorage.getItem("date")
-      ? `departureDate=${localStorage.getItem("date")}&`
+      ? `departureDate=${
+          JSON.parse(localStorage.getItem("date") as string)[indexTicket]
+        }&`
       : "";
 
     const classType = localStorage.getItem("classType")
@@ -77,7 +92,7 @@ const TicketList = () => {
 
     // Set Date
     setArraysDate(getArrayOfDays(departureDate));
-    setDate(localStorage.getItem("date") as string);
+    setDate(JSON.parse(localStorage.getItem("date") as string)[indexTicket]);
     setCurrentDate(getDate(departureDate));
 
     const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
@@ -163,7 +178,7 @@ const TicketList = () => {
   const fetchData = async (API: string) => {
     try {
       // const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
-      console.log(API);
+      // console.log(API);
       const res = await axios.get(API);
       setData(res.data.data.content);
     } catch (error) {
@@ -171,7 +186,7 @@ const TicketList = () => {
       console.log(error);
     } finally {
       setLoading(false);
-      console.log(data);
+      // console.log(data);
     }
   };
 
@@ -180,10 +195,10 @@ const TicketList = () => {
       try {
         setLoading(true);
         if (localStorageResourceAvailable()) {
-          console.log("fetching data from local storage");
+          // console.log("fetching data from local storage");
           await fetchDataFromLocalStorage();
         } else if (searchParamaterResourceAvailable()) {
-          console.log("fetching data from search params");
+          // console.log("fetching data from search params");
           await fetchDataFromSearchParams();
         }
       } catch (error) {
@@ -205,7 +220,6 @@ const TicketList = () => {
   useEffect(() => {
     const fetchNewData = async (API: string) => {
       try {
-        console.log("Date Changed");
         await fetchData(API);
       } catch (error) {
         setError(true);
@@ -219,12 +233,14 @@ const TicketList = () => {
       setLoadingNewData(true);
       const sourceAirport = localStorage.getItem("sourceAirport");
       const sourceAirportId = sourceAirport
-        ? `sourceAirportId=${JSON.parse(sourceAirport as string).id}&`
+        ? `sourceAirportId=${
+            JSON.parse(sourceAirport as string)[indexTicket].id
+          }&`
         : "";
 
       const destAirport = localStorage.getItem("destinationAirport");
       const destAirportId = destAirport
-        ? `destAirportId=${JSON.parse(destAirport as string).id}&`
+        ? `destAirportId=${JSON.parse(destAirport as string)[indexTicket].id}&`
         : "";
 
       const adultsNumber = getAdultsNumberFromLocalStorage()
@@ -246,7 +262,7 @@ const TicketList = () => {
         : "";
 
       // Set Date
-      setDate(localStorage.getItem("date") as string);
+      setDate(JSON.parse(localStorage.getItem("date") as string)[indexTicket]);
       setCurrentDate(getDate(newDate));
 
       const API = `${API_URL}/v1/flights/departures?${sourceAirportId}${destAirportId}${adultsNumber}${childsNumber}${infantsNumber}${departureDate}${classType}`;
@@ -255,7 +271,15 @@ const TicketList = () => {
   }, [newDate]);
 
   return (
-    <>
+    <BookingProvider
+      requiredItem={[
+        "passengers",
+        "sourceAirport",
+        "destinationAirport",
+        "date",
+        "classType",
+      ]}
+    >
       {loading && !error && (
         <div className="flex flex-col items-center justify-center w-screen h-screen">
           <CircularProgress size="6rem" />
@@ -270,32 +294,39 @@ const TicketList = () => {
           <HeaderLayout>
             <HeaderFill
               departure={
-                JSON.parse(localStorage.getItem("sourceAirport") as string).city
-                  ? JSON.parse(localStorage.getItem("sourceAirport") as string)
-                      .city
+                JSON.parse(localStorage.getItem("sourceAirport") as string)[
+                  indexTicket
+                ].city
+                  ? JSON.parse(localStorage.getItem("sourceAirport") as string)[
+                      indexTicket
+                    ].city
                   : "Unknown"
               }
               departureCode={
-                JSON.parse(localStorage.getItem("sourceAirport") as string)
-                  .cityCode
-                  ? JSON.parse(localStorage.getItem("sourceAirport") as string)
-                      .cityCode
+                JSON.parse(localStorage.getItem("sourceAirport") as string)[
+                  indexTicket
+                ].cityCode
+                  ? JSON.parse(localStorage.getItem("sourceAirport") as string)[
+                      indexTicket
+                    ].cityCode
                   : "UNK"
               }
               arrival={
-                JSON.parse(localStorage.getItem("destinationAirport") as string)
-                  .city
+                JSON.parse(
+                  localStorage.getItem("destinationAirport") as string
+                )[indexTicket].city
                   ? JSON.parse(
                       localStorage.getItem("destinationAirport") as string
-                    ).city
+                    )[indexTicket].city
                   : "Unknown"
               }
               arrivalCode={
-                JSON.parse(localStorage.getItem("destinationAirport") as string)
-                  .cityCode
+                JSON.parse(
+                  localStorage.getItem("destinationAirport") as string
+                )[indexTicket].cityCode
                   ? JSON.parse(
                       localStorage.getItem("destinationAirport") as string
-                    ).cityCode
+                    )[indexTicket].cityCode
                   : "UNK"
               }
               date={getDayAndDate(date)}
@@ -320,6 +351,8 @@ const TicketList = () => {
               departureDate={date}
               setNewDate={setNewDate}
               loadingNewData={loadingNewData}
+              ticketSelected={ticketSelected}
+              setTicketSelected={setTicketSelected}
             />
           </BodyLayout>
 
@@ -357,7 +390,7 @@ const TicketList = () => {
           </button>
         </div>
       )}
-    </>
+    </BookingProvider>
   );
 };
 

@@ -15,6 +15,8 @@ interface BodyComponentProps {
   departureDate: string;
   setNewDate: React.Dispatch<React.SetStateAction<string>>;
   loadingNewData: boolean;
+  ticketSelected: boolean;
+  setTicketSelected: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BodyComponent: React.FC<BodyComponentProps> = ({
@@ -24,6 +26,8 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
   departureDate,
   setNewDate,
   loadingNewData,
+  ticketSelected,
+  setTicketSelected,
 }) => {
   const [selectedDate, setSelectedDate] = useState<number>(currentDate);
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -102,19 +106,25 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
 
             <div className="flex flex-col w-full mt-4 gap-y-3">
               {flightData.map((flight) => (
-                  <>
-                    <FlightCard handleOpenModal={() => setOpenModal(true)} flightData={flight} />
-                    {openModal && (
-                        <FlightDetail detailFlight={flight} onClose={() => setOpenModal(false)}  />
-                    )}
-                  </>
-
+                <>
+                  <FlightCard
+                    handleOpenModal={() => setOpenModal(true)}
+                    flightData={flight}
+                    ticketSelected={ticketSelected}
+                    setTicketSelected={setTicketSelected}
+                  />
+                  {openModal && (
+                    <FlightDetail
+                      detailFlight={flight}
+                      onClose={() => setOpenModal(false)}
+                    />
+                  )}
+                </>
               ))}
             </div>
           </>
         )}
         {/* Fligth Card */}
-
       </div>
     </>
   );

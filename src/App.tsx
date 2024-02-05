@@ -12,18 +12,19 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 
 // Client Pages
 import Home from "./pages/client/Home";
-import TicketList from "./pages/client/TicketList";
+// import TicketList from "./pages/client/TicketList";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
 import Meals from "./pages/client/Meals";
 import SelectedMethod from "./pages/client/SelectedMethod";
 import ContinuePayment from "./pages/client/ContinuePayment";
 import FillDetailInfo from "./pages/client/FillDetailInfo";
-import SelectedFlight from "./pages/client/SelectedFlight";
+// import SelectedFlight from "./pages/client/SelectedFlight";
 import History from "./pages/client/History";
 import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
+import ChooseTicket from "./pages/client/ChooseTicket";
 
 const router = createBrowserRouter([
   {
@@ -40,13 +41,17 @@ const router = createBrowserRouter([
     element: <div>Register Page</div>,
   },
   {
-    path: "/ticketList",
-    element: <TicketList />,
+    path: "chooseTicket",
+    element: <ChooseTicket />,
   },
-  {
-    path: "/selectedFlight",
-    element: <SelectedFlight />,
-  },
+  // {
+  //   path: "/ticketList",
+  //   element: <TicketList />,
+  // },
+  // {
+  //   path: "/selectedFlight",
+  //   element: <SelectedFlight />,
+  // },
   {
     path: "/fillDetailInformation",
     element: <FillDetailInfo />,

@@ -6,7 +6,7 @@ const numberToCurrency = (
 ): string => {
   // Check if the input is a valid number
   if (isNaN(value) || !isFinite(value)) {
-    throw new Error("Invalid number");
+    return "0";
   }
 
   // Convert the number to a string and split it into integer and decimal parts
