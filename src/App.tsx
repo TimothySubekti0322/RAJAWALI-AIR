@@ -25,6 +25,7 @@ import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
+import HomeDash from "./pages/admin/home/HomeDash";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
   {
     path: "/history-empty",
     element: <EmptyHistory />,
+  },
+  {
+    path: "/dashboard/home",
+    element: <HomeDash />,
   },
   {
     path: "/dashboard/airport",
