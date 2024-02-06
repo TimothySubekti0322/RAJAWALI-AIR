@@ -12,17 +12,19 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 
 // Client Pages
 import Home from "./pages/client/Home";
-import TicketList from "./pages/client/TicketList";
+// import TicketList from "./pages/client/TicketList";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
 import Meals from "./pages/client/Meals";
 import SelectedMethod from "./pages/client/SelectedMethod";
 import ContinuePayment from "./pages/client/ContinuePayment";
 import FillDetailInfo from "./pages/client/FillDetailInfo";
-import SelectedFlight from "./pages/client/SelectedFlight";
+// import SelectedFlight from "./pages/client/SelectedFlight";
 import History from "./pages/client/History";
 import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
+import SearchTestPage from "./pages/client/SearchTestPage";
+import ChooseTicket from "./pages/client/ChooseTicket";
 import LoginClient from "./pages/client/loginClient";
 import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -45,15 +47,19 @@ const router = createBrowserRouter([
     element: <div>Register Page</div>,
   },
   {
-    path: "/ticketList",
-    element: <TicketList />,
+    path: "chooseTicket",
+    element: <ChooseTicket />,
   },
+  // {
+  //   path: "/ticketList",
+  //   element: <TicketList />,
+  // },
+  // {
+  //   path: "/selectedFlight",
+  //   element: <SelectedFlight />,
+  // },
   {
-    path: "/selectedFlight",
-    element: <SelectedFlight />,
-  },
-  {
-    path: "/fillDetailInformation/:id",
+    path: "/fillDetailInformation",
     element: <FillDetailInfo />,
   },
   {
@@ -79,6 +85,14 @@ const router = createBrowserRouter([
   {
     path: "/travelAddOns",
     element: <TravelAddOns />,
+  },
+  {
+    path: "/history",
+    element: <History />,
+  },
+  {
+    path: "/history-empty",
+    element: <EmptyHistory />,
   },
   {
     path: "/dashboard/airport",
@@ -116,15 +130,9 @@ const router = createBrowserRouter([
     path: "/dashboard/flight/edit/:id",
     element: <FlightForm />,
   },
-  // Check history page
   {
-    path: "/history",
-    element: <History />,
-  },
-  // Check Empty history page
-  {
-    path: "/history-empty",
-    element: <EmptyHistory />,
+    path: "/search-test",
+    element: <SearchTestPage />,
   },
 ]);
 

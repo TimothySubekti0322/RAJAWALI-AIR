@@ -25,7 +25,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({ value, setValue }) => {
         onChange={handleChange}
       >
         <FormControlLabel
-          value="Mr."
+          value="MAN"
           control={
             <Radio
               sx={{
@@ -38,7 +38,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({ value, setValue }) => {
           label={<p className="text-xs">Mr.</p>}
         />
         <FormControlLabel
-          value="Mrs."
+          value="WOMAN"
           control={
             <Radio
               sx={{
