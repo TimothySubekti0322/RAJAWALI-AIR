@@ -25,6 +25,8 @@ import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
+import PendingPurchase from "./pages/client/PendingPurchase.tsx";
+import SuccessPurchase from "./pages/client/SuccessPurchase.tsx";
 
 const router = createBrowserRouter([
   {
@@ -128,6 +130,14 @@ const router = createBrowserRouter([
     path: "/search-test",
     element: <SearchTestPage />,
   },
+  {
+    path: "/pendingPurchase",
+    element: <PendingPurchase />
+  },
+  {
+    path: "/successPurchase",
+    element: <SuccessPurchase />
+  }
 ]);
 
 export default function App() {
