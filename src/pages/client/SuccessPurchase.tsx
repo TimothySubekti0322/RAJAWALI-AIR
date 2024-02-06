@@ -52,7 +52,7 @@ const SuccessPurchase = () => {
                         <PriceDetails />
                     </div>
                     <button className={'btn btn-side w-full bg-[#1E90FF] text-white hover:bg-blue-700'}>
-                        Ok
+                        OK
                     </button>
                 </div>
 
