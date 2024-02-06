@@ -34,13 +34,21 @@ interface Props {
   lineTwoBold: string;
   parafTwo: string;
   priceInsure: number;
-  setPriceInsure: React.Dispatch<React.SetStateAction<number>>
+  setPriceInsure: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBold, parafTwo, id, setPriceInsure  }: Props) => {
+const ExtraProtections = ({
+  textHeader,
+  price,
+  lineOneBold,
+  parafOne,
+  lineTwoBold,
+  parafTwo,
+  id,
+  setPriceInsure,
+}: Props) => {
   const [expanded, setExpanded] = useState(false);
   const [checked, setChecked] = React.useState<Record<string, boolean>>({});
-  
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -67,7 +75,21 @@ const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBol
     };
 
     setPriceInsure((price) => {
-      return price + updatePriceInsure(id, isChecked);
+      const updatedPrice = updatePriceInsure(id, isChecked);
+
+      let totalPrice = JSON.parse(localStorage.getItem("totalPrice") || "0");
+
+      if (isChecked) {
+        // Checkbox true, tambahkan harga
+        totalPrice += updatedPrice;
+      } else {
+        // Checkbox false, kurangi harga
+        totalPrice -= price;
+      }
+
+      localStorage.setItem("totalPrice", totalPrice.toString());
+
+      return updatedPrice;
     });
   };
 
@@ -104,7 +126,11 @@ const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBol
               </div>
             </div>
             <div className=" w-5 h-5 justify-center items-center flex">
-              <Checkbox id={id} checked={checked[id] || false} onChange={handleChange} />
+              <Checkbox
+                id={id}
+                checked={checked[id] || false}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
@@ -123,7 +149,7 @@ const ExtraProtections = ({ textHeader, price, lineOneBold, parafOne, lineTwoBol
         </ExpandMore>
         <div className="relative bottom-0 left-[7rem]">
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
-          {numberToCurrency("IDR", price, true, false)}/
+            {numberToCurrency("IDR", price, true, false)}/
           </span>
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
             pax

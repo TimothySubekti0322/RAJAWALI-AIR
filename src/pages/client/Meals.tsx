@@ -7,17 +7,18 @@ import React from "react";
 import { numberToCurrency } from "../../utils/NumberFormater";
 import BookingProvider from "../../providers/BookingProvider";
 import { Passenger } from "../../assets/static/LocalStorage.type";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
+// import { useKeenSlider } from "keen-slider/react";
+// import "keen-slider/keen-slider.min.css";
 
 const Meals = () => {
   const [price, setPrice] = React.useState<number>(0);
-  const [ref] = useKeenSlider<HTMLDivElement>({
-    slides: {
-      perView: 2,
-      spacing: 15,
-    },
-  });
+  // const [passenger, setPassenger] = React.useState<Passenger[]>([]);
+  // const [ref] = useKeenSlider<HTMLDivElement>({
+  //   slides: {
+  //     perView: 10,
+  //     spacing: 1,
+  //   },
+  // });
   console.log(price);
 
   const passengers: Passenger[] = JSON.parse(
@@ -32,6 +33,12 @@ const Meals = () => {
 
     window.location.href = "/travelAddOns";
   };
+
+  // const handlePassengerChange = () => {
+  //   setPassenger(passengers);
+
+  //   console.log('isi set penumpang', setPassenger)
+  // }
   return (
     <BookingProvider requiredItem={["passengers"]}>
       <section className="w-full min-h-screen bg-[#f7f7f7] relative">
@@ -56,10 +63,10 @@ const Meals = () => {
         {/* <div className="w-full sm:w-[360px] mx-auto min-h-screen bg-[#E3EEFF] pt-[3.75rem] pb-20"></div> */}
         <BodyLayout paddingBottomSize="5rem">
           <div className="inline-flex pt-[1rem] px-[1rem] flex-col">
-            <div ref={ref} className="grid grid-cols-2 text-black gap-2 mb-[0.75rem] keen-slider">
+            <div className="grid grid-cols-2 gap-2 text-black mb-[0.75rem]">
               {passengers?.map((passenger, index) => (
-                <a href="#" key={index}>
-                  <div className={`w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300 keen-slider__slide number-slide${index}`}>
+                <a href="#" className="grid grid-cols-2" key={index}>
+                  <div className="w-[10rem] h-3.75rem bg-white py-1 px-3 text-[0.75rem] font-['Roboto'] rounded-md shadow-md hover:bg-sky-300">
                     <p className="font-bold">{`Passenger ${index + 1} (${
                       passenger.ageType
                     })`}</p>

@@ -68,8 +68,6 @@ const TravelAddOns = () => {
             Extra Protections
           </p>
 
-          <div className="text-black">total insurance {numberToCurrency("IDR", priceInsure, true, false)}</div>
-
           <ExtraProtections
             id="1"
             textHeader="Travel Insurance"
