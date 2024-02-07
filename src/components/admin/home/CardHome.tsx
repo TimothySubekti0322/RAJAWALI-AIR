@@ -6,7 +6,7 @@ interface Props {
 
 const CardHome = ({ title, img, value }: Props) => {
   return (
-    <div className="w-full rounded-lg shadow-lg bg-white p-4 border border-gray-200 hover:border-[#1E90FF]">
+    <div className="w-full rounded-lg shadow-lg bg-white p-4 border border-gray-200 overflow-hidden transition-transform transform hover:scale-105">
       <div className="flex items-center justify-between">
         <p className="font-['Roboto'] font-semibold text-black">
           {title}
