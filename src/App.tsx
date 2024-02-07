@@ -25,6 +25,9 @@ import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
+import Login from "./pages/auth/Login";
+// import LoginClient from "./pages/client/loginClient";
+// import LoginAdmin from "./pages/admin/loginAdmin";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +36,12 @@ const router = createBrowserRouter([
     errorElement: <div>404 Not Found</div>,
   },
   {
+    path: "/login/admin",
+    element: <Login user="admin" />,
+  },
+  {
     path: "/login",
-    element: <div>Login Page</div>,
+    element: <Login user="client" />,
   },
   {
     path: "/register",
