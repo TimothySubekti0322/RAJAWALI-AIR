@@ -30,6 +30,9 @@ import SuccessPurchase from "./pages/client/SuccessPurchase.tsx";
 import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
 import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
 import HistoryPending from "./components/client/history/HistoryPending.tsx";
+import Login from "./pages/auth/Login";
+// import LoginClient from "./pages/client/loginClient";
+// import LoginAdmin from "./pages/admin/loginAdmin";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +41,12 @@ const router = createBrowserRouter([
     errorElement: <div>404 Not Found</div>,
   },
   {
+    path: "/login/admin",
+    element: <Login user="admin" />,
+  },
+  {
     path: "/login",
-    element: <div>Login Page</div>,
+    element: <Login user="client" />,
   },
   {
     path: "/register",
