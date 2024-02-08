@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { numberToCurrency } from "../../../utils/NumberFormater";
 import { FlightData } from "../flightList/flight.type";
 import { getTotalPassengersFromLocalStorage } from "../../../utils/ticketList/ticketList.utils";
+import {useNavigate} from "react-router-dom";
 
 interface TicketTypeProps {
   type: string;
@@ -22,29 +23,40 @@ const TicketType: React.FC<TicketTypeProps> = ({
   setTicketSelected,
   flightData,
 }) => {
+  const navigate = useNavigate();
   const handleSelect = () => {
     if (flights == indexTicket) {
       setTicketSelected(!ticketSelected);
-      window.location.href = "/fillDetailInformation";
+      // window.location.href = "/fillDetailInformation";
+      navigate("/fillDetailInformation");
     } else {
       setIndexTicket(indexTicket + 1);
       setTicketSelected(!ticketSelected);
     }
   };
 
+  const getPrice = (classType: string) : number => {
+    switch (classType) {
+      case "ECONOMY":
+        return flightData.economySeatsPrice;
+      case "BUSINESS":
+        return flightData.businessSeatPrice;
+      case "FIRST":
+        return flightData.firstSeatsPrice;
+      default:
+        return 0
+    }
+  }
+
   // Get Price
   const [price, setPrice] = useState<number>(
-    localStorage.getItem("classType") == "ECONOMY"
-      ? flightData.economySeatsPrice
-      : flightData.firstSeatsPrice
+      getPrice(JSON.parse(localStorage.getItem("classType") as string))
   );
 
   // Re Render Flight Data
   useEffect(() => {
     setPrice(
-      localStorage.getItem("classType") == "ECONOMY"
-        ? flightData.economySeatsPrice
-        : flightData.firstSeatsPrice
+        getPrice(JSON.parse(localStorage.getItem("classType") as string))
     );
   }, [flightData]);
 

@@ -100,6 +100,24 @@ const SearchInputFlight = () => {
   //   }
   // }
 
+  const getAirportById = (airportId: string) => {
+    const airport = listAirport?.find(s => s.id === airportId);
+    if (airport) {
+      return airport;
+    }
+  }
+
+  const listSourceAirport = (sourceIds: string[]) => {
+    const airports = [];
+    for (let i: number = 0; i < sourceIds.length; i++ ) {
+      const getAirport = getAirportById(sourceIds[i]);
+      if (getAirport) {
+        airports.push(getAirport);
+      }
+    }
+    return airports;
+  }
+
   const savePassengersToLocalStorage = () => {
     const passengers = [];
 
@@ -132,7 +150,7 @@ const SearchInputFlight = () => {
     }
 
     localStorage.setItem("passengers", JSON.stringify(passengers));
-    localStorage.setItem("classType", JSON.stringify(selectCabin));
+    localStorage.setItem("classType", JSON.stringify(selectCabin?.toUpperCase()));
   }
   // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -144,12 +162,18 @@ const SearchInputFlight = () => {
     const destAirportId = formData.get("destAirportId") as string;
     const departureDate = formData.get("departureDate") as string;
     const returnDate = formData.get("returnDate") as string;
+    let flights = 0;
+
+    if (selectedOption == "Round-Trip") {
+      flights = 1;
+    }
 
     const dates: string[] = [
       departureDate
     ]
     const sourceAirports: string[] = [sourceAirportId];
     const destAirports: string[] = [destAirportId];
+
     if (returnDate) dates.push(returnDate);
     if (selectedOption == "Multi-City") {
       for (let i = 0; i < addAnotherCount; i ++) {
@@ -158,20 +182,25 @@ const SearchInputFlight = () => {
         const destAirport = formData.get(`destAirport${i}`) as string;
         dates.push(date)
         sourceAirports.push(sourceAirport);
-        destAirports.push(destAirport)
+        destAirports.push(destAirport);
+        flights = i;
       }
     }
+
+    const sourceAirportList = listSourceAirport(sourceAirports);
+    const destAirportList = listSourceAirport(destAirports);
 
     savePassengersToLocalStorage();
     // saveAirportToLocalStorage(sourceAirportId, "sourceAirport");
     // saveAirportToLocalStorage(destAirportId, "destinationAirport");
-    localStorage.setItem("sourceAirport", JSON.stringify(sourceAirports));
-    localStorage.setItem("destinationAirport", JSON.stringify(destAirports))
+    localStorage.setItem("sourceAirport", JSON.stringify(sourceAirportList));
+    localStorage.setItem("destinationAirport", JSON.stringify(destAirportList));
     saveDateToLocalStorage(dates, "date");
     saveReservationTypeToLocalStorage();
+    localStorage.setItem("flights", JSON.stringify(flights));
 
     // const queryParam = `sourceAirportId=${sourceAirportId}&destAirportId=${destAirportId}&departureDate=${departureDate}&classType=${selectCabin?.toUpperCase()}&adultsNumber=${passenger.adultValue}&childsNumber=${passenger.childValue}&infantsNumber=${passenger.infantValue}`;
-    navigate(`ticketList`);
+    navigate(`chooseTicket`);
   }
 
   const renderAnotherFlight = () => {
