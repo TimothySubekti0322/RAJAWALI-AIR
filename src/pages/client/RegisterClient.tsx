@@ -4,7 +4,7 @@ import InputName from "../../components/authentication/login/register/inputName"
 import InputEmail from "../../components/authentication/login/register/inputEmail";
 import InputPassword from "../../components/authentication/login/register/inputPassword";
 import InputCheckPassword from "../../components/authentication/login/register/inputCheckPassword";
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate} from "react-router-dom"; 
 import API_URL from "../../assets/static/API";
 
 const apiURL = `${API_URL}/v1/auth/sign-up`;
@@ -63,11 +63,13 @@ const RegisterClient = () => {
 //     }
 //   };
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+const history = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-  
+
     try {
       const res = await axios.post(apiURL, {
         fullName: registrationForm.fullName,
@@ -76,10 +78,13 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         password: registrationForm.password,
         confirmationPassword: registrationForm.confirmationPassword
       });
-  
+
       if (res.data.success) {
         setSuccess(true);
         setError(null); // Clear any previous error message
+        
+        // Redirect to verification page
+        history(`/verifikasi/${registrationForm.email}`);
       } else {
         setError(res.data.message || "Registration failed. Please try again.");
         setSuccess(false);
@@ -94,6 +99,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       setLoading(false);
     }
   };
+
   
 
   return (

@@ -27,6 +27,7 @@ import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
 import Login from "./pages/auth/Login";
 import RegisterClient from "./pages/client/RegisterClient";
+import VerifikasiClient from "./pages/client/VerifikasiClient";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterClient />,
+  },
+  {
+    path: "/verifikasi/:email",
+    element: <VerifikasiClient />,
   },
   {
     path: "chooseTicket",
