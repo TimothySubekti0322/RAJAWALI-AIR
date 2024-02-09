@@ -26,6 +26,7 @@ import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
 import Login from "./pages/auth/Login";
+import RegisterClient from "./pages/client/RegisterClient";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <div>Register Page</div>,
+    element: <RegisterClient />,
   },
   {
     path: "chooseTicket",
