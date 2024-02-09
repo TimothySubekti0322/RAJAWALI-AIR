@@ -7,6 +7,7 @@ import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { AiOutlineSelect } from "react-icons/ai";
+import moment from "moment";
 
 const paginationItemStyles = makeStyles(() =>
   createStyles({
@@ -128,12 +129,13 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
+              {data.map((item, index) => (
                 <tr key={item.id} className="border-b-2">
+                  <td className="px-4 py-3 text-center">{index + 1}</td>
                   <td className="px-4 py-3 text-center">{item.id}</td>
                   <td className="px-4 py-3 text-center">{item.classType}</td>
                   <td className="px-4 py-3 text-center">{item.paymentStatus}</td>
-                  <td className="px-4 py-3 text-center">{item.expiredAt}</td>
+                  <td className="px-4 py-3 text-center">{moment(item.expiredAt).format("DD MMM YYYY, HH:mm")}</td>
                   <td className="h-full px-4 py-3">
                     <div className="flex items-center justify-center gap-x-4">
                       {/* Edit */}

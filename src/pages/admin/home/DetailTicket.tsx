@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { numberToCurrency } from "../../../utils/NumberFormater";
 import moment from "moment";
+import ModalAproved from "../../../components/admin/home/Ticket-Details/modals/ModalAproved";
 
 const breadcrumbs = [
   <Typography key="1" color="text.primary">
@@ -37,7 +38,7 @@ const DetailTicket = () => {
     },
     phoneNumber: "",
     classType: "",
-    passengers: [{ ageType: "" }],
+    passengers: [{ genderType: "" }, { ageType: "" }, { fullname: "" }],
     promo: "",
     totalPrice: 0,
     paymentStatus: "",
@@ -91,6 +92,7 @@ const DetailTicket = () => {
             </p>
           </div>
         </div>
+        {/* Ticket Details */}
         <div className="bg-[#F5F5F5] rounded-lg mt-3 w-full">
           <div className="inline-flex gap-3 mt-4 px-4">
             <img src="/images/home-dash/order-detail.svg" alt="" />
@@ -105,7 +107,10 @@ const DetailTicket = () => {
           </div>
           <div className="flex flex-col bg-white rounded-lg px-4 mx-4 mt-3 p-4 mb-5">
             <TextDetail title="Booking ID" value={form.id} />
-            <TextDetail title="Booking Time" value={moment(form.expiredAt).format("DD MMM YYYY, HH:mm")} />
+            <TextDetail
+              title="Booking Time"
+              value={moment(form.expiredAt).format("DD MMM YYYY, HH:mm")}
+            />
             <TextDetail
               title="Flight Id"
               value={form.flightDetailList.map((flight) => flight.flightId)}
@@ -122,16 +127,80 @@ const DetailTicket = () => {
             <TextDetail title="Cabin Class" value={form.classType} />
             <TextDetail
               title="Passengers"
-              value={form.passengers.map((passenger) => passenger.ageType)}
+              value={form.passengers
+                .map((passenger) => passenger.ageType)
+                .join(", ")}
             />
-            <TextDetail title="Promo Code" value={form.promo || "Data Null"} />
+            <TextDetail
+              title="Promo Code"
+              value={
+                Array.isArray(form.promo)
+                  ? form.promo.filter(Boolean)
+                  : form.promo
+              }
+            />
             <TextDetail
               title="Price Details"
               value={numberToCurrency("IDR", form.totalPrice, true, false)}
             />
-            <TextDetail title="Pay Status" value={form.paymentStatus || "Data Null"} />
+            <TextDetail
+              title="Pay Status"
+              value={form.paymentStatus || "Data Null"}
+            />
           </div>
           <div className="text-[#F5F5F5] mt-[-1.2rem]">ayam</div>
+        </div>
+
+        {/* Passenger Details */}
+        <div>
+          {form.passengers.map((passenger, index) => (
+            <div key={index} className="bg-[#F5F5F5] rounded-lg mt-4 w-full">
+              <div className="inline-flex gap-3 mt-4 px-4">
+                <img src="/images/home-dash/profile.svg" alt="" />
+                <div className="fle">
+                  <p className="text-black font-semibold text-xl font-['Roboto']">
+                    Passenger {index + 1}
+                  </p>
+                  <p className="text-gray-500 font-['Roboto']">
+                    List of passenger information and additional facilities.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col bg-white rounded-lg px-4 mx-4 mt-3 p-4 mb-5">
+                <TextDetail title="Full Name" value={passenger.fullname} />
+                <TextDetail title="Gender" value={passenger.genderType} />
+                <TextDetail title="Age" value={passenger.ageType} />
+              </div>
+              <div className="text-[#F5F5F5] mt-[-1.2rem]">ayam</div>
+            </div>
+          ))}
+        </div>
+        <div className="flex item-center justify-end gap-5 mt-10">
+          <button
+            className="text-white rounded-lg bg-red-500 p-4 hover:bg-red-700"
+            onClick={() =>
+              (
+                document.getElementById(
+                  `my_modal_${form.id}`
+                ) as HTMLFormElement
+              )?.showModal()
+            }
+          >
+            Rejected
+          </button>
+          <button
+            className="text-white rounded-lg bg-green-500 p-4 hover:bg-green-700"
+            onClick={() =>
+              (
+                document.getElementById(
+                  `my_modal_${form.id}`
+                ) as HTMLFormElement
+              )?.showModal()
+            }
+          >
+            Approve
+          </button>
+          <ModalAproved dashboardName="airplane" id={form.id} />
         </div>
       </div>
     </Layout>

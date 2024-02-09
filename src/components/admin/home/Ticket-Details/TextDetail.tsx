@@ -1,6 +1,6 @@
 interface TextDetailProps {
   title: string;
-  value?: string | string[] | number | undefined | null;
+  value: string | string[] | number | undefined;
 }
 
 const TextDetail: React.FC<TextDetailProps> = ({ title, value }) => {
@@ -8,9 +8,9 @@ const TextDetail: React.FC<TextDetailProps> = ({ title, value }) => {
     <>
       <div className="flex flex-col">
         <div className="inline-flex gap-3 font-['Roboto'] pt-4">
-          <div className="flex space-x-10">
-            <p className="">{title}</p>
-            <p className="text-gray-500">:</p>
+          <div className="flex space-x-4">
+            <div className="w-24 font-semibold">{title}</div>
+            <div>:</div>
           </div>
           <p className="">{value}</p>
         </div>
