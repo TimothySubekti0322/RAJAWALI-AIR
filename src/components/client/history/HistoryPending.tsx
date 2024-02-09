@@ -1,8 +1,6 @@
 import HeaderLayout from "../headerLayout.tsx";
 import HeaderFill from "../headerFill.tsx";
 import BodyLayout from "../bodyLayout.tsx";
-import rajawaliAirIcon from "../../../assets/images/RajawaliAirPNG2.png";
-import undrawPng from "../../../assets/images/undraw-copy.png";
 import PendingComponent from "../purchaseProcessing/PendingComponent.tsx";
 
 const HistoryPending = () => {

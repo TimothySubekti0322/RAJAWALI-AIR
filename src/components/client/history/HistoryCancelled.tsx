@@ -3,7 +3,6 @@ import HeaderFill from "../headerFill.tsx";
 import BodyLayout from "../bodyLayout.tsx";
 import rajawaliAirIcon from "../../../assets/images/RajawaliAirPNG2.png";
 import cancelIcon from "../../../assets/images/cancel.png";
-import PurchaseDetail from "../purchaseProcessing/PurchaseDetail.tsx";
 import PriceDetails from "../purchaseProcessing/PriceDetails.tsx";
 
 const HistoryCancelled = () => {
