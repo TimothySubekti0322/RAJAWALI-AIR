@@ -4,11 +4,10 @@ import Table from "../../../components/admin/home/Table";
 import Layout from "../../../components/admin/layout/Layout";
 
 const tableColumns = [
-  "Id",
-  "Airplane Code",
-  "Economy Seats | Per Column",
-  "Business Seats | Per Column",
-  "First Seats | Per Column",
+  "Booking ID",
+  "Flight ID",
+  "Status",
+  "Date",
   "Action",
 ];
 
@@ -61,7 +60,7 @@ const HomeDash = () => {
       <div className="w-full px-5">
         <Table
           tableColumns={tableColumns}
-          api="https://rajawali-production.up.railway.app/api/v1/airplanes?pageSize=100"
+          api="https://rajawali-production.up.railway.app/api/v1/reservations?pageSize=100"
         />
       </div>
     </Layout>

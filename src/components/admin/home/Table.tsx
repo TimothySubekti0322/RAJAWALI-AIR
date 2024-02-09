@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
-import { RiDeleteBinLine } from "react-icons/ri";
 // import tableData from "../../../pages/admin/airport/dummyData";
-import type { AirportData } from "../../../assets/static/TableDataTypes";
+import type { ResevationData } from "../../../assets/static/TableDataTypes";
 import Pagination from "@mui/material/Pagination";
 import Modal from "../modals";
 import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+import { AiOutlineSelect } from "react-icons/ai";
 
 const paginationItemStyles = makeStyles(() =>
   createStyles({
@@ -43,10 +42,10 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // Raw Data
-  const [rawData, setRawData] = useState<AirportData[]>([]);
+  const [rawData, setRawData] = useState<ResevationData[]>([]);
 
   // Data
-  const [data, setData] = useState<AirportData[]>([]);
+  const [data, setData] = useState<ResevationData[]>([]);
 
   // Current Page
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -59,7 +58,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
       try {
         setLoading(true);
         const res = await axios.get(api);
-        const response: AirportData[] = res.data.data.content;
+        const response: ResevationData[] = res.data.data.content;
         console.log(res.data.data.content);
         // const response: AirportData[] = [];
         // const response: AirportData[] = tableData;
@@ -132,34 +131,22 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
               {data.map((item) => (
                 <tr key={item.id} className="border-b-2">
                   <td className="px-4 py-3 text-center">{item.id}</td>
-                  <td className="px-4 py-3 text-center">{item.name}</td>
-                  <td className="px-4 py-3 text-center">{item.city}</td>
-                  <td className="px-4 py-3 text-center">{item.country}</td>
-                  <td className="px-4 py-3 text-center">{item.cityCode}</td>
+                  <td className="px-4 py-3 text-center">{item.classType}</td>
+                  <td className="px-4 py-3 text-center">{item.paymentStatus}</td>
+                  <td className="px-4 py-3 text-center">{item.expiredAt}</td>
                   <td className="h-full px-4 py-3">
                     <div className="flex items-center justify-center gap-x-4">
                       {/* Edit */}
                       <button
-                        className="bg-[#F1A025] py-1 px-5 hover:bg-[#D08003] hover:border-[#D08003] rounded-lg"
+                        className=" py-1 px-5 hover:text-blue-500 rounded-lg"
                         onClick={() => {
-                          window.location.href = `/dashboard/airport/edit/${item.id}`;
+                          window.location.href = `/dashboard/home/ticket-details/${item.id}`;
                         }}
                       >
-                        <FaRegEdit className="text-lg text-white" />
-                      </button>
-
-                      {/* Delete */}
-                      <button
-                        className="bg-[#CB3A31] py-1 px-5 hover:bg-[#A91810] hover:border-[#A91810] rounded-lg"
-                        onClick={() =>
-                          (
-                            document.getElementById(
-                              `my_modal_${item.id}`
-                            ) as HTMLFormElement
-                          )?.showModal()
-                        }
-                      >
-                        <RiDeleteBinLine className="text-lg text-white" />
+                        <div className="inline-flex gap-2">
+                          <p>See Details</p>
+                          <AiOutlineSelect />
+                        </div>
                       </button>
                     </div>
                   </td>

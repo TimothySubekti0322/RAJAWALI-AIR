@@ -26,6 +26,8 @@ import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
 import Login from "./pages/auth/Login";
+import HomeDash from "./pages/admin/home/HomeDash";
+import DetailTicket from "./pages/admin/home/DetailTicket";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -98,6 +100,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/home",
     element: <HomeDash />,
+  },
+  {
+    path: "/dashboard/home/ticket-details/:id",
+    element: <DetailTicket />,
   },
   {
     path: "/dashboard/airport",
