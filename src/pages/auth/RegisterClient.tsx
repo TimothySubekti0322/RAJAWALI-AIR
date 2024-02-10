@@ -63,8 +63,7 @@ const RegisterClient = () => {
 //     }
 //   };
 
-const history = useNavigate();
-
+  const history = useNavigate();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);

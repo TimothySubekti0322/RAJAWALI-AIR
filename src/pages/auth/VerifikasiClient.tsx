@@ -11,7 +11,7 @@ const VerifikasiClient = () => {
   const [resendLoading, setResendLoading] = useState(false);
   const [resendError, setResendError] = useState<string | null>(null);
   const [verificationSuccess, setVerificationSuccess] = useState(false);
-  const [otp, setOtp] = useState<string[]>(Array(6).fill("")); // State untuk menyimpan OTP yang dimasukkan oleh pengguna
+  const [otp, setOtp] = useState<string[]>(Array(6).fill("")); // state for saving otp
 
   const handleResendCode = async () => {
     try {
@@ -20,7 +20,7 @@ const VerifikasiClient = () => {
       const res = await axios.post(apiURL, { email });
       // Handle response accordingly
       setResendLoading(false);
-      // Berikan pesan kepada pengguna bahwa OTP telah dikirim
+      // give error messasge
     } catch (error: any) {
       setResendError("Failed to resend code. Please try again.");
       setResendLoading(false);
