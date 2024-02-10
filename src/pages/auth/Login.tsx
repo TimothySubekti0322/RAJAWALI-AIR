@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
@@ -320,12 +321,12 @@ const Login: React.FC<LoginProps> = ({ user }) => {
           </label>
         </div>
         <div className="flex justify-end w-full">
-          <a
+          {/* <a
             href="#"
             className=" mt-6 font-bold text-[#1E90FF] text-end text-sm hover:text-[#0C70DD] lg:hidden"
           >
             Forgot Password?
-          </a>
+          </a> */}
         </div>
 
         <button
@@ -340,9 +341,15 @@ const Login: React.FC<LoginProps> = ({ user }) => {
         </button>
         <div className="flex items-center justify-end mt-2 text-xs gap-x-1 2xl:text-base 2xl:mt-4">
           <p className="hidden text-white lg:block">Forgot Password?</p>
-          <a href="#" className="font-bold text-white hover:text-[#CCCCCC]">
+          {/* <a href="#" className="font-bold text-white hover:text-[#CCCCCC]">
             Reset Password
-          </a>
+          </a> */}
+           <Link
+            to="/forgotpassword"
+            className="text-white ml-1 font-semibold hover:text-[#fffff]"
+          >
+            Reset Password
+          </Link>
         </div>
 
         <div

@@ -31,6 +31,10 @@ import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
 import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
 import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
+import RegisterClient from "./pages/auth/RegisterClient";
+import VerifikasiClient from "./pages/auth/VerifikasiClient";
+import ForgotPassword from "./pages/auth/ForgotClient";
+import ChangePassword from "./pages/auth/ChangePassword";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -50,7 +54,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <div>Register Page</div>,
+    element: <RegisterClient />,
+  },
+  {
+    path: "/verifikasi/:email",
+    element: <VerifikasiClient />,
+  },
+  {
+    path: "/forgotpassword",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/changepassword/:email",
+    element: <ChangePassword />,
   },
   {
     path: "/chooseTicket",
