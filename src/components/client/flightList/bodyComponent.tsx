@@ -117,6 +117,8 @@ const BodyComponent: React.FC<BodyComponentProps> = ({
                     <FlightDetail
                       detailFlight={flight}
                       onClose={() => setOpenModal(false)}
+                      ticketSelected={ticketSelected}
+                      setTicketSelected={setTicketSelected}
                     />
                   )}
                 </>
