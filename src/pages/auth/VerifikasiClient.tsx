@@ -17,15 +17,16 @@ const VerifikasiClient = () => {
     try {
       setResendLoading(true);
       setResendError(null);
-      const res = await axios.post(apiURL, { email });
+      await axios.post(apiURL, { email });
       // Handle response accordingly
       setResendLoading(false);
-      // give error messasge
+      // Berikan pesan kepada pengguna bahwa OTP telah dikirim
     } catch (error: any) {
       setResendError("Failed to resend code. Please try again.");
       setResendLoading(false);
     }
   };
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
