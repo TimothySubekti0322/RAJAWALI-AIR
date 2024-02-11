@@ -25,6 +25,11 @@ import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
+import PendingPurchase from "./pages/client/PendingPurchase.tsx";
+import SuccessPurchase from "./pages/client/SuccessPurchase.tsx";
+import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
+import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
+import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
 import HomeDash from "./pages/admin/home/HomeDash";
 import DetailTicket from "./pages/admin/home/DetailTicket";
@@ -50,7 +55,7 @@ const router = createBrowserRouter([
     element: <div>Register Page</div>,
   },
   {
-    path: "chooseTicket",
+    path: "/chooseTicket",
     element: <ChooseTicket />,
   },
   // {
@@ -145,6 +150,26 @@ const router = createBrowserRouter([
     path: "/search-test",
     element: <SearchTestPage />,
   },
+  {
+    path: "/pendingPurchase",
+    element: <PendingPurchase />
+  },
+  {
+    path: "/successPurchase",
+    element: <SuccessPurchase />
+  },
+  {
+    path: "/historySuccess",
+    element: <HistorySuccess />
+  },
+  {
+    path: "/historyCancelled",
+    element: <HistoryCancelled />
+  },
+  {
+    path: "/historyPending",
+    element: <HistoryPending />
+  }
 ]);
 
 export default function App() {

@@ -87,7 +87,7 @@ const TicketList: React.FC<TicketListProps> = ({
       : "";
 
     const classType = localStorage.getItem("classType")
-      ? `classType=${localStorage.getItem("classType")}`
+      ? `classType=${JSON.parse(localStorage.getItem("classType") as string)}`
       : "";
 
     // Set Date
@@ -258,7 +258,7 @@ const TicketList: React.FC<TicketListProps> = ({
       const departureDate = `departureDate=${newDate}&`;
 
       const classType = localStorage.getItem("classType")
-        ? `classType=${localStorage.getItem("classType")}`
+        ? `classType=${JSON.parse(localStorage.getItem("classType") as string)}`
         : "";
 
       // Set Date
