@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios, { AxiosError } from "axios";
 import API_URL from "../../assets/static/API";
-import { validateEmail } from "../../utils/login/login.utils";
+import { validateEmail } from "../../utils/auth/login.utils";
 
 interface LoginProps {
   user: "admin" | "client";
