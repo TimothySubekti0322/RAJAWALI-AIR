@@ -133,7 +133,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                 <tr key={item.id} className="border-b-2">
                   <td className="px-4 py-3 text-center">{index + 1}</td>
                   <td className="px-4 py-3 text-center">{item.id}</td>
-                  <td className="px-4 py-3 text-center">{item.classType}</td>
+                  {/* <td className="px-4 py-3 text-center">{}</td> */}
                   <td className="px-4 py-3 text-center">{item.paymentStatus}</td>
                   <td className="px-4 py-3 text-center">{moment(item.expiredAt).format("DD MMM YYYY, HH:mm")}</td>
                   <td className="h-full px-4 py-3">

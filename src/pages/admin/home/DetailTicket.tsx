@@ -9,6 +9,9 @@ import axios from "axios";
 import { numberToCurrency } from "../../../utils/NumberFormater";
 import moment from "moment";
 import ModalAproved from "../../../components/admin/home/Ticket-Details/modals/ModalAproved";
+import ModalRejected from "../../../components/admin/home/Ticket-Details/modals/ModalRejected";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { CgCheckO } from "react-icons/cg";
 
 const breadcrumbs = [
   <Typography key="1" color="text.primary">
@@ -23,6 +26,7 @@ const breadcrumbs = [
 ];
 
 const apiURL = `${API_URL}/v1/reservations`;
+const token = localStorage.getItem("token");
 
 const DetailTicket = () => {
   const path = window.location.pathname;
@@ -30,7 +34,12 @@ const DetailTicket = () => {
   const [form, setForm] = useState({
     id: "",
     expiredAt: "",
-    flightDetailList: [{ flightId: "" }],
+    flightDetailList: [
+      { flightId: "" },
+      { useTravelAssurance: false },
+      { useBagageAssurance: false },
+      { useFlightDelayAssurance: false },
+    ],
     user: {
       id: "",
       fullName: "tidak ada",
@@ -47,11 +56,9 @@ const DetailTicket = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const yourJWTToken =
-          "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbi5xYUBnbWFpbC5jb20iLCJpYXQiOjE3MDc0NTgyNjUsImV4cCI6MTcwNzU0NDY2NX0.JUpGkLrMXZ21J7eO6l13hbE0WPe9Mmvs_4VWKSTrDDU";
         const response = await axios.get(`${apiURL}/${id}`, {
           headers: {
-            Authorization: `Bearer ${yourJWTToken}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         console.log(response);
@@ -113,7 +120,9 @@ const DetailTicket = () => {
             />
             <TextDetail
               title="Flight Id"
-              value={form.flightDetailList.map((flight) => flight.flightId)}
+              value={form.flightDetailList
+                .map((flight) => flight.flightId)
+                .join(", ")}
             />
             <TextDetail
               title="Full Name"
@@ -170,6 +179,32 @@ const DetailTicket = () => {
                 <TextDetail title="Full Name" value={passenger.fullname} />
                 <TextDetail title="Gender" value={passenger.genderType} />
                 <TextDetail title="Age" value={passenger.ageType} />
+                <div className="flex flex-col">
+                  <TextDetail
+                    title="Assurance"
+                    value={[
+                      form.flightDetailList.map(
+                        (flight) =>
+                          `Bagage Assurance: ${
+                            flight.useBagageAssurance ? "Yes" : "No"
+                          }`
+                      ),
+                      form.flightDetailList.map(
+                        (flight) =>
+                          `Travel Assurance: ${
+                            flight.useTravelAssurance ? "Yes" : "No"
+                          }`
+                      ),
+                      form.flightDetailList.map(
+                        (flight) =>
+                          `Flight Delay Assurance: ${
+                            flight.useFlightDelayAssurance ? "Yes" : "No"
+                          }`
+                      ),
+                    ].join(", ")}
+                  />
+                </div>
+                <TextDetail title="Facilities" value={"to be continued"} />
               </div>
               <div className="text-[#F5F5F5] mt-[-1.2rem]">ayam</div>
             </div>
@@ -177,31 +212,38 @@ const DetailTicket = () => {
         </div>
         <div className="flex item-center justify-end gap-5 mt-10">
           <button
-            className="text-white rounded-lg bg-red-500 p-4 hover:bg-red-700"
+            className="inline-flex gap-1 text-white rounded-lg bg-red-500 p-4 hover:bg-red-700"
             onClick={() =>
               (
                 document.getElementById(
-                  `my_modal_${form.id}`
+                  `my_modal_Reject_${form.id}`
                 ) as HTMLFormElement
               )?.showModal()
             }
           >
-            Rejected
+            <div className=" text-2xl">
+              <AiOutlineCloseCircle />
+            </div>
+            <div className="font-['Roboto']">Rejected</div>
           </button>
           <button
-            className="text-white rounded-lg bg-green-500 p-4 hover:bg-green-700"
+            className="inline-flex gap-1 text-white rounded-lg bg-green-500 p-4 hover:bg-green-700"
             onClick={() =>
               (
                 document.getElementById(
-                  `my_modal_${form.id}`
+                  `my_modal_aproved_${form.id}`
                 ) as HTMLFormElement
               )?.showModal()
             }
           >
-            Approve
+            <div className="text-2xl">
+              <CgCheckO />
+            </div>
+            <div className="font-['Roboto']">Approve</div>
           </button>
-          <ModalAproved dashboardName="airplane" id={form.id} />
         </div>
+        <ModalAproved token={token} id={form.id} />
+        <ModalRejected token={token} id={form.id} />
       </div>
     </Layout>
   );

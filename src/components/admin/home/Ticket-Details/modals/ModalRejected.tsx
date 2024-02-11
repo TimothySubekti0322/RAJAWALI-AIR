@@ -2,17 +2,16 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import API_URL from "../../../../../assets/static/API";
 
-// type DashboardName = "airport" | "airplane" | "flight" | "user";
 
 interface modalProps {
   token: string | null;
   id: string;
 }
 
-const ModalAproved: React.FC<modalProps> = ({ id, token }) => {
+const ModalRejected: React.FC<modalProps> = ({ id, token }) => {
   const deleteHandler = async () => {
     try {
-      const res = await axios.post(`${API_URL}/v1/payments/${id}/approve`,
+      const res = await axios.post(`${API_URL}/v1/payments/${id}/reject`,
       {},
       {
         headers: {
@@ -36,7 +35,7 @@ const ModalAproved: React.FC<modalProps> = ({ id, token }) => {
     <div>
       <Toaster />
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-      <dialog id={`my_modal_aproved_${id}`} className="modal">
+      <dialog id={`my_modal_Reject_${id}`} className="modal">
         <div className="px-0 py-4 modal-box">
           <div className="flex pl-5">
             <h3 className="pb-[12px] font-semibold text-lg text-black pl-1">
@@ -45,7 +44,7 @@ const ModalAproved: React.FC<modalProps> = ({ id, token }) => {
           </div>
           <hr className="border-[#D2F1FF]" />
           <p className="py-[14px] text-black pl-5">
-            Are you sure you want to approve this booking order?
+            Are you sure you want to reject this booking order?
           </p>
           <hr className="border-[#D2F1FF]" />
           <div className="modal-action">
@@ -63,10 +62,10 @@ const ModalAproved: React.FC<modalProps> = ({ id, token }) => {
                   Cancel
                 </button>
                 <button
-                  className=" bg-green-500 mr-5 py-2 w-[119px] font-normal"
+                  className=" bg-[#CB3A31] mr-5 py-2 w-[119px] font-normal"
                   onClick={deleteHandler}
                 >
-                  Approve
+                  Reject
                 </button>
               </div>
             </form>
@@ -77,4 +76,4 @@ const ModalAproved: React.FC<modalProps> = ({ id, token }) => {
   );
 };
 
-export default ModalAproved;
+export default ModalRejected;

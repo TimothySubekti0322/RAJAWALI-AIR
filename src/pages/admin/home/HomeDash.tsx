@@ -6,7 +6,6 @@ import Layout from "../../../components/admin/layout/Layout";
 const tableColumns = [
   "No",
   "Booking ID",
-  "Flight ID",
   "Status",
   "Date",
   "Action",

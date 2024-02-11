@@ -90,7 +90,7 @@ const Login: React.FC<LoginProps> = ({ user }) => {
             localStorage.removeItem("rememberMe");
           }
           if (response.data.data.roles[0].name == "ROLE_ADMIN") {
-            window.location.href = "/dashboard/airport";
+            window.location.href = "/dashboard/home";
           } else {
             window.location.href = "/";
           }
