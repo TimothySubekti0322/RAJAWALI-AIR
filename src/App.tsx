@@ -12,14 +12,12 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 
 // Client Pages
 import Home from "./pages/client/Home";
-// import TicketList from "./pages/client/TicketList";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
 import Meals from "./pages/client/Meals";
 import SelectedMethod from "./pages/client/SelectedMethod";
 import ContinuePayment from "./pages/client/ContinuePayment";
 import FillDetailInfo from "./pages/client/FillDetailInfo";
-// import SelectedFlight from "./pages/client/SelectedFlight";
 import History from "./pages/client/History";
 import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
@@ -31,6 +29,8 @@ import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
 import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
 import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import VerificationOTP from "./pages/auth/VerificationOTP";
 import HomeDash from "./pages/admin/home/HomeDash";
 import DetailTicket from "./pages/admin/home/DetailTicket";
 // import LoginClient from "./pages/client/loginClient";
@@ -52,20 +52,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <div>Register Page</div>,
+    element: <Register />,
+  },
+  {
+    path: "verifyOTP",
+    element: <VerificationOTP />,
   },
   {
     path: "/chooseTicket",
     element: <ChooseTicket />,
   },
-  // {
-  //   path: "/ticketList",
-  //   element: <TicketList />,
-  // },
-  // {
-  //   path: "/selectedFlight",
-  //   element: <SelectedFlight />,
-  // },
   {
     path: "/fillDetailInformation",
     element: <FillDetailInfo />,
