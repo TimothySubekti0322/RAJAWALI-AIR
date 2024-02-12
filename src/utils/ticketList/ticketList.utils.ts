@@ -229,6 +229,8 @@ function saveFlightIdToLocalStorage(flightId: string) {
   }
 }
 
+
+
 export {
   getDurationBetweenDates,
   getDaysOfMonth,

@@ -31,6 +31,7 @@ import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import VerificationOTP from "./pages/auth/VerificationOTP";
+import ChooseSeat from "./pages/client/ChooseSeat.tsx";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/fillDetailInformation",
     element: <FillDetailInfo />,
+  },
+  {
+    path: "/chooseSeat",
+    element: <ChooseSeat />,
   },
   {
     path: "/baggageDepart",
@@ -136,24 +141,24 @@ const router = createBrowserRouter([
   },
   {
     path: "/pendingPurchase",
-    element: <PendingPurchase />
+    element: <PendingPurchase />,
   },
   {
     path: "/successPurchase",
-    element: <SuccessPurchase />
+    element: <SuccessPurchase />,
   },
   {
     path: "/historySuccess",
-    element: <HistorySuccess />
+    element: <HistorySuccess />,
   },
   {
     path: "/historyCancelled",
-    element: <HistoryCancelled />
+    element: <HistoryCancelled />,
   },
   {
     path: "/historyPending",
-    element: <HistoryPending />
-  }
+    element: <HistoryPending />,
+  },
 ]);
 
 export default function App() {

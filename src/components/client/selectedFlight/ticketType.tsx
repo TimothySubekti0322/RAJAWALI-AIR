@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { numberToCurrency } from "../../../utils/NumberFormater";
 import { FlightData } from "../flightList/flight.type";
 import { getTotalPassengersFromLocalStorage } from "../../../utils/ticketList/ticketList.utils";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface TicketTypeProps {
   type: string;
@@ -35,7 +35,7 @@ const TicketType: React.FC<TicketTypeProps> = ({
     }
   };
 
-  const getPrice = (classType: string) : number => {
+  const getPrice = (classType: string): number => {
     switch (classType) {
       case "ECONOMY":
         return flightData.economySeatsPrice;
@@ -44,20 +44,20 @@ const TicketType: React.FC<TicketTypeProps> = ({
       case "FIRST":
         return flightData.firstSeatsPrice;
       default:
-        return 0
+        return 0;
     }
-  }
+  };
+
+  console.log(localStorage.getItem("classType") as string);
 
   // Get Price
   const [price, setPrice] = useState<number>(
-      getPrice(JSON.parse(localStorage.getItem("classType") as string))
+    getPrice(localStorage.getItem("classType") as string)
   );
 
   // Re Render Flight Data
   useEffect(() => {
-    setPrice(
-        getPrice(JSON.parse(localStorage.getItem("classType") as string))
-    );
+    setPrice(getPrice(localStorage.getItem("classType") as string));
   }, [flightData]);
 
   return (
