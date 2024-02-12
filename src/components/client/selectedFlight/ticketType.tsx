@@ -40,7 +40,7 @@ const TicketType: React.FC<TicketTypeProps> = ({
       case "ECONOMY":
         return flightData.economySeatsPrice;
       case "BUSINESS":
-        return flightData.businessSeatPrice;
+        return flightData.businessSeatsPrice;
       case "FIRST":
         return flightData.firstSeatsPrice;
       default:

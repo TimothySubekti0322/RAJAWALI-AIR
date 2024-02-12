@@ -84,7 +84,7 @@ const FlightCard: React.FC<FlightCardProps> = ({
           <div className="flex flex-col items-end">
             <div className="flex items-center mt-2">
               <p className="text-[#1E90FF] font-semibold">
-                {numberToCurrency("IDR", flightData.totalPrice, true, false)}/
+                {numberToCurrency("IDR", flightData.seatPrice, true, false)}/
               </p>
               <p className="text-xs text-[#757575]">pax</p>
             </div>

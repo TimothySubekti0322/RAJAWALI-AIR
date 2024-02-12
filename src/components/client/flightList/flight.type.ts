@@ -4,7 +4,7 @@ export interface FlightData {
   airplane: Airplane;
   arrivalDate: string;
   businessAvailableSeats: number;
-  businessSeatPrice: number;
+  businessSeatsPrice: number;
   createdAt: string;
   departureDate: string;
   destinationAirport: AirportData;
@@ -28,7 +28,7 @@ export const initialFlightData: FlightData = {
   },
   arrivalDate: "",
   businessAvailableSeats: 0,
-  businessSeatPrice: 0,
+  businessSeatsPrice: 0,
   createdAt: "",
   departureDate: "",
   destinationAirport: {
