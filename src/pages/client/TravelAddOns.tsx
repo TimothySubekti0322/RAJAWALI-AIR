@@ -8,6 +8,9 @@ import { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
+import React from "react";
+import { numberToCurrency } from "../../utils/NumberFormater.ts";
+import BookingProvider from "../../providers/BookingProvider.tsx";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -25,7 +28,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 const TravelAddOns = () => {
   const [showTotalPrice, setShowTotalPrice] = useState<boolean>(false);
+  const [priceInsure, setPriceInsure] = React.useState<number>(0);
+
+  console.log('data price insurence', priceInsure);
   return (
+    <BookingProvider requiredItem={["passengers"]}>
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
       <HeaderLayout>
         <HeaderFill title="Travel Add-ons" />
@@ -61,13 +68,40 @@ const TravelAddOns = () => {
             Extra Protections
           </p>
 
-          <ExtraProtections textHeader="Travel Insurance" price="100.000" />
-          <ExtraProtections textHeader="Baggage Insurance" price="13.500" />
           <ExtraProtections
-            textHeader="Flight Delay Insurance"
-            price="60.000"
+            id="1"
+            textHeader="Travel Insurance"
+            price={100000}
+            lineOneBold="Personal Anccident"
+            parafOne="Covers Up To IDR 500.000.000"
+            lineTwoBold="Trip Cancellation"
+            parafTwo="Covers Up To IDR 30.000.000"
+            priceInsure={priceInsure}
+            setPriceInsure={setPriceInsure}
           />
-          <div>adsfsf</div>
+          <ExtraProtections
+            id="2"
+            textHeader="Baggage Insurance"
+            price={13500}
+            lineOneBold="Baggage Loss or Damage"
+            parafOne="Covers Up To IDR 5.000.000"
+            lineTwoBold="Baggage Delay"
+            parafTwo="Covers Up To IDR 3.000.000"
+            priceInsure={priceInsure}
+            setPriceInsure={setPriceInsure}
+          />
+          <ExtraProtections
+            id="3"
+            textHeader="Flight Delay Insurance"
+            price={60000}
+            lineOneBold="90-minute Departure Delay"
+            parafOne="Reimbursement Up To IDR 600.000"
+            lineTwoBold="Be Instanly Eligible for Claim"
+            parafTwo="Automated Email and SMS Notification"
+            priceInsure={priceInsure}
+            setPriceInsure={setPriceInsure}
+          />
+          <div className="text-black">total insurance {numberToCurrency("IDR", priceInsure, true, false)}</div>
         </div>
       </BodyLayout>
 
@@ -77,7 +111,7 @@ const TravelAddOns = () => {
             <div className="inline-flex items-center justify-between w-80">
               <div className="flex items-center justify-start ">
                 <div className=" text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
-                  IDR 3.204.800
+                  IDR 3.204.80
                 </div>
                 <ExpandMore
                   expand={showTotalPrice}
@@ -118,6 +152,7 @@ const TravelAddOns = () => {
         </div>
       </div>
     </section>
+    </BookingProvider>
   );
 };
 
