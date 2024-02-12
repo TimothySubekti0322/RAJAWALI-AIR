@@ -3,6 +3,7 @@ import { numberToCurrency } from "../../../utils/NumberFormater";
 import { FlightData } from "../flightList/flight.type";
 import { getTotalPassengersFromLocalStorage } from "../../../utils/ticketList/ticketList.utils";
 import {useNavigate} from "react-router-dom";
+import {addTotalPriceToLocalStorage} from "../../../utils/TotalPriceLocalStorage.ts";
 
 interface TicketTypeProps {
   type: string;
@@ -32,6 +33,13 @@ const TicketType: React.FC<TicketTypeProps> = ({
     } else {
       setIndexTicket(indexTicket + 1);
       setTicketSelected(!ticketSelected);
+    }
+    if (type == "normal") {
+      addTotalPriceToLocalStorage(price * getTotalPassengersFromLocalStorage());
+    } else {
+      addTotalPriceToLocalStorage(
+          (price + 100000) * getTotalPassengersFromLocalStorage()
+      );
     }
   };
 

@@ -127,7 +127,8 @@ const SearchInputFlight = () => {
         genderType: "",
         ageType: "ADULT",
         fullName: "",
-        idCardNumber: ""
+        bagageAddOns: 0,
+        mealsAddOns: [""]
       })
     }
     for (let i = 0; i < passenger.childValue; i ++) {
@@ -136,7 +137,8 @@ const SearchInputFlight = () => {
         genderType: "",
         ageType: "CHILD",
         fullName: "",
-        idCardNumber: ""
+        bagageAddOns: 0,
+        mealsAddOns: [""]
       })
     }
     for (let i = 0; i < passenger.infantValue; i ++) {
@@ -145,7 +147,8 @@ const SearchInputFlight = () => {
         genderType: "",
         ageType: "INFANT",
         fullName: "",
-        idCardNumber: ""
+        bagageAddOns: 0,
+        mealsAddOns: [""]
       })
     }
 
