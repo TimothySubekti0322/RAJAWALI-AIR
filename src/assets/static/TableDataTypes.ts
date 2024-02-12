@@ -53,6 +53,27 @@ type MealsData = {
   thumbnailUrl: string;
 };
 
+type user = {
+  id : string;
+  fullName : string;
+  email : string;
+}
+
+type ResevationData = {
+  no: number;
+  id: string;
+  promo: string;
+  user: user;
+  paymentStatus: string;
+  classType: string;
+  genderType: number;
+  fullname: string;
+  email: string;
+  phoneNumber: string;
+  totalPrice: number;
+  expiredAt: string;
+}
+
 export type {
   AirportData,
   AirplaneData,
@@ -60,4 +81,5 @@ export type {
   FlightData,
   UserData,
   MealsData,
+  ResevationData,
 };

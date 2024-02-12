@@ -8,6 +8,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { GoDotFill } from "react-icons/go";
+import React from "react";
+import { numberToCurrency } from "../../../../utils/NumberFormater";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -24,17 +26,71 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 interface Props {
+  id: string;
   textHeader: string;
-  price: string;
+  price: number;
+  lineOneBold: string;
+  parafOne: string;
+  lineTwoBold: string;
+  parafTwo: string;
+  priceInsure: number;
+  setPriceInsure: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
-const ExtraProtections = ({ textHeader, price }: Props) => {
+const ExtraProtections = ({
+  textHeader,
+  price,
+  lineOneBold,
+  parafOne,
+  lineTwoBold,
+  parafTwo,
+  id,
+  setPriceInsure,
+}: Props) => {
   const [expanded, setExpanded] = useState(false);
+  const [checked, setChecked] = React.useState<Record<string, boolean>>({});
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, checked: isChecked } = event.target;
+    setChecked((prevState) => ({
+      ...prevState,
+      [id]: isChecked,
+    }));
+
+    const updatePriceInsure = (id: string, isChecked: boolean) => {
+      switch (id) {
+        case "1":
+          return isChecked ? 100000 : -100000; // Jika diceklis, tambahkan 100000, jika tidak, kembalikan 0
+        case "2":
+          return isChecked ? 13500 : -13500; // Jika diceklis, tambahkan 200000, jika tidak, kembalikan 0
+        case "3":
+          return isChecked ? 60000 : -60000; // Jika diceklis, tambahkan 300000, jika tidak, kembalikan 0
+        default:
+          return 0; // Jika id tidak sesuai, kembalikan 0
+      }
+    };
+
+    setPriceInsure((price) => {
+      const updatedPrice = updatePriceInsure(id, isChecked);
+
+      let totalPrice = JSON.parse(localStorage.getItem("totalPrice") || "0");
+
+      if (isChecked) {
+        // Checkbox true, tambahkan harga
+        totalPrice += updatedPrice;
+      } else {
+        // Checkbox false, kurangi harga
+        totalPrice -= price;
+      }
+
+      localStorage.setItem("totalPrice", totalPrice.toString());
+
+      return updatedPrice;
+    });
   };
 
   return (
@@ -51,10 +107,10 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
                   <div className="inline-flex">
                     <GoDotFill size={8} style={{ margin: "2px" }} />
                   </div>
-                  Personal accident
+                  {lineOneBold}
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
-                  Covers up to IDR 500.000.000
+                  {parafOne}
                 </div>
               </div>
               <div className=" w-60 h-8 relative">
@@ -62,15 +118,19 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
                   <div className="inline-flex">
                     <GoDotFill size={8} style={{ margin: "2px" }} />
                   </div>
-                  Trip cancellation (due to specific reasons)
+                  {lineTwoBold}
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
-                  Covers up to IDR 30.000.000
+                  {parafTwo}
                 </div>
               </div>
             </div>
             <div className=" w-5 h-5 justify-center items-center flex">
-              <Checkbox {...label} defaultChecked />
+              <Checkbox
+                id={id}
+                checked={checked[id] || false}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
@@ -89,7 +149,7 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
         </ExpandMore>
         <div className="relative bottom-0 left-[7rem]">
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
-            IDR {price}/
+            {numberToCurrency("IDR", price, true, false)}/
           </span>
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
             pax
