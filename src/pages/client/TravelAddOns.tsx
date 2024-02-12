@@ -4,7 +4,7 @@ import HeaderFill from "../../components/client/headerFill";
 import { FlightFacil } from "../../components/client/travelAddOns/flightFasil/FlightFacil";
 import ExtraProtections from "../../components/client/travelAddOns/extraProtections/ExtraProtections";
 import TotalPriceDetailComponent from "../../components/client/totalPrice/TotalPriceDetailComponent.tsx";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
@@ -29,6 +29,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 const TravelAddOns = () => {
   const [showTotalPrice, setShowTotalPrice] = useState<boolean>(false);
   const [priceInsure, setPriceInsure] = React.useState<number>(0);
+  const totalPriceLocalStorage = localStorage.getItem("totalPrice")  ? Number(localStorage.getItem("totalPrice") as string) : 0;
+  const [totalPrice, setTotalPrice] = useState<number>(
+      totalPriceLocalStorage
+  );
+
+  useEffect(() => {
+    console.log(priceInsure);
+    console.log(totalPrice);
+    setTotalPrice(totalPriceLocalStorage + priceInsure);
+  }, [priceInsure])
 
   console.log('data price insurence', priceInsure);
   return (
@@ -111,7 +121,7 @@ const TravelAddOns = () => {
             <div className="inline-flex items-center justify-between w-80">
               <div className="flex items-center justify-start ">
                 <div className=" text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
-                  IDR 3.204.80
+                  {numberToCurrency("IDR", totalPrice, true, false)}
                 </div>
                 <ExpandMore
                   expand={showTotalPrice}
