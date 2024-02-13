@@ -118,7 +118,7 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                             status={"Infant"} ageInformation={"Age 0-2"} /></td>
                         <td style={cabinClassStyle}><CabinClassComponent
                             text={"First"}
-                            isSelected={selectCabin === "First Class"}
+                            isSelected={selectCabin === "First"}
                             onClick={() => handleCabinClick("First")}
                         /></td>
                     </tr>

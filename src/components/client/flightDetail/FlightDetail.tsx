@@ -125,7 +125,7 @@ const FlightDetail = ({ onClose, detailFlight, ticketSelected, setTicketSelected
                     <strong>Total</strong>
                   </p>
                   <p className={"text-[#1E90FF]"}>
-                    <strong>IDR {detailFlight.totalPrice.toLocaleString('id-ID')}</strong>
+                    <strong>IDR {detailFlight.seatPrice.toLocaleString('id-ID')}</strong>
                   </p>
                 </div>
                 <button

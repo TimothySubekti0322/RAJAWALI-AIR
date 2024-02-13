@@ -229,6 +229,18 @@ function saveFlightIdToLocalStorage(flightId: string) {
   }
 }
 
+function removeFlightIdFromLocalStorage(index: number) {
+  const currentFlightId = localStorage.getItem("flightId");
+  if (!currentFlightId) {
+    return;
+  } else {
+    const currentFlightIdArray = JSON.parse(currentFlightId);
+    currentFlightIdArray.splice(index, 1);
+    const flightIdStringfy = JSON.stringify(currentFlightIdArray);
+    localStorage.setItem("flightId", flightIdStringfy);
+  }
+}
+
 export {
   getDurationBetweenDates,
   getDaysOfMonth,
@@ -245,4 +257,5 @@ export {
   getInfantsNumberFromLocalStorage,
   getTotalPassengersFromLocalStorage,
   saveFlightIdToLocalStorage,
+  removeFlightIdFromLocalStorage
 };

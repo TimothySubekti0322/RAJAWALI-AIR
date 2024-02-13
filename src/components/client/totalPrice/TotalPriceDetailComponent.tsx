@@ -1,6 +1,10 @@
 import arrowRight from "../../../assets/images/arrowRight.png";
+import {numberToCurrency} from "../../../utils/NumberFormater.ts";
 
 const TotalPriceDetailComponent = () => {
+    const baggagePrice =
+        localStorage.getItem("baggagePrice")  ? Number(localStorage.getItem("baggagePrice") as string) : 0 ;
+
     return(
         <div
             className={`mx-auto mt-0 bg-[white]`}
@@ -30,7 +34,7 @@ const TotalPriceDetailComponent = () => {
                     <p className={'font-semibold text-xs text-black'}>Add-ons</p>
                     <div className={'flex justify-between text-slate-600'}>
                         <div className={'font-normal text-xs'}>Baggage</div>
-                        <div className={'font-normal text-xs'}>IDR 500.000  </div>
+                        <div className={'font-normal text-xs'}>{numberToCurrency("IDR", baggagePrice, true, false)}</div>
                     </div>
                     <div className={'flex justify-between text-slate-600'}>
                         <div className={'font-normal text-xs'}>Meals</div>

@@ -12,7 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import {
   getAdultsNumberFromLocalStorage,
   getChildsNumberFromLocalStorage,
-  getInfantsNumberFromLocalStorage,
+  getInfantsNumberFromLocalStorage, removeFlightIdFromLocalStorage,
 } from "../../utils/ticketList/ticketList.utils";
 import { FlightData } from "../../components/client/flightList/flight.type";
 import BookingProvider from "../../providers/BookingProvider";
@@ -58,6 +58,7 @@ const SelectedFlight: React.FC<SelectedFlightProps> = ({
   console.log(flightData);
 
   const handleBackButton = () => {
+    removeFlightIdFromLocalStorage(indexTicket);
     setTicketSelected(!ticketSelected);
   };
 
