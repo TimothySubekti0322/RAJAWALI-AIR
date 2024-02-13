@@ -38,6 +38,7 @@ const BaggageDepart = () => {
 
   const handleSave = () => {
     addTotalPriceToLocalStorage(price);
+    localStorage.setItem("baggagePrice", JSON.stringify(price));
     window.location.href = "/travelAddOns";
   };
 

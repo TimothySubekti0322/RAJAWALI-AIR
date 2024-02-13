@@ -10,6 +10,10 @@ import Checkbox from "@mui/material/Checkbox";
 import { GoDotFill } from "react-icons/go";
 import React from "react";
 import { numberToCurrency } from "../../../../utils/NumberFormater";
+import {
+  addTotalPriceToLocalStorage,
+  substractTotalPriceFromLocalStorage
+} from "../../../../utils/TotalPriceLocalStorage.ts";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -45,6 +49,7 @@ const ExtraProtections = ({
   lineTwoBold,
   parafTwo,
   id,
+  priceInsure,
   setPriceInsure,
 }: Props) => {
   const [expanded, setExpanded] = useState(false);
@@ -60,37 +65,36 @@ const ExtraProtections = ({
       ...prevState,
       [id]: isChecked,
     }));
-
-    const updatePriceInsure = (id: string, isChecked: boolean) => {
-      switch (id) {
-        case "1":
-          return isChecked ? 100000 : -100000; // Jika diceklis, tambahkan 100000, jika tidak, kembalikan 0
-        case "2":
-          return isChecked ? 13500 : -13500; // Jika diceklis, tambahkan 200000, jika tidak, kembalikan 0
-        case "3":
-          return isChecked ? 60000 : -60000; // Jika diceklis, tambahkan 300000, jika tidak, kembalikan 0
-        default:
-          return 0; // Jika id tidak sesuai, kembalikan 0
+    if (isChecked) {
+      console.log("isChecked")
+      if(id == "1"){
+        setPriceInsure(priceInsure + 100000);
+        addTotalPriceToLocalStorage(100000);
       }
-    };
-
-    setPriceInsure((price) => {
-      const updatedPrice = updatePriceInsure(id, isChecked);
-
-      let totalPrice = JSON.parse(localStorage.getItem("totalPrice") || "0");
-
-      if (isChecked) {
-        // Checkbox true, tambahkan harga
-        totalPrice += updatedPrice;
-      } else {
-        // Checkbox false, kurangi harga
-        totalPrice -= price;
+      if(id == "2"){
+        setPriceInsure(priceInsure + 13500);
+        addTotalPriceToLocalStorage(13500);
       }
-
-      localStorage.setItem("totalPrice", totalPrice.toString());
-
-      return updatedPrice;
-    });
+      if(id == "3"){
+        setPriceInsure(priceInsure + 60000);
+        addTotalPriceToLocalStorage(60000);
+      }
+    }
+    else {
+      console.log("un Checked")
+      if(id == "1"){
+        setPriceInsure(priceInsure - 100000);
+        substractTotalPriceFromLocalStorage(100000);
+      }
+      if(id == "2"){
+        setPriceInsure(priceInsure - 13500);
+        substractTotalPriceFromLocalStorage(13500);
+      }
+      if(id == "3"){
+        setPriceInsure(priceInsure - 60000);
+        substractTotalPriceFromLocalStorage(60000);
+      }
+    }
   };
 
   return (
