@@ -15,6 +15,7 @@ import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 import {
   BaggageDepart,
+  addBaggageAddOnsToLocalStorage,
   createInitialBaggageData,
 } from "../../utils/bagageDepart/baggageDepart.utils";
 import axios from "axios";
@@ -39,6 +40,7 @@ const BaggageDepart = () => {
   const handleSave = () => {
     addTotalPriceToLocalStorage(price);
     localStorage.setItem("baggagePrice", JSON.stringify(price));
+    addBaggageAddOnsToLocalStorage(baggageData);
     window.location.href = "/travelAddOns";
   };
 
@@ -87,7 +89,9 @@ const BaggageDepart = () => {
   }, []);
 
   return (
-    <BookingProvider requiredItem={["passengers", "flightId"]}>
+    <BookingProvider
+      requiredItem={["passengers", "flightId", "flightDetailList"]}
+    >
       <section
         className="w-full min-h-screen bg-[#f7f7f7] relative text-white"
         style={{ fontFamily: "Roboto" }}

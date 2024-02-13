@@ -241,6 +241,51 @@ function removeFlightIdFromLocalStorage(index: number) {
   }
 }
 
+export interface PassengerDetailList {
+  seatId: string;
+  bagageAddOns: number | undefined;
+  mealsAddOns: string[];
+}
+
+export interface FlightDetailList {
+  flightId: string;
+  useTravelAssurance: boolean;
+  useBagageAssurance: boolean;
+  useFlightDelayAssurance: boolean;
+  passengerDetailList: PassengerDetailList[];
+}
+
+function initFlightDetailList() {
+  const flightDetailList: FlightDetailList[] = [];
+  const flightId = JSON.parse(localStorage.getItem("flightId") as string);
+  const passengers = JSON.parse(localStorage.getItem("passengers") as string);
+  if (!flightId) {
+    return [];
+  }
+
+  for (let i = 0; i < flightId.length; i++) {
+    const passengerDetailList: PassengerDetailList[] = [];
+    for (let j = 0; j < passengers.length; j++) {
+      const passengerDetail: PassengerDetailList = {
+        seatId: "",
+        bagageAddOns: 0,
+        mealsAddOns: [],
+      };
+      passengerDetailList.push(passengerDetail);
+    }
+    const flightDetail: FlightDetailList = {
+      flightId: flightId[i],
+      useTravelAssurance: false,
+      useBagageAssurance: false,
+      useFlightDelayAssurance: false,
+      passengerDetailList: passengerDetailList,
+    };
+    flightDetailList.push(flightDetail);
+  }
+
+  localStorage.setItem("flightDetailList", JSON.stringify(flightDetailList));
+}
+
 export {
   getDurationBetweenDates,
   getDaysOfMonth,
@@ -257,5 +302,6 @@ export {
   getInfantsNumberFromLocalStorage,
   getTotalPassengersFromLocalStorage,
   saveFlightIdToLocalStorage,
-  removeFlightIdFromLocalStorage
+  removeFlightIdFromLocalStorage,
+  initFlightDetailList,
 };

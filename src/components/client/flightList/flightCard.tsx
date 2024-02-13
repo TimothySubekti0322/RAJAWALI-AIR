@@ -26,7 +26,7 @@ const FlightCard: React.FC<FlightCardProps> = ({
     // navigate(`/selectedFlight`);
     setTicketSelected(!ticketSelected);
   };
-
+  console.log(flightData)
   return (
     <div
       className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md "
