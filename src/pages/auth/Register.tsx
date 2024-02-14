@@ -292,7 +292,7 @@ const Register = () => {
           {loading ? (
             <span className="loading loading-spinner loading-sm sm:loading-md"></span>
           ) : (
-            "SIGN IN"
+            "SIGN UP"
           )}
         </button>
       </div>

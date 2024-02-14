@@ -17,7 +17,7 @@ const VerificationOTP = () => {
   const handleVerify = async () => {
     const formData = {
       email: localStorage.getItem("email") as string,
-      otp: otp.join(""),
+      otpCode: otp.join(""),
     };
     console.log(formData);
     try {
