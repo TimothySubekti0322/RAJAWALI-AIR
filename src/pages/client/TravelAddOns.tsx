@@ -35,9 +35,7 @@ const TravelAddOns = () => {
   );
 
   useEffect(() => {
-    console.log(priceInsure);
-    console.log(totalPrice);
-    setTotalPrice(totalPriceLocalStorage + priceInsure);
+    setTotalPrice(totalPriceLocalStorage);
   }, [priceInsure])
 
   console.log('data price insurence', priceInsure);
@@ -147,7 +145,7 @@ const TravelAddOns = () => {
             </div>
             {showTotalPrice && (
               <div className="w-full ">
-                <TotalPriceDetailComponent />
+                <TotalPriceDetailComponent totalPrice={totalPrice} priceInsure={priceInsure} />
               </div>
             )}
             <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex hover:bg-blue-600 focus:outline-none focus:shadow-outline">

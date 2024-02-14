@@ -55,9 +55,17 @@ const ExtraProtections = ({
   const [expanded, setExpanded] = useState(false);
   const [checked, setChecked] = React.useState<Record<string, boolean>>({});
 
+  const flightLength = JSON.parse(localStorage.getItem("flightId") as string).length;
+  const passengerLength = JSON.parse(localStorage.getItem("passengers") as string).length;
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const totalInsurance = (price: number): number => {
+    console.log("Total: " + price * passengerLength * flightLength)
+    return price * passengerLength * flightLength;
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, checked: isChecked } = event.target;
@@ -66,33 +74,31 @@ const ExtraProtections = ({
       [id]: isChecked,
     }));
     if (isChecked) {
-      console.log("isChecked")
       if(id == "1"){
-        setPriceInsure(priceInsure + 100000);
-        addTotalPriceToLocalStorage(100000);
+        setPriceInsure(priceInsure + totalInsurance(100000));
+        addTotalPriceToLocalStorage(totalInsurance(100000));
       }
       if(id == "2"){
-        setPriceInsure(priceInsure + 13500);
-        addTotalPriceToLocalStorage(13500);
+        setPriceInsure(priceInsure + totalInsurance(13500));
+        addTotalPriceToLocalStorage(totalInsurance(13500));
       }
       if(id == "3"){
-        setPriceInsure(priceInsure + 60000);
-        addTotalPriceToLocalStorage(60000);
+        setPriceInsure(priceInsure + totalInsurance(60000));
+        addTotalPriceToLocalStorage(totalInsurance(60000));
       }
     }
     else {
-      console.log("un Checked")
       if(id == "1"){
-        setPriceInsure(priceInsure - 100000);
-        substractTotalPriceFromLocalStorage(100000);
+        setPriceInsure(priceInsure - totalInsurance(100000));
+        substractTotalPriceFromLocalStorage(totalInsurance(100000));
       }
       if(id == "2"){
-        setPriceInsure(priceInsure - 13500);
-        substractTotalPriceFromLocalStorage(13500);
+        setPriceInsure(priceInsure - totalInsurance(13500));
+        substractTotalPriceFromLocalStorage(totalInsurance(13500));
       }
       if(id == "3"){
-        setPriceInsure(priceInsure - 60000);
-        substractTotalPriceFromLocalStorage(60000);
+        setPriceInsure(priceInsure - totalInsurance(60000));
+        substractTotalPriceFromLocalStorage(totalInsurance(60000));
       }
     }
   };
