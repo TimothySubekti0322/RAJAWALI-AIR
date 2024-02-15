@@ -22,8 +22,10 @@ import axios from "axios";
 import { FlightData } from "../../components/client/flightList/flight.type";
 import API_URL from "../../assets/static/API";
 import CircularProgress from "@mui/material/CircularProgress";
+import {useNavigate} from "react-router-dom";
 
 const BaggageDepart = () => {
+  const navigate = useNavigate();
   // price
   const [price, setPrice] = useState<number>(0);
 
@@ -41,7 +43,7 @@ const BaggageDepart = () => {
     addTotalPriceToLocalStorage(price);
     localStorage.setItem("baggagePrice", JSON.stringify(price));
     addBaggageAddOnsToLocalStorage(baggageData);
-    window.location.href = "/travelAddOns";
+    navigate("/travelAddOns");
   };
 
   const [baggageData, setBaggageData] = useState<BaggageDepart[]>(

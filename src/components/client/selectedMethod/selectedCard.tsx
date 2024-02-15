@@ -1,8 +1,14 @@
 import { FaChevronRight, FaClock } from "react-icons/fa";
 import CountDown, { CountdownProps } from "./countDown";
+import {FlightData} from "../../../assets/static/TableDataTypes.ts";
+import {extractTimeFromDateString} from "../../../utils/DateFormater.ts";
+import moment from "moment";
 
+interface ISelectedCardProps {
+    flightData: FlightData
+}
 
-const selectedCard: React.FC = () => {
+const selectedCard = ({flightData} : ISelectedCardProps) => {
   const initialCountdown: CountdownProps = {
     initialHours: 2,
     initialMinutes: 59,
@@ -20,7 +26,7 @@ const selectedCard: React.FC = () => {
         <div className="flex items-center gap-x-3 ml-2">
           <div className="flex flex-col items-center">
             <p className="text-xs font-semibold text-black 2xl:text-sm">
-              BPN
+                {flightData.sourceAirport.cityCode}
             </p>
           </div>
           <div className="flex flex-col items-center">
@@ -30,7 +36,7 @@ const selectedCard: React.FC = () => {
           </div>
           <div className="flex flex-col items-center">
             <p className="text-xs font-semibold text-black 2xl:text-sm">
-              YIA
+                {flightData.destinationAirport.cityCode}
             </p>
           </div>
         </div>
@@ -41,8 +47,11 @@ const selectedCard: React.FC = () => {
 
       <div className="flex justify-between text-[10px] text-[#757575]">
       <div>
-        <p className="mt-2">25 Jan 2024, 08:15 - 09:05</p>
-        <p className="mt-1">Economy | Direct Flight</p>
+        <p className="mt-2">{moment(flightData.departureDate).format("DD MMM YYYY")},
+            {extractTimeFromDateString(flightData.departureDate)} -
+            {extractTimeFromDateString(flightData.arrivalDate)}
+        </p>
+        <p className="mt-1">{JSON.parse(localStorage.getItem("classType") as string)} | Direct Flight</p>
       </div>
       <button className="p-[0.25rem] rounded-[8px]">
           <FaChevronRight className="text-sm text-black" />

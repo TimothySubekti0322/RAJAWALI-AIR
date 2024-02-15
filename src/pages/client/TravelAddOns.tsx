@@ -35,10 +35,8 @@ const TravelAddOns = () => {
   const [totalPrice, setTotalPrice] = useState<number>(totalPriceLocalStorage);
 
   useEffect(() => {
-    console.log(priceInsure);
-    console.log(totalPrice);
-    setTotalPrice(totalPriceLocalStorage + priceInsure);
-  }, [priceInsure]);
+    setTotalPrice(totalPriceLocalStorage);
+  }, [priceInsure])
 
   console.log("data price insurence", priceInsure);
   return (
@@ -118,53 +116,53 @@ const TravelAddOns = () => {
           </div>
         </BodyLayout>
 
-        <div className="fixed left-0 right-0 bottom-0 mx-auto w-full sm:w-[360px] bg-white rounded-t-sm flex justify-center items-center gap-x-12">
-          <div className=" w-96 p-2 bg-white rounded-tl rounded-tr border-t border-blue-500 flex-col justify-start items-start gap-2.5 inline-flex">
-            <div className="flex flex-col items-start justify-start gap-2 ">
-              <div className="inline-flex items-center justify-between w-80">
-                <div className="flex items-center justify-start ">
-                  <div className=" text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
-                    {numberToCurrency("IDR", totalPrice, true, false)}
-                  </div>
-                  <ExpandMore
-                    expand={showTotalPrice}
-                    onClick={() => setShowTotalPrice(!showTotalPrice)}
-                    aria-expanded={showTotalPrice}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon className="text-blue-500" />
-                  </ExpandMore>
-                  {/*<button className={'text-black'} onClick={() => setShowTotalPrice(!showTotalPrice)}>Test</button>*/}
-                  <div className="flex items-center justify-center w-5 h-5 ">
-                    <div className="relative w-5 h-5 "></div>
-                  </div>
+      <div className="fixed left-0 right-0 bottom-0 mx-auto w-full sm:w-[360px] bg-white rounded-t-sm flex justify-center items-center gap-x-12">
+        <div className=" w-96 p-2 bg-white rounded-tl rounded-tr border-t border-blue-500 flex-col justify-start items-start gap-2.5 inline-flex">
+          <div className="flex flex-col items-start justify-start gap-2 ">
+            <div className="inline-flex items-center justify-between w-80">
+              <div className="flex items-center justify-start ">
+                <div className=" text-blue-500 text-base font-bold font-['Roboto'] leading-snug">
+                  {numberToCurrency("IDR", totalPrice, true, false)}
                 </div>
-                <div className="flex items-center justify-start gap-1 ">
-                  <div className="flex items-center justify-center w-3 h-3 p-px ">
-                    <div className="relative w-3 h-3 "></div>
-                  </div>
-                  <div className=" text-right text-blue-500 text-xs font-medium font-['Roboto'] leading-none">
-                    Get 10000 Loyalty Points
-                  </div>
+                <ExpandMore
+                  expand={showTotalPrice}
+                  onClick={() => setShowTotalPrice(!showTotalPrice)}
+                  aria-expanded={showTotalPrice}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon className="text-blue-500" />
+                </ExpandMore>
+                {/*<button className={'text-black'} onClick={() => setShowTotalPrice(!showTotalPrice)}>Test</button>*/}
+                <div className="flex items-center justify-center w-5 h-5 ">
+                  <div className="relative w-5 h-5 "></div>
                 </div>
               </div>
-              {showTotalPrice && (
-                <div className="w-full ">
-                  <TotalPriceDetailComponent />
+              <div className="flex items-center justify-start gap-1 ">
+                <div className="flex items-center justify-center w-3 h-3 p-px ">
+                  <div className="relative w-3 h-3 "></div>
                 </div>
-              )}
-              <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex hover:bg-blue-600 focus:outline-none focus:shadow-outline">
-                <button
-                  className="Primary text-stone-50 text-base font-semibold font-['Roboto'] leading-none"
-                  onClick={() => (window.location.href = "/continuePayment")}
-                >
-                  Continue to Payment
-                </button>
-              </button>
+                <div className=" text-right text-blue-500 text-xs font-medium font-['Roboto'] leading-none">
+                  Get 10000 Loyalty Points
+                </div>
+              </div>
             </div>
+            {showTotalPrice && (
+              <div className="w-full ">
+                <TotalPriceDetailComponent totalPrice={totalPrice} priceInsure={priceInsure} />
+              </div>
+            )}
+            <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex hover:bg-blue-600 focus:outline-none focus:shadow-outline">
+              <button
+                className="Primary text-stone-50 text-base font-semibold font-['Roboto'] leading-none"
+                onClick={() => (window.location.href = "/continuePayment")}
+              >
+                Continue to Payment
+              </button>
+            </button>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
     </BookingProvider>
   );
 };

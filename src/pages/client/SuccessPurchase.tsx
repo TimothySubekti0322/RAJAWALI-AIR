@@ -7,8 +7,10 @@ import PurchaseDetail from "../../components/client/purchaseProcessing/PurchaseD
 import PriceDetails from "../../components/client/purchaseProcessing/PriceDetails.tsx";
 import medalIcon from "../../assets/images/ph_medal-light.png"
 import HeaderFillPurchase from "../../components/client/purchaseProcessing/HeaderFillPurchase.tsx";
+import {useNavigate} from "react-router-dom";
 
 const SuccessPurchase = () => {
+    const navigate = useNavigate();
     return(
         <section className="w-full min-h-screen bg-[#f7f7f7] relative text-white">
             <HeaderLayout>
@@ -51,7 +53,11 @@ const SuccessPurchase = () => {
                         </div>
                         <PriceDetails />
                     </div>
-                    <button className={'btn btn-side w-full bg-[#1E90FF] text-white hover:bg-blue-700'}>
+                    <button className={'btn btn-side w-full bg-[#1E90FF] text-white hover:bg-blue-700'}
+                            onClick={() => {
+                                localStorage.clear()
+                                navigate("/")
+                            }}>
                         OK
                     </button>
                 </div>

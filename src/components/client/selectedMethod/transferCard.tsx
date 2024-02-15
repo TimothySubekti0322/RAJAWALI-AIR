@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import {numberToCurrency} from "../../../utils/NumberFormater.ts";
 
 interface TransferCardProps {}
 
 const TransferCard: React.FC<TransferCardProps> = () => {
   const [copied, setCopied] = useState(false);
+  const payment = localStorage.getItem("paymentMethod") as string;
 
   const handleCopyClick = () => {
     const range = document.createRange();
@@ -41,7 +43,7 @@ const TransferCard: React.FC<TransferCardProps> = () => {
           <img src="/images/payment-method/mandiri.svg" alt="mandiri" />
         </div>
         <p className="text-xs font-normal text-black">
-          Mandiri Virtual Account
+            {payment}
         </p>
       </div>
       <div className="flex items-center justify-between mt-2 h-9 bg-[#D2F1FF] rounded px-3">
@@ -61,7 +63,8 @@ const TransferCard: React.FC<TransferCardProps> = () => {
       </div>
       <hr className="mt-2 bg-[#C2C2C2]" />
       <p className="mt-2 text-xs font-semibold text-black">Total Payment</p>
-      <p className="mt-1 text-lg text-[#1E90FF] font-semibold">IDR 3.420.800</p>
+      <p className="mt-1 text-lg text-[#1E90FF] font-semibold">{numberToCurrency("IDR",
+          JSON.parse(localStorage.getItem("totalPrice") as string) ?? 0, true, false)}</p>
     </div>
   );
 };

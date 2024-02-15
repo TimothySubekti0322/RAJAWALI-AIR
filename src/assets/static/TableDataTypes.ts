@@ -30,10 +30,10 @@ type FlightData = {
   airplane: Airplane;
   departureDate: string;
   arrivalDate: string;
-  economySeatsPrice: 350000.0;
-  businessSeatsPrice: 500000.0;
-  firstSeatsPrice: 750000.0;
-  discount: 0.0;
+  economySeatsPrice: number;
+  businessSeatsPrice: number;
+  firstSeatsPrice: number;
+  discount: number;
 };
 
 type UserData = {
