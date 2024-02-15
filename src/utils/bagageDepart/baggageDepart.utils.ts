@@ -48,6 +48,10 @@ export function addBaggageAddOnsToLocalStorage(baggageData: BaggageDepart[]) {
   for (let i = 0; i < flightDetailList.length; i++) {
     for(let j = 0; j < flightDetailList[i].passengerDetailList.length; j++) {
       flightDetailList[i].passengerDetailList[j].bagageAddOns = baggageData[i].passangerBaggage[j].baggageAddOns;
+      if (!baggageData[i].passangerBaggage[j].baggageAddOns) {
+        flightDetailList[i].passengerDetailList[j].bagageAddOns = 0;
+      }
     }
   }
+  localStorage.setItem("flightDetailList", JSON.stringify(flightDetailList));
 }

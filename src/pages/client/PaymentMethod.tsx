@@ -3,6 +3,7 @@ import HeaderLayout from "../../components/client/headerLayout";
 import HeaderFill from "../../components/client/headerFill";
 import BodyLayout from "../../components/client/bodyLayout";
 import PaymentOptions from "../../components/client/paymentMethod/paymentOption";
+import {useNavigate} from "react-router-dom";
 
 const TransferBank = [
   {
@@ -55,9 +56,10 @@ const ConvenienceStore = [
 
 const PaymentMethod = () => {
   const [selectedValue, setSelectedValue] = React.useState("other");
+  const navigate = useNavigate();
   const handleApply = () => {
     localStorage.setItem("paymentMethod", selectedValue);
-    window.location.href = "/continuePayment";
+    navigate("/selectedMethod")
   };
   return (
     <section className="w-full min-h-screen bg-[#f7f7f7] relative text-white">
@@ -84,7 +86,6 @@ const PaymentMethod = () => {
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
           />
-          w
           <button
             className="w-full bg-[#1E90FF] rounded-lg mt-4 py-3 mb-6 text-white font-semibold"
             onClick={() => handleApply()}

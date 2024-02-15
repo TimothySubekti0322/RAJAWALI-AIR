@@ -66,12 +66,12 @@ const TicketType: React.FC<TicketTypeProps> = ({
 
   // Get Price
   const [price, setPrice] = useState<number>(
-    getPrice(localStorage.getItem("classType") as string)
+    getPrice(JSON.parse(localStorage.getItem("classType") as string))
   );
 
   // Re Render Flight Data
   useEffect(() => {
-    setPrice(getPrice(localStorage.getItem("classType") as string));
+    setPrice(getPrice(JSON.parse(localStorage.getItem("classType") as string)));
   }, [flightData]);
 
   return (

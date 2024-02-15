@@ -34,6 +34,7 @@ import VerificationOTP from "./pages/auth/VerificationOTP";
 import ChooseSeat from "./pages/client/ChooseSeat.tsx";
 import HomeDash from "./pages/admin/home/HomeDash";
 import DetailTicket from "./pages/admin/home/DetailTicket.tsx";
+import PurchaseStatus from "./pages/client/PurchaseStatus.tsx";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -171,6 +172,10 @@ const router = createBrowserRouter([
     path: "/historyPending",
     element: <HistoryPending />,
   },
+  {
+    path: "/purchaseStatus/:id",
+    element: <PurchaseStatus />
+  }
 ]);
 
 export default function App() {

@@ -4,6 +4,10 @@ import {FlightData} from "../../../assets/static/TableDataTypes.ts";
 import axios from "axios";
 import API_URL from "../../../assets/static/API.ts";
 import {useEffect, useState} from "react";
+import {
+    getAdultsNumberFromLocalStorage,
+    getChildsNumberFromLocalStorage, getInfantsNumberFromLocalStorage
+} from "../../../utils/ticketList/ticketList.utils.ts";
 
 interface ITotalPriceDetailProps {
     totalPrice: number,
@@ -15,10 +19,11 @@ const TotalPriceDetailComponent = ({totalPrice, priceInsure}: ITotalPriceDetailP
 
     const baggagePrice =
         localStorage.getItem("baggagePrice")  ? Number(localStorage.getItem("baggagePrice") as string) : 0 ;
-    const passengerLength = JSON.parse(localStorage.getItem("passengers") as string).length;
-
+    const passengers = JSON.parse(localStorage.getItem("passengers") as string);
+    const passengerLength = passengers.length;
     const flightIds: string[] = JSON.parse(localStorage.getItem("flightId") as string);
     const totalPriceFirst: number = JSON.parse(localStorage.getItem("totalPriceFirst") as string);
+    const priceOne = totalPriceFirst / passengerLength;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,10 +60,28 @@ const TotalPriceDetailComponent = ({totalPrice, priceInsure}: ITotalPriceDetailP
 
                             <div className={'flex flex-col gap-1'}>
                                 <p className={'font-semibold text-xs text-black'}>Price</p>
-                                <div className={'flex justify-between text-slate-600'}>
-                                    <div className={'font-normal text-xs'}>Passengers (x{passengerLength})</div>
-                                    <div className={'font-normal text-xs'}>{numberToCurrency("IDR", totalPriceFirst, true, false)} </div>
-                                </div>
+                                {/*<div className={'flex justify-between text-slate-600'}>*/}
+                                {/*    <div className={'font-normal text-xs'}>Passengers (x{passengerLength})</div>*/}
+                                {/*    <div className={'font-normal text-xs'}>{numberToCurrency("IDR", totalPriceFirst, true, false)} </div>*/}
+                                {/*</div>*/}
+                                {getAdultsNumberFromLocalStorage() > 0 && (
+                                    <div className={'flex justify-between text-slate-600'}>
+                                        <div className={'font-normal text-xs'}>Adult (x{getAdultsNumberFromLocalStorage()})</div>
+                                        <div className={'font-normal text-xs'}>{numberToCurrency("IDR", priceOne * getAdultsNumberFromLocalStorage(), true, false)} </div>
+                                    </div>
+                                )}
+                                {getChildsNumberFromLocalStorage() > 0 && (
+                                    <div className={'flex justify-between text-slate-600'}>
+                                        <div className={'font-normal text-xs'}>Child (x{getChildsNumberFromLocalStorage()})</div>
+                                        <div className={'font-normal text-xs'}>{numberToCurrency("IDR", priceOne * getChildsNumberFromLocalStorage(), true, false)} </div>
+                                    </div>
+                                )}
+                                {getInfantsNumberFromLocalStorage() > 0 && (
+                                    <div className={'flex justify-between text-slate-600'}>
+                                        <div className={'font-normal text-xs'}>Infant (x{getInfantsNumberFromLocalStorage()})</div>
+                                        <div className={'font-normal text-xs'}>{numberToCurrency("IDR", priceOne * getInfantsNumberFromLocalStorage(), true, false)} </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))}
