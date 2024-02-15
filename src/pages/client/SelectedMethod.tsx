@@ -4,11 +4,13 @@ import BodyLayout from "../../components/client/bodyLayout";
 import BodyComponent from "../../components/client/selectedMethod/bodyComponent";
 
 const SelectedMethod = () => {
+    const paymentMethod = localStorage.getItem("paymentMethod") as string;
+
   return (
     <section className="w-full min-h-screen bg-[#f7f7f7] relative">
       <HeaderLayout>
       <HeaderFill
-         bank="Mandiri Virtual Account"
+         bank={paymentMethod}
          orderID="123456789"
         />
       </HeaderLayout>

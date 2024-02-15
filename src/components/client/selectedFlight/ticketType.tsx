@@ -38,12 +38,14 @@ const TicketType: React.FC<TicketTypeProps> = ({
       setIndexTicket(indexTicket + 1);
       setTicketSelected(!ticketSelected);
     }
-    if (type == "normal") {
+    if (type == "Normal") {
       addTotalPriceToLocalStorage(price * getTotalPassengersFromLocalStorage());
+      localStorage.setItem("totalPriceFirst", JSON.stringify(price * getTotalPassengersFromLocalStorage()) )
     } else {
       addTotalPriceToLocalStorage(
         (price + 100000) * getTotalPassengersFromLocalStorage()
       );
+      localStorage.setItem("totalPriceFirst", JSON.stringify((price + 100000) * getTotalPassengersFromLocalStorage()) )
     }
   };
 
@@ -64,12 +66,12 @@ const TicketType: React.FC<TicketTypeProps> = ({
 
   // Get Price
   const [price, setPrice] = useState<number>(
-    getPrice(localStorage.getItem("classType") as string)
+    getPrice(JSON.parse(localStorage.getItem("classType") as string))
   );
 
   // Re Render Flight Data
   useEffect(() => {
-    setPrice(getPrice(localStorage.getItem("classType") as string));
+    setPrice(getPrice(JSON.parse(localStorage.getItem("classType") as string)));
   }, [flightData]);
 
   return (
