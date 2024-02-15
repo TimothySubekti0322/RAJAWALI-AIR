@@ -22,7 +22,7 @@ import {
 import type { DaysObject } from "../../utils/ticketList/ticketList.utils";
 import type { RawFlightData } from "../../components/client/flightList/flight.type";
 import { initialData } from "../../components/client/flightList/flight.type";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 
 interface TicketListProps {
   indexTicket: number;

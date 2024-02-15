@@ -7,7 +7,7 @@ import PassengerBaggage from "../../components/client/baggageDepart/passengerBag
 import { numberToCurrency } from "../../utils/NumberFormater";
 import type { Passenger } from "../../assets/static/LocalStorage.type";
 import { addTotalPriceToLocalStorage } from "../../utils/TotalPriceLocalStorage";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";

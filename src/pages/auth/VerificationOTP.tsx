@@ -3,7 +3,7 @@ import API_URL from "../../assets/static/API";
 import VerifyOtpBox from "../../components/authentication/verifyOTP/verifyOtpBox";
 import axios, { AxiosError } from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 
 interface AxiosRegisterError {
   success: boolean;

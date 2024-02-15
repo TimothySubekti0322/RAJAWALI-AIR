@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-interface BookingProviderProps {
+interface LocalStorageProviderProps {
   requiredItem: string[];
   children: ReactNode;
 }
@@ -24,7 +24,7 @@ const ErrorPage = (
   </div>
 );
 
-const BookingProvider: React.FC<BookingProviderProps> = ({
+const LocalStorageProvider: React.FC<LocalStorageProviderProps> = ({
   requiredItem,
   children,
 }) => {
@@ -37,4 +37,4 @@ const BookingProvider: React.FC<BookingProviderProps> = ({
   return children;
 };
 
-export default BookingProvider;
+export default LocalStorageProvider;

@@ -4,13 +4,13 @@ import HeaderFill from "../../components/client/headerFill";
 import { FlightFacil } from "../../components/client/travelAddOns/flightFasil/FlightFacil";
 import ExtraProtections from "../../components/client/travelAddOns/extraProtections/ExtraProtections";
 import TotalPriceDetailComponent from "../../components/client/totalPrice/TotalPriceDetailComponent.tsx";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import React from "react";
 import { numberToCurrency } from "../../utils/NumberFormater.ts";
-import BookingProvider from "../../providers/BookingProvider.tsx";
+import BookingProvider from "../../providers/LocalStorageProvider.tsx";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -29,89 +29,92 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 const TravelAddOns = () => {
   const [showTotalPrice, setShowTotalPrice] = useState<boolean>(false);
   const [priceInsure, setPriceInsure] = React.useState<number>(0);
-  const totalPriceLocalStorage = localStorage.getItem("totalPrice")  ? Number(localStorage.getItem("totalPrice") as string) : 0;
-  const [totalPrice, setTotalPrice] = useState<number>(
-      totalPriceLocalStorage
-  );
+  const totalPriceLocalStorage = localStorage.getItem("totalPrice")
+    ? Number(localStorage.getItem("totalPrice") as string)
+    : 0;
+  const [totalPrice, setTotalPrice] = useState<number>(totalPriceLocalStorage);
 
   useEffect(() => {
     setTotalPrice(totalPriceLocalStorage);
   }, [priceInsure])
 
-  console.log('data price insurence', priceInsure);
+  console.log("data price insurence", priceInsure);
   return (
     <BookingProvider requiredItem={["passengers"]}>
-    <section className="w-full min-h-screen bg-[#f7f7f7] relative">
-      <HeaderLayout>
-        <HeaderFill title="Travel Add-ons" />
-      </HeaderLayout>
+      <section className="w-full min-h-screen bg-[#f7f7f7] relative">
+        <HeaderLayout>
+          <HeaderFill title="Travel Add-ons" />
+        </HeaderLayout>
 
-      <BodyLayout paddingBottomSize="5rem">
-        <div className="inline-flex pt-[1rem] px-[1rem] flex-col">
-          <p className="text-black text-base font-bold font-['Roboto'] leading-snug mb-[0.5rem]">
-            Flight Facilities
-          </p>
-          <FlightFacil
-            img1="/images/travel-add-ons/bag.png"
-            textBold="Baggage"
-            paraf="You can bring up to 20kg baggage per passenger. Are you sure this is enough?"
-            img2="/images/travel-add-ons/tambah.png"
-          />
-          <FlightFacil
-            img1="/images/travel-add-ons/seat.png"
-            textBold="Seat Number"
-            paraf="Baggage addition successfully selected.
+        <BodyLayout paddingBottomSize="5rem">
+          <div className="inline-flex pt-[1rem] px-[1rem] flex-col">
+            <p className="text-black text-base font-bold font-['Roboto'] leading-snug mb-[0.5rem]">
+              Flight Facilities
+            </p>
+            <FlightFacil
+              img1="/images/travel-add-ons/bag.png"
+              textBold="Baggage"
+              paraf="You can bring up to 20kg baggage per passenger. Are you sure this is enough?"
+              img2="/images/travel-add-ons/tambah.png"
+            />
+            <FlightFacil
+              img1="/images/travel-add-ons/seat.png"
+              textBold="Seat Number"
+              paraf="Baggage addition successfully selected.
             Tap to view or make changes."
-            img2="/images/travel-add-ons/check.png"
-          />
-          <FlightFacil
-            img1="/images/travel-add-ons/meal.png"
-            textBold="In-flight Meals"
-            paraf="Don’t let yourself go hungry during the flight.
+              img2="/images/travel-add-ons/check.png"
+            />
+            <FlightFacil
+              img1="/images/travel-add-ons/meal.png"
+              textBold="In-flight Meals"
+              paraf="Don’t let yourself go hungry during the flight.
             Enjoy the meals we have prepared for you."
-            img2="/images/travel-add-ons/tambah.png"
-          />
+              img2="/images/travel-add-ons/tambah.png"
+            />
 
-          <p className="text-black text-base font-bold font-['Roboto'] leading-snug mb-[0.5rem] mt-[1.5rem]">
-            Extra Protections
-          </p>
+            <p className="text-black text-base font-bold font-['Roboto'] leading-snug mb-[0.5rem] mt-[1.5rem]">
+              Extra Protections
+            </p>
 
-          <ExtraProtections
-            id="1"
-            textHeader="Travel Insurance"
-            price={100000}
-            lineOneBold="Personal Anccident"
-            parafOne="Covers Up To IDR 500.000.000"
-            lineTwoBold="Trip Cancellation"
-            parafTwo="Covers Up To IDR 30.000.000"
-            priceInsure={priceInsure}
-            setPriceInsure={setPriceInsure}
-          />
-          <ExtraProtections
-            id="2"
-            textHeader="Baggage Insurance"
-            price={13500}
-            lineOneBold="Baggage Loss or Damage"
-            parafOne="Covers Up To IDR 5.000.000"
-            lineTwoBold="Baggage Delay"
-            parafTwo="Covers Up To IDR 3.000.000"
-            priceInsure={priceInsure}
-            setPriceInsure={setPriceInsure}
-          />
-          <ExtraProtections
-            id="3"
-            textHeader="Flight Delay Insurance"
-            price={60000}
-            lineOneBold="90-minute Departure Delay"
-            parafOne="Reimbursement Up To IDR 600.000"
-            lineTwoBold="Be Instanly Eligible for Claim"
-            parafTwo="Automated Email and SMS Notification"
-            priceInsure={priceInsure}
-            setPriceInsure={setPriceInsure}
-          />
-          <div className="text-black">total insurance {numberToCurrency("IDR", priceInsure, true, false)}</div>
-        </div>
-      </BodyLayout>
+            <ExtraProtections
+              id="1"
+              textHeader="Travel Insurance"
+              price={100000}
+              lineOneBold="Personal Anccident"
+              parafOne="Covers Up To IDR 500.000.000"
+              lineTwoBold="Trip Cancellation"
+              parafTwo="Covers Up To IDR 30.000.000"
+              priceInsure={priceInsure}
+              setPriceInsure={setPriceInsure}
+            />
+            <ExtraProtections
+              id="2"
+              textHeader="Baggage Insurance"
+              price={13500}
+              lineOneBold="Baggage Loss or Damage"
+              parafOne="Covers Up To IDR 5.000.000"
+              lineTwoBold="Baggage Delay"
+              parafTwo="Covers Up To IDR 3.000.000"
+              priceInsure={priceInsure}
+              setPriceInsure={setPriceInsure}
+            />
+            <ExtraProtections
+              id="3"
+              textHeader="Flight Delay Insurance"
+              price={60000}
+              lineOneBold="90-minute Departure Delay"
+              parafOne="Reimbursement Up To IDR 600.000"
+              lineTwoBold="Be Instanly Eligible for Claim"
+              parafTwo="Automated Email and SMS Notification"
+              priceInsure={priceInsure}
+              setPriceInsure={setPriceInsure}
+            />
+            <div className="text-black">
+              total insurance{" "}
+              {numberToCurrency("IDR", priceInsure, true, false)}
+            </div>
+          </div>
+        </BodyLayout>
 
       <div className="fixed left-0 right-0 bottom-0 mx-auto w-full sm:w-[360px] bg-white rounded-t-sm flex justify-center items-center gap-x-12">
         <div className=" w-96 p-2 bg-white rounded-tl rounded-tr border-t border-blue-500 flex-col justify-start items-start gap-2.5 inline-flex">
