@@ -5,7 +5,7 @@ import MealsCard from "../../components/client/meals/meals/mealsCard";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import React from "react";
 import { numberToCurrency } from "../../utils/NumberFormater";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 import { Passenger } from "../../assets/static/LocalStorage.type";
 // import { useKeenSlider } from "keen-slider/react";
 // import "keen-slider/keen-slider.min.css";

@@ -1,5 +1,5 @@
 import React from "react";
-import BookingProvider from "../../../providers/BookingProvider";
+import BookingProvider from "../../../providers/LocalStorageProvider";
 import { FlightData } from "../flightList/flight.type";
 import moment from "moment";
 import { getDurationBetweenDates } from "../../../utils/ticketList/ticketList.utils";
