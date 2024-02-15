@@ -1,6 +1,5 @@
 import { useState } from "react";
 import TextInput from "../../components/authentication/register/textInput";
-import TextInputError from "../../components/authentication/register/textInputError";
 import { validateEmail } from "../../utils/auth/login.utils";
 import {
   validatePassword,
@@ -8,7 +7,6 @@ import {
   validateRegistrationDataNotNull,
 } from "../../utils/auth/register.utils";
 import PasswordInput from "../../components/authentication/register/passwordInput";
-import PasswordInputError from "../../components/authentication/register/passwordInputError";
 import axios, { AxiosError } from "axios";
 import API_URL from "../../assets/static/API";
 
@@ -195,96 +193,46 @@ const Register = () => {
             Sign in
           </a>
         </div>
-        {fullNameError == "" ? (
-          <TextInput
-            label="Full Name"
-            id="fullName"
-            placeholder="Enter Your Name"
-            value={fullName}
-            onChange={handleFullNameChange}
-          />
-        ) : (
-          <TextInputError
-            label="Full Name"
-            id="fullName"
-            placeholder="Enter Your Name"
-            value={fullName}
-            onChange={handleFullNameChange}
-            textError={fullNameError}
-          />
-        )}
-        {emailError == "" ? (
-          <TextInput
-            label="Email"
-            id="email"
-            placeholder="Enter Your Email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        ) : (
-          <TextInputError
-            label="Email"
-            id="email"
-            placeholder="Enter Your Email"
-            value={email}
-            onChange={handleEmailChange}
-            textError={emailError}
-          />
-        )}
-        {phoneNumberError == "" ? (
-          <TextInput
-            label="Phone Number"
-            id="phoneNumber"
-            placeholder="Example: 081234567899"
-            value={phoneNumber}
-            onChange={handlePhoneNumberChange}
-          />
-        ) : (
-          <TextInputError
-            label="Phone Number"
-            id="phoneNumber"
-            placeholder="Example: 081234567899"
-            value={phoneNumber}
-            onChange={handlePhoneNumberChange}
-            textError={phoneNumberError}
-          />
-        )}
-        {passwordError == "" ? (
-          <PasswordInput
-            label="Password"
-            id="password"
-            placeholder="Minimum 6 characters"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        ) : (
-          <PasswordInputError
-            label="Password"
-            id="password"
-            placeholder="Minimum 6 characters"
-            value={password}
-            onChange={handlePasswordChange}
-            errorText={passwordError}
-          />
-        )}
-        {confirmPasswordError == "" ? (
-          <PasswordInput
-            label="Confirm Password"
-            id="confirmPassword"
-            placeholder="Repeat your password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-          />
-        ) : (
-          <PasswordInputError
-            label="Confirm Password"
-            id="confirmPassword"
-            placeholder="Repeat your password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            errorText={confirmPasswordError}
-          />
-        )}
+        <TextInput
+          label="Full Name"
+          id="fullName"
+          placeholder="Enter Your Name"
+          value={fullName}
+          onChange={handleFullNameChange}
+          textError={fullNameError}
+        />
+        <TextInput
+          label="Email"
+          id="email"
+          placeholder="Enter Your Email"
+          value={email}
+          onChange={handleEmailChange}
+          textError={emailError}
+        />
+        <TextInput
+          label="Phone Number"
+          id="phoneNumber"
+          placeholder="Example: 081234567899"
+          value={phoneNumber}
+          onChange={handlePhoneNumberChange}
+          textError={phoneNumberError}
+        />
+        <PasswordInput
+          label="Password"
+          id="password"
+          placeholder="Minimum 6 characters"
+          value={password}
+          onChange={handlePasswordChange}
+          errorText={passwordError}
+        />
+        <PasswordInput
+          label="Confirm Password"
+          id="confirmPassword"
+          placeholder="Repeat your password"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          errorText={confirmPasswordError}
+        />
         <button
           className="text-white bg-[#1E90FF] py-2 sm:py-4 sm:text-lg w-full mt-6 hover:bg-[#0C70DD] font-semibold rounded-md lg:bg-[#D2F1FF] lg:hover:bg-[#A0C0CC] lg:text-[#0F53B7] lg:py-2 lg:mt-6 2xl:mt-8 2xl:py-3 lg:mb-8"
           onClick={handleRegister}

@@ -10,21 +10,24 @@ interface PasswordInputProps {
   placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errorText: string;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({
+const PasswordInputError: React.FC<PasswordInputProps> = ({
   label,
   id,
   placeholder,
   value,
   onChange,
+  errorText,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-
   return (
     <>
       <div className="w-full lg:hidden">
         <TextField
+          error={errorText !== ""}
+          helperText={errorText}
           id="outlined-required"
           type={showPassword ? "text" : "password"}
           label={label}
@@ -55,14 +58,21 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           type={showPassword ? "text" : "password"}
           name={id}
           id={id}
-          className="w-full px-3 py-3 mt-2 text-black bg-white rounded-lg"
+          className={`${
+            errorText !== "" && "border-2 border-[#d32f2f]"
+          } w-full px-3 py-3 mt-2 text-black bg-white rounded-lg`}
           placeholder={placeholder}
           onChange={onChange}
           value={value}
         />
+        {errorText !== "" && (
+          <p className="text-[#d32f2f] text-xs font-semibold mt-1">
+            {errorText}
+          </p>
+        )}
       </div>
     </>
   );
 };
 
-export default PasswordInput;
+export default PasswordInputError;
