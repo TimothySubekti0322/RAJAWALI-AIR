@@ -57,13 +57,18 @@ const EditAirplane = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
-    console.log('isi handle input change', event.target.value);
+    console.log("isi handle input change", event.target.value);
   };
 
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.put(`${apiURL}/${id}`, form);
+      const token = localStorage.getItem("token") ?? "";
+      const response = await axios.put(`${apiURL}/${id}`, form, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response);
       if (response.data.success) {
         toast.success("Data updated successfully");
@@ -81,7 +86,7 @@ const EditAirplane = () => {
           window.location.href = "/dashboard/airplane";
         }, 1000); // Delayed by 1000 milliseconds (1 seconds)
       }
-      console.log('kursi ekonomi: ',response.data.data.economySeats);
+      console.log("kursi ekonomi: ", response.data.data.economySeats);
     } catch (error) {
       console.log(error);
       setTimeout(toast.error("Something when wrong"), 100);

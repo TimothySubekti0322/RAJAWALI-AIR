@@ -13,7 +13,12 @@ interface modalProps {
 const Modal: React.FC<modalProps> = ({ dashboardName, id }) => {
   const deleteHandler = async () => {
     try {
-      const res = await axios.delete(`${API_URL}/v1/${dashboardName}s/${id}`);
+      const token = localStorage.getItem("token") ?? "";
+      const res = await axios.delete(`${API_URL}/v1/${dashboardName}s/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (res.data.success) {
         toast.success("Data deleted successfully");
         setTimeout(() => {

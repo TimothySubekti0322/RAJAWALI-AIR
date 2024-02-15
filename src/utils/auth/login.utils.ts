@@ -4,3 +4,18 @@ export const validateEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
+export const adminLoginAtAdminPortal = (
+  user: string,
+  role: string
+): boolean => {
+  // Check if the user is an admin
+  return user === "admin" && role === "ROLE_ADMIN";
+};
+
+export const clientLoginAtClientPortal = (
+  user: string,
+  role: string
+): boolean => {
+  // Check if the user is an admin
+  return user === "client" && role === "ROLE_USER";
+};
