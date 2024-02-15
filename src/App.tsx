@@ -32,7 +32,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import VerificationOTP from "./pages/auth/VerificationOTP";
 import ChooseSeat from "./pages/client/ChooseSeat.tsx";
-import HomeDash from "./pages/admin/home/HomeDash";
+import HomeDash from "./pages/admin/home/HomeDash.tsx";
 import DetailTicket from "./pages/admin/home/DetailTicket.tsx";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";

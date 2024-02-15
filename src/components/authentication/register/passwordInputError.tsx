@@ -13,7 +13,14 @@ interface PasswordInputProps {
   errorText: string;
 }
 
-const PasswordInputError: React.FC<PasswordInputProps> = ({label, id, placeholder, value, onChange, errorText}) => {
+const PasswordInputError: React.FC<PasswordInputProps> = ({
+  label,
+  id,
+  placeholder,
+  value,
+  onChange,
+  errorText,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <>
@@ -56,9 +63,7 @@ const PasswordInputError: React.FC<PasswordInputProps> = ({label, id, placeholde
           onChange={onChange}
           value={value}
         />
-        <p className="text-[#d32f2f] text-xs font-semibold mt-1">
-          {errorText}
-        </p>
+        <p className="text-[#d32f2f] text-xs font-semibold mt-1">{errorText}</p>
       </div>
     </>
   );
