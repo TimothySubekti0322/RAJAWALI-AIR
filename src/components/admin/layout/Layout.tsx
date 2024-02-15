@@ -7,7 +7,7 @@ import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 import Header from "../header";
 import Footer from "../footer";
-import PrivateProvider from "../../../providers/PrivateProvider";
+import ProtectedProvider from "../../../providers/ProtectedProvider";
 import styles from "./css/Layout.module.css";
 
 interface LayoutProps {
@@ -16,7 +16,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <PrivateProvider>
+    <ProtectedProvider>
       <div
         className={styles.outerDiv}
         // style={{ fontFamily: "Roboto", width: "calc(100vw - 17px)" }}
@@ -38,7 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         </div>
       </div>
-    </PrivateProvider>
+    </ProtectedProvider>
   );
 };
 
