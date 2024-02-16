@@ -89,7 +89,7 @@ const Login: React.FC<LoginProps> = ({ user }) => {
         if (response.data.success) {
           // Check if it is in Correct Portal
           if (
-            !adminLoginAtAdminPortal(user, response.data.data.roles[0].name) ||
+            !adminLoginAtAdminPortal(user, response.data.data.roles[0].name) &&
             !clientLoginAtClientPortal(user, response.data.data.roles[0].name)
           ) {
             setEmailError("Email not found");
