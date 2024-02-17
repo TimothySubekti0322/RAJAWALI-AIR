@@ -19,7 +19,7 @@ const ModalRejected: React.FC<modalProps> = ({ id, token }) => {
         }
       });
       if (res.data.success) {
-        toast.success("Data deleted successfully");
+        toast.success("Payment Rejected");
         setTimeout(() => {
           window.location.href = `/dashboard/home`;
         }, 1000); // Delayed by 1000 milliseconds (1 seconds)

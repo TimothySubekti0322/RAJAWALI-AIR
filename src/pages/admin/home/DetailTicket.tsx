@@ -2,16 +2,16 @@ import Layout from "../../../components/admin/layout/Layout";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Typography from "@mui/material/Typography";
-import TextDetail from "../../../components/admin/home/Ticket-Details/TextDetail";
 import API_URL from "../../../assets/static/API";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { numberToCurrency } from "../../../utils/NumberFormater";
 import moment from "moment";
-import ModalAproved from "../../../components/admin/home/Ticket-Details/modals/ModalAproved";
-import ModalRejected from "../../../components/admin/home/Ticket-Details/modals/ModalRejected";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { CgCheckO } from "react-icons/cg";
+import TextDetail from "../../../components/admin/home/Ticket-Details/TextDetail";
+import ModalAproved from "../../../components/admin/home/Ticket-Details/modals/ModalAproved";
+import ModalRejected from "../../../components/admin/home/Ticket-Details/modals/ModalRejected";
 
 const breadcrumbs = [
   <Typography key="1" color="text.primary">
@@ -33,6 +33,9 @@ const DetailTicket = () => {
   const id = path.split("/")[4];
   const [form, setForm] = useState({
     id: "",
+    payment: {
+      id: "",
+    },
     expiredAt: "",
     flightDetailList: [
       { flightId: "" },
@@ -114,6 +117,7 @@ const DetailTicket = () => {
           </div>
           <div className="flex flex-col bg-white rounded-lg px-4 mx-4 mt-3 p-4 mb-5">
             <TextDetail title="Booking ID" value={form.id} />
+            <TextDetail title="Payment ID" value={form.payment.id} />
             <TextDetail
               title="Booking Time"
               value={moment(form.expiredAt).format("DD MMM YYYY, HH:mm")}
@@ -216,7 +220,7 @@ const DetailTicket = () => {
             onClick={() =>
               (
                 document.getElementById(
-                  `my_modal_Reject_${form.id}`
+                  `my_modal_Reject_${form.payment.id}`
                 ) as HTMLFormElement
               )?.showModal()
             }
@@ -231,7 +235,7 @@ const DetailTicket = () => {
             onClick={() =>
               (
                 document.getElementById(
-                  `my_modal_aproved_${form.id}`
+                  `my_modal_aproved_${form.payment.id}`
                 ) as HTMLFormElement
               )?.showModal()
             }
@@ -242,8 +246,8 @@ const DetailTicket = () => {
             <div className="font-['Roboto']">Approve</div>
           </button>
         </div>
-        <ModalAproved token={token} id={form.id} />
-        <ModalRejected token={token} id={form.id} />
+        <ModalAproved token={token} id={form.payment.id} />
+        <ModalRejected token={token} id={form.payment.id} />
       </div>
     </Layout>
   );

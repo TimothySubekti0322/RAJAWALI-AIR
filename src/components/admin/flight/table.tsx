@@ -8,6 +8,7 @@ import { makeStyles, createStyles } from "@mui/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 // Pagination Styling
 const paginationItemStyles = makeStyles(() =>
@@ -144,9 +145,9 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                     {item.airplane.airplaneCode}
                   </td>
                   <td className="px-4 py-3 text-center">
-                    {item.departureDate}
+                  {moment(item.departureDate).format("DD MMM YYYY, HH:mm")}
                   </td>
-                  <td className="px-4 py-3 text-center">{item.arrivalDate}</td>
+                  <td className="px-4 py-3 text-center">{moment(item.arrivalDate).format("DD MMM YYYY, HH:mm")}</td>
                   <td className="px-4 py-3 text-center">
                     {item.economySeatsPrice}
                   </td>
