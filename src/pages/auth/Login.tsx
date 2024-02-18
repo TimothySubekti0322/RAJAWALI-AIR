@@ -97,6 +97,7 @@ const Login: React.FC<LoginProps> = ({ user }) => {
           } else {
             // Login Logic
             localStorage.setItem("token", response.data.data.accessToken);
+            localStorage.setItem("userId", response.data.data.id);
             if (remember) {
               localStorage.setItem("rememberMe", "true");
               localStorage.setItem(

@@ -22,8 +22,16 @@ export interface History {
   createdAt: string;
 }
 
+export interface HistoryData {
+  reservationId: string;
+  price: number;
+  date: string;
+  time: string;
+  status: string;
+}
+
 export interface HistoryGroup {
   title: string;
-  date: string[];
+  data: HistoryData[];
 }
 
