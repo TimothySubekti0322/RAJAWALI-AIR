@@ -2,18 +2,19 @@ import Breadcrumbs from "./breadcrumbs";
 import SelectedCard from "./selectedCard";
 import TransferCard from "./transferCard";
 import VaCard from "./vaCard";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import {useEffect, useState} from "react";
 import {FlightData} from "../../../assets/static/TableDataTypes.ts";
 import API_URL from "../../../assets/static/API.ts";
 import axios from "axios";
 import ProcessingModal from "../purchaseProcessing/ProcessingModal.tsx";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const BodyComponent = () => {
   const [flights, setFlights] = useState<FlightData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const {id} = useParams();
 
   const paymentMethod = localStorage.getItem("paymentMethod") as string;
   const flightIds: string[] = JSON.parse(localStorage.getItem("flightId") as string);
@@ -30,14 +31,27 @@ const BodyComponent = () => {
     if (flightIds.length > 0) {
       fetchData();
     }
-  }, [flightIds]);
+
+
+  }, []);
 
   const handleClick = () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/purchaseStatus/123")
-    }, 2000);
+    axios.post(`${API_URL}/v1/payments/${id}/finish`)
+        .then(({data}) => {
+          navigate(`/purchaseStatus/${data.data.reservation.id}`)
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(error.response.data.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        })
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   navigate("/purchaseStatus/123")
+    // }, 2000);
   };
 
   return (

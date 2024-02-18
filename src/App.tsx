@@ -81,7 +81,7 @@ const router = createBrowserRouter([
     element: <PaymentMethod />,
   },
   {
-    path: "/continuePayment",
+    path: "/continuePayment/:id",
     element: <ContinuePayment />,
   },
   {
