@@ -2,7 +2,6 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import API_URL from "../../../../../assets/static/API";
 
-
 interface modalProps {
   token: string | null;
   id: string;
@@ -11,15 +10,17 @@ interface modalProps {
 const ModalRejected: React.FC<modalProps> = ({ id, token }) => {
   const deleteHandler = async () => {
     try {
-      const res = await axios.post(`${API_URL}/v1/payments/${id}/reject`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const res = await axios.post(
+        `${API_URL}/v1/payments/${id}/reject`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
       if (res.data.success) {
-        toast.success("Data deleted successfully");
+        toast.success("Data Rejected");
         setTimeout(() => {
           window.location.href = `/dashboard/home`;
         }, 1000); // Delayed by 1000 milliseconds (1 seconds)
