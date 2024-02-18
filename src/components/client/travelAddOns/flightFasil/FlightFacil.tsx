@@ -1,5 +1,5 @@
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 interface FlightFacilProps {
   img1: string;
   textBold: string;
@@ -19,8 +19,8 @@ export const FlightFacil: React.FC<FlightFacilProps> = ({
       navigate("/baggageDepart");
     } else if (title == "In-flight Meals") {
       navigate("/meals");
-    } else if (title === "Seat Number") {
-      navigate("/chooseSeat")
+    } else if (title == "Seat Number") {
+      navigate("/chooseSeat");
     }
   };
   return (
