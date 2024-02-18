@@ -36,6 +36,7 @@ import ChooseSeat from "./pages/client/ChooseSeat.tsx";
 import HomeDash from "./pages/admin/home/HomeDash.tsx";
 import DetailTicket from "./pages/admin/home/DetailTicket.tsx";
 import PurchaseStatus from "./pages/client/PurchaseStatus.tsx";
+import UserDashboard from "./pages/admin/user/UserDashboard.tsx";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -150,6 +151,10 @@ const router = createBrowserRouter([
     element: <FlightForm />,
   },
   {
+    path: "/dashboard/user",
+    element: <UserDashboard />,
+  },
+  {
     path: "/search-test",
     element: <SearchTestPage />,
   },
@@ -157,7 +162,7 @@ const router = createBrowserRouter([
   // For check notification
   {
     path: "/notification",
-    element: <Notification/>,
+    element: <Notification />,
   },
   {
     path: "/pendingPurchase",
@@ -181,8 +186,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/purchaseStatus/:id",
-    element: <PurchaseStatus />
-  }
+    element: <PurchaseStatus />,
+  },
 ]);
 
 export default function App() {
