@@ -29,6 +29,7 @@ import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
 import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
 import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
+import Notification from "./pages/client/Notification";
 import Register from "./pages/auth/Register";
 import VerificationOTP from "./pages/auth/VerificationOTP";
 import ChooseSeat from "./pages/client/ChooseSeat.tsx";
@@ -151,6 +152,12 @@ const router = createBrowserRouter([
   {
     path: "/search-test",
     element: <SearchTestPage />,
+  },
+
+  // For check notification
+  {
+    path: "/notification",
+    element: <Notification/>,
   },
   {
     path: "/pendingPurchase",
