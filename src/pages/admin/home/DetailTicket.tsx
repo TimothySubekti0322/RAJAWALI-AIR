@@ -34,6 +34,10 @@ const DetailTicket = () => {
   const [form, setForm] = useState({
     id: "",
     expiredAt: "",
+    payment: {
+      id: "",
+      method: "",
+    },
     flightDetailList: [
       { flightId: "" },
       { useTravelAssurance: false },
@@ -86,7 +90,7 @@ const DetailTicket = () => {
             {breadcrumbs}
           </Breadcrumbs>
         </div>
-        <hr className="border-1 w-full mt-4 border-black h-0" />
+        <hr className="w-full h-0 mt-4 border-black border-1" />
         <div className="inline-flex gap-3 mt-4">
           <img src="/images/home-dash/detail.svg" alt="" />
           <div className="fle">
@@ -101,7 +105,7 @@ const DetailTicket = () => {
         </div>
         {/* Ticket Details */}
         <div className="bg-[#F5F5F5] rounded-lg mt-3 w-full">
-          <div className="inline-flex gap-3 mt-4 px-4">
+          <div className="inline-flex gap-3 px-4 mt-4">
             <img src="/images/home-dash/order-detail.svg" alt="" />
             <div className="fle">
               <p className="text-black font-semibold text-xl font-['Roboto']">
@@ -112,7 +116,7 @@ const DetailTicket = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col bg-white rounded-lg px-4 mx-4 mt-3 p-4 mb-5">
+          <div className="flex flex-col p-4 px-4 mx-4 mt-3 mb-5 bg-white rounded-lg">
             <TextDetail title="Booking ID" value={form.id} />
             <TextDetail
               title="Booking Time"
@@ -164,7 +168,7 @@ const DetailTicket = () => {
         <div>
           {form.passengers.map((passenger, index) => (
             <div key={index} className="bg-[#F5F5F5] rounded-lg mt-4 w-full">
-              <div className="inline-flex gap-3 mt-4 px-4">
+              <div className="inline-flex gap-3 px-4 mt-4">
                 <img src="/images/home-dash/profile.svg" alt="" />
                 <div className="fle">
                   <p className="text-black font-semibold text-xl font-['Roboto']">
@@ -175,7 +179,7 @@ const DetailTicket = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col bg-white rounded-lg px-4 mx-4 mt-3 p-4 mb-5">
+              <div className="flex flex-col p-4 px-4 mx-4 mt-3 mb-5 bg-white rounded-lg">
                 <TextDetail title="Full Name" value={passenger.fullname} />
                 <TextDetail title="Gender" value={passenger.genderType} />
                 <TextDetail title="Age" value={passenger.ageType} />
@@ -210,28 +214,28 @@ const DetailTicket = () => {
             </div>
           ))}
         </div>
-        <div className="flex item-center justify-end gap-5 mt-10">
+        <div className="flex justify-end gap-5 mt-10 item-center">
           <button
-            className="inline-flex gap-1 text-white rounded-lg bg-red-500 p-4 hover:bg-red-700"
+            className="inline-flex gap-1 p-4 text-white bg-red-500 rounded-lg hover:bg-red-700"
             onClick={() =>
               (
                 document.getElementById(
-                  `my_modal_Reject_${form.id}`
+                  `my_modal_Reject_${form.payment.id}`
                 ) as HTMLFormElement
               )?.showModal()
             }
           >
-            <div className=" text-2xl">
+            <div className="text-2xl ">
               <AiOutlineCloseCircle />
             </div>
             <div className="font-['Roboto']">Rejected</div>
           </button>
           <button
-            className="inline-flex gap-1 text-white rounded-lg bg-green-500 p-4 hover:bg-green-700"
+            className="inline-flex gap-1 p-4 text-white bg-green-500 rounded-lg hover:bg-green-700"
             onClick={() =>
               (
                 document.getElementById(
-                  `my_modal_aproved_${form.id}`
+                  `my_modal_aproved_${form.payment.id}`
                 ) as HTMLFormElement
               )?.showModal()
             }
@@ -242,8 +246,8 @@ const DetailTicket = () => {
             <div className="font-['Roboto']">Approve</div>
           </button>
         </div>
-        <ModalAproved token={token} id={form.id} />
-        <ModalRejected token={token} id={form.id} />
+        <ModalAproved token={token} id={form.payment.id} />
+        <ModalRejected token={token} id={form.payment.id} />
       </div>
     </Layout>
   );
