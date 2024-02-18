@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     element: <ContinuePayment />,
   },
   {
-    path: "/selectedMethod",
+    path: "/selectedMethod/:id",
     element: <SelectedMethod />,
   },
   {

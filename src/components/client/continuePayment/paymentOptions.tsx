@@ -19,7 +19,7 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({
 }) => {
     const handleChangeMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedValue(event.target.value);
-        console.log(selectedValue);
+        // console.log(selectedValue);
       };
       
   return (

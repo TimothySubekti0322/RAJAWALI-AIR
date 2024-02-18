@@ -7,6 +7,19 @@ const TransferCard: React.FC<TransferCardProps> = () => {
   const [copied, setCopied] = useState(false);
   const payment = localStorage.getItem("paymentMethod") as string;
 
+  const paymentLogo = (): string => {
+      const methodString = payment.toUpperCase();
+      if (/MANDIRI/.test(methodString)) {
+          return "mandiri";
+      } else if (/BNI/.test(methodString)) {
+          return "bni";
+      } else if (/BCA/.test(methodString)) {
+          return "bca"
+      } else {
+          return "bri"
+      }
+  }
+
   const handleCopyClick = () => {
     const range = document.createRange();
     const virtualAccountNumberElement = document.getElementById(
@@ -40,7 +53,7 @@ const TransferCard: React.FC<TransferCardProps> = () => {
       </p>
       <div className="flex items-center mt-2">
         <div className="w-10 h-7 border border-[#E0E0E0] rounded mr-2 flex items-center justify-center">
-          <img src="/images/payment-method/mandiri.svg" alt="mandiri" />
+          <img src={`/images/payment-method/${paymentLogo()}.svg`} alt="mandiri" />
         </div>
         <p className="text-xs font-normal text-black">
             {payment}
