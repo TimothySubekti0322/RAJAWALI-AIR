@@ -32,7 +32,7 @@ const BodyComponent = () => {
           .then(() => {
             // navigate("/selectedMethod/999");
             localStorage.setItem("paymentMethod", selectedValue);
-            navigate(`/selectedMethod/${id}`)
+            navigate(`/purchaseStatus/${id}`)
           })
           .catch((error) => {
               console.log(error)
