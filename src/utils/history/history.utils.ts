@@ -1,39 +1,50 @@
-import type { History } from "./history.interface";
+import type { History, HistoryGroup } from "./history.interface";
 import moment from "moment";
 
-interface HistoryGroup {
-  title: string;
-  date: string[];
-}
-
 export const arrayMonthYear = (histories: History[]): HistoryGroup[] => {
-  const recapMap: { [key: string]: string[] } = {};
+  const reversedHistories = histories.slice().reverse();
 
-  // Iterate through the array of dates
-  histories.forEach((history) => {
-    const monthYear = moment(history.createdAt).format("MMMM YYYY");
+  const result: HistoryGroup[] = [];
 
-    // If the month-year is not in the map, create a new entry
-    if (!recapMap[monthYear]) {
-      recapMap[monthYear] = [];
+  for (const element of reversedHistories) {
+    const title = moment(element.createdAt).format("MMMM YYYY");
+    if (result.length === 0) {
+      const firstHistoryData = {
+        reservationId: element.id,
+        price: element.totalPrice,
+        date: moment(element.createdAt).format("YYYY-MM-DD"),
+        time: moment(element.createdAt).format("HH:mm:ss"),
+        status: element.paymentStatus,
+      };
+      const firstData = {
+        title: title,
+        data: [firstHistoryData],
+      };
+      result.push(firstData);
+    } else if (result[result.length - 1].title === title) {
+      const historyData = {
+        reservationId: element.id,
+        price: element.totalPrice,
+        date: moment(element.createdAt).format("YYYY-MM-DD"),
+        time: moment(element.createdAt).format("HH:mm:ss"),
+        status: element.paymentStatus,
+      };
+      result[result.length - 1].data.push(historyData);
+    } else {
+      const newHistoryData = {
+        reservationId: element.id,
+        price: element.totalPrice,
+        date: moment(element.createdAt).format("YYYY-MM-DD"),
+        time: moment(element.createdAt).format("HH:mm:ss"),
+        status: element.paymentStatus,
+      };
+      const newData = {
+        title: title,
+        data: [newHistoryData],
+      };
+      result.push(newData);
     }
+  }
 
-    // Add the date to the corresponding month-year entry
-    recapMap[monthYear].push(history.createdAt);
-  });
-
-  // Convert the map into an array of objects
-  const recapArray: HistoryGroup[] = Object.entries(recapMap).map(
-    ([title, date]) => ({
-      title,
-      date,
-    })
-  );
-
-  // Sort the array by title (month-year)
-  recapArray.sort((a, b) => (a.title > b.title ? 1 : -1));
-
-  return recapArray;
+  return result;
 };
-
-

@@ -1,7 +1,22 @@
-// import React from 'react'
+import React from "react";
 import { FaChevronRight } from "react-icons/fa6";
+import { numberToCurrency } from "../../../utils/NumberFormater";
 
-const HistoryCard = () => {
+interface HistoryCardProps {
+  reservationId: string;
+  price: number;
+  date: string;
+  time: string;
+  status: string;
+}
+
+const HistoryCard: React.FC<HistoryCardProps> = ({
+  reservationId,
+  price,
+  date,
+  time,
+  status,
+}) => {
   return (
     <div className="flex flex-col w-full px-3 py-1 bg-white rounded-lg shadow-md">
       <div className="flex items-center justify-between mt-3">
@@ -11,19 +26,15 @@ const HistoryCard = () => {
               src="/images/blue-rajawali-air-logo.svg"
               alt="rajawali air logo"
             />
-            <p className="">Balikpapan</p>
-            <img
-              src="/images/long-arrow.svg"
-              alt="long arrow"
-              className="w-4 h-2 "
-            />
-            <p className="">Yogyakarta</p>
+            <p className="">{reservationId}</p>
           </div>
 
-          <p className="text-[#757575] text-xs mt-2">
-            25 Jan 2024, 08:15 - 09:05
+          <p className="text-[#1E90FF] font-semibold text-sm mt-2">
+            {numberToCurrency("IDR", price, true, true)}
           </p>
-          <p className="text-[#757575] text-xs mt-1">1h 50m | Sepinggan</p>
+          <p className="text-[#757575] text-[0.625rem] mt-1">
+            {date} {time}
+          </p>
         </div>
         <button className="bg-[#EDEDED] p-[0.25rem] rounded-[8px]">
           <FaChevronRight className="text-sm text-black" />
@@ -34,12 +45,18 @@ const HistoryCard = () => {
 
       {/* Purchase Schedule */}
       <div className="flex items-center justify-between mb-2">
-        <div className="text-[#FFFF] bg-[#18AF5E] rounded-lg text-[0.625rem] 2xl:text-xs py-1 px-2">
-          Purchase Schedule
+        <div
+          className={`${status == "Purchase Successful" && "bg-[#18AF5E]"} ${
+            status == "Waiting for Payment" && "bg-[#0F53B7]"
+          } ${status == "Purchase Pending" && "bg-[#F1A025]"} ${
+            status == "Purchase Canceled" && "bg-[#CB3A31]"
+          } text-[#FFFFFF] rounded-lg text-[0.625rem] 2xl:text-xs py-[0.3rem] px-2`}
+        >
+          {status}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default HistoryCard
+export default HistoryCard;

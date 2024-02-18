@@ -29,12 +29,14 @@ import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
 import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
 import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
+import Notification from "./pages/client/Notification";
 import Register from "./pages/auth/Register";
 import VerificationOTP from "./pages/auth/VerificationOTP";
 import ChooseSeat from "./pages/client/ChooseSeat.tsx";
 import HomeDash from "./pages/admin/home/HomeDash.tsx";
 import DetailTicket from "./pages/admin/home/DetailTicket.tsx";
 import PurchaseStatus from "./pages/client/PurchaseStatus.tsx";
+import UserDashboard from "./pages/admin/user/UserDashboard.tsx";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -149,8 +151,18 @@ const router = createBrowserRouter([
     element: <FlightForm />,
   },
   {
+    path: "/dashboard/user",
+    element: <UserDashboard />,
+  },
+  {
     path: "/search-test",
     element: <SearchTestPage />,
+  },
+
+  // For check notification
+  {
+    path: "/notification",
+    element: <Notification />,
   },
   {
     path: "/pendingPurchase",
@@ -174,8 +186,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/purchaseStatus/:id",
-    element: <PurchaseStatus />
-  }
+    element: <PurchaseStatus />,
+  },
 ]);
 
 export default function App() {

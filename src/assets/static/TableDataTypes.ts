@@ -45,6 +45,15 @@ type UserData = {
   password: string;
 };
 
+type UserDataTable = {
+  id: string;
+  roles: [{ name: string }];
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  reservationsMade: number;
+};
+
 type MealsData = {
   id: string;
   name: string;
@@ -54,10 +63,10 @@ type MealsData = {
 };
 
 type user = {
-  id : string;
-  fullName : string;
-  email : string;
-}
+  id: string;
+  fullName: string;
+  email: string;
+};
 
 type ResevationData = {
   no: number;
@@ -72,7 +81,7 @@ type ResevationData = {
   phoneNumber: string;
   totalPrice: number;
   expiredAt: string;
-}
+};
 
 export type {
   AirportData,
@@ -80,6 +89,7 @@ export type {
   Airplane,
   FlightData,
   UserData,
+  UserDataTable,
   MealsData,
   ResevationData,
 };
