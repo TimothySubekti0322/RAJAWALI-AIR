@@ -26,7 +26,7 @@ const FlightCard: React.FC<FlightCardProps> = ({
     // navigate(`/selectedFlight`);
     setTicketSelected(!ticketSelected);
   };
-  console.log(flightData)
+  console.log(flightData);
   return (
     <div
       className="flex flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md "
@@ -36,8 +36,8 @@ const FlightCard: React.FC<FlightCardProps> = ({
         {/* Logo and RW225 */}
         <div className="flex items-center">
           <img
-              src="/images/blue-rajawali-air-logo.svg"
-              alt="Blue Rajawali Logo"
+            src="/images/blue-rajawali-air-logo.svg"
+            alt="Blue Rajawali Logo"
           />
           <p className="text-[#757575] text-[0.625rem] 2xl:text-xs ml-2">
             RW225, RW752
@@ -59,8 +59,8 @@ const FlightCard: React.FC<FlightCardProps> = ({
             <div className="flex flex-col items-center">
               <p className="text-[#757575] text-[0.5rem] 2xl:text-[0.625rem]">
                 {getDurationBetweenDates(
-                    flightData.departureDate,
-                    flightData.arrivalDate
+                  flightData.departureDate,
+                  flightData.arrivalDate
                 )}
               </p>
               <div>
@@ -90,8 +90,8 @@ const FlightCard: React.FC<FlightCardProps> = ({
             </div>
             <div className="flex mt-[0.1rem] gap-x-1">
               <img
-                  src="/images/loyalty-point-logo.svg"
-                  alt="loyalty point logo"
+                src="/images/loyalty-point-logo.svg"
+                alt="loyalty point logo"
               />
               <p className="text-[0.625rem] text-[#757575] font-semibold">
                 {flightData.points} Loyalty Points
