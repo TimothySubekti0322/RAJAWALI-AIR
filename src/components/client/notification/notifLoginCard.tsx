@@ -1,4 +1,8 @@
-const notifLoginCard=()=>{
+
+
+
+const NotifLoginCard = () => {
+    
     return(
         <section className="flex items-center text-black p-2 border-b-2 border-grey-500">
             <div className="flex-none w-50 p-1">
@@ -19,4 +23,4 @@ const notifLoginCard=()=>{
     )
 }
 
-export default notifLoginCard
+export default NotifLoginCard;

@@ -22,7 +22,7 @@ function Navbar() {
                             <img className="h-[25px] w-[25px]" src={Favorite} alt="" />
                             <div className="ml-2 text-white">Favorite</div>
                         </Link>
-                        <Link to="/" className="flex items-center mx-3 bg-transparant hover:bg-slate-500 p-3 rounded-lg">
+                        <Link to="/notification" className="flex items-center mx-3 bg-transparant hover:bg-slate-500 p-3 rounded-lg">
                             <img className="h-[21px] w-[21px]" src={Inbox} alt="" />
                             <div className="ml-2 text-white">Inbox</div>
                         </Link>
