@@ -54,7 +54,7 @@ export const seatRender = (
         let jsxElement = (
           <button
             className="w-[90%] h-[90%] bg-[#1E90FF] hover:bg-[#0C70DD] text-sm rounded-md flex justify-center items-center"
-            onClick={() => handleSelectSeat(seat.seatNo)}
+            onClick={() => handleSelectSeat(seat.id)}
           ></button>
         );
         if (!seat.isAvailable) {
@@ -64,11 +64,11 @@ export const seatRender = (
               disabled={true}
             ></button>
           );
-        } else if (selectedSeat.includes(seat.seatNo)) {
+        } else if (selectedSeat.includes(seat.id)) {
           jsxElement = (
             <button className="w-[90%] h-[90%] p-1 bg-[#1E90FF] hover:bg-[#0C70DD] text-sm rounded-md flex justify-center items-center">
               <div className="w-full h-full bg-[#7CBAF6] hover:bg-[#5A98D4] flex items-center justify-center rounded-md font-bold ">
-                {selectedSeat.indexOf(seat.seatNo) + 1}
+                {selectedSeat.indexOf(seat.id) + 1}
               </div>
             </button>
           );

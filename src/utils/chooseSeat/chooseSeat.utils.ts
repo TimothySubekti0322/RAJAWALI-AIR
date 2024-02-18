@@ -1,5 +1,5 @@
 import { FlightDetailList } from "../ticketList/ticketList.utils";
-import { FlightPassengerSeat } from "./chooseSeat.interface";
+import { FlightPassengerSeat, Seat } from "./chooseSeat.interface";
 
 export const createGridTemplateColumns = (seatPerCol: number) => {
   let gridTemplateColumns = "";
@@ -69,3 +69,12 @@ export const saveFlightPassengerSeatData = (
   });
   localStorage.setItem("flightDetailList", JSON.stringify(flightDetailList));
 };
+
+export const getSeatNumber = (seats: Seat[], selectedSeat: string) => {
+  let seatNumber = "";
+  const seat = seats.find((seat) => seat.id === selectedSeat);
+  if (seat) {
+    seatNumber = seat.seatNo;
+  }
+  return seatNumber;
+}
