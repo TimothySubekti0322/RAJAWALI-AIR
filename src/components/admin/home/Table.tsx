@@ -135,7 +135,7 @@ const Table: React.FC<TableProps> = ({ tableColumns, api }) => {
                   <td className="px-4 py-3 text-center">{item.id}</td>
                   {/* <td className="px-4 py-3 text-center">{}</td> */}
                   <td className="px-4 py-3 text-center">{item.paymentStatus}</td>
-                  <td className="px-4 py-3 text-center">{moment(item.expiredAt).format("DD MMM YYYY, HH:mm")}</td>
+                  <td className="px-4 py-3 text-center">{moment(item.createdAt).format("DD MMM YYYY, HH:mm")}</td>
                   <td className="h-full px-4 py-3">
                     <div className="flex items-center justify-center gap-x-4">
                       {/* Edit */}

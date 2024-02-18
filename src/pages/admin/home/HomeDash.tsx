@@ -7,7 +7,7 @@ const tableColumns = [
   "No",
   "Booking ID",
   "Status",
-  "Date",
+  "Booking Date",
   "Action",
 ];
 

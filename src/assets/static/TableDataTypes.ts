@@ -72,6 +72,7 @@ type ResevationData = {
   phoneNumber: string;
   totalPrice: number;
   expiredAt: string;
+  createdAt: string;
 }
 
 export type {

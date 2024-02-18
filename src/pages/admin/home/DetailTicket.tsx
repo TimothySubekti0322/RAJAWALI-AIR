@@ -116,8 +116,11 @@ const DetailTicket = () => {
             </div>
           </div>
           <div className="flex flex-col bg-white rounded-lg px-4 mx-4 mt-3 p-4 mb-5">
-            <TextDetail title="Booking ID" value={form.id} />
-            <TextDetail title="Payment ID" value={form.payment.id} />
+            <TextDetail title="Booking ID" value={form?.id ?? "Data Null"} />
+            <TextDetail
+              title="Payment ID"
+              value={form?.payment.id ?? "Data Null"}
+            />
             <TextDetail
               title="Booking Time"
               value={moment(form.expiredAt).format("DD MMM YYYY, HH:mm")}
@@ -208,7 +211,7 @@ const DetailTicket = () => {
                     ].join(", ")}
                   />
                 </div>
-                <TextDetail title="Facilities" value={"to be continued"} />
+                {/* <TextDetail title="Facilities" value={"to be continued"} /> */}
               </div>
               <div className="text-[#F5F5F5] mt-[-1.2rem]">ayam</div>
             </div>
