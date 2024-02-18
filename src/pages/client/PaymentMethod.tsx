@@ -43,16 +43,16 @@ const VirtualAccount = [
   },
 ];
 
-const ConvenienceStore = [
-  {
-    image: "/images/payment-method/alfamart.svg",
-    title: "Alfamart/Alfamidi",
-  },
-  {
-    image: "/images/payment-method/indomaret.svg",
-    title: "Indomaret",
-  },
-];
+// const ConvenienceStore = [
+//   {
+//     image: "/images/payment-method/alfamart.svg",
+//     title: "Alfamart/Alfamidi",
+//   },
+//   {
+//     image: "/images/payment-method/indomaret.svg",
+//     title: "Indomaret",
+//   },
+// ];
 
 const PaymentMethod = () => {
   const [selectedValue, setSelectedValue] = React.useState("other");
@@ -80,12 +80,12 @@ const PaymentMethod = () => {
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
           />
-          <p className="font-bold">Convenience Store</p>
-          <PaymentOptions
-            options={ConvenienceStore}
-            selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
-          />
+          {/*<p className="font-bold">Convenience Store</p>*/}
+          {/*<PaymentOptions*/}
+          {/*  options={ConvenienceStore}*/}
+          {/*  selectedValue={selectedValue}*/}
+          {/*  setSelectedValue={setSelectedValue}*/}
+          {/*/>*/}
           <button
             className="w-full bg-[#1E90FF] rounded-lg mt-4 py-3 mb-6 text-white font-semibold"
             onClick={() => handleApply()}

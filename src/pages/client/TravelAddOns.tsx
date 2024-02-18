@@ -28,7 +28,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 const TravelAddOns = () => {
   const [showTotalPrice, setShowTotalPrice] = useState<boolean>(false);
-  const [priceInsure, setPriceInsure] = React.useState<number>(0);
+  const [priceInsure, setPriceInsure] = React.useState<number>(
+      localStorage.getItem("priceInsure")
+          ? Number(localStorage.getItem("priceInsure") as string)
+          : 0
+  );
   const totalPriceLocalStorage = localStorage.getItem("totalPrice")
     ? Number(localStorage.getItem("totalPrice") as string)
     : 0;
@@ -37,8 +41,6 @@ const TravelAddOns = () => {
   useEffect(() => {
     setTotalPrice(totalPriceLocalStorage);
   }, [priceInsure])
-
-  console.log("data price insurence", priceInsure);
   return (
     <BookingProvider requiredItem={["passengers"]}>
       <section className="w-full min-h-screen bg-[#f7f7f7] relative">
