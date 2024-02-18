@@ -13,13 +13,12 @@ interface FLightCardProps {
 }
 
 const FLightCard: React.FC<FLightCardProps> = ({
-  flightId,
   flightData,
   selectedFlight,
   setSelectedFlight,
   index,
 }) => {
-  console.log(flightId);
+  // console.log(flightId);
   const handleClicked = () => {
     setSelectedFlight(index);
   };

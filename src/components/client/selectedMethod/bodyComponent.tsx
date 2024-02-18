@@ -3,18 +3,16 @@ import SelectedCard from "./selectedCard";
 import TransferCard from "./transferCard";
 import VaCard from "./vaCard";
 import { Toaster } from "react-hot-toast";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {FlightData} from "../../../assets/static/TableDataTypes.ts";
 import API_URL from "../../../assets/static/API.ts";
 import axios from "axios";
 import ProcessingModal from "../purchaseProcessing/ProcessingModal.tsx";
 import {useNavigate} from "react-router-dom";
-import TransferEvidenceComponent from "../purchaseProcessing/TansferEvidenceComponent.tsx";
 
 const BodyComponent = () => {
   const [flights, setFlights] = useState<FlightData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [showEvidence, setShowEvidence] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const paymentMethod = localStorage.getItem("paymentMethod") as string;
@@ -34,9 +32,7 @@ const BodyComponent = () => {
     }
   }, [flightIds]);
 
-  const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setShowEvidence(false);
+  const handleClick = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -50,9 +46,9 @@ const BodyComponent = () => {
       {loading && (
           <ProcessingModal />
       )}
-      {showEvidence && (
-          <TransferEvidenceComponent handleSubmit={handleClick} />
-      )}
+      {/*{showEvidence && (*/}
+      {/*    <TransferEvidenceComponent handleSubmit={handleClick} />*/}
+      {/*)}*/}
       {/* Inner Body Section */}
       <div className="w-full px-4">
         {/* Departure Header */}
@@ -68,7 +64,7 @@ const BodyComponent = () => {
           <VaCard />
           <button
             className="mt-5 h-10 bg-[#1E90FF] rounded font-semibold"
-            onClick={() => setShowEvidence(!showEvidence)}
+            onClick={handleClick}
           >
             I already paid
           </button>

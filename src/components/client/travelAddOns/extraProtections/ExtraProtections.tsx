@@ -14,6 +14,8 @@ import {
   addTotalPriceToLocalStorage,
   substractTotalPriceFromLocalStorage
 } from "../../../../utils/TotalPriceLocalStorage.ts";
+import {GetFlightDetailList} from "../../../../utils/GetLocalStorageValue.ts";
+import {SaveToLocalStorage} from "../../../../utils/SaveToLocalStorage.ts";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -58,12 +60,13 @@ const ExtraProtections = ({
   const flightLength = JSON.parse(localStorage.getItem("flightId") as string).length;
   const passengerLength = JSON.parse(localStorage.getItem("passengers") as string).length;
 
+  const flightDetailList = GetFlightDetailList();
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   const totalInsurance = (price: number): number => {
-    console.log("Total: " + price * passengerLength * flightLength)
     return price * passengerLength * flightLength;
   }
 
@@ -75,33 +78,64 @@ const ExtraProtections = ({
     }));
     if (isChecked) {
       if(id == "1"){
+        SaveToLocalStorage("priceInsure", priceInsure + totalInsurance(100000));
         setPriceInsure(priceInsure + totalInsurance(100000));
         addTotalPriceToLocalStorage(totalInsurance(100000));
+        flightDetailList[0].useTravelAssurance = true;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
       }
       if(id == "2"){
+        SaveToLocalStorage("priceInsure", priceInsure + totalInsurance(13500))
         setPriceInsure(priceInsure + totalInsurance(13500));
         addTotalPriceToLocalStorage(totalInsurance(13500));
+        flightDetailList[0].useBagageAssurance = true;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
       }
       if(id == "3"){
+        SaveToLocalStorage("priceInsure", priceInsure + totalInsurance(60000))
         setPriceInsure(priceInsure + totalInsurance(60000));
         addTotalPriceToLocalStorage(totalInsurance(60000));
+        flightDetailList[0].useFlightDelayAssurance = true;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
       }
     }
     else {
       if(id == "1"){
+        SaveToLocalStorage("priceInsure", priceInsure - totalInsurance(100000))
         setPriceInsure(priceInsure - totalInsurance(100000));
         substractTotalPriceFromLocalStorage(totalInsurance(100000));
+        flightDetailList[0].useTravelAssurance = false;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
       }
       if(id == "2"){
+        SaveToLocalStorage("priceInsure", priceInsure - totalInsurance(13500))
         setPriceInsure(priceInsure - totalInsurance(13500));
         substractTotalPriceFromLocalStorage(totalInsurance(13500));
+        flightDetailList[0].useBagageAssurance = false;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
       }
       if(id == "3"){
+        SaveToLocalStorage("priceInsure", priceInsure - totalInsurance(60000))
         setPriceInsure(priceInsure - totalInsurance(60000));
         substractTotalPriceFromLocalStorage(totalInsurance(60000));
+        flightDetailList[0].useFlightDelayAssurance = false;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
       }
     }
   };
+
+  const checkedByLocalStorage = (): boolean => {
+    switch (id) {
+      case "1":
+        return flightDetailList[0].useTravelAssurance;
+      case "2":
+        return flightDetailList[0].useBagageAssurance;
+      case "3":
+        return flightDetailList[0].useFlightDelayAssurance;
+      default:
+        return false
+    }
+  }
 
   return (
     <Card sx={{ maxWidth: 345 }} className="mb-3">
@@ -138,7 +172,7 @@ const ExtraProtections = ({
             <div className=" w-5 h-5 justify-center items-center flex">
               <Checkbox
                 id={id}
-                checked={checked[id] || false}
+                checked={checked[id] || false || checkedByLocalStorage()}
                 onChange={handleChange}
               />
             </div>
