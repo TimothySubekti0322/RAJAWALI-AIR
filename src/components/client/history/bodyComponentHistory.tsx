@@ -21,9 +21,9 @@ const bodyComponentHistory: React.FC<bodyComponentHistoryProps> = ({
             <p className="mt-4 font-bold text-black">{history.title}</p>
             {/* Card in Month */}
             <div className="flex flex-col mt-2 space-y-4">
-              {history.date.map((date, index) => {
+              {history.date.map((date) => {
                 return (
-                  <div key={index}>
+                  <div key={date}>
                     <HistoryCardPurchase />
                   </div>
                 );

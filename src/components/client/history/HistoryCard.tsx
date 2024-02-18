@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { FaChevronRight } from "react-icons/fa6";
 
 const HistoryCard = () => {
