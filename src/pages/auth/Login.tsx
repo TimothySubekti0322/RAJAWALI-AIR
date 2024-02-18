@@ -78,6 +78,7 @@ const Login: React.FC<LoginProps> = ({ user }) => {
       const formData = {
         email: email,
         password: password,
+        rememberMe: remember,
       };
       try {
         console.log(formData);

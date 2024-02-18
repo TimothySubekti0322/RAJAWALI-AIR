@@ -9,6 +9,7 @@ import {
   Seat,
 } from "../../utils/chooseSeat/chooseSeat.interface";
 import {
+  getSeatNumber,
   initFlightPassengerSeatData,
   saveFlightPassengerSeatData,
 } from "../../utils/chooseSeat/chooseSeat.utils";
@@ -178,11 +179,10 @@ const ChooseSeat = () => {
                       Passenger {index + 1} ({passenger.ageType})
                     </p>
                     <p className="text-[0.625rem] mt-2">
-                      {
-                        flightPassengerSeatData[selectedFlightId].selectedSeat[
-                          index
-                        ]
-                      }{" "}
+                      {getSeatNumber(
+                        seats,
+                        flightPassengerSeatData[0].selectedSeat[index]
+                      )}{" "}
                       ({numberToCurrency("IDR", pricePerSeat, true, false)})
                     </p>
                   </button>

@@ -1,33 +1,39 @@
-import HistoryCardCancel from "./historyCardCancel";
+import React from "react";
+import { HistoryGroup } from "../../../utils/history/history.interface";
+// import HistoryCardCancel from "./historyCardCancel";
 import HistoryCardPurchase from "./historyCardPurchase";
-import HistoryCardReschedule from "./historyCardReschedule";
+// import HistoryCardReschedule from "./historyCardReschedule";
+// import HistoryCard from "./HistoryCard";
 
-
-const bodyComponentHistory = () => {
-    return(
-        <>
-
-        <div className="w-full px-3">
-            {/* Month Header */}
-            <p className="mt-4 font-bold text-black">January 2024</p>
-            {/* Card in Month */}
-            <div className="flex flex-col space-y-4 mt-2">
-                <HistoryCardPurchase />
-                <HistoryCardReschedule />
-            </div>
-        </div>
-
-        <div className="w-full px-3">
-            {/* Month Header */}
-            <p className="mt-4 font-bold text-black">December 2023</p>
-            {/* Card in Month */}
-            <div className="flex flex-col space-y-4 mt-2">
-                <HistoryCardCancel />
-            </div>
-        </div>
-        </>
-    )
+interface bodyComponentHistoryProps {
+  historyGroup: HistoryGroup[];
 }
 
-export default bodyComponentHistory;
+const bodyComponentHistory: React.FC<bodyComponentHistoryProps> = ({
+  historyGroup,
+}) => {
+  return (
+    <>
+      {historyGroup.map((history, index) => {
+        return (
+          <div key={index} className="w-full px-3">
+            {/* Month Header */}
+            <p className="mt-4 font-bold text-black">{history.title}</p>
+            {/* Card in Month */}
+            <div className="flex flex-col mt-2 space-y-4">
+              {history.date.map((date) => {
+                return (
+                  <div key={date}>
+                    <HistoryCardPurchase />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
+};
 
+export default bodyComponentHistory;
