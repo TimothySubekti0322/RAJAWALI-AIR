@@ -7,7 +7,7 @@ import PassengerBaggage from "../../components/client/baggageDepart/passengerBag
 import { numberToCurrency } from "../../utils/NumberFormater";
 import type { Passenger } from "../../assets/static/LocalStorage.type";
 import { addTotalPriceToLocalStorage } from "../../utils/TotalPriceLocalStorage";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -15,14 +15,17 @@ import "@fontsource/roboto/700.css";
 import "@fontsource/roboto/900.css";
 import {
   BaggageDepart,
+  addBaggageAddOnsToLocalStorage,
   createInitialBaggageData,
 } from "../../utils/bagageDepart/baggageDepart.utils";
 import axios from "axios";
 import { FlightData } from "../../components/client/flightList/flight.type";
 import API_URL from "../../assets/static/API";
 import CircularProgress from "@mui/material/CircularProgress";
+import {useNavigate} from "react-router-dom";
 
 const BaggageDepart = () => {
+  const navigate = useNavigate();
   // price
   const [price, setPrice] = useState<number>(0);
 
@@ -38,7 +41,9 @@ const BaggageDepart = () => {
 
   const handleSave = () => {
     addTotalPriceToLocalStorage(price);
-    window.location.href = "/travelAddOns";
+    localStorage.setItem("baggagePrice", JSON.stringify(price));
+    addBaggageAddOnsToLocalStorage(baggageData);
+    navigate("/travelAddOns");
   };
 
   const [baggageData, setBaggageData] = useState<BaggageDepart[]>(
@@ -86,7 +91,9 @@ const BaggageDepart = () => {
   }, []);
 
   return (
-    <BookingProvider requiredItem={["passengers", "flightId"]}>
+    <BookingProvider
+      requiredItem={["passengers", "flightId", "flightDetailList"]}
+    >
       <section
         className="w-full min-h-screen bg-[#f7f7f7] relative text-white"
         style={{ fontFamily: "Roboto" }}

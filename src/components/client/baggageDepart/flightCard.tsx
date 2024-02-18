@@ -1,5 +1,5 @@
 import React from "react";
-import BookingProvider from "../../../providers/BookingProvider";
+import BookingProvider from "../../../providers/LocalStorageProvider";
 import { FlightData } from "../flightList/flight.type";
 import moment from "moment";
 import { getDurationBetweenDates } from "../../../utils/ticketList/ticketList.utils";
@@ -13,13 +13,12 @@ interface FLightCardProps {
 }
 
 const FLightCard: React.FC<FLightCardProps> = ({
-  flightId,
   flightData,
   selectedFlight,
   setSelectedFlight,
   index,
 }) => {
-  console.log(flightId);
+  // console.log(flightId);
   const handleClicked = () => {
     setSelectedFlight(index);
   };

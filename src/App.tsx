@@ -12,21 +12,30 @@ import EditAirplane from "./pages/admin/airplane/EditAirplane";
 
 // Client Pages
 import Home from "./pages/client/Home";
-// import TicketList from "./pages/client/TicketList";
 import PaymentMethod from "./pages/client/PaymentMethod";
 import BaggageDepart from "./pages/client/BaggageDepart";
 import Meals from "./pages/client/Meals";
 import SelectedMethod from "./pages/client/SelectedMethod";
 import ContinuePayment from "./pages/client/ContinuePayment";
 import FillDetailInfo from "./pages/client/FillDetailInfo";
-// import SelectedFlight from "./pages/client/SelectedFlight";
 import History from "./pages/client/History";
 import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
+import PendingPurchase from "./pages/client/PendingPurchase.tsx";
+import SuccessPurchase from "./pages/client/SuccessPurchase.tsx";
+import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
+import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
+import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
 import Notification from "./pages/client/Notification";
+import Register from "./pages/auth/Register";
+import VerificationOTP from "./pages/auth/VerificationOTP";
+import ChooseSeat from "./pages/client/ChooseSeat.tsx";
+import HomeDash from "./pages/admin/home/HomeDash.tsx";
+import DetailTicket from "./pages/admin/home/DetailTicket.tsx";
+import PurchaseStatus from "./pages/client/PurchaseStatus.tsx";
 // import LoginClient from "./pages/client/loginClient";
 // import LoginAdmin from "./pages/admin/loginAdmin";
 
@@ -46,23 +55,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <div>Register Page</div>,
+    element: <Register />,
   },
   {
-    path: "chooseTicket",
+    path: "verifyOTP",
+    element: <VerificationOTP />,
+  },
+  {
+    path: "/chooseTicket",
     element: <ChooseTicket />,
   },
-  // {
-  //   path: "/ticketList",
-  //   element: <TicketList />,
-  // },
-  // {
-  //   path: "/selectedFlight",
-  //   element: <SelectedFlight />,
-  // },
   {
     path: "/fillDetailInformation",
     element: <FillDetailInfo />,
+  },
+  {
+    path: "/chooseSeat",
+    element: <ChooseSeat />,
   },
   {
     path: "/baggageDepart",
@@ -77,7 +86,7 @@ const router = createBrowserRouter([
     element: <ContinuePayment />,
   },
   {
-    path: "/selectedMethod",
+    path: "/selectedMethod/:id",
     element: <SelectedMethod />,
   },
   {
@@ -95,6 +104,14 @@ const router = createBrowserRouter([
   {
     path: "/history-empty",
     element: <EmptyHistory />,
+  },
+  {
+    path: "/dashboard/home",
+    element: <HomeDash />,
+  },
+  {
+    path: "/dashboard/home/ticket-details/:id",
+    element: <DetailTicket />,
   },
   {
     path: "/dashboard/airport",
@@ -142,6 +159,30 @@ const router = createBrowserRouter([
     path: "/notification",
     element: <Notification/>,
   },
+  {
+    path: "/pendingPurchase",
+    element: <PendingPurchase />,
+  },
+  {
+    path: "/successPurchase",
+    element: <SuccessPurchase />,
+  },
+  {
+    path: "/historySuccess",
+    element: <HistorySuccess />,
+  },
+  {
+    path: "/historyCancelled",
+    element: <HistoryCancelled />,
+  },
+  {
+    path: "/historyPending",
+    element: <HistoryPending />,
+  },
+  {
+    path: "/purchaseStatus/:id",
+    element: <PurchaseStatus />
+  }
 ]);
 
 export default function App() {

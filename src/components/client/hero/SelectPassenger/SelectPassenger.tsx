@@ -39,13 +39,33 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
         setSelectCabin(cabin);
     };
 
+    const handlePlus= (ageType: string) => {
+        const total = amountPassenger.infantValue + amountPassenger.adultValue + amountPassenger.childValue;
+        if (total < 7) {
+            switch (ageType) {
+                case "child":
+                    setAmountPassenger({...amountPassenger, childValue: amountPassenger.childValue + 1});
+                    break;
+                case "infant":
+                    setAmountPassenger({...amountPassenger, infantValue: amountPassenger.infantValue + 1});
+                    break;
+                case "adult":
+                    setAmountPassenger({...amountPassenger, adultValue: amountPassenger.adultValue + 1});
+                    break
+                default :
+                    console.log("Not Valid");
+                    break;
+            }
+        }
+    }
+
     return(
         <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 9999, display: "flex", justifyContent: "center", alignItems: "center" }}>
             <div className={"rounded-md bg-white p-3 flex flex-col justify-center items-center"} style={{ color: "black" }}>
                 <table>
                     <thead style={{ borderBottom: "1px solid blue" }}>
                     <tr style={greyStyleText}>
-                        <td className={"p-2"}><b>Select Amount of Passenger</b></td>
+                        <td className={"p-2"}><b>Select Amount of Passenger </b></td>
                         <td className={"p-2"}><b>Select Cabin Class</b></td>
                     </tr>
                     </thead>
@@ -58,7 +78,7 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                                     setAmountPassenger({...amountPassenger, adultValue: amountPassenger.adultValue - 1})
                                 }
                             }}
-                            handlePlus={() => setAmountPassenger({ ...amountPassenger, adultValue: amountPassenger.adultValue + 1 }) }
+                            handlePlus={() => handlePlus("adult")}
                             nameInput={amountPassenger.adultName}
                             status={"Adult"}
                             ageInformation={"Age 12 and over"} /></td>
@@ -76,7 +96,7 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                                     setAmountPassenger({...amountPassenger, childValue: amountPassenger.childValue - 1})
                                 }
                             }}
-                            handlePlus={() => setAmountPassenger({ ...amountPassenger, childValue: amountPassenger.childValue + 1 }) }
+                            handlePlus={() => handlePlus("child")}
                             nameInput={amountPassenger.childName}
                             status={"Child"} ageInformation={"Age 2-11"} /></td>
                         <td style={cabinClassStyle}><CabinClassComponent
@@ -93,14 +113,17 @@ const SelectPassengerComponent = ({amountPassenger, setAmountPassenger, selectCa
                                     setAmountPassenger({...amountPassenger, infantValue: amountPassenger.infantValue - 1})
                                 }
                             }}
-                            handlePlus={() => setAmountPassenger({ ...amountPassenger, infantValue: amountPassenger.infantValue + 1 }) }
+                            handlePlus={() => handlePlus("infant")}
                             nameInput={amountPassenger.infantName}
                             status={"Infant"} ageInformation={"Age 0-2"} /></td>
                         <td style={cabinClassStyle}><CabinClassComponent
                             text={"First"}
-                            isSelected={selectCabin === "First Class"}
+                            isSelected={selectCabin === "First"}
                             onClick={() => handleCabinClick("First")}
                         /></td>
+                    </tr>
+                    <tr>
+                        <td><span className={'text-xs font-normal text-red-600'}>*Total Maximum passengers only 7 people</span></td>
                     </tr>
                     <tr>
                         <td></td>

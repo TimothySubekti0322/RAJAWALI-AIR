@@ -1,3 +1,5 @@
+import { FlightDetailList } from "../ticketList/ticketList.utils";
+
 export interface PassangerBaggage {
   passengerIndex: number;
   baggageAddOns: number | undefined;
@@ -39,4 +41,17 @@ export function createInitialBaggageData(): BaggageDepart[] {
 
 export function generateArrayWithValue(num: number, value: number) {
   return Array(num).fill(value);
+}
+
+export function addBaggageAddOnsToLocalStorage(baggageData: BaggageDepart[]) {
+  const flightDetailList: FlightDetailList[] = JSON.parse(localStorage.getItem("flightDetailList") as string);
+  for (let i = 0; i < flightDetailList.length; i++) {
+    for(let j = 0; j < flightDetailList[i].passengerDetailList.length; j++) {
+      flightDetailList[i].passengerDetailList[j].bagageAddOns = baggageData[i].passangerBaggage[j].baggageAddOns;
+      if (!baggageData[i].passangerBaggage[j].baggageAddOns) {
+        flightDetailList[i].passengerDetailList[j].bagageAddOns = 0;
+      }
+    }
+  }
+  localStorage.setItem("flightDetailList", JSON.stringify(flightDetailList));
 }

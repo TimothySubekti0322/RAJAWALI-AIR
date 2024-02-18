@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SelectedFlight from "./SelectedFlight";
 import TicketList from "./TicketList";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 
 const ChooseTicket = () => {
   const flights: number = Number(localStorage.getItem("flights") as string);

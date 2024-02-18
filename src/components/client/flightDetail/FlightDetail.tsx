@@ -7,8 +7,8 @@ import groupIcon from "../../../assets/images/Group.png";
 import {Airplane, AirportData} from "../../../assets/static/TableDataTypes.ts";
 import {extractTimeFromDateString} from "../../../utils/DateFormater.ts";
 import moment from "moment";
-import {getDurationBetweenDates} from "../../../utils/ticketList/ticketList.utils.ts";
-import {useNavigate} from "react-router-dom";
+import {getDurationBetweenDates, saveFlightIdToLocalStorage} from "../../../utils/ticketList/ticketList.utils.ts";
+import React from "react";
 
 interface IFlightDetail {
   id: string;
@@ -28,18 +28,26 @@ interface IFlightDetail {
 }
 interface FlightDetailProps {
   onClose: () => void;
-  detailFlight: IFlightDetail
+  detailFlight: IFlightDetail;
+  ticketSelected: boolean;
+  setTicketSelected: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const FlightDetail = ({ onClose, detailFlight }: FlightDetailProps) => {
-  const navigate = useNavigate();
+const FlightDetail = ({ onClose, detailFlight, ticketSelected, setTicketSelected }: FlightDetailProps) => {
+  // const navigate = useNavigate();
+  // const handleOnClick = () => {
+  //   localStorage.setItem("flightId", JSON.stringify(detailFlight.id));
+  //   navigate(`/selectedFlight`);
+  // }
+
   const handleOnClick = () => {
-    localStorage.setItem("flightId", JSON.stringify(detailFlight.id));
-    navigate(`/selectedFlight`);
-  }
+    saveFlightIdToLocalStorage(detailFlight.id);
+    // navigate(`/selectedFlight`);
+    setTicketSelected(!ticketSelected);
+  };
 
   return (
       <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 9999, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <div className={"rounded-md bg-white p-3 fixed top-[367px] flex flex-col justify-center items-center"} style={{ color: "black" }}>
+        <div className={"rounded-md bg-white p-3 fixed top-[365px] flex flex-col justify-center items-center"} style={{ color: "black" }}>
           <div
               className={`absolute sm:w-[360px] mx-auto mt-0 min-h-[600px] bg-[white] flex flex-col justify-between rounded-lg`}
           >
@@ -117,7 +125,7 @@ const FlightDetail = ({ onClose, detailFlight }: FlightDetailProps) => {
                     <strong>Total</strong>
                   </p>
                   <p className={"text-[#1E90FF]"}>
-                    <strong>IDR {detailFlight.totalPrice.toLocaleString('id-ID')}</strong>
+                    <strong>IDR {detailFlight.seatPrice.toLocaleString('id-ID')}</strong>
                   </p>
                 </div>
                 <button

@@ -30,10 +30,10 @@ type FlightData = {
   airplane: Airplane;
   departureDate: string;
   arrivalDate: string;
-  economySeatsPrice: 350000.0;
-  businessSeatsPrice: 500000.0;
-  firstSeatsPrice: 750000.0;
-  discount: 0.0;
+  economySeatsPrice: number;
+  businessSeatsPrice: number;
+  firstSeatsPrice: number;
+  discount: number;
 };
 
 type UserData = {
@@ -53,6 +53,27 @@ type MealsData = {
   thumbnailUrl: string;
 };
 
+type user = {
+  id : string;
+  fullName : string;
+  email : string;
+}
+
+type ResevationData = {
+  no: number;
+  id: string;
+  promo: string;
+  user: user;
+  paymentStatus: string;
+  classType: string;
+  genderType: number;
+  fullname: string;
+  email: string;
+  phoneNumber: string;
+  totalPrice: number;
+  expiredAt: string;
+}
+
 export type {
   AirportData,
   AirplaneData,
@@ -60,4 +81,5 @@ export type {
   FlightData,
   UserData,
   MealsData,
+  ResevationData,
 };

@@ -58,7 +58,12 @@ const EditAirport = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.put(`${apiURL}/${id}`, form);
+      const token = localStorage.getItem("token") ?? "";
+      const response = await axios.put(`${apiURL}/${id}`, form, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response);
       if (response.data.success) {
         toast.success("Data added successfully");

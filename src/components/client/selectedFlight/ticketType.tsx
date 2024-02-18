@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { numberToCurrency } from "../../../utils/NumberFormater";
 import { FlightData } from "../flightList/flight.type";
-import { getTotalPassengersFromLocalStorage } from "../../../utils/ticketList/ticketList.utils";
+import {
+  getTotalPassengersFromLocalStorage,
+  initFlightDetailList,
+} from "../../../utils/ticketList/ticketList.utils";
+import { useNavigate } from "react-router-dom";
+import { addTotalPriceToLocalStorage } from "../../../utils/TotalPriceLocalStorage.ts";
 
 interface TicketTypeProps {
   type: string;
@@ -22,30 +27,51 @@ const TicketType: React.FC<TicketTypeProps> = ({
   setTicketSelected,
   flightData,
 }) => {
+  const navigate = useNavigate();
   const handleSelect = () => {
     if (flights == indexTicket) {
       setTicketSelected(!ticketSelected);
-      window.location.href = "/fillDetailInformation";
+      // window.location.href = "/fillDetailInformation";
+      initFlightDetailList();
+      navigate("/fillDetailInformation");
     } else {
       setIndexTicket(indexTicket + 1);
       setTicketSelected(!ticketSelected);
     }
+    if (type == "Normal") {
+      addTotalPriceToLocalStorage(price * getTotalPassengersFromLocalStorage());
+      localStorage.setItem("totalPriceFirst", JSON.stringify(price * getTotalPassengersFromLocalStorage()) )
+    } else {
+      addTotalPriceToLocalStorage(
+        (price + 100000) * getTotalPassengersFromLocalStorage()
+      );
+      localStorage.setItem("totalPriceFirst", JSON.stringify((price + 100000) * getTotalPassengersFromLocalStorage()) )
+    }
   };
+
+  const getPrice = (classType: string): number => {
+    switch (classType) {
+      case "ECONOMY":
+        return flightData.economySeatsPrice;
+      case "BUSINESS":
+        return flightData.businessSeatsPrice;
+      case "FIRST":
+        return flightData.firstSeatsPrice;
+      default:
+        return 0;
+    }
+  };
+
+  console.log(localStorage.getItem("classType") as string);
 
   // Get Price
   const [price, setPrice] = useState<number>(
-    localStorage.getItem("classType") == "ECONOMY"
-      ? flightData.economySeatsPrice
-      : flightData.firstSeatsPrice
+    getPrice(JSON.parse(localStorage.getItem("classType") as string))
   );
 
   // Re Render Flight Data
   useEffect(() => {
-    setPrice(
-      localStorage.getItem("classType") == "ECONOMY"
-        ? flightData.economySeatsPrice
-        : flightData.firstSeatsPrice
-    );
+    setPrice(getPrice(JSON.parse(localStorage.getItem("classType") as string)));
   }, [flightData]);
 
   return (

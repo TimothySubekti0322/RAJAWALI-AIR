@@ -13,9 +13,10 @@ import {
   getAdultsNumberFromLocalStorage,
   getChildsNumberFromLocalStorage,
   getInfantsNumberFromLocalStorage,
+  removeFlightIdFromLocalStorage,
 } from "../../utils/ticketList/ticketList.utils";
 import { FlightData } from "../../components/client/flightList/flight.type";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 
 interface SelectedFlightProps {
   flights: number;
@@ -58,6 +59,7 @@ const SelectedFlight: React.FC<SelectedFlightProps> = ({
   console.log(flightData);
 
   const handleBackButton = () => {
+    removeFlightIdFromLocalStorage(indexTicket);
     setTicketSelected(!ticketSelected);
   };
 

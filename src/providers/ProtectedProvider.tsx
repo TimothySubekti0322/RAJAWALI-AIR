@@ -8,7 +8,7 @@ export default function PrivateProvider({ children }: PropsWithChildren) {
   const auth = AuthAdmin();
 
   if (!auth) {
-    window.location.href = "/login";
+    window.location.href = "/login/admin";
     return <></>;
   }
 

@@ -8,6 +8,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import { GoDotFill } from "react-icons/go";
+import React from "react";
+import { numberToCurrency } from "../../../../utils/NumberFormater";
+import {
+  addTotalPriceToLocalStorage,
+  substractTotalPriceFromLocalStorage
+} from "../../../../utils/TotalPriceLocalStorage.ts";
+import {GetFlightDetailList} from "../../../../utils/GetLocalStorageValue.ts";
+import {SaveToLocalStorage} from "../../../../utils/SaveToLocalStorage.ts";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -24,18 +32,110 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 interface Props {
+  id: string;
   textHeader: string;
-  price: string;
+  price: number;
+  lineOneBold: string;
+  parafOne: string;
+  lineTwoBold: string;
+  parafTwo: string;
+  priceInsure: number;
+  setPriceInsure: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
-const ExtraProtections = ({ textHeader, price }: Props) => {
+const ExtraProtections = ({
+  textHeader,
+  price,
+  lineOneBold,
+  parafOne,
+  lineTwoBold,
+  parafTwo,
+  id,
+  priceInsure,
+  setPriceInsure,
+}: Props) => {
   const [expanded, setExpanded] = useState(false);
+  const [checked, setChecked] = React.useState<Record<string, boolean>>({});
+
+  const flightLength = JSON.parse(localStorage.getItem("flightId") as string).length;
+  const passengerLength = JSON.parse(localStorage.getItem("passengers") as string).length;
+
+  const flightDetailList = GetFlightDetailList();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const totalInsurance = (price: number): number => {
+    return price * passengerLength * flightLength;
+  }
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, checked: isChecked } = event.target;
+    setChecked((prevState) => ({
+      ...prevState,
+      [id]: isChecked,
+    }));
+    if (isChecked) {
+      if(id == "1"){
+        SaveToLocalStorage("priceInsure", priceInsure + totalInsurance(100000));
+        setPriceInsure(priceInsure + totalInsurance(100000));
+        addTotalPriceToLocalStorage(totalInsurance(100000));
+        flightDetailList[0].useTravelAssurance = true;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
+      }
+      if(id == "2"){
+        SaveToLocalStorage("priceInsure", priceInsure + totalInsurance(13500))
+        setPriceInsure(priceInsure + totalInsurance(13500));
+        addTotalPriceToLocalStorage(totalInsurance(13500));
+        flightDetailList[0].useBagageAssurance = true;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
+      }
+      if(id == "3"){
+        SaveToLocalStorage("priceInsure", priceInsure + totalInsurance(60000))
+        setPriceInsure(priceInsure + totalInsurance(60000));
+        addTotalPriceToLocalStorage(totalInsurance(60000));
+        flightDetailList[0].useFlightDelayAssurance = true;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
+      }
+    }
+    else {
+      if(id == "1"){
+        SaveToLocalStorage("priceInsure", priceInsure - totalInsurance(100000))
+        setPriceInsure(priceInsure - totalInsurance(100000));
+        substractTotalPriceFromLocalStorage(totalInsurance(100000));
+        flightDetailList[0].useTravelAssurance = false;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
+      }
+      if(id == "2"){
+        SaveToLocalStorage("priceInsure", priceInsure - totalInsurance(13500))
+        setPriceInsure(priceInsure - totalInsurance(13500));
+        substractTotalPriceFromLocalStorage(totalInsurance(13500));
+        flightDetailList[0].useBagageAssurance = false;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
+      }
+      if(id == "3"){
+        SaveToLocalStorage("priceInsure", priceInsure - totalInsurance(60000))
+        setPriceInsure(priceInsure - totalInsurance(60000));
+        substractTotalPriceFromLocalStorage(totalInsurance(60000));
+        flightDetailList[0].useFlightDelayAssurance = false;
+        SaveToLocalStorage("flightDetailList", flightDetailList);
+      }
+    }
+  };
+
+  const checkedByLocalStorage = (): boolean => {
+    switch (id) {
+      case "1":
+        return flightDetailList[0].useTravelAssurance;
+      case "2":
+        return flightDetailList[0].useBagageAssurance;
+      case "3":
+        return flightDetailList[0].useFlightDelayAssurance;
+      default:
+        return false
+    }
+  }
 
   return (
     <Card sx={{ maxWidth: 345 }} className="mb-3">
@@ -51,10 +151,10 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
                   <div className="inline-flex">
                     <GoDotFill size={8} style={{ margin: "2px" }} />
                   </div>
-                  Personal accident
+                  {lineOneBold}
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
-                  Covers up to IDR 500.000.000
+                  {parafOne}
                 </div>
               </div>
               <div className=" w-60 h-8 relative">
@@ -62,15 +162,19 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
                   <div className="inline-flex">
                     <GoDotFill size={8} style={{ margin: "2px" }} />
                   </div>
-                  Trip cancellation (due to specific reasons)
+                  {lineTwoBold}
                 </div>
                 <div className=" left-[18px] top-[17px] absolute text-neutral-500 text-xs font-medium font-['Roboto'] leading-none">
-                  Covers up to IDR 30.000.000
+                  {parafTwo}
                 </div>
               </div>
             </div>
             <div className=" w-5 h-5 justify-center items-center flex">
-              <Checkbox {...label} defaultChecked />
+              <Checkbox
+                id={id}
+                checked={checked[id] || false || checkedByLocalStorage()}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
@@ -89,7 +193,7 @@ const ExtraProtections = ({ textHeader, price }: Props) => {
         </ExpandMore>
         <div className="relative bottom-0 left-[7rem]">
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
-            IDR {price}/
+            {numberToCurrency("IDR", price, true, false)}/
           </span>
           <span className="text-green-600 text-xs font-normal font-['Roboto'] leading-none">
             pax

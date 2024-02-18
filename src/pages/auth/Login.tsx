@@ -5,7 +5,11 @@ import TextField from "@mui/material/TextField";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios, { AxiosError } from "axios";
 import API_URL from "../../assets/static/API";
-import { validateEmail } from "../../utils/login/login.utils";
+import {
+  adminLoginAtAdminPortal,
+  clientLoginAtClientPortal,
+  validateEmail,
+} from "../../utils/auth/login.utils";
 
 interface LoginProps {
   user: "admin" | "client";
@@ -74,6 +78,7 @@ const Login: React.FC<LoginProps> = ({ user }) => {
       const formData = {
         email: email,
         password: password,
+        rememberMe: remember,
       };
       try {
         console.log(formData);
@@ -83,19 +88,34 @@ const Login: React.FC<LoginProps> = ({ user }) => {
         );
         console.log(response);
         if (response.data.success) {
-          localStorage.setItem("token", response.data.data.accessToken);
-          if (remember) {
-            localStorage.setItem("rememberMe", "true");
+          // Check if it is in Correct Portal
+          if (
+            !adminLoginAtAdminPortal(user, response.data.data.roles[0].name) &&
+            !clientLoginAtClientPortal(user, response.data.data.roles[0].name)
+          ) {
+            setEmailError("Email not found");
           } else {
-            localStorage.removeItem("rememberMe");
+            // Login Logic
+            localStorage.setItem("token", response.data.data.accessToken);
+            localStorage.setItem("userId", response.data.data.id);
+            if (remember) {
+              localStorage.setItem("rememberMe", "true");
+              localStorage.setItem(
+                "refreshToken",
+                response.data.data.refreshToken
+              );
+            } else {
+              localStorage.removeItem("rememberMe");
+            }
+            if (response.data.data.roles[0].name == "ROLE_ADMIN") {
+              localStorage.setItem("role", "admin");
+              window.location.href = "/dashboard/home";
+            } else {
+              window.location.href = "/";
+            }
+            setEmailError("");
+            setPasswordError("");
           }
-          if (response.data.data.roles[0].name == "ROLE_ADMIN") {
-            window.location.href = "/dashboard/airport";
-          } else {
-            window.location.href = "/";
-          }
-          setEmailError("");
-          setPasswordError("");
         }
       } catch (error) {
         const errorResponse = error as AxiosError;

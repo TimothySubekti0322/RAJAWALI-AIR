@@ -22,7 +22,7 @@ import {
 import type { DaysObject } from "../../utils/ticketList/ticketList.utils";
 import type { RawFlightData } from "../../components/client/flightList/flight.type";
 import { initialData } from "../../components/client/flightList/flight.type";
-import BookingProvider from "../../providers/BookingProvider";
+import BookingProvider from "../../providers/LocalStorageProvider";
 
 interface TicketListProps {
   indexTicket: number;
@@ -87,7 +87,7 @@ const TicketList: React.FC<TicketListProps> = ({
       : "";
 
     const classType = localStorage.getItem("classType")
-      ? `classType=${localStorage.getItem("classType")}`
+      ? `classType=${JSON.parse(localStorage.getItem("classType") as string)}`
       : "";
 
     // Set Date
@@ -258,7 +258,7 @@ const TicketList: React.FC<TicketListProps> = ({
       const departureDate = `departureDate=${newDate}&`;
 
       const classType = localStorage.getItem("classType")
-        ? `classType=${localStorage.getItem("classType")}`
+        ? `classType=${JSON.parse(localStorage.getItem("classType") as string)}`
         : "";
 
       // Set Date

@@ -43,7 +43,12 @@ const AddAirplane = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(apiURL, form);
+      const token = localStorage.getItem("token") ?? "";
+      const response = await axios.post(apiURL, form, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.data.success) {
         toast.success("Data added successfully");
         setLoading(false);
