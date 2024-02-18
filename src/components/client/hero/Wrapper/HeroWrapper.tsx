@@ -13,7 +13,7 @@ const divStyle = {
 
 const HeroWrapper = () => {
     return (
-        <div style={divStyle} className={"px-6 "}>
+        <div style={divStyle} className={"px-6"}>
             <Navbar />
             <div className={"flex flex-col pb-24 pt-36"}>
                 <HeroTitle />
