@@ -12,6 +12,10 @@ import React from "react";
 import { numberToCurrency } from "../../utils/NumberFormater.ts";
 import BookingProvider from "../../providers/LocalStorageProvider.tsx";
 import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
+import {GetReservationValue} from "../../utils/GetLocalStorageValue.ts";
+import axios from "axios";
+import API_URL from "../../assets/static/API.ts";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -39,6 +43,23 @@ const TravelAddOns = () => {
     ? Number(localStorage.getItem("totalPrice") as string)
     : 0;
   const [totalPrice, setTotalPrice] = useState<number>(totalPriceLocalStorage);
+
+  const handleContinuePayment = () => {
+    const flightDetail = GetReservationValue();
+    // flightDetail.promo = promoCode;
+    console.log("Continue Payment")
+    axios.post(`${API_URL}/v1/reservations`, flightDetail)
+        .then(({data}) => {
+          // navigate("/selectedMethod/999");
+          // localStorage.setItem("paymentMethod", selectedValue);
+          navigate(`/continuePayment/${data.data.id}`)
+        })
+        .catch((error) => {
+          console.log(error)
+          toast.error(error.response.data.message);
+        })
+    // console.log(flightDetail)
+  }
 
   useEffect(() => {
     setTotalPrice(totalPriceLocalStorage);
@@ -158,8 +179,8 @@ const TravelAddOns = () => {
             <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex hover:bg-blue-600 focus:outline-none focus:shadow-outline">
               <button
                 className="Primary text-stone-50 text-base font-semibold font-['Roboto'] leading-none"
-                // onClick={() => (window.location.href = "/continuePayment")}
-                onClick={() => navigate("/continuePayment")}
+                onClick={handleContinuePayment}
+                // onClick={() => navigate("/continuePayment")}
               >
                 Continue to Payment
               </button>

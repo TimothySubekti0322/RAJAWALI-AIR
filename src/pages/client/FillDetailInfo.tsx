@@ -14,7 +14,7 @@ interface IPassenger {
   seatId: string;
   genderType: string;
   ageType: string;
-  fullName: string;
+  fullname: string;
   idCardNumber: string;
 }
 
@@ -24,7 +24,7 @@ const FillDetailInfo = () => {
   const [contactDetail, setContactDetail] = useState<ContactDetailInput>({
     genderType: "",
     email: "",
-    fullName: "",
+    fullname: "",
     phoneNumber: "",
   });
   const [passengers, setPassengers] = useState<IPassenger[]>([]);
@@ -32,7 +32,7 @@ const FillDetailInfo = () => {
     {
       id: 0,
       genderType: "",
-      fullName: "",
+      fullname: "",
     },
   ]);
   const [isSameContactDetail, setIsSameContactDetail] =
@@ -57,7 +57,7 @@ const FillDetailInfo = () => {
         ...contactDetail,
         genderType: JSON.parse(genderTypeLs),
         phoneNumber: JSON.parse(phoneNumberLs),
-        fullName: JSON.parse(fullNameLs),
+        fullname: JSON.parse(fullNameLs),
         email: emailLs as string,
       });
     }
@@ -83,7 +83,7 @@ const FillDetailInfo = () => {
       updatedPassengerList[passengerIndex] = {
         ...updatedPassengerList[passengerIndex],
         genderType: honorofic,
-        fullName: name,
+        fullname: name,
       };
       setPassengerList(updatedPassengerList);
     } else {
@@ -93,7 +93,7 @@ const FillDetailInfo = () => {
         {
           id: index,
           genderType: honorofic,
-          fullName: name,
+          fullname: name,
         },
       ]);
     }
@@ -101,7 +101,7 @@ const FillDetailInfo = () => {
 
   const saveInformationToLocalStorage = () => {
     saveToLocalStorage("genderType", contactDetail.genderType);
-    saveToLocalStorage("fullName", contactDetail.fullName);
+    saveToLocalStorage("fullName", contactDetail.fullname);
     saveToLocalStorage("email", contactDetail.email);
     saveToLocalStorage("phoneNumber", contactDetail.phoneNumber);
 
@@ -110,7 +110,7 @@ const FillDetailInfo = () => {
       passengerList[0] = {
         id: 0,
         genderType: contactDetail.genderType,
-        fullName: contactDetail.fullName,
+        fullname: contactDetail.fullname,
       };
     }
 
@@ -120,7 +120,7 @@ const FillDetailInfo = () => {
       updatePassengers[index] = {
         ...updatePassengers[index],
         genderType: p.genderType,
-        fullName: p.fullName,
+        fullname: p.fullname,
       };
     });
     saveToLocalStorage("passengers", updatePassengers);
@@ -146,7 +146,7 @@ const FillDetailInfo = () => {
 
   const disabledButtonValidation = (): boolean => {
     return (
-      !contactDetail.fullName ||
+      !contactDetail.fullname ||
       !contactDetail.genderType ||
       !contactDetail.phoneNumber ||
       !contactDetail.email

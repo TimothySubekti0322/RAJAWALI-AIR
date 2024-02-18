@@ -1,7 +1,7 @@
 import HeaderLayout from "../headerLayout.tsx";
 import HeaderFill from "../headerFill.tsx";
 import BodyLayout from "../bodyLayout.tsx";
-import PendingComponent from "../purchaseProcessing/PendingComponent.tsx";
+// import PendingComponent from "../purchaseProcessing/PendingComponent.tsx";
 
 const HistoryPending = () => {
     return(
@@ -11,7 +11,7 @@ const HistoryPending = () => {
             </HeaderLayout>
             <BodyLayout paddingBottomSize="50px">
                 <div className={'w-full py-10 px-5'}>
-                    <PendingComponent />
+                    {/*<PendingComponent  />*/}
                 </div>
             </BodyLayout>
         </section>

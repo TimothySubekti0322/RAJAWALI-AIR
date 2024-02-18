@@ -3,9 +3,8 @@ import PaymentCard from "./paymentCard";
 import PaymentMethodCard from "./paymentMethodCard";
 import PromoCard from "./promoCard";
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import toast, {Toaster} from "react-hot-toast";
-import {GetReservationValue} from "../../../utils/GetLocalStorageValue.ts";
 import axios from "axios";
 import API_URL from "../../../assets/static/API.ts";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -16,21 +15,27 @@ const BodyComponent = () => {
   const [selectedValue, setSelectedValue] = React.useState("other");
   const [promoCode, setPromoCode] = React.useState("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const {id} = useParams();
 
   const handleApply = () => {
     if (selectedValue === "other") {
       toast.error("Please, select method payment first")
     } else {
       setIsLoading(true);
-      const flightDetail = GetReservationValue();
+      // const flightDetail = GetReservationValue();
+        const createPayment = {
+            reservationId: id,
+            method: selectedValue
+        }
       // flightDetail.promo = promoCode;
-      axios.post(`${API_URL}/v1/reservations`, flightDetail)
-          .then(({data}) => {
+      axios.post(`${API_URL}/v1/payments/create`, createPayment)
+          .then(() => {
             // navigate("/selectedMethod/999");
             localStorage.setItem("paymentMethod", selectedValue);
-            navigate(`/selectedMethod/${data.data.id}`)
+            navigate(`/purchaseStatus/${id}`)
           })
           .catch((error) => {
+              console.log(error)
             toast.error(error.response.data.message);
           })
           .finally(() => {

@@ -2,7 +2,7 @@ import React from "react";
 
 export interface ContactDetailInput {
     genderType: string,
-    fullName: string,
+    fullname: string,
     phoneNumber: string,
     email: string
 }
@@ -35,7 +35,7 @@ const ContactDetailForm = ({contactDetail, setContactDetail}: ContactDetailProps
                         <span className="text-black text-xs">Mrs.</span>
                     </div>
                     <div className={'mt-3 mb-2 items-center w-full'}>
-                        <input type="text" placeholder="Full Name" name={"fullName"} value={contactDetail.fullName} onChange={handleOnChange} className="input input-bordered input-sm w-full sm-max-full input-info" />
+                        <input type="text" placeholder="Full Name" name={"fullname"} value={contactDetail.fullname} onChange={handleOnChange} className="input input-bordered input-sm w-full sm-max-full input-info" />
                         <div className={'flex gap-2'}>
                             <input type="text" placeholder="" value={'+62'} readOnly className="input my-3 w-1/5 input-bordered input-sm input-info" />
                             <input type="text" placeholder="Phone Number" name={"phoneNumber"} value={contactDetail.phoneNumber} onChange={handleOnChange} className="input my-3 input-bordered input-sm w-full sm-max-full input-info" />

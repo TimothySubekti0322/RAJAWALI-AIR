@@ -23,7 +23,6 @@ import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
-import PendingPurchase from "./pages/client/PendingPurchase.tsx";
 import SuccessPurchase from "./pages/client/SuccessPurchase.tsx";
 import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
 import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
@@ -83,7 +82,7 @@ const router = createBrowserRouter([
     element: <PaymentMethod />,
   },
   {
-    path: "/continuePayment",
+    path: "/continuePayment/:id",
     element: <ContinuePayment />,
   },
   {
@@ -163,10 +162,6 @@ const router = createBrowserRouter([
   {
     path: "/notification",
     element: <Notification />,
-  },
-  {
-    path: "/pendingPurchase",
-    element: <PendingPurchase />,
   },
   {
     path: "/successPurchase",
