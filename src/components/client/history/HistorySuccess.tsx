@@ -1,8 +1,8 @@
 import HeaderLayout from "../headerLayout.tsx";
 import BodyLayout from "../bodyLayout.tsx";
 import rajawaliAirIcon from "../../../assets/images/RajawaliAirPNG2.png";
-import PurchaseDetail from "../purchaseProcessing/PurchaseDetail.tsx";
-import PriceDetails from "../purchaseProcessing/PriceDetails.tsx";
+// import PurchaseDetail from "../purchaseProcessing/PurchaseDetail.tsx";
+// import PriceDetails from "../purchaseProcessing/PriceDetails.tsx";
 import downloadIcon from "../../../assets/images/Unduh.png";
 import shareIcon from "../../../assets/images/share.png";
 import HeaderFill from "../headerFill.tsx";
@@ -32,7 +32,7 @@ const HistorySuccess = () => {
                             </div>
 
                             {/*2*/}
-                            <PurchaseDetail />
+                            {/*<PurchaseDetail paymentMethod={} />*/}
                             <div className={'flex flex-col items-center justify-center pt-3 text-black gap-4'}>
                                 {/*<PurchaseDetail />*/}
                                 <div className={'w-[90%] h-[1px] bg-[#505050]'}></div>
@@ -40,7 +40,7 @@ const HistorySuccess = () => {
 
                             {/*<PriceDetails />*/}
                         </div>
-                        <PriceDetails />
+                        {/*<PriceDetails flightId={} />*/}
                         <div className={'flex w-full justify-between p-2'}>
                             <button className={'w-[49%] bg-white flex justify-center'}><img src={downloadIcon} alt={'Download'}/></button>
                             <div style={{ borderLeft: "2px solid #ccc" }} />;

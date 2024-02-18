@@ -4,12 +4,18 @@ import BodyLayout from "../bodyLayout.tsx";
 import rajawaliAirIcon from "../../../assets/images/RajawaliAirPNG2.png";
 import cancelIcon from "../../../assets/images/cancel.png";
 import PriceDetails from "../purchaseProcessing/PriceDetails.tsx";
+import {MaximumWordLength} from "../../../utils/MaximumWordLength.ts";
+import {useNavigate} from "react-router-dom";
 
-const HistoryCancelled = () => {
+interface IHistoryCancelled {
+    reservationData: any,
+}
+const HistoryCancelled = ({reservationData}: IHistoryCancelled) => {
+    const navigate = useNavigate();
     return(
         <section className="w-full min-h-screen bg-[#f7f7f7] relative text-white">
             <HeaderLayout>
-                <HeaderFill title="Order ID : 761817890" />
+                <HeaderFill title={`Order ID : ${MaximumWordLength(reservationData?.id, 8)}`} />
             </HeaderLayout>
             <BodyLayout paddingBottomSize="50px">
                 <div className={'w-full py-10 px-5'}>
@@ -17,7 +23,7 @@ const HistoryCancelled = () => {
                         {/*Header*/}
                         <div className={'w-full flex px-4 py-3 bg-[#EDEDED] justify-between'}>
                             <img src={rajawaliAirIcon} alt={'Rajawali'}/>
-                            <span className={'text-black text-xs font-medium'}>Order ID : 761817890</span>
+                            <span className={'text-black text-xs font-medium'}>Order ID : {MaximumWordLength(reservationData?.id, 8)}</span>
                         </div>
 
                         {/*Body*/}
@@ -32,9 +38,18 @@ const HistoryCancelled = () => {
                             </div>
 
                             {/*2*/}
-                            <PriceDetails />
+                            <PriceDetails
+                                reservationData={reservationData}
+                            />
                         </div>
                     </div>
+                    <button className={'btn btn-side w-full bg-[#1E90FF] text-white hover:bg-blue-700 mt-3'}
+                            onClick={() => {
+                                localStorage.clear()
+                                navigate("/")
+                            }}>
+                        OK
+                    </button>
                 </div>
             </BodyLayout>
         </section>

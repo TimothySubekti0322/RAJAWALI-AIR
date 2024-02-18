@@ -3,7 +3,7 @@ import HeaderLayout from "../../components/client/headerLayout";
 import HeaderFill from "../../components/client/headerFill";
 import BodyLayout from "../../components/client/bodyLayout";
 import PaymentOptions from "../../components/client/paymentMethod/paymentOption";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import toast, {Toaster} from "react-hot-toast";
 import {GetReservationValue} from "../../utils/GetLocalStorageValue.ts";
 import axios from "axios";
@@ -63,6 +63,7 @@ const PaymentMethod = () => {
   const [selectedValue, setSelectedValue] = React.useState("other");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const {id} = useParams();
 
   const savePaymentMethod = () => {
     if (selectedValue === "other") {
@@ -71,13 +72,30 @@ const PaymentMethod = () => {
       setIsLoading(true);
       const flightDetail = GetReservationValue();
       flightDetail.promo = "";
-      axios.post(`${API_URL}/v1/reservations`, flightDetail)
-          .then(({data}) => {
+      // axios.post(`${API_URL}/v1/reservations`, flightDetail)
+      //     .then(({data}) => {
+      //       // navigate("/selectedMethod/999");
+      //       localStorage.setItem("paymentMethod", selectedValue);
+      //       navigate(`/selectedMethod/${data.data.id}`)
+      //     })
+      //     .catch((error) => {
+      //       toast.error(error.response.data.message);
+      //     })
+      //     .finally(() => {
+      //       setIsLoading(false);
+      //     })
+      const createPayment = {
+        reservationId: id,
+        method: selectedValue
+      }
+      axios.post(`${API_URL}/v1/payments/create`, createPayment)
+          .then(() => {
             // navigate("/selectedMethod/999");
             localStorage.setItem("paymentMethod", selectedValue);
-            navigate(`/selectedMethod/${data.data.id}`)
+            navigate(`/selectedMethod/${id}`)
           })
           .catch((error) => {
+            console.log(error)
             toast.error(error.response.data.message);
           })
           .finally(() => {

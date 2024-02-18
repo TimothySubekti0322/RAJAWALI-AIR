@@ -18,6 +18,7 @@ const BodyComponent = () => {
 
   const paymentMethod = localStorage.getItem("paymentMethod") as string;
   const flightIds: string[] = JSON.parse(localStorage.getItem("flightId") as string);
+  const [paymentId, setPaymentId] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,14 @@ const BodyComponent = () => {
       setFlights(flightsData);
     };
 
+    axios.get(`${API_URL}/v1/reservations/${id}`)
+        .then(({data}) => {
+          setPaymentId(data.data.payment.id)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+
     if (flightIds.length > 0) {
       fetchData();
     }
@@ -37,7 +46,7 @@ const BodyComponent = () => {
 
   const handleClick = () => {
     setLoading(true);
-    axios.post(`${API_URL}/v1/payments/${id}/finish`)
+    axios.post(`${API_URL}/v1/payments/${paymentId}/finish`)
         .then(({data}) => {
           navigate(`/purchaseStatus/${data.data.reservation.id}`)
         })

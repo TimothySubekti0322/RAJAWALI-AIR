@@ -23,9 +23,9 @@ import EmptyHistory from "./pages/client/EmptyHistory";
 import TravelAddOns from "./pages/client/TravelAddOns";
 import SearchTestPage from "./pages/client/SearchTestPage";
 import ChooseTicket from "./pages/client/ChooseTicket";
-import SuccessPurchase from "./pages/client/SuccessPurchase.tsx";
+// import SuccessPurchase from "./pages/client/SuccessPurchase.tsx";
 import HistorySuccess from "./components/client/history/HistorySuccess.tsx";
-import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
+// import HistoryCancelled from "./components/client/history/HistoryCancelled.tsx";
 import HistoryPending from "./components/client/history/HistoryPending.tsx";
 import Login from "./pages/auth/Login";
 import Notification from "./pages/client/Notification";
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
     element: <BaggageDepart />,
   },
   {
-    path: "/paymentMethod",
+    path: "/paymentMethod/:id",
     element: <PaymentMethod />,
   },
   {
@@ -163,18 +163,18 @@ const router = createBrowserRouter([
     path: "/notification",
     element: <Notification />,
   },
-  {
-    path: "/successPurchase",
-    element: <SuccessPurchase />,
-  },
+  // {
+  //   path: "/successPurchase",
+  //   element: <SuccessPurchase />,
+  // },
   {
     path: "/historySuccess",
     element: <HistorySuccess />,
   },
-  {
-    path: "/historyCancelled",
-    element: <HistoryCancelled />,
-  },
+  // {
+  //   path: "/historyCancelled",
+  //   element: <HistoryCancelled />,
+  // },
   {
     path: "/historyPending",
     element: <HistoryPending />,

@@ -30,9 +30,9 @@ const PurchaseStatus = () => {
         } else if (reservationData?.paymentStatus === "Purchase Pending") {
             return <PendingPurchase reservationData={reservationData} /> // OKK
         } else if (reservationData?.paymentStatus === "Purchase Canceled") {
-            return <HistoryCancelled />
+            return <HistoryCancelled reservationData={reservationData} /> // 50%
         } else if (reservationData?.paymentStatus === "Purchase Successful") {
-            return <SuccessPurchase />
+            return <SuccessPurchase reservationData={reservationData} /> // 50%
         } else {
             return <div>Error</div>
         }
