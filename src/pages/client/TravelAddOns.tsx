@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import React from "react";
 import { numberToCurrency } from "../../utils/NumberFormater.ts";
 import BookingProvider from "../../providers/LocalStorageProvider.tsx";
+import {useNavigate} from "react-router-dom";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -27,6 +28,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 const TravelAddOns = () => {
+  const navigate = useNavigate();
   const [showTotalPrice, setShowTotalPrice] = useState<boolean>(false);
   const [priceInsure, setPriceInsure] = React.useState<number>(
       localStorage.getItem("priceInsure")
@@ -156,7 +158,8 @@ const TravelAddOns = () => {
             <button className=" w-80 px-16 py-3 bg-blue-500 rounded shadow justify-center items-center gap-2.5 inline-flex hover:bg-blue-600 focus:outline-none focus:shadow-outline">
               <button
                 className="Primary text-stone-50 text-base font-semibold font-['Roboto'] leading-none"
-                onClick={() => (window.location.href = "/continuePayment")}
+                // onClick={() => (window.location.href = "/continuePayment")}
+                onClick={() => navigate("/continuePayment")}
               >
                 Continue to Payment
               </button>

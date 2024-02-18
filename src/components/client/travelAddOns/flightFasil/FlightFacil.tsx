@@ -19,6 +19,8 @@ export const FlightFacil: React.FC<FlightFacilProps> = ({
       navigate("/baggageDepart");
     } else if (title == "In-flight Meals") {
       navigate("/meals");
+    } else if (title === "Seat Number") {
+      navigate("/chooseSeat")
     }
   };
   return (

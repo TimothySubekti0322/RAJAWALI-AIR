@@ -95,7 +95,7 @@ const TotalPriceDetailComponent = ({totalPrice, priceInsure}: ITotalPriceDetailP
                     </div>
                     <div className={'flex justify-between text-slate-600'}>
                         <div className={'font-normal text-xs'}>Meals</div>
-                        <div className={'font-normal text-xs'}>IDR 146.400  </div>
+                        <div className={'font-normal text-xs'}>IDR 0  </div>
                     </div>
                     <div className={'flex justify-between text-slate-600'}>
                         <div className={'font-normal text-xs'}>Travel Insurance (x{passengerLength})</div>
