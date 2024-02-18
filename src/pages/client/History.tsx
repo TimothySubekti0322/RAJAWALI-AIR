@@ -11,110 +11,33 @@ import axios from "axios";
 import API_URL from "../../assets/static/API";
 import LocalStorageProvider from "../../providers/LocalStorageProvider";
 
-// const arrayDate: History[] = [
-//   {
-//     id: "314ffda7-0f35-40de-87c0-b933e452e391",
-//     promo: null,
-//     user: {
-//       id: "b5338161-25e7-4b91-b1b9-30866aec9ca3",
-//       fullName: "Timothy Subekti",
-//       email: "velmothy14@gmail.com",
-//     },
-//     payment: {
-//       id: "e8db20c6-08d8-4975-a646-4c4da58f779a",
-//     },
-//     paymentStatus: "Purchase Canceled",
-//     classType: "FIRST",
-//     genderType: "MAN",
-//     fullname: "Timothy Subekti",
-//     email: "velmothy14@gmail.com",
-//     phoneNumber: "087780623955",
-//     totalPrice: 4833500.0,
-//     expiredAt: "2024-02-18T07:57:57.709303",
-//     createdAt: "2024-02-18T07:52:57.686045",
-//   },
-//   {
-//     id: "314ffda7-0f35-40de-87c0-b933e452e391",
-//     promo: null,
-//     user: {
-//       id: "b5338161-25e7-4b91-b1b9-30866aec9ca3",
-//       fullName: "Timothy Subekti",
-//       email: "velmothy14@gmail.com",
-//     },
-//     payment: {
-//       id: "e8db20c6-08d8-4975-a646-4c4da58f779a",
-//     },
-//     paymentStatus: "Waiting For Payment",
-//     classType: "FIRST",
-//     genderType: "MAN",
-//     fullname: "Timothy Subekti",
-//     email: "velmothy14@gmail.com",
-//     phoneNumber: "087780623955",
-//     totalPrice: 4833555.0,
-//     expiredAt: "2024-02-18T07:57:57.709303",
-//     createdAt: "2024-03-18T07:52:57.686045",
-//   },
-//   {
-//     id: "314ffda7-0f35-40de-87c0-b933e452e391",
-//     promo: null,
-//     user: {
-//       id: "b5338161-25e7-4b91-b1b9-30866aec9ca3",
-//       fullName: "Timothy Subekti",
-//       email: "velmothy14@gmail.com",
-//     },
-//     payment: {
-//       id: "e8db20c6-08d8-4975-a646-4c4da58f779a",
-//     },
-//     paymentStatus: "Purchase Successful",
-//     classType: "FIRST",
-//     genderType: "MAN",
-//     fullname: "Timothy Subekti",
-//     email: "velmothy14@gmail.com",
-//     phoneNumber: "087780623955",
-//     totalPrice: 6000000.0,
-//     expiredAt: "2025-11-18T07:57:57.709303",
-//     createdAt: "2025-11-18T09:11:57.686045",
-//   },
-//   {
-//     id: "314ffda7-0f35-40de-87c0-b933e452e391",
-//     promo: null,
-//     user: {
-//       id: "b5338161-25e7-4b91-b1b9-30866aec9ca3",
-//       fullName: "Timothy Subekti",
-//       email: "velmothy14@gmail.com",
-//     },
-//     payment: {
-//       id: "e8db20c6-08d8-4975-a646-4c4da58f779a",
-//     },
-//     paymentStatus: "Purchase Pending",
-//     classType: "FIRST",
-//     genderType: "MAN",
-//     fullname: "Timothy Subekti",
-//     email: "velmothy14@gmail.com",
-//     phoneNumber: "087780623955",
-//     totalPrice: 6000000.0,
-//     expiredAt: "2025-11-18T07:57:57.709303",
-//     createdAt: "2025-11-18T09:11:57.686045",
-//   },
-// ];
-
 const History = () => {
   const [historyGroup, setHistoryGroup] = useState<HistoryGroup[]>([]);
+
+  // loading
+  const [loading, setLoading] = useState<boolean>(true);
 
   // fetchData
   useEffect(() => {
     const fetchData = async () => {
-      const userId = (localStorage.getItem("userId") as string) || "";
-      const response = await axios.get(
-        `${API_URL}/v1/reservations/user/${userId}`, {
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      try {
+        const userId = (localStorage.getItem("userId") as string) || "";
+        const response = await axios.get(
+          `${API_URL}/v1/reservations/user/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
           }
-        }
-      );
-      const data: History[] = response.data.data.content;
-      console.log(data);
-      setHistoryGroup(arrayMonthYear(data));
+        );
+        const data: History[] = response.data.data.content;
+        console.log(data);
+        setHistoryGroup(arrayMonthYear(data));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, []);
@@ -137,7 +60,7 @@ const History = () => {
         </HeaderLayout>
 
         <BodyLayout paddingBottomSize="5rem">
-          <BodyComponentHistory historyGroup={historyGroup} />
+          <BodyComponentHistory loading={loading} historyGroup={historyGroup} />
         </BodyLayout>
 
         {/* Bottom Navbar */}
