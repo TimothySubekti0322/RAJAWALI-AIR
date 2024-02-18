@@ -1,6 +1,7 @@
 import React from "react";
 import { FaChevronRight } from "react-icons/fa6";
 import { numberToCurrency } from "../../../utils/NumberFormater";
+import { useNavigate } from "react-router-dom";
 
 interface HistoryCardProps {
   reservationId: string;
@@ -17,6 +18,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
   time,
   status,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col w-full px-3 py-1 bg-white rounded-lg shadow-md">
       <div className="flex items-center justify-between mt-3">
@@ -36,7 +38,12 @@ const HistoryCard: React.FC<HistoryCardProps> = ({
             {date} {time}
           </p>
         </div>
-        <button className="bg-[#EDEDED] p-[0.25rem] rounded-[8px]">
+        <button
+          className="bg-[#EDEDED] p-[0.25rem] rounded-[8px]"
+          onClick={() => {
+            navigate(`/purchaseStatus/${reservationId}`);
+          }}
+        >
           <FaChevronRight className="text-sm text-black" />
         </button>
       </div>
