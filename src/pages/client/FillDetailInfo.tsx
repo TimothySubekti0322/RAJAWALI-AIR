@@ -4,8 +4,8 @@ import FlightCard from "../../components/client/fillDetailInformation/FlightCard
 import ContactDetailForm, {
   ContactDetailInput,
 } from "../../components/client/fillDetailInformation/ContactDetailForm";
-import {useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import SwipeableEdgeDrawer from "../../components/client/passengerDetails/passengerDetails.tsx";
 import HeaderFill from "../../components/client/headerFill.tsx";
 import saveToLocalStorage from "../../helpers/SaveToLocalStorage.ts";
@@ -32,10 +32,11 @@ const FillDetailInfo = () => {
     {
       id: 0,
       genderType: "",
-      fullName: ""
-    }
+      fullName: "",
+    },
   ]);
-  const [isSameContactDetail, setIsSameContactDetail] = useState<boolean>(false);
+  const [isSameContactDetail, setIsSameContactDetail] =
+    useState<boolean>(false);
 
   useEffect(() => {
     // Mendapatkan data dari local storage
@@ -52,12 +53,13 @@ const FillDetailInfo = () => {
     }
 
     if (genderTypeLs && fullNameLs && phoneNumberLs && emailLs) {
-      setContactDetail({...contactDetail,
+      setContactDetail({
+        ...contactDetail,
         genderType: JSON.parse(genderTypeLs),
         phoneNumber: JSON.parse(phoneNumberLs),
         fullName: JSON.parse(fullNameLs),
-        email: JSON.parse(emailLs)
-      })
+        email: emailLs as string,
+      });
     }
   }, []);
 
@@ -66,8 +68,14 @@ const FillDetailInfo = () => {
     navigate("/travelAddOns");
   };
 
-  const handleSavePassenger = (index: number, honorofic: string, name: string) => {
-    const passengerIndex = passengerList.findIndex(passenger => passenger.id === index);
+  const handleSavePassenger = (
+    index: number,
+    honorofic: string,
+    name: string
+  ) => {
+    const passengerIndex = passengerList.findIndex(
+      (passenger) => passenger.id === index
+    );
 
     if (passengerIndex !== -1) {
       // Jika id sudah ada, update nilai penumpang
@@ -75,16 +83,19 @@ const FillDetailInfo = () => {
       updatedPassengerList[passengerIndex] = {
         ...updatedPassengerList[passengerIndex],
         genderType: honorofic,
-        fullName: name
+        fullName: name,
       };
       setPassengerList(updatedPassengerList);
     } else {
       // Jika id tidak ditemukan, tambahkan penumpang baru
-      setPassengerList([...passengerList, {
-        id: index,
-        genderType: honorofic,
-        fullName: name
-      }]);
+      setPassengerList([
+        ...passengerList,
+        {
+          id: index,
+          genderType: honorofic,
+          fullName: name,
+        },
+      ]);
     }
   };
 
@@ -99,8 +110,8 @@ const FillDetailInfo = () => {
       passengerList[0] = {
         id: 0,
         genderType: contactDetail.genderType,
-        fullName: contactDetail.fullName
-      }
+        fullName: contactDetail.fullName,
+      };
     }
 
     // Update passengers in Local Storage after filled the information
@@ -109,32 +120,38 @@ const FillDetailInfo = () => {
       updatePassengers[index] = {
         ...updatePassengers[index],
         genderType: p.genderType,
-        fullName: p.fullName
+        fullName: p.fullName,
       };
     });
     saveToLocalStorage("passengers", updatePassengers);
   };
-
 
   const passengerDetails = () => {
     const result: React.ReactNode[] = [];
 
     passengers.map((p, index) => {
       result.push(
-          <SwipeableEdgeDrawer
-              handleSaveButton={handleSavePassenger}
-              index={index} ageGroup={p.ageType}
-              isSameContactDetail={isSameContactDetail}
-              setIsSameContactDetail={setIsSameContactDetail} />
-      )
-    })
+        <SwipeableEdgeDrawer
+          handleSaveButton={handleSavePassenger}
+          index={index}
+          ageGroup={p.ageType}
+          isSameContactDetail={isSameContactDetail}
+          setIsSameContactDetail={setIsSameContactDetail}
+        />
+      );
+    });
 
     return result;
   };
 
   const disabledButtonValidation = (): boolean => {
-    return !contactDetail.fullName || !contactDetail.genderType || !contactDetail.phoneNumber || !contactDetail.email
-  }
+    return (
+      !contactDetail.fullName ||
+      !contactDetail.genderType ||
+      !contactDetail.phoneNumber ||
+      !contactDetail.email
+    );
+  };
 
   return (
     <section
