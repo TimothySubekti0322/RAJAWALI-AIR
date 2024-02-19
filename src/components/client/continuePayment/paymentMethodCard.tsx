@@ -1,7 +1,7 @@
 import React from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import PaymentOptions from "./paymentOptions";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const TransferBank = [
   {
@@ -31,6 +31,7 @@ interface IPaymentMethodCard {
 
 const PaymentMethodCard = ({selectedValue, setSelectedValue}: IPaymentMethodCard) => {
   const navigate = useNavigate();
+  const {id} = useParams();
   return (
     <div className="flex text-black flex-col w-full px-4 py-3 bg-white rounded-lg shadow-md">
       <p className="text-sm font-semibold text-black 2xl:text-sm">
@@ -54,7 +55,7 @@ const PaymentMethodCard = ({selectedValue, setSelectedValue}: IPaymentMethodCard
       <button
         onClick={() => {
           // window.location.href = "/paymentMethod";
-            navigate("/paymentMethod")
+            navigate("/paymentMethod/" + id)
         }}
         className="mt-2 flex justify-center text-[#1E90FF] text-xs font-semibold "
       >
