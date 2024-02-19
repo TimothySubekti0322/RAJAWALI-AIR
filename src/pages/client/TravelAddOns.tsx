@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import {GetReservationValue} from "../../utils/GetLocalStorageValue.ts";
 import axios from "axios";
 import API_URL from "../../assets/static/API.ts";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -43,8 +44,10 @@ const TravelAddOns = () => {
     ? Number(localStorage.getItem("totalPrice") as string)
     : 0;
   const [totalPrice, setTotalPrice] = useState<number>(totalPriceLocalStorage);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleContinuePayment = () => {
+    setIsLoading(true);
     const flightDetail = GetReservationValue();
     // flightDetail.promo = promoCode;
     console.log("Continue Payment")
@@ -57,6 +60,9 @@ const TravelAddOns = () => {
         .catch((error) => {
           console.log(error)
           toast.error(error.response.data.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
         })
     // console.log(flightDetail)
   }
@@ -72,6 +78,17 @@ const TravelAddOns = () => {
         </HeaderLayout>
 
         <BodyLayout paddingBottomSize="5rem">
+          {isLoading && (
+              <div className="flex flex-col items-center justify-center w-full h-full pt-[50%]">
+                <CircularProgress size="3rem" />
+                <div className="flex items-end">
+                  <p className="mt-12 text-[1rem] font-bold text-black">
+                    Loading
+                  </p>
+                  <span className="ml-1 -mb-[0.1rem] text-black loading loading-dots loading-xs"></span>
+                </div>
+              </div>
+          )}
           <div className="inline-flex pt-[1rem] px-[1rem] flex-col">
             <p className="text-black text-base font-bold font-['Roboto'] leading-snug mb-[0.5rem]">
               Flight Facilities
